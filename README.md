@@ -14,7 +14,8 @@ Starts the reference docs preview server for the API specified.
 Examples:
 
     openapi preview-docs openapi/date-annotator/openapi.yaml
-    openapi preview-docs openapi/name-annotator/openapi.yaml
+    openapi preview-docs openapi/person-name-annotator/openapi.yaml
+    openapi preview-docs openapi/physical-address-annotator/openapi.yaml
     openapi preview-docs openapi/data-node/openapi.yaml
 
 We can then check the API doc at the address http://localhost:8080.
