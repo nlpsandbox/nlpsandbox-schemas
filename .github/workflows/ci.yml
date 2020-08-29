@@ -26,12 +26,17 @@ jobs:
   build-and-publish:
     needs: [lint]
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        api:
+        - "data-node"
+        - "date-annotator"
     steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ env.node_version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ env.node_version }}
-      - run: npm install -g @ga4gh/gh-openapi-docs
-      # - name: Build full openapi specs and their docs
-      #   run: npx @redocly/openapi-cli lint openapi/*/openapi.yaml
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ env.node_version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ env.node_version }}
+    - run: npm install -g @ga4gh/gh-openapi-docs
+    # - name: Build full openapi specs and their docs
+    #   run: npx @redocly/openapi-cli lint openapi/*/openapi.yaml
