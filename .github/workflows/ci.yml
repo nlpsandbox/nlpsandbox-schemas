@@ -1,15 +1,17 @@
 name: ci
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - master
+      - develop
+  pull_request:
 
 jobs:
   lint:
     runs-on: ubuntu-latest
     env:
       node_version: 12.x
-    # strategy:
-    #   matrix:
-    #     node-version: [12.x]
     steps:
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ env.node_version }}
