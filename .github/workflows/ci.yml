@@ -1,0 +1,30 @@
+name: ci
+
+on:
+  push:
+    branches:
+      - master
+      - develop
+    tags:
+      - '*'
+  pull_request:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: npm install
+    - name: Lint OpenAPI specifications
+      run: npx @redocly/openapi-cli lint
+        openapi/data-node/openapi.yaml
+        openapi/date-annotator/openapi.yaml
+        openapi/person-name-annotator/openapi.yaml
+        openapi/physical-address-annotator/openapi.yaml
