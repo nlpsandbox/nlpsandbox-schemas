@@ -33,6 +33,24 @@ jobs:
         # - "date-annotator"
     steps:
     - uses: actions/checkout@v2
+    - name: Set variables
+      id: vars
+      run: |
+        echo ::set-output name=version::test
+        echo ::set-output name=publish::false
+        if [[ ${GITHUB_REF} == refs/tags/* ]]
+        then
+          echo ::set-output name=version::${GITHUB_REF#refs/tags/}
+          echo ::set-output name=publish::true
+        elif [[ ${GITHUB_REF} == refs/heads/main ]]
+        then
+          echo ::set-output name=version::
+          echo ::set-output name=publish::true
+        elif [[ ${GITHUB_REF} == refs/heads/develop ]]
+        then
+          echo ::set-output name=version::develop
+          echo ::set-output name=publish::true
+        fi
     - name: Use Node.js ${{ env.node_version }}
       uses: actions/setup-node@v1
       with:
@@ -42,10 +60,10 @@ jobs:
       run: |
         printf "%s\n" \
         '{' \
-        '"apiSpecPath": "openapi/${{ env.node_version }}/openapi.yaml",' \
+        '"apiSpecPath": "openapi/${{ steps.vars.outputs.version }}/openapi.yaml",' \
         '"docsRoot": "docs",' \
         '"defaultBranch": "",' \
-        '"branchPathBase": "preview"'
+        '"branchPathBase": "preview"' \
         '}' | tee -a .spec-docs.json
     - name: Show the content of .spec-docs.json
       run: cat .spec-docs.json
