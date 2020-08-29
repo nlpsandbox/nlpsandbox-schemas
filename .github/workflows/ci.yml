@@ -1,26 +1,21 @@
 name: ci
 
-on:
-  push:
-    branches:
-      - master
-      - develop
-    tags:
-      - '*'
-  pull_request:
+on: [push, pull_request]
 
 jobs:
   lint:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [12.x]
+    env:
+      node_version: 12.x
+    # strategy:
+    #   matrix:
+    #     node-version: [12.x]
     steps:
     - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Use Node.js $node_version
       uses: actions/setup-node@v1
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: $node_version
     - run: npm install
     - name: Lint OpenAPI specifications
       run: npx @redocly/openapi-cli lint
