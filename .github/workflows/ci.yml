@@ -38,5 +38,14 @@ jobs:
       with:
         node-version: ${{ env.node_version }}
     - run: npm install -g @ga4gh/gh-openapi-docs
+    - name: Create .spec-docs.json
+      run: |
+      printf "%s\n" \
+      '{' \
+      '    "apiSpecPath": "openapi/API_NAME/openapi.yaml"' \
+      '}' | tee -a .spec-docs.json
+    - name: Show the content of .spec-docs.json
+      run: cat .spec-docs.json
+
     # - name: Build full openapi specs and their docs
     #   run: npx @redocly/openapi-cli lint openapi/*/openapi.yaml
