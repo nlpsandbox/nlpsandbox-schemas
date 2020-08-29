@@ -20,8 +20,4 @@ jobs:
         node-version: ${{ env.node_version }}
     - run: npm install
     - name: Lint OpenAPI specifications
-      run: npx @redocly/openapi-cli lint
-        openapi/data-node/openapi.yaml
-        openapi/date-annotator/openapi.yaml
-        openapi/person-name-annotator/openapi.yaml
-        openapi/physical-address-annotator/openapi.yaml
+      run: npx @redocly/openapi-cli lint openapi/*/openapi.yaml
