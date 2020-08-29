@@ -30,7 +30,7 @@ jobs:
       matrix:
         api:
         - "data-node"
-        - "date-annotator"
+        # - "date-annotator"
     steps:
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ env.node_version }}
@@ -40,10 +40,10 @@ jobs:
     - run: npm install -g @ga4gh/gh-openapi-docs
     - name: Create .spec-docs.json
       run: |
-      printf "%s\n" \
-      '{' \
-      '    "apiSpecPath": "openapi/API_NAME/openapi.yaml"' \
-      '}' | tee -a .spec-docs.json
+        printf "%s\n" \
+        '{' \
+        '    "apiSpecPath": "openapi/API_NAME/openapi.yaml"' \
+        '}' | tee -a .spec-docs.json
     - name: Show the content of .spec-docs.json
       run: cat .spec-docs.json
 
