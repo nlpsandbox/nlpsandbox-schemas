@@ -7,11 +7,12 @@ on:
       - develop
   pull_request:
 
+env:
+  node_version: 12.x
+
 jobs:
   lint:
     runs-on: ubuntu-latest
-    env:
-      node_version: 12.x
     steps:
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ env.node_version }}
@@ -21,3 +22,9 @@ jobs:
     - run: npm install
     - name: Lint OpenAPI specifications
       run: npx @redocly/openapi-cli lint openapi/*/openapi.yaml
+
+  # build-and-publish:
+  #   needs: [lint]
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
