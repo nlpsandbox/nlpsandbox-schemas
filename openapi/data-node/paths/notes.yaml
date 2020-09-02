@@ -1,0 +1,25 @@
+parameters:
+  - name: pretty_print
+    in: query
+    description: Pretty print response
+    schema:
+      type: boolean
+get:
+  tags:
+    - Note
+  summary: Get All Notes
+  description: Returns all Notes
+  operationId: "notes.read_all"
+  responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: ../components/schemas/Note.yaml
+      '403':
+        description: Forbidden
+      '404':
+        description: Note not found

@@ -1,0 +1,18 @@
+type: object
+properties:
+  id:
+    description: ID for this note
+    type: integer
+    minLength: 1
+    example: 1
+  text:
+    description: Full Identified Text Note
+    type: string
+    minLength: 1
+    example: John78
+  fileName:
+    description: Associated File Name
+    type: string
+    example: 260-01.xml
+  type:
+    description: Note type [ pathology , phone call, etc. ]

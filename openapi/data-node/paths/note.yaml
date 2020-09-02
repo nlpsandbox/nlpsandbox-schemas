@@ -1,0 +1,67 @@
+parameters:
+  - name: pretty_print
+    in: query
+    description: Pretty print response
+    schema:
+      type: boolean
+get:
+  tags:
+    - Note
+  summary: Get note by noteId
+  description: |
+    Returns the Note Text for a given Noteid
+  operationId: "notes.read"
+  parameters:
+    - name: noteid
+      in: path
+      description: The noteid that needs to be fetched
+      required: true
+      schema:
+        type: string
+  security:
+    - api_key: []
+    - basic_auth: []
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Note.yaml
+    '403':
+      description: Forbidden
+    '404':
+      description: Note not found
+put:
+  tags:
+    - Note
+  summary: Updated note
+  description: This can only be done by the logged in user.
+  operationId: "notes.update"
+  parameters:
+    - name: noteid
+      in: path
+      description: The noteid that needs to be updated
+      required: true
+      schema:
+        type: string
+  security:
+    - main_auth:
+        - 'write:note'
+  responses:
+    '200':
+      description: OK
+    '400':
+      description: Invalid note supplied
+    '404':
+      description: Note not found
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Note.yaml
+      application/xml:
+        schema:
+          $ref: ../components/schemas/Note.yaml
+    description: Updated note object
+    required: true
