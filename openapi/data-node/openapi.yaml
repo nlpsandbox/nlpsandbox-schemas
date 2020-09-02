@@ -1,11 +1,11 @@
 openapi: 3.0.2
 info:
   version: 1.0.0
-  title: NLP Sandbox Data Node API
+  title: NLP Sandbox Data Node Schemas
   # termsOfService: 'https://data2health.github.io/nlp-sandbox-data-node-schemas/terms/'
   contact:
     email: thomas.schaffter@sagebionetworks.org
-    url: 'https://data2health.github.io/nlp-sandbox-schemas'
+    url: 'https://data2health.github.io/nlp-sandbox-data-node-schemas'
   license:
     name: Apache 2.0
     url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
@@ -55,16 +55,18 @@ info:
 tags:
   - name: Echo
     description: Example echo operations
-  - name: User
-    description: Operations about user
+  - name: Note
+    description: Operations about Note
 servers:
   - url: 'http://example.com/api/v1'
   - url: 'https://example.com/api/v1'
 paths:
-  '/users/{username}':
-    $ref: 'paths/users@{username}.yaml'
+  /note/{noteid}:
+    $ref: 'paths/note.yaml'
+  /notes:
+    $ref: 'paths/notes.yaml'
   /echo:
-    $ref: paths/echo.yaml
+    $ref: 'paths/echo.yaml'
 components:
   securitySchemes:
     main_auth:

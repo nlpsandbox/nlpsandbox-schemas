@@ -1,0 +1,19 @@
+type: object
+properties:
+  id:
+    description: The patient ID
+    readOnly: true
+    # allOf:
+    #   - $ref: ./ResourceId.yaml
+  firstName:
+    description: Patient first name
+    type: string
+    minLength: 1
+    example: John
+  lastName:
+    description: Patient last name
+    type: string
+    minLength: 1
+    example: Smith
+  email:
+    $ref: ./Email.yaml
