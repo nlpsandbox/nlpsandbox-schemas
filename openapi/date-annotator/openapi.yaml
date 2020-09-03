@@ -61,10 +61,12 @@ servers:
   - url: 'http://example.com/api/v1'
   - url: 'https://example.com/api/v1'
 paths:
-  '/users/{username}':
-    $ref: 'paths/users@{username}.yaml'
   /echo:
     $ref: paths/echo.yaml
+  /health:
+    $ref: '../commons/paths/health.yaml'
+  '/users/{username}':
+    $ref: 'paths/users@{username}.yaml'
 components:
   securitySchemes:
     main_auth:

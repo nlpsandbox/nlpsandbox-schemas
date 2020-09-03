@@ -34,3 +34,8 @@ Examples:
     npm run build openapi/data-node/openapi.yaml
 
 We can then check the API doc at the address http://localhost:8080.
+
+## Contribution guidelines
+
+- List paths in alphanumerical order
+- Add schemas and paths used in more than one API to `commons`
