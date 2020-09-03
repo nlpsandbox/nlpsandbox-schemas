@@ -1,0 +1,6 @@
+type: object
+properties:
+  status:
+    description: Health status
+    type: string
+    enum: [pass, warn]
