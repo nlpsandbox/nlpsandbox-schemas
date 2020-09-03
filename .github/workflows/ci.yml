@@ -7,11 +7,12 @@ on:
       - develop
   pull_request:
 
+env:
+  node_version: 12.x
+
 jobs:
   lint:
     runs-on: ubuntu-latest
-    env:
-      node_version: 12.x
     steps:
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ env.node_version }}
@@ -19,5 +20,54 @@ jobs:
       with:
         node-version: ${{ env.node_version }}
     - run: npm install
-    - name: Lint OpenAPI specifications
+    - name: Lint openapi specifications
       run: npx @redocly/openapi-cli lint openapi/*/openapi.yaml
+
+  build-and-publish:
+    needs: [lint]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        api:
+        - "data-node"
+        # - "date-annotator"
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set variables
+      id: vars
+      run: |
+        echo ::set-output name=version::test
+        echo ::set-output name=publish::false
+        if [[ ${GITHUB_REF} == refs/tags/* ]]
+        then
+          echo ::set-output name=version::${GITHUB_REF#refs/tags/}
+          echo ::set-output name=publish::true
+        elif [[ ${GITHUB_REF} == refs/heads/main ]]
+        then
+          echo ::set-output name=version::
+          echo ::set-output name=publish::true
+        elif [[ ${GITHUB_REF} == refs/heads/develop ]]
+        then
+          echo ::set-output name=version::develop
+          echo ::set-output name=publish::true
+        fi
+    - name: Use Node.js ${{ env.node_version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ env.node_version }}
+    - run: npm install -g @ga4gh/gh-openapi-docs
+    - name: Create .spec-docs.json
+      run: |
+        printf "%s\n" \
+        '{' \
+        '"apiSpecPath": "openapi/${{ steps.vars.outputs.version }}/openapi.yaml",' \
+        '"docsRoot": "docs",' \
+        '"defaultBranch": "",' \
+        '"branchPathBase": "preview"' \
+        '}' | tee -a .spec-docs.json
+    # - name: Build openapi specifications and docs
+    #   run: gh-openapi-docs
+    # - run: ls -al
+
+    # - name: Build full openapi specs and their docs
+    #   run: npx @redocly/openapi-cli lint openapi/*/openapi.yaml
