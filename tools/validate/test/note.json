@@ -1,0 +1,14 @@
+{
+    "$schema": "http://json-schema.org/draft/2019-09/schema",
+    "$id": "http://nlp-sandbox.org/schemas/note.json",
+    "title": "Clinical note",
+    "description": "A clinical note that may include PHI.",
+    "type": "object",
+    "properties": {
+        "text": { "type": "string" }
+    },
+    "required": ["text"],
+    "propertyNames": {
+        "pattern": "^[A-Za-z_][A-Za-z0-9_]*$"
+    }
+}

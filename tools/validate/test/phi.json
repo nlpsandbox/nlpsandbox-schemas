@@ -1,0 +1,17 @@
+{
+    "$schema": "http://json-schema.org/draft/2019-09/schema#",
+    "$id": "http://nlp-sandbox.org/schemas/phi.json",
+    "title": "Protected Health Information (PHI)",
+    "description": "A Protected Health Information (PHI) string in a text.",
+    "type": "object",
+    "properties": {
+        "id": { "type": "string" },
+        "start": { "type": "integer" },
+        "length": { "type": "integer" },
+        "text": { "type": "string" }
+    },
+    "required": ["id", "start", "length"],
+    "propertyNames": {
+        "pattern": "^[A-Za-z_][A-Za-z0-9_]*$"
+    }
+}
