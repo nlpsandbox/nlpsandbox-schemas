@@ -62,7 +62,7 @@ servers:
   - url: 'https://example.com/api/v1'
 paths:
   /note/{noteid}:
-    $ref: 'paths/note.yaml'
+    $ref: 'paths/notes@{id}.yaml'
   /notes:
     $ref: 'paths/notes.yaml'
   /echo:

@@ -18,7 +18,7 @@ get:
             schema:
               type: array
               items:
-                $ref: ../components/schemas/Note.yaml
+                $ref: ../../commons/components/schemas/Note.yaml
       '403':
         description: Forbidden
       '404':
