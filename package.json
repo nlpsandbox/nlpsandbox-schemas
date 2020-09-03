@@ -6,5 +6,11 @@
   "devDependencies": {
     "@ga4gh/gh-openapi-docs": "^0.2.1",
     "@redocly/openapi-cli": "^1.0.0-beta.9"
+  },
+  "scripts": {
+    "start": "openapi preview-docs $npm_config_entrypoint",
+    "build": "openapi bundle -o dist $npm_config_entrypoint",
+    "lint": "openapi lint $npm_config_entrypoint",
+    "lint:all": "openapi lint openapi/*/openapi.yaml"
   }
 }
