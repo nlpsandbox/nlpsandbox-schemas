@@ -65,9 +65,9 @@ jobs:
         '"defaultBranch": "",' \
         '"branchPathBase": "preview"' \
         '}' | tee -a .spec-docs.json
-    - name: Build openapi specifications and docs
-      run: gh-openapi-docs
-    - run: ls -al
+    # - name: Build openapi specifications and docs
+    #   run: gh-openapi-docs
+    # - run: ls -al
 
     # - name: Build full openapi specs and their docs
     #   run: npx @redocly/openapi-cli lint openapi/*/openapi.yaml
