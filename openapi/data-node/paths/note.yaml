@@ -27,7 +27,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/Note.yaml
+            $ref: ../../commons/components/schemas/Note.yaml
     '403':
       description: Forbidden
     '404':
@@ -59,9 +59,9 @@ put:
     content:
       application/json:
         schema:
-          $ref: ../components/schemas/Note.yaml
+          $ref: ../../commons/components/schemas/Note.yaml
       application/xml:
         schema:
-          $ref: ../components/schemas/Note.yaml
+          $ref: ../../commons/components/schemas/Note.yaml
     description: Updated note object
     required: true
