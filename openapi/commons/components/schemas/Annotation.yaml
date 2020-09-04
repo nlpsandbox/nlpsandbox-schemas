@@ -1,0 +1,18 @@
+type: object
+properties:
+  id:
+    description: Annotation ID
+    type: integer
+  createdBy:
+    description: The User who created the Annotation
+    type: string
+  createdAt:
+    description: When the Annotation has been created
+    type: date-time
+  updatedBy:
+    description: The User who update the Annotation
+  updatedAt:
+    description: When the Annotation has been updated
+    type: date-time
+required:
+  - id
