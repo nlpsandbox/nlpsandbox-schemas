@@ -1,18 +1,19 @@
 type: object
+description: A clinical note
 properties:
-  id:
-    description: ID for this note
-    type: integer
-    minLength: 1
-    example: 1
   text:
-    description: Full Identified Text Note
+    description: The content of the note
     type: string
-    minLength: 1
     example: John78
   fileName:
-    description: Associated File Name
+    description: The filename of the source note
     type: string
     example: 260-01.xml
   type:
-    description: Note type [ pathology , phone call, etc. ]
+    description: The note type
+    type: string
+    enum:
+      - pathology
+      - phone_call
+allOf:
+  - $ref: Entity.yaml

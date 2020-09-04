@@ -1,5 +1,8 @@
 type: object
-description: A clinical note date annotation
-# properties:
+description: A date annotation in a text
+properties:
+  dateFormat:
+    description: Date format (ISO 8601)
+    type: string
 allOf:
 - $ref: Annotation.yaml
