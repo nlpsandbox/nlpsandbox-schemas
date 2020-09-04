@@ -21,7 +21,7 @@ jobs:
         node-version: ${{ env.node_version }}
     - run: npm install
     - name: Lint openapi specifications
-      run: npx @redocly/openapi-cli lint openapi/*/openapi.yaml
+      run: npm run lint:all
 
   build-and-publish:
     needs: [lint]
