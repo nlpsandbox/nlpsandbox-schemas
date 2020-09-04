@@ -1,18 +1,22 @@
 type: object
+description: A clinical note annotation
 properties:
   id:
     description: Annotation ID
     type: integer
   createdBy:
     description: The User who created the Annotation
-    type: string
+    $ref: User.yaml
   createdAt:
     description: When the Annotation has been created
-    type: date-time
+    type: string
+    format: date-time
   updatedBy:
     description: The User who update the Annotation
+    $ref: User.yaml
   updatedAt:
     description: When the Annotation has been updated
-    type: date-time
+    type: string
+    format: date-time
 required:
-  - id
+   - id

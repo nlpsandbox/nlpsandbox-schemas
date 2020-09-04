@@ -1,0 +1,5 @@
+type: object
+description: A clinical note date annotation
+# properties:
+allOf:
+- $ref: Annotation.yaml
