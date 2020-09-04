@@ -1,9 +1,3 @@
-parameters:
-  - name: pretty_print
-    in: query
-    description: Pretty print response
-    schema:
-      type: boolean
 get:
   tags:
     - Note
