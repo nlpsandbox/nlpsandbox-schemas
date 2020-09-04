@@ -1,6 +1,9 @@
 type: object
 description: An annotation in a text
 properties:
+  noteId:
+    description: The note ID
+    type: integer
   start:
     description: The position of the first character
     type: integer
@@ -11,6 +14,7 @@ properties:
     description: The string annotated
     type: string
 required:
+  - noteId
   - start
   - length
 allOf:
