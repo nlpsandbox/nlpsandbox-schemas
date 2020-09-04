@@ -4,7 +4,7 @@ properties:
   text:
     description: The content of the note
     type: string
-    example: John78
+    example: October 3, Ms Chloe Price met with...
   fileName:
     description: The filename of the source note
     type: string

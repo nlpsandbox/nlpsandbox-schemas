@@ -21,9 +21,13 @@ info:
 tags:
   - name: Date
     description: Operations about dates
+  - name: Health
+    descirption: Operations about API health
 servers:
   - url: 'http://example.com/api/v1'
   - url: 'https://example.com/api/v1'
 paths:
   /dates:
     $ref: 'paths/dates.yaml'
+  /health:
+    $ref: '../commons/paths/health.yaml'
