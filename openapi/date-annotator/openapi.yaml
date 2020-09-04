@@ -15,6 +15,9 @@ info:
     The OpenAPI specification implemented by NLP Sandbox Date Annotators.
 
     # Introduction
+
+    This NLP tool detects date references in the clinical note specified and
+    returns a list of date annotations objects.
 tags:
   - name: Date
     description: Operations about dates
@@ -24,20 +27,3 @@ servers:
 paths:
   /dates:
     $ref: 'paths/dates.yaml'
-# components:
-#   securitySchemes:
-#     main_auth:
-#       type: oauth2
-#       flows:
-#         implicit:
-#           authorizationUrl: 'http://example.com/api/oauth/dialog'
-#           scopes:
-#             'read:users': read users info
-#             'write:users': modify or remove users
-#     api_key:
-#       type: apiKey
-#       in: header
-#       name: api_key
-#     basic_auth:
-#       type: http
-#       scheme: basic

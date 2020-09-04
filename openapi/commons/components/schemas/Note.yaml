@@ -17,3 +17,5 @@ properties:
       - phone_call
 allOf:
   - $ref: Entity.yaml
+required:
+  - text
