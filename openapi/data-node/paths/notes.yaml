@@ -1,8 +1,8 @@
 get:
   tags:
     - Note
-  summary: Get All Notes
-  description: Returns all Notes
+  summary: Get all clinical notes
+  description: Returns the clinical notes
   operationId: "notes.read_all"
   responses:
       '200':
