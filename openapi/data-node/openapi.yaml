@@ -7,7 +7,7 @@ info:
     url: 'https://data2health.github.io/nlp-sandbox-data-node-schemas'
   license:
     name: Apache 2.0
-    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+    url: 'https://github.com/data2health/nlp-sandbox/blob/master/LICENSE'
   x-logo:
     url: 'https://data2health.github.io/nlp-sandbox-data-node-schemas/docs/logo.png'
   description: >
