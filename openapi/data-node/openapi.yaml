@@ -30,7 +30,11 @@ servers:
   - url: 'http://example.com/api/v1'
   - url: 'https://example.com/api/v1'
 paths:
-  /notes/{id}:
-    $ref: 'paths/notes@{id}.yaml'
+  /annotations/dates:
+    $ref: 'paths/annotations/dates.yaml'
+  /health:
+    $ref: '../commons/paths/health.yaml'
   /notes:
     $ref: 'paths/notes.yaml'
+  /notes/{id}:
+    $ref: 'paths/notes@{id}.yaml'
