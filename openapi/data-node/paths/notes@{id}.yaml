@@ -1,26 +1,16 @@
-parameters:
-  - name: pretty_print
-    in: query
-    description: Pretty print response
-    schema:
-      type: boolean
 get:
   tags:
     - Note
-  summary: Get note by noteId
-  description: |
-    Returns the Note Text for a given Noteid
+  summary: Get a clinical note by ID
+  description: Returns the clinical note for a given ID
   operationId: "notes.read"
   parameters:
-    - name: noteid
+    - name: id
       in: path
-      description: The noteid that needs to be fetched
+      description: The ID of the clinical note to fetch
       required: true
       schema:
         type: string
-  security:
-    - api_key: []
-    - basic_auth: []
   responses:
     '200':
       description: Success
@@ -35,19 +25,19 @@ get:
 put:
   tags:
     - Note
-  summary: Updated note
+  summary: Update a clinical note by ID
   description: This can only be done by the logged in user.
   operationId: "notes.update"
   parameters:
-    - name: noteid
+    - name: id
       in: path
-      description: The noteid that needs to be updated
+      description: Updates the clinical note for a given ID
       required: true
       schema:
         type: string
-  security:
-    - main_auth:
-        - 'write:note'
+  # security:
+  #   - main_auth:
+  #       - 'write:note'
   responses:
     '200':
       description: OK
@@ -60,8 +50,5 @@ put:
       application/json:
         schema:
           $ref: ../../commons/components/schemas/Note.yaml
-      application/xml:
-        schema:
-          $ref: ../../commons/components/schemas/Note.yaml
-    description: Updated note object
+    description: Updated clinical note
     required: true
