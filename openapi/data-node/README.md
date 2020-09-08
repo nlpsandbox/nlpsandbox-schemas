@@ -11,3 +11,10 @@ Here are some sections to pay attention to:
 * [Paths](paths/README.md): this defines each endpoint.  A path can have one operation per http method.
 * Tags: it's a good idea to organize each operation.  Each tag can have a description.  The description is used as a section description within the reference docs.
 * Servers: a list of your servers, each with a URL.
+
+
+## Generate a Python-Flask server
+
+TODO: Describe the steps to perform to generate a server
+
+openapi-generator generate -i openapi.yaml -g python-flask -o ~/PycharmProjects/openapi-flask/
