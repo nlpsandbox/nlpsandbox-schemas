@@ -3,8 +3,10 @@ properties:
   id:
     description: The patient ID
     readOnly: true
-    # allOf:
-    #   - $ref: ./ResourceId.yaml
+  publicId:
+    readOnly: true
+    allOf:
+      - $ref: PatientPublicId.yaml
   firstName:
     description: Patient first name
     type: string
@@ -16,4 +18,4 @@ properties:
     minLength: 1
     example: Smith
   email:
-    $ref: ./Email.yaml
+    $ref: Email.yaml
