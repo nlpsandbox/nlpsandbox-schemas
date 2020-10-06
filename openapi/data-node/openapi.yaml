@@ -1,7 +1,7 @@
 openapi: 3.0.2
 info:
   version: 1.0.0
-  title: NLP Sandbox Data Node Schemas
+  title: NLP Sandbox Data Node API
   contact:
     email: thomas.schaffter@sagebionetworks.org
     url: 'https://data2health.github.io/nlp-sandbox-data-node-schemas'

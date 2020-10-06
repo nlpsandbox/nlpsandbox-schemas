@@ -9,7 +9,7 @@ properties:
     readOnly: true
     allOf:
       - $ref: PatientPublicId.yaml
-  fileName:
+  filename:
     description: The filename of the source note
     type: string
     example: 260-01.xml
