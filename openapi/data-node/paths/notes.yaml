@@ -4,16 +4,39 @@ get:
   summary: Get all clinical notes
   description: Returns the clinical notes
   operationId: "notes.read_all"
-  responses:
-      '200':
-        description: Success
-        content:
-          application/json:
-            schema:
-              type: array
-              items:
-                $ref: ../../commons/components/schemas/Note.yaml
-      '403':
-        description: Forbidden
-      '404':
-        description: Note not found
+  parameters:
+    - in: query
+      name: page
+      description: Current page number
+      required: false
+      schema:
+        type: integer
+        format: int32
+        default: 1
+        minimum: 1
+    - in: query
+      name: limit
+      description: Limits the number of returned items
+      required: false
+      schema:
+        format: int32
+        default: 10
+        minimum: 10
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+                allOf:
+                  - $ref: '../../commons/components/schemas/PaginationResponse'
+                  - items:
+                      type: array
+                      $ref: '#/components/schemas/Note'
+
+          description: Success
+        "403":
+          description: Forbidden
+        "404":
+          description: Note not found
+

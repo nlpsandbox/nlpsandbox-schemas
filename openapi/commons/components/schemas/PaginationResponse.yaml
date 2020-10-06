@@ -1,0 +1,9 @@
+type: object
+description: Respose included on pagination
+properties:
+  count:
+    type: number
+  totalrecords:
+    type: number
+  displayrecords:
+    type: number
