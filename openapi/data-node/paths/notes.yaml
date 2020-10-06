@@ -29,7 +29,7 @@ get:
           schema:
             type: object
             allOf:
-              - $ref: '../../commons/components/schemas/PaginationResponse.yaml'
+              - $ref: '../../commons/components/schemas/PageResponse.yaml'
               - items:
                   type: array
                   $ref: '../../commons/components/schemas/Note.yaml'
