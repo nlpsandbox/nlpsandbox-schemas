@@ -17,7 +17,7 @@ info:
     # Overview
 
     This NLP tool detects date references in the clinical note specified and
-    returns a list of date annotations objects.
+    returns a list of date annotations.
 tags:
   - name: Date
     description: Operations about dates
