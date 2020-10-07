@@ -10,7 +10,7 @@ info:
     name: Apache 2.0
     url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
   x-logo:
-    url: 'https://data2health.github.io/nlp-sandbox-data-node-schemas/docs/logo.png'
+    url: 'https://data2health.github.io/nlp-sandbox-schemas/logo.png'
   description: >
     The OpenAPI specification implemented by NLP Sandbox Person Name Annotators.
 
