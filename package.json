@@ -4,7 +4,7 @@
   "license": "Apache-2.0",
   "repository": "github:data2health/npm-sandbox-schemas",
   "devDependencies": {
-    "@ga4gh/gh-openapi-docs": "^0.2.1",
+    "@ga4gh/gh-openapi-docs": "github:ga4gh/gh-openapi-docs#develop",
     "@redocly/openapi-cli": "^1.0.0-beta.9"
   },
   "scripts": {
