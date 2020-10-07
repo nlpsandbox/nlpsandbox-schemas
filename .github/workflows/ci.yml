@@ -104,7 +104,7 @@ jobs:
         # The above command will fail if no changes were present, so we ignore
         # that.
     - name: Push changes
-      if: ${{ steps.prep.outputs.push }}
+      if: steps.prep.outputs.push == 'true'
       uses: ad-m/github-push-action@master
       with:
         branch: gh-pages
