@@ -85,7 +85,7 @@ jobs:
         '}' | tee -a .spec-docs.json >/dev/null
         cat .spec-docs.json
     - name: Create openapi docs
-      run: npx gh-openapi-docs-test
+      run: npx gh-openapi-docs-ts
     - name: Commit doc changes
       run: |
         git clone ${{ github.event.repository.clone_url }} \
