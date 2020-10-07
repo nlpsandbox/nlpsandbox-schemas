@@ -84,6 +84,8 @@ jobs:
         '"branchPathBase": "preview"' \
         '}' | tee -a .spec-docs.json >/dev/null
         cat .spec-docs.json
+    - name: Install dependencies
+      run: npm install
     - name: Create openapi docs
       run: npx gh-openapi-docs-ts
     - name: Commit doc changes
