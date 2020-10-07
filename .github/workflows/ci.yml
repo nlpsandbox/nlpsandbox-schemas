@@ -31,10 +31,11 @@ jobs:
     needs: [lint]
     runs-on: ubuntu-latest
     strategy:
+      # Issue: By default api are processed in parallel => race condition
       matrix:
         api:
         - "data-node"
-        - "date-annotator"
+        # - "date-annotator"
     steps:
     - uses: actions/checkout@v2
     - name: Prepare
@@ -82,8 +83,7 @@ jobs:
         '}' | tee -a .spec-docs.json >/dev/null
         cat .spec-docs.json
     - name: Create openapi docs
-      run: gh-openapi-docs
-      # Options in matrix are processed sequentially (to check)
+      run: gh-openapi-docs-test
     - name: Commit doc changes
       if: ${{ steps.prep.outputs.push }}
       run: |
