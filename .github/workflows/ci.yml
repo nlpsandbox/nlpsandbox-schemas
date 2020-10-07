@@ -88,7 +88,7 @@ jobs:
     - name: Commit doc changes
       if: ${{ steps.prep.outputs.push }}
       run: |
-        git clone https://github.com/${{ github.event.repository.name }}.git \
+        git clone https://github.com/${{ github.event.repository.full_name }}.git \
           --branch gh-pages --single-branch gh-pages
         GH_PAGES_DIR=gh-pages/${{ matrix.api }}/${{ steps.prep.outputs.version }}
         mkdir -p ${GH_PAGES_DIR}
