@@ -40,11 +40,10 @@ jobs:
     - name: Prepare
       id: prep
       run: |
-        BRANCH=noop
+        BRANCH=undefined
         VERSION=noop
         PUSH=false
         if [ "${{ github.event_name }}" = "schedule" ]; then
-          BRANCH=${GITHUB_REF#refs/heads/}
           VERSION=nightly
           PUSH=true
         elif [[ $GITHUB_REF == refs/tags/* ]]; then
@@ -71,7 +70,7 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ env.node_version }}
-    - run: npm install -g @ga4gh/gh-openapi-docs
+    - run: npm install -g gh-openapi-docs-test
     - name: Create .spec-docs.json
       run: |
         printf "%s\n" \
