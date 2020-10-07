@@ -10,14 +10,14 @@ info:
     name: Apache 2.0
     url: 'https://github.com/data2health/nlp-sandbox/blob/master/LICENSE'
   x-logo:
-    url: 'https://data2health.github.io/nlp-sandbox-data-node-schemas/docs/logo.png'
+    url: 'https://data2health.github.io/nlp-sandbox-schemas/logo.png'
   description: >
     The OpenAPI specification implemented by NLP Sandbox Date Annotators.
 
     # Overview
 
     This NLP tool detects date references in the clinical note specified and
-    returns a list of date annotations objects.
+    returns a list of date annotations.
 tags:
   - name: Date
     description: Operations about dates
