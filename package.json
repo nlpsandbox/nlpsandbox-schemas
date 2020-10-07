@@ -5,7 +5,7 @@
   "repository": "github:data2health/npm-sandbox-schemas",
   "devDependencies": {
     "@redocly/openapi-cli": "^1.0.0-beta.9",
-    "gh-openapi-docs-ts": "^0.3.3"
+    "gh-openapi-docs-ts": "^0.3.4"
   },
   "scripts": {
     "start": "openapi preview-docs $npm_config_entrypoint",
