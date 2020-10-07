@@ -74,7 +74,6 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ env.node_version }}
-    - run: npm install -g gh-openapi-docs-test
     - name: Create .spec-docs.json
       run: |
         printf "%s\n" \
@@ -86,14 +85,14 @@ jobs:
         '}' | tee -a .spec-docs.json >/dev/null
         cat .spec-docs.json
     - name: Create openapi docs
-      run: gh-openapi-docs-test
+      run: npx gh-openapi-docs-test
     - name: Commit doc changes
       run: |
-        git clone https://github.com/${{ github.event.repository.full_name }}.git \
+        git clone ${{ github.event.repository.clone_url }} \
           --branch gh-pages --single-branch gh-pages
         TARGET_DIR=gh-pages/${{ matrix.api }}/${{ steps.prep.outputs.version }}
         mkdir -p ${TARGET_DIR}
-        ls -al preview
+        ls -alR preview
         cp -R preview/${{ steps.prep.outputs.branch }} ${TARGET_DIR}
         cd gh-pages
         git config --local user.email "action@github.com"
