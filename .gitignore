@@ -1,4 +1,5 @@
 # Dir for bundles
 dist
+dist.yaml
 node_modules
 .idea
