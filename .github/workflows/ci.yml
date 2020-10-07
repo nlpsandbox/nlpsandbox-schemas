@@ -91,10 +91,11 @@ jobs:
       run: |
         git clone https://github.com/${{ github.event.repository.full_name }}.git \
           --branch gh-pages --single-branch gh-pages
-        GH_PAGES_DIR=gh-pages/${{ matrix.api }}/${{ steps.prep.outputs.version }}
-        mkdir -p ${GH_PAGES_DIR}
-        cp -R preview/${{ steps.prep.outputs.branch }} ${GH_PAGES_DIR}
+        TARGET_DIR=gh-pages/${{ matrix.api }}/${{ steps.prep.outputs.version }}
+        mkdir -p ${TARGET_DIR}
+        cp -R preview/${{ steps.prep.outputs.branch }} ${TARGET_DIR}
         cd gh-pages
+        ls -al
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add .
@@ -102,7 +103,7 @@ jobs:
         # The above command will fail if no changes were present, so we ignore
         # that.
     - name: Push changes
-      if: ${{ steps.prep.outputs.push }}
+      if: ${{ steps.prep.outputs.push }} == "true"
       uses: ad-m/github-push-action@master
       with:
         branch: gh-pages
