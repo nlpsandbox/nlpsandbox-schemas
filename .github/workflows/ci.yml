@@ -36,14 +36,14 @@ jobs:
       matrix:
         api:
         - "data-node"
-        # - "date-annotator"
+        - "date-annotator"
     steps:
     - uses: actions/checkout@v2
     - name: Prepare
       id: prep
-      # gh-openapi-docs uses the name "undefined" when it does not find the
-      # branch name
       run: |
+        # gh-openapi-docs uses the name "undefined" when it does not find the
+        # branch name
         BRANCH=undefined
         VERSION=noop
         PUSH=false
@@ -88,10 +88,24 @@ jobs:
     - name: Create openapi docs
       run: gh-openapi-docs-test
     - name: Commit doc changes
-      if: ${{ steps.prep.outputs.push }}
       run: |
         git clone https://github.com/${{ github.event.repository.full_name }}.git \
           --branch gh-pages --single-branch gh-pages
         GH_PAGES_DIR=gh-pages/${{ matrix.api }}/${{ steps.prep.outputs.version }}
         mkdir -p ${GH_PAGES_DIR}
         cp -R preview/${{ steps.prep.outputs.branch }} ${GH_PAGES_DIR}
+        cd gh-pages
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add .
+        git commit -m "Update documentation" -a || true
+        # The above command will fail if no changes were present, so we ignore
+        # that.
+    - name: Push changes
+      if: ${{ steps.prep.outputs.push }}
+      uses: ad-m/github-push-action@master
+      with:
+        branch: gh-pages
+        directory: gh-pages
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        force: true
