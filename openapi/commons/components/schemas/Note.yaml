@@ -1,0 +1,25 @@
+type: object
+description: A clinical note
+properties:
+  text:
+    description: The content of the note
+    type: string
+    example: October 3, Ms Chloe Price met with...
+  patientPublicId:
+    readOnly: true
+    allOf:
+      - $ref: PatientPublicId.yaml
+  filename:
+    description: The filename of the source note
+    type: string
+    example: 260-01.xml
+  type:
+    description: The note type
+    type: string
+    enum:
+      - pathology
+      - phone_call
+allOf:
+  - $ref: Entity.yaml
+required:
+  - text
