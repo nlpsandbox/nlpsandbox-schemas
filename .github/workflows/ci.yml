@@ -102,24 +102,24 @@ jobs:
         # Update gh-pages: version specified
         TARGET_DIR=gh-pages/${{ matrix.api }}/${{ steps.prep.outputs.version }}
         mkdir -p ${TARGET_DIR}
-        cp -R preview/${{ steps.prep.outputs.branch }} ${TARGET_DIR}
+        cp -R preview/${{ steps.prep.outputs.branch }}/* ${TARGET_DIR}
 
         # Update gh-pages: latest, major, and minor versions
         if [ ! -z "${{ steps.prep.outputs.version_major }}" ]; then
           # Update major version (e.g. "1.2.3" => "1")
           TARGET_DIR=gh-pages/${{ matrix.api }}/latest
           mkdir -p ${TARGET_DIR}
-          cp -R preview/${{ steps.prep.outputs.branch }} ${TARGET_DIR}
+          cp -R preview/${{ steps.prep.outputs.branch }}/* ${TARGET_DIR}
 
           # Update major version (e.g. "1.2.3" => "1")
           TARGET_DIR=gh-pages/${{ matrix.api }}/${{ steps.prep.outputs.version_major }}
           mkdir -p ${TARGET_DIR}
-          cp -R preview/${{ steps.prep.outputs.branch }} ${TARGET_DIR}
+          cp -R preview/${{ steps.prep.outputs.branch }}/* ${TARGET_DIR}
 
           # Update minor version (e.g. "1.2.3" => "1.2")
           TARGET_DIR=gh-pages/${{ matrix.api }}/${{ steps.prep.outputs.version_major }}.${{ steps.prep.outputs.version_minor }}
           mkdir -p ${TARGET_DIR}
-          cp -R preview/${{ steps.prep.outputs.branch }} ${TARGET_DIR}
+          cp -R preview/${{ steps.prep.outputs.branch }}/* ${TARGET_DIR}
         fi
 
         cd gh-pages
