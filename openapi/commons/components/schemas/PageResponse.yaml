@@ -1,18 +1,18 @@
 type: object
 description: A page of results
 properties:
-  count:
-    description: Number of results in the page
-    type: number
-    example: 10
+  # count:
+  #   description: Number of results in the page
+  #   type: number
+  #   example: 10
   links:
     description: Links to navigate to different pages of results
     type: object
     properties:
-      previous:
-        description: Link to the previous page of results
-        type: string
-        format: uri
+      # previous:
+      #   description: Link to the previous page of results
+      #   type: string
+      #   format: uri
       next:
         description: Link to the enxt page of results
         type: string
