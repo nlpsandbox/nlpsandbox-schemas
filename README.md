@@ -3,6 +3,18 @@
 [![GitHub CI](https://img.shields.io/github/workflow/status/data2health/nlp-sandbox-schemas/ci.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github)](https://github.com/data2health/nlp-sandbox-schemas)
 [![GitHub License](https://img.shields.io/github/license/data2health/nlp-sandbox-schemas.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github)](https://github.com/data2health/nlp-sandbox-schemas)
 
+## OpenAPI Specifications
+
+### Data Node
+
+| Tag | Version | Specification | HTML Doc |
+|---|---|---|---|
+| Latest  | 1.0.0 | YAML, JSON  | Link  |
+| 1.0  | 1.0.0 | YAML, JSON  | Link  |
+| 1  | 1.0.0 | YAML, JSON  | Link  |
+| Edge  |  | YAML, JSON | Link  |
+| Develop  |  | [YAML][data_node_yaml], [JSON][data_node_yaml] | [Link][data_node_html]  |
+
 ## Working on your OpenAPI Definition
 
 ### Install
@@ -40,3 +52,9 @@ We can then check the API doc at the address http://localhost:8080.
 
 - List paths in alphanumerical order
 - Add schemas and paths used in more than one API to `commons`
+
+<!-- Definitions -->
+
+[data_node_yaml]: https://data2health.github.io//nlp-sandbox-schemas/data-node/develop/openapi.yaml
+[data_node_json]: https://data2health.github.io//nlp-sandbox-schemas/data-node/develop/openapi.json
+[data_node_html]: https://data2health.github.io//nlp-sandbox-schemas/data-node/develop/docs/index.html
