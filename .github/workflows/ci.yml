@@ -37,13 +37,15 @@ jobs:
         api:
         - "data-node"
         - "date-annotator"
+        - "person-name-annotator"
+        - "physical-address-annotator"
     steps:
     - uses: actions/checkout@v2
     - name: Prepare
       id: prep
       run: |
-        # gh-openapi-docs uses the name "undefined" when it does not find the
-        # branch name
+        # gh-openapi-docs uses the branch name "undefined" when it does not find
+        # the name of the current branch
         BRANCH=undefined
         VERSION=noop
         PUSH=false
