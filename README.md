@@ -19,7 +19,7 @@ order.
 
 You can find below example implementations of the APIs defined by the NLP Sandbox.
 
-| GitHub | API |
+| GitHub repository | API |
 |---|---|
 | [Sage-Bionetworks/nlp-sandbox-data-node-i2b2-2014](https://github.com/Sage-Bionetworks/nlp-sandbox-data-node-i2b2-2014) | Data Node |
 | [Sage-Bionetworks/nlp-sandbox-date-annotator-example](https://github.com/Sage-Bionetworks/nlp-sandbox-date-annotator-example) | Date Annotator |
