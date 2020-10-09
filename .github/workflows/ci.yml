@@ -61,10 +61,13 @@ jobs:
             VERSION=edge
             PUSH=true
           elif [ "develop" = "$VERSION" ]; then
+            # If the branch develop is the default branch, the doc will be pushed
+            # to the folder edge but not the folder develop..
             PUSH=true
           fi
         elif [[ $GITHUB_REF == refs/pull/* ]]; then
           VERSION=pr-${{ github.event.number }}
+          PUSH=true
         fi
         if [[ $VERSION =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
           MINOR=${VERSION%.*}

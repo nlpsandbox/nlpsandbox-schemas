@@ -19,11 +19,12 @@ get:
         application/json:
           schema:
             type: object
+            properties:
+              items:
+                type: array
+                $ref: '../../../commons/components/schemas/DateAnnotation.yaml'
             allOf:
               - $ref: '../../../commons/components/schemas/PageResponse.yaml'
-              - items:
-                  type: array
-                  $ref: '../../../commons/components/schemas/DateAnnotation.yaml'
       description: Success
     "403":
       description: Forbidden
