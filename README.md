@@ -8,18 +8,14 @@
 List of APIs defined by the NLP Sandbox sorted by type and name in alphabetic
 order.
 
-| API | Type | Version | Specification | Documentation |
-|---|---|---|---|---|
-| [Data Node](/openapi/data-node) | Data Node | latest | YAML, JSON | Link |
-| [Data Node](/openapi/data-node) | Data Node | develop | [YAML](https://sage-bionetworks.github.io/nlp-sandbox-schemas/data-node/develop/openapi.yaml), [JSON](https://sage-bionetworks.github.io/nlp-sandbox-schemas/data-node/develop/openapi.json) | [Link](https://sage-bionetworks.github.io/nlp-sandbox-schemas/data-node/develop/docs/) |
-| [Date Annotator](/openapi/date-annotator) | NLP Tool | latest | YAML, JSON | Link |
-| [Date Annotator](/openapi/date-annotator) | NLP Tool | develop | [YAML](https://sage-bionetworks.github.io/nlp-sandbox-schemas/date-annotator/develop/openapi.yaml), [JSON](https://sage-bionetworks.github.io/nlp-sandbox-schemas/date-annotator/develop/openapi.json) | [Link](https://sage-bionetworks.github.io/nlp-sandbox-schemas/date-annotator/develop/docs/) |
-| [Person Name Annotator](/openapi/person-name-annotator) | NLP Tool | latest | YAML, JSON | Link |
-| [Person Name Annotator](/openapi/person-name-annotator) | NLP Tool | develop | [YAML](https://sage-bionetworks.github.io/nlp-sandbox-schemas/person-name-annotator/develop/openapi.yaml), [JSON](https://sage-bionetworks.github.io/nlp-sandbox-schemas/person-name/develop/openapi.json) | [Link](https://sage-bionetworks.github.io/nlp-sandbox-schemas/person-name-annotator/develop/docs/) |
-| [Physical Address Annotator](/openapi/physical-address-annotator) | NLP Tool | latest | YAML, JSON | Link |
-| [Physical Address Annotator](/openapi/physical-address-annotator) | NLP Tool | develop | [YAML](https://sage-bionetworks.github.io/nlp-sandbox-schemas/physical-address-annotator/develop/openapi.yaml), [JSON](https://sage-bionetworks.github.io/nlp-sandbox-schemas/physical-address-annotator/develop/openapi.json) | [Link](https://sage-bionetworks.github.io/nlp-sandbox-schemas/physical-address/develop/docs/) |
+| API | Type | Version |
+|---|---|---|
+| [Data Node](/openapi/data-node) | Data Node | 1.0.0 |
+| [Date Annotator](/openapi/date-annotator) | NLP Tool | 1.0.0 |
+| [Person Name Annotator](/openapi/person-name-annotator) | NLP Tool | 1.0.0 |
+| [Physical Address Annotator](/openapi/physical-address-annotator) | NLP Tool | 1.0.0 |
 
-## Examples
+## Web services
 
 You can find below example implementations of the APIs defined by the NLP Sandbox.
 
