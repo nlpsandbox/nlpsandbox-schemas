@@ -4,15 +4,16 @@
     "version": "1.0.0",
     "title": "NLP Sandbox Physical Address Annotator API",
     "contact": {
+      "name": "The NLP Sandbox Team",
       "email": "thomas.schaffter@sagebionetworks.org",
-      "url": "https://data2health.github.io/nlp-sandbox-schemas"
+      "url": "https://Sage-Bionetworks.github.io/nlp-sandbox-schemas"
     },
     "license": {
       "name": "Apache 2.0",
-      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+      "url": "https://github.com/Sage-Bionetworks/nlp-sandbox/blob/main/LICENSE"
     },
     "x-logo": {
-      "url": "https://data2health.github.io/nlp-sandbox-schemas/logo.png"
+      "url": "https://Sage-Bionetworks.github.io/nlp-sandbox-schemas/logo.png"
     },
     "description": "The OpenAPI specification implemented by NLP Sandbox Physical Address Annotators.\n# Overview\nThis NLP tool detects references of physical addresses in the clinical notes given as input and returns a list of physical address annotations.\n"
   },
