@@ -10,10 +10,10 @@ order.
 
 | API | Type | Version |
 |---|---|---|
-| [Data Node](/openapi/data-node) | Data Node | 1.0.0 |
-| [Date Annotator](/openapi/date-annotator) | NLP Tool | 1.0.0 |
-| [Person Name Annotator](/openapi/person-name-annotator) | NLP Tool | 1.0.0 |
-| [Physical Address Annotator](/openapi/physical-address-annotator) | NLP Tool | 1.0.0 |
+| [Data Node](/openapi/data-node) | Data Node | 0.1.0 |
+| [Date Annotator](/openapi/date-annotator) | NLP Tool | 0.1.0 |
+| [Person Name Annotator](/openapi/person-name-annotator) | NLP Tool | 0.1.0 |
+| [Physical Address Annotator](/openapi/physical-address-annotator) | NLP Tool | 0.1.0 |
 
 ## Web services
 
