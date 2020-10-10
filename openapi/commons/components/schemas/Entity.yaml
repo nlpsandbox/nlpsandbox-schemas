@@ -1,0 +1,21 @@
+type: object
+properties:
+  id:
+    description: ID
+    type: integer
+  createdBy:
+    description: The User who created this entity
+    $ref: User.yaml
+  createdAt:
+    description: When the entity has been created
+    type: string
+    format: date-time
+  updatedBy:
+    description: The User who update this entity
+    $ref: User.yaml
+  updatedAt:
+    description: When the entity has been updated
+    type: string
+    format: date-time
+required:
+   - id

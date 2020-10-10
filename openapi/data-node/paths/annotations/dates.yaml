@@ -1,0 +1,32 @@
+get:
+  tags:
+    - Date
+  summary: Get all date annotations
+  description: Returns the date annotations
+  operationId: "dates.read_all"
+  parameters:
+    - in: query
+      name: limit
+      description: Maximum number of results returned
+      required: false
+      schema:
+        format: int32
+        default: 10
+        minimum: 10
+  responses:
+    "200":
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              items:
+                type: array
+                $ref: '../../../commons/components/schemas/DateAnnotation.yaml'
+            allOf:
+              - $ref: '../../../commons/components/schemas/PageResponse.yaml'
+      description: Success
+    "403":
+      description: Forbidden
+    "404":
+      description: Date not found
