@@ -120,7 +120,7 @@ jobs:
           cp -R preview/${{ steps.prep.outputs.branch }}/* ${TARGET_DIR}
 
           # Update minor version (e.g. "1.2.3" => "1.2")
-          TARGET_DIR=gh-pages/${{ matrix.api }}/${{ steps.prep.outputs.version_major }}.${{ steps.prep.outputs.version_minor }}
+          TARGET_DIR=gh-pages/${{ matrix.api }}/${{ steps.prep.outputs.version_minor }}
           mkdir -p ${TARGET_DIR}
           cp -R preview/${{ steps.prep.outputs.branch }}/* ${TARGET_DIR}
         fi
