@@ -139,7 +139,7 @@ paths:
         '403':
           description: Forbidden
         '404':
-          description: Note not found
+          $ref: '#/components/responses/NotFound'
     put:
       tags:
         - Note
@@ -280,15 +280,10 @@ components:
         text:
           description: The content of the note
           type: string
-          example: 'October 3, Ms Chloe Price met with...'
+          example: 'On March 11, Ms Chloe Price met with her family.'
         patientPublicId:
-          readOnly: true
           allOf:
             - $ref: '#/components/schemas/PatientPublicId'
-        filename:
-          description: The filename of the source note
-          type: string
-          example: 260-01.xml
         type:
           description: The note type
           type: string
@@ -299,3 +294,20 @@ components:
         - $ref: '#/components/schemas/Entity'
       required:
         - text
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+      required:
+        - code
+        - message
+  responses:
+    NotFound:
+      description: The specified resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
