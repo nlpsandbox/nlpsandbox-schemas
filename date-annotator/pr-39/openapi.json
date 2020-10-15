@@ -59,7 +59,7 @@
             }
           },
           "403": {
-            "description": "Forbidden"
+            "$ref": "#/components/responses/Unauthorized"
           }
         },
         "requestBody": {
@@ -257,6 +257,21 @@
           }
         ]
       },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "message"
+        ]
+      },
       "Health": {
         "type": "object",
         "properties": {
@@ -267,6 +282,18 @@
               "pass",
               "warn"
             ]
+          }
+        }
+      }
+    },
+    "responses": {
+      "Unauthorized": {
+        "description": "Unauthorized",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
           }
         }
       }

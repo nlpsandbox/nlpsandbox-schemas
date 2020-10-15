@@ -44,7 +44,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/DateAnnotation'
         '403':
-          description: Forbidden
+          $ref: '#/components/responses/Unauthorized'
       requestBody:
         content:
           application/json:
@@ -176,6 +176,16 @@ components:
           type: string
       allOf:
         - $ref: '#/components/schemas/Annotation'
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+      required:
+        - code
+        - message
     Health:
       type: object
       properties:
@@ -185,3 +195,10 @@ components:
           enum:
             - pass
             - warn
+  responses:
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
