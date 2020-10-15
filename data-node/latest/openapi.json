@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.2",
   "info": {
-    "version": "0.1.0",
+    "version": "0.1.2",
     "title": "NLP Sandbox Data Node API",
     "contact": {
       "name": "The NLP Sandbox Team",
@@ -76,10 +76,10 @@
             "description": "Success"
           },
           "403": {
-            "description": "Forbidden"
+            "$ref": "#/components/responses/Unauthorized"
           },
           "404": {
-            "description": "Date not found"
+            "$ref": "#/components/responses/NotFound"
           }
         }
       }
@@ -104,10 +104,10 @@
             }
           },
           "403": {
-            "description": "Forbidden"
+            "$ref": "#/components/responses/Unauthorized"
           },
           "404": {
-            "description": "Note not found"
+            "$ref": "#/components/responses/NotFound"
           }
         }
       }
@@ -156,10 +156,10 @@
             "description": "Success"
           },
           "403": {
-            "description": "Forbidden"
+            "$ref": "#/components/responses/Unauthorized"
           },
           "404": {
-            "description": "Note not found"
+            "$ref": "#/components/responses/NotFound"
           }
         }
       }
@@ -195,10 +195,10 @@
             }
           },
           "403": {
-            "description": "Forbidden"
+            "$ref": "#/components/responses/Unauthorized"
           },
           "404": {
-            "description": "Note not found"
+            "$ref": "#/components/responses/NotFound"
           }
         }
       },
@@ -225,10 +225,10 @@
             "description": "OK"
           },
           "400": {
-            "description": "Invalid note supplied"
+            "$ref": "#/components/responses/BadRequest"
           },
           "404": {
-            "description": "Note not found"
+            "$ref": "#/components/responses/NotFound"
           }
         },
         "requestBody": {
@@ -363,7 +363,7 @@
         "type": "object",
         "description": "A date annotation in a text",
         "properties": {
-          "dateFormat": {
+          "format": {
             "description": "Date format (ISO 8601)",
             "type": "string"
           }
@@ -372,6 +372,21 @@
           {
             "$ref": "#/components/schemas/Annotation"
           }
+        ]
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "message"
         ]
       },
       "Health": {
@@ -400,20 +415,14 @@
           "text": {
             "description": "The content of the note",
             "type": "string",
-            "example": "October 3, Ms Chloe Price met with..."
+            "example": "On March 11, Ms Chloe Price met with her family."
           },
           "patientPublicId": {
-            "readOnly": true,
             "allOf": [
               {
                 "$ref": "#/components/schemas/PatientPublicId"
               }
             ]
-          },
-          "filename": {
-            "description": "The filename of the source note",
-            "type": "string",
-            "example": "260-01.xml"
           },
           "type": {
             "description": "The note type",
@@ -432,6 +441,38 @@
         "required": [
           "text"
         ]
+      }
+    },
+    "responses": {
+      "Unauthorized": {
+        "description": "Unauthorized",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "NotFound": {
+        "description": "The specified resource was not found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "BadRequest": {
+        "description": "Invalid request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
       }
     }
   }
