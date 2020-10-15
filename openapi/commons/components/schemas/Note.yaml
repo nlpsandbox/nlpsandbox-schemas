@@ -4,15 +4,11 @@ properties:
   text:
     description: The content of the note
     type: string
-    example: October 3, Ms Chloe Price met with...
+    example: On March 11, Ms Chloe Price met with her family.
   patientPublicId:
-    readOnly: true
+    # readOnly: true
     allOf:
       - $ref: PatientPublicId.yaml
-  fileName:
-    description: The filename of the source note
-    type: string
-    example: 260-01.xml
   type:
     description: The note type
     type: string

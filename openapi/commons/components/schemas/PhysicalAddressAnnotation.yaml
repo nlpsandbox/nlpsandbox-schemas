@@ -1,0 +1,4 @@
+type: object
+description: A physical address annotation in a text
+allOf:
+- $ref: Annotation.yaml
