@@ -1,7 +1,7 @@
 # NLP Sandbox OpenAPI Specifications
 
-[![GitHub CI](https://img.shields.io/github/workflow/status/data2health/nlp-sandbox-schemas/ci.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github)](https://github.com/data2health/nlp-sandbox-schemas)
-[![GitHub License](https://img.shields.io/github/license/data2health/nlp-sandbox-schemas.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github)](https://github.com/data2health/nlp-sandbox-schemas)
+[![GitHub CI](https://img.shields.io/github/workflow/status/Sage-Bionetworks/nlp-sandbox-schemas/ci.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github)](https://github.com/Sage-Bionetworks/nlp-sandbox-schemas)
+[![GitHub License](https://img.shields.io/github/license/Sage-Bionetworks/nlp-sandbox-schemas.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github)](https://github.com/Sage-Bionetworks/nlp-sandbox-schemas)
 
 ## OpenAPI specifications
 
@@ -64,6 +64,6 @@ TBA
 
 <!-- Definitions -->
 
-[data_node_yaml]: https://data2health.github.io//nlp-sandbox-schemas/data-node/develop/openapi.yaml
-[data_node_json]: https://data2health.github.io//nlp-sandbox-schemas/data-node/develop/openapi.json
-[data_node_html]: https://data2health.github.io//nlp-sandbox-schemas/data-node/develop/docs/index.html
+[data_node_yaml]: https://Sage-Bionetworks.github.io//nlp-sandbox-schemas/data-node/develop/openapi.yaml
+[data_node_json]: https://Sage-Bionetworks.github.io//nlp-sandbox-schemas/data-node/develop/openapi.json
+[data_node_html]: https://Sage-Bionetworks.github.io//nlp-sandbox-schemas/data-node/develop/docs/index.html
