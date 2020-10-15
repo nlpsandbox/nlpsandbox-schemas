@@ -14,7 +14,7 @@ get:
               items:
                 $ref: ../../commons/components/schemas/DateAnnotation.yaml
       '403':
-        description: Forbidden
+        $ref: ../../commons/components/responses/Unauthorized.yaml
   requestBody:
     content:
       application/json:

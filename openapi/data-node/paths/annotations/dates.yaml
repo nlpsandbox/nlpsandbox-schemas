@@ -14,7 +14,7 @@ get:
         default: 10
         minimum: 10
   responses:
-    "200":
+    '200':
       content:
         application/json:
           schema:
@@ -22,11 +22,11 @@ get:
             properties:
               items:
                 type: array
-                $ref: '../../../commons/components/schemas/DateAnnotation.yaml'
+                $ref: ../../../commons/components/schemas/DateAnnotation.yaml
             allOf:
-              - $ref: '../../../commons/components/schemas/PageResponse.yaml'
+              - $ref: ../../../commons/components/schemas/PageResponse.yaml
       description: Success
-    "403":
-      description: Forbidden
-    "404":
-      description: Date not found
+    '403':
+      $ref: ../../../commons/components/responses/Unauthorized.yaml
+    '404':
+      $ref: ../../../commons/components/responses/NotFound.yaml
