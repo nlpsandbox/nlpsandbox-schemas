@@ -1,7 +1,7 @@
 type: object
 description: A date annotation in a text
 properties:
-  dateFormat:
+  format:
     description: Date format (ISO 8601)
     type: string
 allOf:

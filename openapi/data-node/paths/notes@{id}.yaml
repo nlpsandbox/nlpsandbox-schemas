@@ -19,9 +19,9 @@ get:
           schema:
             $ref: ../../commons/components/schemas/Note.yaml
     '403':
-      description: Forbidden
+      $ref: ../../commons/components/responses/Unauthorized.yaml
     '404':
-      description: Note not found
+      $ref: ../../commons/components/responses/NotFound.yaml
 put:
   tags:
     - Note
@@ -42,9 +42,9 @@ put:
     '200':
       description: OK
     '400':
-      description: Invalid note supplied
+      $ref: ../../commons/components/responses/BadRequest.yaml
     '404':
-      description: Note not found
+      $ref: ../../commons/components/responses/NotFound.yaml
   requestBody:
     content:
       application/json:
