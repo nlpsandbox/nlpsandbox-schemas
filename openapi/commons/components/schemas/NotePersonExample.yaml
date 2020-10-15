@@ -1,0 +1,9 @@
+type: object
+description: A clinical note for the Peron Example Node
+properties:
+  text:
+    description: The content of the note for Person Deidentification
+    type: string
+    example: On October 3, Alicia Reed was seen by Doctor Marcos Wyatt.
+allOf:
+  - $ref: Note.yaml

@@ -22,7 +22,7 @@ get:
             properties:
               items:
                 type: array
-                $ref: ../../commons/components/schemas/Note.yaml
+                $ref: '../../commons/components/schemas/NotePersonExample.yaml'
             allOf:
               - $ref: ../../commons/components/schemas/PageResponse.yaml
       description: Success
