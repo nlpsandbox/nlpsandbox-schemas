@@ -13,6 +13,8 @@ on:
 
 env:
   node_version: 12.x
+  # github.event.repository.clone_url not available for on: schedule
+  clone_url: https://github.com/Sage-Bionetworks/nlp-sandbox-schemas.git
 
 jobs:
   lint:
@@ -99,7 +101,7 @@ jobs:
       run: npx gh-openapi-docs-ts
     - name: Commit doc changes
       run: |
-        git clone ${{ github.event.repository.clone_url }} \
+        git clone ${{ env.clone_url }} \
           --branch gh-pages --single-branch gh-pages
 
         # Update gh-pages: version specified
