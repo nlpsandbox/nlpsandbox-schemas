@@ -14,7 +14,7 @@ get:
         default: 10
         minimum: 10
   responses:
-    "200":
+    '200':
       content:
         application/json:
           schema:
@@ -26,8 +26,8 @@ get:
             allOf:
               - $ref: ../../commons/components/schemas/PageResponse.yaml
       description: Success
-    "403":
+    '403':
       $ref: ../../commons/components/responses/Unauthorized.yaml
-    "404":
+    '404':
       $ref: ../../commons/components/responses/NotFound.yaml
 
