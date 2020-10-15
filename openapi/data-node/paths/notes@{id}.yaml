@@ -21,7 +21,7 @@ get:
     '403':
       description: Forbidden
     '404':
-      description: Note not found
+      $ref: ../../commons/components/responses/NotFound.yaml
 put:
   tags:
     - Note
