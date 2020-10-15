@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.2",
   "info": {
-    "version": "0.1.1",
+    "version": "0.1.2",
     "title": "NLP Sandbox Physical Address Annotator API",
     "contact": {
       "name": "The NLP Sandbox Team",
@@ -96,10 +96,10 @@
             }
           },
           "403": {
-            "description": "Forbidden"
+            "$ref": "#/components/responses/Unauthorized"
           },
           "404": {
-            "description": "Note not found"
+            "$ref": "#/components/responses/NotFound"
           }
         }
       }
@@ -183,20 +183,14 @@
           "text": {
             "description": "The content of the note",
             "type": "string",
-            "example": "October 3, Ms Chloe Price met with..."
+            "example": "On March 11, Ms Chloe Price met with her family."
           },
           "patientPublicId": {
-            "readOnly": true,
             "allOf": [
               {
                 "$ref": "#/components/schemas/PatientPublicId"
               }
             ]
-          },
-          "filename": {
-            "description": "The filename of the source note",
-            "type": "string",
-            "example": "260-01.xml"
           },
           "type": {
             "description": "The note type",
@@ -267,6 +261,43 @@
               "pass",
               "warn"
             ]
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "message"
+        ]
+      }
+    },
+    "responses": {
+      "Unauthorized": {
+        "description": "Unauthorized",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "NotFound": {
+        "description": "The specified resource was not found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
           }
         }
       }
