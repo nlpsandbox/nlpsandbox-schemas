@@ -12,6 +12,6 @@ get:
           schema:
             $ref: ../components/schemas/Health.yaml
     '403':
-      description: Forbidden
+      $ref: ../components/responses/Unauthorized.yaml
     '404':
-      description: Note not found
+      $ref: ../components/responses/NotFound.yaml
