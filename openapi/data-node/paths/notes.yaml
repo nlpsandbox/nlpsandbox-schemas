@@ -22,12 +22,12 @@ get:
             properties:
               items:
                 type: array
-                $ref: '../../commons/components/schemas/Note.yaml'
+                $ref: ../../commons/components/schemas/Note.yaml
             allOf:
-              - $ref: '../../commons/components/schemas/PageResponse.yaml'
+              - $ref: ../../commons/components/schemas/PageResponse.yaml
       description: Success
     "403":
-      description: Forbidden
+      $ref: ../../commons/components/responses/Unauthorized.yaml
     "404":
-      description: Note not found
+      $ref: ../../commons/components/responses/NotFound.yaml
 
