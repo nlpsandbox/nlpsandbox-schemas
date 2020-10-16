@@ -47,7 +47,7 @@
             "description": "Maximum number of results returned",
             "required": false,
             "schema": {
-              "format": "int32",
+              "type": "integer",
               "default": 10,
               "minimum": 10
             }
@@ -127,7 +127,7 @@
             "description": "Maximum number of results returned",
             "required": false,
             "schema": {
-              "format": "int32",
+              "type": "integer",
               "default": 10,
               "minimum": 10
             }
