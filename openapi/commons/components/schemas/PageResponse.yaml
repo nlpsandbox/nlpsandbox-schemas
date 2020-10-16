@@ -9,10 +9,6 @@ properties:
     description: Links to navigate to different pages of results
     type: object
     properties:
-      # previous:
-      #   description: Link to the previous page of results
-      #   type: string
-      #   format: uri
       next:
         description: Link to the enxt page of results
         type: string

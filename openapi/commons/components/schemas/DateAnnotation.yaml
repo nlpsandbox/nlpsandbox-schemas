@@ -5,4 +5,4 @@ properties:
     description: Date format (ISO 8601)
     type: string
 allOf:
-- $ref: Annotation.yaml
+  - $ref: Annotation.yaml
