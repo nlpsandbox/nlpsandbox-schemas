@@ -51,6 +51,16 @@
               "default": 10,
               "minimum": 10
             }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "description": "Index of the first result that must be returned",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0
+            }
           }
         ],
         "responses": {
@@ -62,7 +72,9 @@
                   "properties": {
                     "items": {
                       "type": "array",
-                      "$ref": "#/components/schemas/DateAnnotation"
+                      "items": {
+                        "$ref": "#/components/schemas/DateAnnotation"
+                      }
                     }
                   },
                   "allOf": [
@@ -131,6 +143,16 @@
               "default": 10,
               "minimum": 10
             }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "description": "Index of the first result that must be returned",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0
+            }
           }
         ],
         "responses": {
@@ -142,7 +164,9 @@
                   "properties": {
                     "items": {
                       "type": "array",
-                      "$ref": "#/components/schemas/Note"
+                      "items": {
+                        "$ref": "#/components/schemas/Note"
+                      }
                     }
                   },
                   "allOf": [

@@ -47,6 +47,13 @@ paths:
             type: integer
             default: 10
             minimum: 10
+        - in: query
+          name: offset
+          description: Index of the first result that must be returned
+          required: false
+          schema:
+            type: integer
+            minimum: 0
       responses:
         '200':
           content:
@@ -56,7 +63,8 @@ paths:
                 properties:
                   items:
                     type: array
-                    $ref: '#/components/schemas/DateAnnotation'
+                    items:
+                      $ref: '#/components/schemas/DateAnnotation'
                 allOf:
                   - $ref: '#/components/schemas/PageResponse'
           description: Success
@@ -98,6 +106,13 @@ paths:
             type: integer
             default: 10
             minimum: 10
+        - in: query
+          name: offset
+          description: Index of the first result that must be returned
+          required: false
+          schema:
+            type: integer
+            minimum: 0
       responses:
         '200':
           content:
@@ -107,7 +122,8 @@ paths:
                 properties:
                   items:
                     type: array
-                    $ref: '#/components/schemas/Note'
+                    items:
+                      $ref: '#/components/schemas/Note'
                 allOf:
                   - $ref: '#/components/schemas/PageResponse'
           description: Success
