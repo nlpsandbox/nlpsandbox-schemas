@@ -1,3 +1,10 @@
+Developer Documentation
+=======================
+TO create a flask application :
+
+npm run build openapi/date-annotator/openapi.yaml
+openapi-generator generate -i dist.yaml -g python-flask -o
+
 Reusable components
 ===========
 
