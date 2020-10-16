@@ -1,0 +1,32 @@
+openapi: 3.0.2
+info:
+  version: 0.1.2
+  title: NLP Sandbox PHI Deidentifier API
+  contact:
+    name: The NLP Sandbox Team
+    email: thomas.schaffter@sagebionetworks.org
+    url: 'https://Sage-Bionetworks.github.io/nlp-sandbox-schemas'
+  license:
+    name: Apache 2.0
+    url: 'https://github.com/Sage-Bionetworks/nlp-sandbox/blob/main/LICENSE'
+  x-logo:
+    url: 'https://Sage-Bionetworks.github.io/nlp-sandbox-schemas/logo.png'
+  description: >
+    The OpenAPI specification implemented by NLP Sandbox PHI Deidentifiers.
+
+    # Overview
+
+    TBA
+tags:
+  - name: Deidentified Notes
+    description: Operations about deidentified notes
+  - name: Health
+    description: Operations about API health
+servers:
+  - url: 'http://example.com/api/v1'
+  - url: 'https://example.com/api/v1'
+paths:
+  /deidentified-notes:
+    $ref: 'paths/deidentified-notes.yaml'
+  /health:
+    $ref: '../commons/paths/health.yaml'
