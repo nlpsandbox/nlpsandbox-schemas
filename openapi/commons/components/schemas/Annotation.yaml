@@ -18,4 +18,4 @@ required:
   - start
   - length
 allOf:
-- $ref: Entity.yaml
+  - $ref: Entity.yaml
