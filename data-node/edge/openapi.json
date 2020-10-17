@@ -227,47 +227,6 @@
             "$ref": "#/components/responses/NotFound"
           }
         }
-      },
-      "put": {
-        "tags": [
-          "Note"
-        ],
-        "summary": "Update a clinical note by ID",
-        "description": "This can only be done by the logged in user.",
-        "operationId": "notes.update",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "Updates the clinical note for a given ID",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "$ref": "#/components/responses/BadRequest"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Note"
-              }
-            }
-          },
-          "description": "Updated clinical note",
-          "required": true
-        }
       }
     }
   },
@@ -482,16 +441,6 @@
       },
       "NotFound": {
         "description": "The specified resource was not found",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/schemas/Error"
-            }
-          }
-        }
-      },
-      "BadRequest": {
-        "description": "Invalid request",
         "content": {
           "application/json": {
             "schema": {
