@@ -199,8 +199,8 @@ components:
             A human readable explanation specific to this occurrence of the
             problem
       required:
-        - code
-        - message
+        - title
+        - status
   responses:
     Unauthorized:
       description: Unauthorized
