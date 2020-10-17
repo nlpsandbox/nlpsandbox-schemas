@@ -59,6 +59,7 @@
             "required": false,
             "schema": {
               "type": "integer",
+              "default": 0,
               "minimum": 0
             }
           }
@@ -151,6 +152,7 @@
             "required": false,
             "schema": {
               "type": "integer",
+              "default": 10,
               "minimum": 0
             }
           }
