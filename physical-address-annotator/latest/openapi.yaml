@@ -185,10 +185,20 @@ components:
     Error:
       type: object
       properties:
-        code:
+        type:
           type: string
-        message:
+          description: An absolute URI that identifies the problem type
+        title:
           type: string
+          description: A human readable documentation for the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: >-
+            A human readable explanation specific to this occurrence of the
+            problem
       required:
         - code
         - message
