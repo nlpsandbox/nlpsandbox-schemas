@@ -47,6 +47,14 @@ paths:
             type: integer
             default: 10
             minimum: 10
+        - in: query
+          name: offset
+          description: Index of the first result that must be returned
+          required: false
+          schema:
+            type: integer
+            default: 0
+            minimum: 0
       responses:
         '200':
           content:
@@ -56,7 +64,8 @@ paths:
                 properties:
                   items:
                     type: array
-                    $ref: '#/components/schemas/DateAnnotation'
+                    items:
+                      $ref: '#/components/schemas/DateAnnotation'
                 allOf:
                   - $ref: '#/components/schemas/PageResponse'
           description: Success
@@ -98,6 +107,14 @@ paths:
             type: integer
             default: 10
             minimum: 10
+        - in: query
+          name: offset
+          description: Index of the first result that must be returned
+          required: false
+          schema:
+            type: integer
+            default: 10
+            minimum: 0
       responses:
         '200':
           content:
@@ -107,7 +124,8 @@ paths:
                 properties:
                   items:
                     type: array
-                    $ref: '#/components/schemas/Note'
+                    items:
+                      $ref: '#/components/schemas/Note'
                 allOf:
                   - $ref: '#/components/schemas/PageResponse'
           description: Success
@@ -140,33 +158,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
-    put:
-      tags:
-        - Note
-      summary: Update a clinical note by ID
-      description: This can only be done by the logged in user.
-      operationId: notes.update
-      parameters:
-        - name: id
-          in: path
-          description: Updates the clinical note for a given ID
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: OK
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '404':
-          $ref: '#/components/responses/NotFound'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Note'
-        description: Updated clinical note
-        required: true
 components:
   schemas:
     PageResponse:
@@ -262,10 +253,20 @@ components:
     Error:
       type: object
       properties:
-        code:
+        type:
           type: string
-        message:
+          description: An absolute URI that identifies the problem type
+        title:
           type: string
+          description: A human readable documentation for the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: >-
+            A human readable explanation specific to this occurrence of the
+            problem
       required:
         - code
         - message
@@ -313,12 +314,6 @@ components:
             $ref: '#/components/schemas/Error'
     NotFound:
       description: The specified resource was not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Invalid request
       content:
         application/json:
           schema:
