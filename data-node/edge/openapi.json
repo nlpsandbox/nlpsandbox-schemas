@@ -380,8 +380,8 @@
           }
         },
         "required": [
-          "code",
-          "message"
+          "title",
+          "status"
         ]
       },
       "Health": {
