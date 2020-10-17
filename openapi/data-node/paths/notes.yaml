@@ -19,6 +19,7 @@ get:
       required: false
       schema:
         type: integer
+        default: 10
         minimum: 0
   responses:
     '200':
