@@ -1,7 +1,19 @@
+type: object
+description: A clinical note
+properties:
+  text:
+    description: The content of the note
+    type: string
+    example: On 09-03-1999, Ms Chloe Price met with Dr Joe. Please come back on
+      08/02/1999 or 08.03.1999 not next year in MAY of 2021.
+  type:
+    description: The note type
+    type: string
+    enum:
+      - pathology
+      - phone_call
 allOf:
-  - $ref: ../../../commons/components/schemas/Note.yaml
-example:
-  id: 0
-  text: On 09-03-1999, Ms Chloe Price met with Dr Joe. Please come back on
-    08/02/1999 or 08.03.1999 not next year in MAY of 2021.
-  type: pathology
+  - $ref: ../../../commons/components/schemas/Entity.yaml
+required:
+  - id
+  - text
