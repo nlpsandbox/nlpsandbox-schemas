@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.2",
   "info": {
-    "version": "0.1.5",
+    "version": "0.1.6",
     "title": "NLP Sandbox Physical Address Annotator API",
     "contact": {
       "name": "The NLP Sandbox Team",
@@ -193,9 +193,6 @@
               }
             }
           }
-        ],
-        "required": [
-          "text"
         ]
       },
       "Annotation": {
