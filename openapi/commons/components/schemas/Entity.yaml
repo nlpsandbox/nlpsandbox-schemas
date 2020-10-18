@@ -3,6 +3,7 @@ properties:
   id:
     description: ID
     type: integer
+    example: 0
   createdBy:
     description: The User who created this entity
     $ref: User.yaml
