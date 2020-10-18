@@ -37,13 +37,25 @@
   ],
   "paths": {
     "/dates": {
-      "get": {
+      "post": {
         "tags": [
           "Date"
         ],
         "summary": "Get all date annotations",
         "description": "Returns the date annotations",
         "operationId": "dates.read_all",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Note"
+                }
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Success",
@@ -60,18 +72,6 @@
           },
           "403": {
             "$ref": "#/components/responses/Unauthorized"
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/Note"
-                }
-              }
-            }
           }
         }
       }
