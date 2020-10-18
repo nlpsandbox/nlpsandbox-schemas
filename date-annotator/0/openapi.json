@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.2",
   "info": {
-    "version": "0.1.5",
+    "version": "0.1.6",
     "title": "NLP Sandbox Date Annotator API",
     "contact": {
       "name": "The NLP Sandbox Team",
@@ -37,13 +37,25 @@
   ],
   "paths": {
     "/dates": {
-      "get": {
+      "post": {
         "tags": [
           "Date"
         ],
         "summary": "Get all date annotations",
         "description": "Returns the date annotations",
         "operationId": "dates.read_all",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Note"
+                }
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Success",
@@ -60,18 +72,6 @@
           },
           "403": {
             "$ref": "#/components/responses/Unauthorized"
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/Note"
-                }
-              }
-            }
           }
         }
       }
@@ -145,7 +145,8 @@
         "properties": {
           "id": {
             "description": "ID",
-            "type": "integer"
+            "type": "integer",
+            "example": 0
           },
           "createdBy": {
             "description": "The User who created this entity",
@@ -165,95 +166,80 @@
             "type": "string",
             "format": "date-time"
           }
-        },
-        "required": [
-          "id"
-        ]
-      },
-      "PatientPublicId": {
-        "type": "string",
-        "description": "The patient public ID",
-        "maxLength": 50,
-        "example": "4f6cf35x-2c4y-483z-a0a9-158621f77a21"
+        }
       },
       "Note": {
         "type": "object",
         "description": "A clinical note",
-        "properties": {
-          "text": {
-            "description": "The content of the note",
-            "type": "string",
-            "example": "On March 11, Ms Chloe Price met with her family."
-          },
-          "patientPublicId": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/PatientPublicId"
-              }
-            ]
-          },
-          "type": {
-            "description": "The note type",
-            "type": "string",
-            "enum": [
-              "pathology",
-              "phone_call"
-            ]
-          }
-        },
         "allOf": [
           {
             "$ref": "#/components/schemas/Entity"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "text": {
+                "description": "The content of the note",
+                "type": "string",
+                "example": "On 09-03-1999, Ms Chloe Price met with Dr Joe."
+              },
+              "type": {
+                "description": "The note type",
+                "type": "string",
+                "enum": [
+                  "pathology",
+                  "phone_call"
+                ]
+              }
+            }
           }
-        ],
-        "required": [
-          "text"
         ]
       },
       "Annotation": {
         "type": "object",
         "description": "An annotation in a text",
-        "properties": {
-          "noteId": {
-            "description": "The note ID",
-            "type": "integer"
-          },
-          "start": {
-            "description": "The position of the first character",
-            "type": "integer"
-          },
-          "length": {
-            "description": "The length of the annotation",
-            "type": "integer"
-          },
-          "text": {
-            "description": "The string annotated",
-            "type": "string"
-          }
-        },
-        "required": [
-          "noteId",
-          "start",
-          "length"
-        ],
         "allOf": [
           {
             "$ref": "#/components/schemas/Entity"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "noteId": {
+                "description": "The note ID",
+                "type": "integer"
+              },
+              "start": {
+                "description": "The position of the first character",
+                "type": "integer"
+              },
+              "length": {
+                "description": "The length of the annotation",
+                "type": "integer"
+              },
+              "text": {
+                "description": "The string annotated",
+                "type": "string"
+              }
+            }
           }
         ]
       },
       "DateAnnotation": {
         "type": "object",
         "description": "A date annotation in a text",
-        "properties": {
-          "format": {
-            "description": "Date format (ISO 8601)",
-            "type": "string"
-          }
-        },
         "allOf": [
           {
             "$ref": "#/components/schemas/Annotation"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "format": {
+                "description": "Date format (ISO 8601)",
+                "type": "string"
+              }
+            }
           }
         ]
       },
