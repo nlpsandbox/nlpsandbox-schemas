@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.2",
   "info": {
-    "version": "0.1.5",
+    "version": "0.1.6",
     "title": "NLP Sandbox Person Name Annotator API",
     "contact": {
       "name": "The NLP Sandbox Team",
@@ -19,12 +19,12 @@
   },
   "tags": [
     {
-      "name": "Person Name",
-      "description": "Operations about person names"
-    },
-    {
       "name": "Health",
       "description": "Operations about API health"
+    },
+    {
+      "name": "Person Name",
+      "description": "Operations about person names"
     }
   ],
   "servers": [
@@ -36,46 +36,6 @@
     }
   ],
   "paths": {
-    "/person-names": {
-      "get": {
-        "tags": [
-          "Person Name"
-        ],
-        "summary": "Get all person name annotations",
-        "description": "Returns the person name annotations",
-        "operationId": "person_names.read_all",
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/PersonNameAnnotation"
-                  }
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden"
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/Note"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/health": {
       "get": {
         "tags": [
@@ -103,10 +63,88 @@
           }
         }
       }
+    },
+    "/person-names": {
+      "post": {
+        "tags": [
+          "Person Name"
+        ],
+        "summary": "Get all person name annotations",
+        "description": "Returns the person name annotations",
+        "operationId": "person_names.read_all",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Note"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PersonNameAnnotation"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
+      "Health": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "description": "Health status",
+            "type": "string",
+            "enum": [
+              "pass",
+              "warn"
+            ]
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "A human readable documentation for the problem type"
+          },
+          "status": {
+            "type": "integer",
+            "description": "The HTTP status code"
+          },
+          "detail": {
+            "type": "string",
+            "description": "A human readable explanation specific to this occurrence of the problem"
+          },
+          "type": {
+            "type": "string",
+            "description": "An absolute URI that identifies the problem type"
+          }
+        },
+        "required": [
+          "title",
+          "status"
+        ]
+      },
       "Email": {
         "description": "User email address",
         "type": "string",
@@ -193,9 +231,6 @@
               }
             }
           }
-        ],
-        "required": [
-          "text"
         ]
       },
       "Annotation": {
@@ -235,44 +270,6 @@
           {
             "$ref": "#/components/schemas/Annotation"
           }
-        ]
-      },
-      "Health": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "description": "Health status",
-            "type": "string",
-            "enum": [
-              "pass",
-              "warn"
-            ]
-          }
-        }
-      },
-      "Error": {
-        "type": "object",
-        "properties": {
-          "title": {
-            "type": "string",
-            "description": "A human readable documentation for the problem type"
-          },
-          "status": {
-            "type": "integer",
-            "description": "The HTTP status code"
-          },
-          "detail": {
-            "type": "string",
-            "description": "A human readable explanation specific to this occurrence of the problem"
-          },
-          "type": {
-            "type": "string",
-            "description": "An absolute URI that identifies the problem type"
-          }
-        },
-        "required": [
-          "title",
-          "status"
         ]
       }
     },
