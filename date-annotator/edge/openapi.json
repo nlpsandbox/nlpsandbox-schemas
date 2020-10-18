@@ -166,83 +166,83 @@
             "type": "string",
             "format": "date-time"
           }
-        },
-        "required": [
-          "id"
-        ]
+        }
       },
       "Note": {
         "type": "object",
         "description": "A clinical note",
-        "properties": {
-          "text": {
-            "description": "The content of the note",
-            "type": "string",
-            "example": "On 09-03-1999, Ms Chloe Price met with Dr Joe. Please come back on 08/02/1999 or 08.03.1999 not next year in MAY of 2021."
-          },
-          "type": {
-            "description": "The note type",
-            "type": "string",
-            "enum": [
-              "pathology",
-              "phone_call"
-            ]
-          }
-        },
         "allOf": [
           {
             "$ref": "#/components/schemas/Entity"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "text": {
+                "description": "The content of the note",
+                "type": "string",
+                "example": "On 09-03-1999, Ms Chloe Price met with Dr Joe."
+              },
+              "type": {
+                "description": "The note type",
+                "type": "string",
+                "enum": [
+                  "pathology",
+                  "phone_call"
+                ]
+              }
+            }
           }
         ],
         "required": [
-          "id",
           "text"
         ]
       },
       "Annotation": {
         "type": "object",
         "description": "An annotation in a text",
-        "properties": {
-          "noteId": {
-            "description": "The note ID",
-            "type": "integer"
-          },
-          "start": {
-            "description": "The position of the first character",
-            "type": "integer"
-          },
-          "length": {
-            "description": "The length of the annotation",
-            "type": "integer"
-          },
-          "text": {
-            "description": "The string annotated",
-            "type": "string"
-          }
-        },
-        "required": [
-          "noteId",
-          "start",
-          "length"
-        ],
         "allOf": [
           {
             "$ref": "#/components/schemas/Entity"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "noteId": {
+                "description": "The note ID",
+                "type": "integer"
+              },
+              "start": {
+                "description": "The position of the first character",
+                "type": "integer"
+              },
+              "length": {
+                "description": "The length of the annotation",
+                "type": "integer"
+              },
+              "text": {
+                "description": "The string annotated",
+                "type": "string"
+              }
+            }
           }
         ]
       },
       "DateAnnotation": {
         "type": "object",
         "description": "A date annotation in a text",
-        "properties": {
-          "format": {
-            "description": "Date format (ISO 8601)",
-            "type": "string"
-          }
-        },
         "allOf": [
           {
             "$ref": "#/components/schemas/Annotation"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "format": {
+                "description": "Date format (ISO 8601)",
+                "type": "string"
+              }
+            }
           }
         ]
       },
