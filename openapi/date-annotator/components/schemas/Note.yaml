@@ -1,0 +1,7 @@
+allOf:
+  - $ref: ../../../commons/components/schemas/Note.yaml
+example:
+  id: 0
+  text: On 09-03-1999, Ms Chloe Price met with Dr Joe. Please come back on
+    08/02/1999 or 08.03.1999 not next year in MAY of 2021.
+  type: pathology
