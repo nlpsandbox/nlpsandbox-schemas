@@ -14,5 +14,5 @@ allOf:
         enum:
           - pathology
           - phone_call
-required:
-  - text
+# required:
+#   - text
