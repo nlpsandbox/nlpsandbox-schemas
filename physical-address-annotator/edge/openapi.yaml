@@ -119,48 +119,44 @@ components:
           description: When the entity has been updated
           type: string
           format: date-time
-      required:
-        - id
     Note:
       type: object
       description: A clinical note
-      properties:
-        text:
-          description: The content of the note
-          type: string
-          example: 'On 09-03-1999, Ms Chloe Price met with Dr Joe.'
-        type:
-          description: The note type
-          type: string
-          enum:
-            - pathology
-            - phone_call
       allOf:
         - $ref: '#/components/schemas/Entity'
+        - type: object
+          properties:
+            text:
+              description: The content of the note
+              type: string
+              example: 'On 09-03-1999, Ms Chloe Price met with Dr Joe.'
+            type:
+              description: The note type
+              type: string
+              enum:
+                - pathology
+                - phone_call
       required:
         - text
     Annotation:
       type: object
       description: An annotation in a text
-      properties:
-        noteId:
-          description: The note ID
-          type: integer
-        start:
-          description: The position of the first character
-          type: integer
-        length:
-          description: The length of the annotation
-          type: integer
-        text:
-          description: The string annotated
-          type: string
-      required:
-        - noteId
-        - start
-        - length
       allOf:
         - $ref: '#/components/schemas/Entity'
+        - type: object
+          properties:
+            noteId:
+              description: The note ID
+              type: integer
+            start:
+              description: The position of the first character
+              type: integer
+            length:
+              description: The length of the annotation
+              type: integer
+            text:
+              description: The string annotated
+              type: string
     PhysicalAddressAnnotation:
       type: object
       description: A physical address annotation in a text
