@@ -21,6 +21,10 @@
     {
       "name": "Note",
       "description": "Operations about clinical notes"
+    },
+    {
+      "name": "Health",
+      "description": "Operations about API health"
     }
   ],
   "servers": [
