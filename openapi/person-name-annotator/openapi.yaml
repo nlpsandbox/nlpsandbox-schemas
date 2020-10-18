@@ -19,15 +19,15 @@ info:
     This NLP tool detects references of person names in the clinical notes given
     as input and returns a list of person name annotations.
 tags:
-  - name: Person Name
-    description: Operations about person names
   - name: Health
     description: Operations about API health
+  - name: Person Name
+    description: Operations about person names
 servers:
   - url: 'http://example.com/api/v1'
   - url: 'https://example.com/api/v1'
 paths:
-  /person-names:
-    $ref: 'paths/person-names.yaml'
   /health:
     $ref: '../commons/paths/health.yaml'
+  /person-names:
+    $ref: 'paths/person-names.yaml'
