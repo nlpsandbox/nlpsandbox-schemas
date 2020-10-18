@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 0.1.2
+  version: 0.1.5
   title: NLP Sandbox PHI Deidentifier API
   contact:
     name: The NLP Sandbox Team
@@ -100,6 +100,7 @@ components:
         id:
           description: ID
           type: integer
+          example: 0
         createdBy:
           description: The User who created this entity
           $ref: '#/components/schemas/User'
@@ -116,11 +117,6 @@ components:
           format: date-time
       required:
         - id
-    PatientPublicId:
-      type: string
-      description: The patient public ID
-      maxLength: 50
-      example: 4f6cf35x-2c4y-483z-a0a9-158621f77a21
     Note:
       type: object
       description: A clinical note
@@ -128,10 +124,7 @@ components:
         text:
           description: The content of the note
           type: string
-          example: 'On March 11, Ms Chloe Price met with her family.'
-        patientPublicId:
-          allOf:
-            - $ref: '#/components/schemas/PatientPublicId'
+          example: 'On 09-03-1999, Ms Chloe Price met with Dr Joe.'
         type:
           description: The note type
           type: string
@@ -145,13 +138,23 @@ components:
     Error:
       type: object
       properties:
-        code:
+        title:
           type: string
-        message:
+          description: A human readable documentation for the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
           type: string
+          description: >-
+            A human readable explanation specific to this occurrence of the
+            problem
+        type:
+          type: string
+          description: An absolute URI that identifies the problem type
       required:
-        - code
-        - message
+        - title
+        - status
     Health:
       type: object
       properties:
