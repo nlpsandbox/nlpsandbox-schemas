@@ -18,5 +18,3 @@ properties:
     description: When the entity has been updated
     type: string
     format: date-time
-required:
-   - id

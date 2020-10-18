@@ -10,8 +10,8 @@ post:
         schema:
           type: array
           items:
-            $ref: ../components/schemas/Note.yaml
-            # $ref: ../../commons/components/schemas/Note.yaml
+            # $ref: ../components/schemas/Note.yaml
+            $ref: ../../commons/components/schemas/Note.yaml
   responses:
     '200':
       description: Success
