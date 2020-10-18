@@ -1,20 +1,9 @@
-get:
+post:
   tags:
     - Date
   summary: Get all date annotations
   description: Returns the date annotations
   operationId: "dates.read_all"
-  responses:
-      '200':
-        description: Success
-        content:
-          application/json:
-            schema:
-              type: array
-              items:
-                $ref: ../../commons/components/schemas/DateAnnotation.yaml
-      '403':
-        $ref: ../../commons/components/responses/Unauthorized.yaml
   requestBody:
     content:
       application/json:
@@ -22,3 +11,14 @@ get:
           type: array
           items:
             $ref: ../../commons/components/schemas/Note.yaml
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../../commons/components/schemas/DateAnnotation.yaml
+    '403':
+      $ref: ../../commons/components/responses/Unauthorized.yaml
