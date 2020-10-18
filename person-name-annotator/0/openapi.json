@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.2",
   "info": {
-    "version": "0.1.4",
+    "version": "0.1.5",
     "title": "NLP Sandbox Person Name Annotator API",
     "contact": {
       "name": "The NLP Sandbox Team",
@@ -267,10 +267,6 @@
       "Error": {
         "type": "object",
         "properties": {
-          "type": {
-            "type": "string",
-            "description": "An absolute URI that identifies the problem type"
-          },
           "title": {
             "type": "string",
             "description": "A human readable documentation for the problem type"
@@ -282,11 +278,15 @@
           "detail": {
             "type": "string",
             "description": "A human readable explanation specific to this occurrence of the problem"
+          },
+          "type": {
+            "type": "string",
+            "description": "An absolute URI that identifies the problem type"
           }
         },
         "required": [
-          "code",
-          "message"
+          "title",
+          "status"
         ]
       }
     },
