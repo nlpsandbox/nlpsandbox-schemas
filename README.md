@@ -1,7 +1,7 @@
 # NLP Sandbox OpenAPI Specifications
 
-[![GitHub Release](https://img.shields.io/github/release/Sage-Bionetworks/nlp-sandbox-schemas.svg?include_prereleases&color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github)](https://github.com/Sage-Bionetworks/nlp-sandbox-schemas/releases)
 [![GitHub CI](https://img.shields.io/github/workflow/status/Sage-Bionetworks/nlp-sandbox-schemas/ci.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github)](https://github.com/Sage-Bionetworks/nlp-sandbox-schemas)
+[![GitHub Release](https://img.shields.io/github/release/Sage-Bionetworks/nlp-sandbox-schemas.svg?include_prereleases&color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github)](https://github.com/Sage-Bionetworks/nlp-sandbox-schemas/releases)
 [![GitHub License](https://img.shields.io/github/license/Sage-Bionetworks/nlp-sandbox-schemas.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github)](https://github.com/Sage-Bionetworks/nlp-sandbox-schemas)
 
 ## OpenAPI specifications
