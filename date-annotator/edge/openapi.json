@@ -50,7 +50,7 @@
               "schema": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/components/schemas/Note-2"
+                  "$ref": "#/components/schemas/Note"
                 }
               }
             }
@@ -178,7 +178,7 @@
           "text": {
             "description": "The content of the note",
             "type": "string",
-            "example": "On 09-03-1999, Ms Chloe Price met with Dr Joe."
+            "example": "On 09-03-1999, Ms Chloe Price met with Dr Joe. Please come back on 08/02/1999 or 08.03.1999 not next year in MAY of 2021."
           },
           "type": {
             "description": "The note type",
@@ -195,20 +195,9 @@
           }
         ],
         "required": [
+          "id",
           "text"
         ]
-      },
-      "Note-2": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Note"
-          }
-        ],
-        "example": {
-          "id": 0,
-          "text": "On 09-03-1999, Ms Chloe Price met with Dr Joe. Please come back on 08/02/1999 or 08.03.1999 not next year in MAY of 2021.",
-          "type": "pathology"
-        }
       },
       "Annotation": {
         "type": "object",
