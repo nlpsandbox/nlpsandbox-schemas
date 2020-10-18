@@ -27,6 +27,8 @@ info:
 tags:
   - name: Note
     description: Operations about clinical notes
+  - name: Health
+    description: Operations about API health
 servers:
   - url: 'http://example.com/api/v1'
   - url: 'https://example.com/api/v1'
