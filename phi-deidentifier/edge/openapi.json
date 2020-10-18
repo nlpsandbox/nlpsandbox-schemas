@@ -166,32 +166,32 @@
             "type": "string",
             "format": "date-time"
           }
-        },
-        "required": [
-          "id"
-        ]
+        }
       },
       "Note": {
         "type": "object",
         "description": "A clinical note",
-        "properties": {
-          "text": {
-            "description": "The content of the note",
-            "type": "string",
-            "example": "On 09-03-1999, Ms Chloe Price met with Dr Joe."
-          },
-          "type": {
-            "description": "The note type",
-            "type": "string",
-            "enum": [
-              "pathology",
-              "phone_call"
-            ]
-          }
-        },
         "allOf": [
           {
             "$ref": "#/components/schemas/Entity"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "text": {
+                "description": "The content of the note",
+                "type": "string",
+                "example": "On 09-03-1999, Ms Chloe Price met with Dr Joe."
+              },
+              "type": {
+                "description": "The note type",
+                "type": "string",
+                "enum": [
+                  "pathology",
+                  "phone_call"
+                ]
+              }
+            }
           }
         ],
         "required": [
