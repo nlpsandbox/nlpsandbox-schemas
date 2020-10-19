@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 0.1.5
+  version: 0.1.6
   title: NLP Sandbox PHI Deidentifier API
   contact:
     name: The NLP Sandbox Team
@@ -115,26 +115,23 @@ components:
           description: When the entity has been updated
           type: string
           format: date-time
-      required:
-        - id
     Note:
       type: object
       description: A clinical note
-      properties:
-        text:
-          description: The content of the note
-          type: string
-          example: 'On 09-03-1999, Ms Chloe Price met with Dr Joe.'
-        type:
-          description: The note type
-          type: string
-          enum:
-            - pathology
-            - phone_call
       allOf:
         - $ref: '#/components/schemas/Entity'
-      required:
-        - text
+        - type: object
+          properties:
+            text:
+              description: The content of the note
+              type: string
+              example: 'On 09-03-1999, Ms Chloe Price met with Dr Joe.'
+            type:
+              description: The note type
+              type: string
+              enum:
+                - pathology
+                - phone_call
     Error:
       type: object
       properties:
