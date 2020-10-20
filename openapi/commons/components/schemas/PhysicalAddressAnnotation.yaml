@@ -2,3 +2,20 @@ type: object
 description: A physical address annotation in a text
 allOf:
   - $ref: Annotation.yaml
+  - type: object
+    properties:
+      type:
+        description: Type of address information
+        type: string
+        enum:
+          - City
+          - Country
+          - Department
+          - Hospital
+          - Organization
+          - Other
+          - Room
+          - State
+          - Street
+          - Zip
+
