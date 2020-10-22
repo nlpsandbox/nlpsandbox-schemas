@@ -1,4 +1,4 @@
-get:
+post:
   tags:
     - Physical Address
   summary: Get all physical address annotations
