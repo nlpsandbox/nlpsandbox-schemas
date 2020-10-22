@@ -5,8 +5,10 @@ allOf:
   - type: object
     properties:
       name:
-        description: The distribution name of the Tool
+        description: The distribution name
         type: string
+        pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+        example: awesome-date-annotator
       version:
         description: The Tool version
         type: string
