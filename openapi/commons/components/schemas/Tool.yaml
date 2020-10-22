@@ -1,0 +1,32 @@
+type: object
+description: Information about an NLP Tool
+allOf:
+  - $ref: Entity.yaml
+  - type: object
+    properties:
+      name:
+        description: The distribution name of the Tool
+        type: string
+      version:
+        description: The Tool version
+        type: string
+      license:
+        description: The license associated to this Tool
+        type: string
+      repository:
+        description: The place where the code lives
+        type: string
+      description:
+        description: A short, one-sentence summary of the Tool
+        type: string
+      author:
+        description: The author of the Tool
+        type: string
+      author_email:
+        description: The email of the author
+        type: string
+        format: email
+      url:
+        description: The URL to the homepage of the Tool
+        type: string
+        format: uri
