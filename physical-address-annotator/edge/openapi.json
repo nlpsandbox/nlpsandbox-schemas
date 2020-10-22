@@ -37,7 +37,7 @@
   ],
   "paths": {
     "/physical-addresses": {
-      "get": {
+      "post": {
         "tags": [
           "Physical Address"
         ],
