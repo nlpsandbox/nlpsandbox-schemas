@@ -14,7 +14,8 @@ allOf:
       version:
         description: The version of the Tool (SemVer string)
         type: string
-        pattern: '^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$'
+        minLength: 1
+        pattern: "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$"
         example: 1.0.0
       license:
         description: The license of this Tool (spdx.org/licenses Identifier)
@@ -33,8 +34,8 @@ allOf:
         description: The author of the Tool
         type: string
         example: "Example Author"
-      author_email:
-        description: The email of the author
+      authorEmail:
+        description: The email address of the author
         type: string
         format: email
         example: "author@example.com"

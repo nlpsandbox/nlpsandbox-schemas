@@ -12,6 +12,6 @@
     "build": "openapi bundle -o dist $npm_config_entrypoint",
     "lint": "openapi lint $npm_config_entrypoint",
     "lint:all": "openapi lint openapi/*/openapi.yaml",
-    "validate:schemas": "python tools/validate/validate.py validate --json_filepath test/json-samples/tool.json --schema_filepath json-schema/tool.json"
+    "validate:schemas": "python tools/validate/validate.py validate --json_filepath test/json-samples/tool.json --schema_filepath json-schema/schemas/tool.json"
   }
 }
