@@ -1,7 +1,7 @@
 openapi: 3.0.2
 info:
   version: 0.1.6
-  title: NLP Sandbox PHI Deidentifier API
+  title: NLP Sandbox Deidentifier API
   contact:
     name: The NLP Sandbox Team
     email: thomas.schaffter@sagebionetworks.org
