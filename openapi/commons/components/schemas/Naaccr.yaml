@@ -1,0 +1,13 @@
+type: object
+description: A NAACCR object
+allOf:
+  - $ref: Entity.yaml
+  - type: object
+    properties:
+      noteId:
+        description: The note ID
+        type: integer
+      cea:
+        description: Carcinoembryonic antigen
+        type: string
+        # pattern:
