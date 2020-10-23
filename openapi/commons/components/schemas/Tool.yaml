@@ -5,11 +5,11 @@ allOf:
   - type: object
     properties:
       name:
-        description: The distribution name
+        description: The Tool name
         type: string
         minLength: 3
         maxLength: 60
-        pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+        pattern: "^[a-z0-9]+(?:-[a-z0-9]+)*$"
         example: awesome-date-annotator
       version:
         description: The version of the Tool (SemVer string)
