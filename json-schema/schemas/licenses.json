@@ -1,0 +1,6 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://nlp-sandbox.org/schemas/tool.json",
+    "title": "Licenses",
+    "description": "List of licenses"
+}
