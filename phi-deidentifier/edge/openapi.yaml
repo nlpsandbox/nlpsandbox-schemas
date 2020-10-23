@@ -1,7 +1,7 @@
 openapi: 3.0.2
 info:
   version: 0.1.6
-  title: NLP Sandbox PHI Deidentifier API
+  title: NLP Sandbox Deidentifier API
   contact:
     name: The NLP Sandbox Team
     email: thomas.schaffter@sagebionetworks.org
@@ -25,12 +25,19 @@ servers:
   - url: 'https://example.com/api/v1'
 paths:
   /deidentified-notes:
-    get:
+    post:
       tags:
         - Deidentified Notes
       summary: Get deidentified notes
       description: Returns the deidentified notes
       operationId: deidentified_notes.read_all
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Note'
       responses:
         '200':
           description: Success
@@ -42,13 +49,6 @@ paths:
                   $ref: '#/components/schemas/Note'
         '403':
           $ref: '#/components/responses/Unauthorized'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: array
-              items:
-                $ref: '#/components/schemas/Note'
   /health:
     get:
       tags:
