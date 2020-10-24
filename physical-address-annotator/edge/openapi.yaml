@@ -24,6 +24,8 @@ tags:
     description: Operations about physical addresses
   - name: Health
     description: Operations about API health
+  - name: Service
+    description: Operations about NLP services
 servers:
   - url: 'http://example.com/api/v1'
   - url: 'https://example.com/api/v1'
@@ -67,6 +69,24 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Health'
+        '403':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /service:
+    get:
+      tags:
+        - Service
+      summary: Get service information
+      description: Get information about the service
+      operationId: service
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Service'
         '403':
           $ref: '#/components/responses/Unauthorized'
         '404':
@@ -205,6 +225,50 @@ components:
       required:
         - title
         - status
+    Service:
+      type: object
+      description: Information about an NLP service
+      properties:
+        name:
+          description: The service name
+          type: string
+          minLength: 3
+          maxLength: 60
+          pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+          example: awesome-date-annotator
+        version:
+          description: The version of the service (SemVer string)
+          type: string
+          minLength: 1
+          pattern: >-
+            ^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$
+          example: 1.0.0
+        license:
+          description: The license of this service (spdx.org/licenses Identifier)
+          type: string
+          example: Apache-2.0
+        repository:
+          description: The place where the code lives
+          type: string
+          example: 'github:awesome-org/awesome-date-annotator'
+        description:
+          description: 'A short, one-sentence summary of the service'
+          type: string
+          maxLength: 100
+          example: An awesome Date Annotator based on regex patterns
+        author:
+          description: The author of the service
+          type: string
+          example: Example Author
+        authorEmail:
+          description: The email address of the author
+          type: string
+          format: email
+          example: author@example.com
+        url:
+          description: The URL to the homepage of the service
+          type: string
+          format: uri
   responses:
     Unauthorized:
       description: Unauthorized
