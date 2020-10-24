@@ -29,6 +29,8 @@ tags:
     description: Operations about clinical notes
   - name: Health
     description: Operations about API health
+  - name: Service
+    description: Operations about NLP services
 servers:
   - url: 'http://example.com/api/v1'
   - url: 'https://example.com/api/v1'
@@ -41,3 +43,5 @@ paths:
     $ref: 'paths/notes.yaml'
   /notes/{id}:
     $ref: 'paths/notes@{id}.yaml'
+  /service:
+    $ref: '../commons/paths/service.yaml'
