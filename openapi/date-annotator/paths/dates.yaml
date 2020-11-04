@@ -8,7 +8,7 @@ post:
     content:
       application/json:
         schema:
-          $ref: ../../commons/components/schemas/Note.yaml
+          $ref: ../../commons/components/schemas/Text.yaml
   responses:
     '200':
       description: Success
