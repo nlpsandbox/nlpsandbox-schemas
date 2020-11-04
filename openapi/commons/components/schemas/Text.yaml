@@ -1,0 +1,9 @@
+type: object
+description: A text
+properties:
+  text:
+    description: A text
+    type: string
+    example: "This is a text."
+required:
+ - text
