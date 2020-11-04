@@ -1,0 +1,48 @@
+get:
+  tags:
+    - Dataset
+  summary: Get a dataset by ID
+  description: Returns the dataset for a given ID
+  operationId: "datasets.read"
+  parameters:
+    - name: id
+      in: path
+      description: The ID of the dataset to fetch
+      required: true
+      schema:
+        type: string
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Dataset.yaml
+    '403':
+      $ref: ../../commons/components/responses/Unauthorized.yaml
+    '404':
+      $ref: ../../commons/components/responses/NotFound.yaml
+delete:
+  tags:
+    - Dataset
+  summary: Delete a dataset by ID
+  description: Deletes the dataset for a given ID
+  operationId: "datasets.delete"
+  parameters:
+    - name: id
+      in: path
+      description: The ID of the dataset to fetch
+      required: true
+      schema:
+        type: string
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Dataset.yaml
+    '403':
+      $ref: ../../commons/components/responses/Unauthorized.yaml
+    '404':
+      $ref: ../../commons/components/responses/NotFound.yaml
