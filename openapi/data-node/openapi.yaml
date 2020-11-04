@@ -37,6 +37,8 @@ servers:
 paths:
   /annotations/dates:
     $ref: 'paths/annotations/dates.yaml'
+  /datasets:
+    $ref: 'paths/datasets.yaml'
   /health:
     $ref: '../commons/paths/health.yaml'
   /notes:

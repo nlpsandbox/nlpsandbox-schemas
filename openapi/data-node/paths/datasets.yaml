@@ -1,0 +1,64 @@
+post:
+  tags:
+    - Dataset
+  summary: Create a dataset
+  description: Create a dataset with the name specified
+  operationId: "datasets.create"
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Dataset.yaml
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Dataset.yaml
+      description: Success
+    '403':
+      $ref: ../../commons/components/responses/Unauthorized.yaml
+    '404':
+      $ref: ../../commons/components/responses/NotFound.yaml
+get:
+  tags:
+    - Dataset
+  summary: Get all datasets
+  description: Returns the datasets
+  operationId: "datasets.read_all"
+  parameters:
+    - in: query
+      name: limit
+      description: Maximum number of results returned
+      required: false
+      schema:
+        type: integer
+        default: 10
+        minimum: 10
+    - in: query
+      name: offset
+      description: Index of the first result that must be returned
+      required: false
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              items:
+                type: array
+                items:
+                  $ref: ../components/schemas/Dataset.yaml
+            allOf:
+              - $ref: ../../commons/components/schemas/PageResponse.yaml
+      description: Success
+    '403':
+      $ref: ../../commons/components/responses/Unauthorized.yaml
+    '404':
+      $ref: ../../commons/components/responses/NotFound.yaml
+
