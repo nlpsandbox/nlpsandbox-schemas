@@ -1,19 +1,13 @@
 post:
   tags:
-    - Annotation
-  summary: Create an annotation linked to a dataset ID and store ID
-  description: Create an annotation
-  operationId: "annotations.create"
+    - NoteStore
+  summary: Create a note store linked to a dataset ID
+  description: Create a note store with the name specified
+  operationId: "noteStores.create"
   parameters:
     - name: datasetId
       in: path
       description: The ID of the dataset to use
-      required: true
-      schema:
-        type: string
-    - name: storeId
-      in: path
-      description: The ID of the store to use
       required: true
       schema:
         type: string
@@ -21,17 +15,13 @@ post:
     content:
       application/json:
         schema:
-          oneOf:
-            - $ref: ../../commons/components/schemas/Annotation.yaml
-            - $ref: ../../commons/components/schemas/DateAnnotation.yaml
+          $ref: ../components/schemas/NoteStore.yaml
   responses:
     '200':
       content:
         application/json:
           schema:
-            oneOf:
-              - $ref: ../../commons/components/schemas/Annotation.yaml
-              - $ref: ../../commons/components/schemas/DateAnnotation.yaml
+            $ref: ../components/schemas/NoteStore.yaml
       description: Success
     '403':
       $ref: ../../commons/components/responses/Unauthorized.yaml
@@ -39,20 +29,14 @@ post:
       $ref: ../../commons/components/responses/NotFound.yaml
 get:
   tags:
-    - Annotation
-  summary: Get all annotation linked to a dataset ID and store ID
-  description: Returns the annotations for a given dataset ID and store ID
-  operationId: "annotations.read_all"
+    - NoteStore
+  summary: Get all note stores by dataset ID
+  description: Returns the note stores for a given dataset ID
+  operationId: "noteStores.read_all"
   parameters:
     - name: datasetId
       in: path
       description: The ID of the dataset to use
-      required: true
-      schema:
-        type: string
-    - name: storeId
-      in: path
-      description: The ID of the store to use
       required: true
       schema:
         type: string
@@ -82,9 +66,7 @@ get:
               items:
                 type: array
                 items:
-                  oneOf:
-                    - $ref: ../../commons/components/schemas/Annotation.yaml
-                    - $ref: ../../commons/components/schemas/DateAnnotation.yaml
+                  $ref: ../components/schemas/NoteStore.yaml
             allOf:
               - $ref: ../../commons/components/schemas/PageResponse.yaml
       description: Success

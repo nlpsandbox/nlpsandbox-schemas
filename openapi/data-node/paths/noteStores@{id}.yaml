@@ -1,9 +1,9 @@
 get:
   tags:
-    - Note
-  summary: Get a note by ID
-  description: Returns the note for a given ID
-  operationId: "notes.read"
+    - NoteStore
+  summary: Get a note store by ID
+  description: Returns the note store for a given ID
+  operationId: "noteStores.read"
   parameters:
     - name: datasetId
       in: path
@@ -11,15 +11,9 @@ get:
       required: true
       schema:
         type: string
-    - name: storeId
-      in: path
-      description: The ID of the store to use
-      required: true
-      schema:
-        type: string
     - name: id
       in: path
-      description: The ID of the note to fetch
+      description: The ID of the note store to fetch
       required: true
       schema:
         type: string
@@ -29,17 +23,17 @@ get:
       content:
         application/json:
           schema:
-            $ref: ../../commons/components/schemas/Note.yaml
+            $ref: ../components/schemas/NoteStore.yaml
     '403':
       $ref: ../../commons/components/responses/Unauthorized.yaml
     '404':
       $ref: ../../commons/components/responses/NotFound.yaml
 delete:
   tags:
-    - Note
-  summary: Delete an note by ID
-  description: Deletes the note for a given ID
-  operationId: "notes.delete"
+    - NoteStore
+  summary: Delete a note store by ID
+  description: Deletes the note store for a given ID
+  operationId: "noteStores.delete"
   parameters:
     - name: datasetId
       in: path
@@ -47,15 +41,9 @@ delete:
       required: true
       schema:
         type: string
-    - name: storeId
-      in: path
-      description: The ID of the store to use
-      required: true
-      schema:
-        type: string
     - name: id
       in: path
-      description: The ID of the note to delete
+      description: The ID of the note store to delete
       required: true
       schema:
         type: string
@@ -65,7 +53,7 @@ delete:
       content:
         application/json:
           schema:
-            $ref: ../../commons/components/schemas/Note.yaml
+            $ref: ../components/schemas/NoteStore.yaml
     '403':
       $ref: ../../commons/components/responses/Unauthorized.yaml
     '404':

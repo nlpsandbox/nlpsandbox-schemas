@@ -31,18 +31,18 @@ tags:
     description: Operations about annotation stores
   - name: Dataset
     description: Operations about datasets
-  # - name: Note
-  #   description: Operations about clinical notes
   - name: Health
-    description: Operations about API health
+    description: Operations about service health
+  - name: NoteStore
+    description: Operations about note stores
+  - name: Note
+    description: Operations about notes
   - name: Service
     description: Operations about NLP services
 servers:
   - url: 'http://example.com/api/v1'
   - url: 'https://example.com/api/v1'
 paths:
-  # /annotations/dates:
-  #   $ref: 'paths/annotations/dates.yaml'
   /datasets:
     $ref: 'paths/datasets.yaml'
   /datasets/{id}:
@@ -55,11 +55,15 @@ paths:
     $ref: 'paths/annotations.yaml'
   /datasets/{datasetId}/annotationStore/{storeId}/annotations/{id}:
     $ref: 'paths/annotations@{id}.yaml'
+  /datasets/{datasetId}/noteStore:
+    $ref: 'paths/noteStores.yaml'
+  /datasets/{datasetId}/noteStore/{id}:
+    $ref: 'paths/noteStores@{id}.yaml'
+  /datasets/{datasetId}/noteStore/{storeId}/notes:
+    $ref: 'paths/notes.yaml'
+  /datasets/{datasetId}/noteStore/{storeId}/notes/{id}:
+    $ref: 'paths/notes@{id}.yaml'
   /health:
     $ref: '../commons/paths/health.yaml'
-  # /notes:
-  #   $ref: 'paths/notes.yaml'
-  # /notes/{id}:
-  #   $ref: 'paths/notes@{id}.yaml'
   /service:
     $ref: '../commons/paths/service.yaml'
