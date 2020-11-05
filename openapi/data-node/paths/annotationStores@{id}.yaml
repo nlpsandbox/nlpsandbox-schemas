@@ -1,0 +1,60 @@
+get:
+  tags:
+    - AnnotationStore
+  summary: Get an annotation store by ID
+  description: Returns the annotation store for a given ID
+  operationId: "annotationStores.read"
+  parameters:
+    - name: datasetId
+      in: path
+      description: The ID of the dataset to use
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      description: The ID of the annotation store to fetch
+      required: true
+      schema:
+        type: string
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/AnnotationStore.yaml
+    '403':
+      $ref: ../../commons/components/responses/Unauthorized.yaml
+    '404':
+      $ref: ../../commons/components/responses/NotFound.yaml
+delete:
+  tags:
+    - AnnotationStore
+  summary: Delete an annotation store by ID
+  description: Deletes the annotation store for a given ID
+  operationId: "annotationStores.delete"
+  parameters:
+    - name: datasetId
+      in: path
+      description: The ID of the dataset to use
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      description: The ID of the annotation store to delete
+      required: true
+      schema:
+        type: string
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/AnnotationStore.yaml
+    '403':
+      $ref: ../../commons/components/responses/Unauthorized.yaml
+    '404':
+      $ref: ../../commons/components/responses/NotFound.yaml
