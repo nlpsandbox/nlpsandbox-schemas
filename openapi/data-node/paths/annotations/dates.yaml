@@ -1,6 +1,6 @@
 get:
   tags:
-    - Date
+    - DateAnnotation
   summary: Get all date annotations
   description: Returns the date annotations
   operationId: "dates.read_all"

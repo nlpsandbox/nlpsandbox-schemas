@@ -1,9 +1,9 @@
 get:
   tags:
-    - AnnotationStore
-  summary: Get an annotation store by ID
-  description: Returns the annotation store for a given ID
-  operationId: "annotationStores.read"
+    - Annotation
+  summary: Get an annotation by ID
+  description: Returns the annotation for a given ID
+  operationId: "annotations.read"
   parameters:
     - name: datasetId
       in: path
@@ -11,9 +11,15 @@ get:
       required: true
       schema:
         type: string
+    - name: storeId
+      in: path
+      description: The ID of the store to use
+      required: true
+      schema:
+        type: string
     - name: id
       in: path
-      description: The ID of the annotation store to fetch
+      description: The ID of the annotation to fetch
       required: true
       schema:
         type: string
@@ -23,17 +29,19 @@ get:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/AnnotationStore.yaml
+            oneOf:
+              - $ref: ../../commons/components/schemas/Annotation.yaml
+              - $ref: ../../commons/components/schemas/DateAnnotation.yaml
     '403':
       $ref: ../../commons/components/responses/Unauthorized.yaml
     '404':
       $ref: ../../commons/components/responses/NotFound.yaml
 delete:
   tags:
-    - AnnotationStore
-  summary: Delete an annotation store by ID
-  description: Deletes the annotation store for a given ID
-  operationId: "annotationStores.delete"
+    - Annotation
+  summary: Delete an annotation by ID
+  description: Deletes the annotation for a given ID
+  operationId: "annotations.delete"
   parameters:
     - name: datasetId
       in: path
@@ -41,9 +49,15 @@ delete:
       required: true
       schema:
         type: string
+    - name: storeId
+      in: path
+      description: The ID of the store to use
+      required: true
+      schema:
+        type: string
     - name: id
       in: path
-      description: The ID of the annotation store to delete
+      description: The ID of the dataset to delete
       required: true
       schema:
         type: string
@@ -53,7 +67,9 @@ delete:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/AnnotationStore.yaml
+            oneOf:
+              - $ref: ../../commons/components/schemas/Annotation.yaml
+              - $ref: ../../commons/components/schemas/DateAnnotation.yaml
     '403':
       $ref: ../../commons/components/responses/Unauthorized.yaml
     '404':

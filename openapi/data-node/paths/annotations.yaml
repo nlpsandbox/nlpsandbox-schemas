@@ -1,9 +1,9 @@
 post:
   tags:
-    - AnnotationStore
-  summary: Create an annotation store linked to a dataset ID
-  description: Create an annotation store with the name specified
-  operationId: "annotationStores.create"
+    - Annotation
+  summary: Create an annotation linked to a dataset ID and store ID
+  description: Create an annotation
+  operationId: "annotations.create"
   parameters:
     - name: datasetId
       in: path
@@ -11,17 +11,27 @@ post:
       required: true
       schema:
         type: string
+    - name: storeId
+      in: path
+      description: The ID of the store to use
+      required: true
+      schema:
+        type: string
   requestBody:
     content:
       application/json:
         schema:
-          $ref: ../components/schemas/AnnotationStore.yaml
+          oneOf:
+            - $ref: ../../commons/components/schemas/Annotation.yaml
+            - $ref: ../../commons/components/schemas/DateAnnotation.yaml
   responses:
     '200':
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/AnnotationStore.yaml
+            oneOf:
+              - $ref: ../../commons/components/schemas/Annotation.yaml
+              - $ref: ../../commons/components/schemas/DateAnnotation.yaml
       description: Success
     '403':
       $ref: ../../commons/components/responses/Unauthorized.yaml
@@ -29,14 +39,20 @@ post:
       $ref: ../../commons/components/responses/NotFound.yaml
 get:
   tags:
-    - AnnotationStore
-  summary: Get all annotation stores by dataset ID
-  description: Returns the annotation stores for a given dataset ID
-  operationId: "annotationStores.read_all"
+    - Annotation
+  summary: Get all annotation linked to a dataset ID and store ID
+  description: Returns the annotation for a given dataset ID and store ID
+  operationId: "annotations.read_all"
   parameters:
     - name: datasetId
       in: path
       description: The ID of the dataset to use
+      required: true
+      schema:
+        type: string
+    - name: storeId
+      in: path
+      description: The ID of the store to use
       required: true
       schema:
         type: string
@@ -66,7 +82,9 @@ get:
               items:
                 type: array
                 items:
-                  $ref: ../components/schemas/AnnotationStore.yaml
+                  oneOf:
+                    - $ref: ../../commons/components/schemas/Annotation.yaml
+                    - $ref: ../../commons/components/schemas/DateAnnotation.yaml
             allOf:
               - $ref: ../../commons/components/schemas/PageResponse.yaml
       description: Success

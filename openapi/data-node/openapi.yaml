@@ -25,6 +25,8 @@ info:
     For the sake of benchmarking NLP Tool, a Data Node can also give access to
     the gold standard that the NLP Tool is expected to infer (e.g. annotations).
 tags:
+  - name: Annotation
+    description: Operations about annotations
   - name: AnnotationStore
     description: Operations about annotation stores
   - name: Dataset
@@ -49,6 +51,10 @@ paths:
     $ref: 'paths/annotationStores.yaml'
   /datasets/{datasetId}/annotationStore/{id}:
     $ref: 'paths/annotationStores@{id}.yaml'
+  /datasets/{datasetId}/annotationStore/{storeId}/annotations:
+    $ref: 'paths/annotations.yaml'
+  /datasets/{datasetId}/annotationStore/{storeId}/annotations/{id}:
+    $ref: 'paths/annotations@{id}.yaml'
   /health:
     $ref: '../commons/paths/health.yaml'
   # /notes:
