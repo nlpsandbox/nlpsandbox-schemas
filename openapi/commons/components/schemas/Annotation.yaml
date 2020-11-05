@@ -1,18 +1,15 @@
 type: object
 description: An annotation in a text
-allOf:
-  - $ref: Entity.yaml
-  - type: object
-    properties:
-      noteId:
-        description: The note ID
-        type: integer
-      start:
-        description: The position of the first character
-        type: integer
-      length:
-        description: The length of the annotation
-        type: integer
-      text:
-        description: The string annotated
-        type: string
+properties:
+  noteId:
+    description: The note ID
+    type: string
+  start:
+    description: The position of the first character
+    type: integer
+  length:
+    description: The length of the annotation
+    type: integer
+  text:
+    description: The string annotated
+    type: string
