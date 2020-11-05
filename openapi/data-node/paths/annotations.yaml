@@ -22,16 +22,16 @@ post:
       application/json:
         schema:
           oneOf:
-            - $ref: ../../commons/components/schemas/Annotation.yaml
-            - $ref: ../../commons/components/schemas/DateAnnotation.yaml
+            - $ref: ../components/schemas/StoredAnnotation.yaml
+            - $ref: ../components/schemas/StoredDateAnnotation.yaml
   responses:
     '200':
       content:
         application/json:
           schema:
             oneOf:
-              - $ref: ../../commons/components/schemas/Annotation.yaml
-              - $ref: ../../commons/components/schemas/DateAnnotation.yaml
+              - $ref: ../components/schemas/StoredAnnotation.yaml
+              - $ref: ../components/schemas/StoredDateAnnotation.yaml
       description: Success
     '403':
       $ref: ../../commons/components/responses/Unauthorized.yaml
@@ -40,7 +40,7 @@ post:
 get:
   tags:
     - Annotation
-  summary: Get all annotation linked to a dataset ID and store ID
+  summary: Get all annotations linked to a dataset ID and store ID
   description: Returns the annotations for a given dataset ID and store ID
   operationId: "annotations.read_all"
   parameters:
@@ -82,9 +82,9 @@ get:
               items:
                 type: array
                 items:
-                  oneOf:
-                    - $ref: ../../commons/components/schemas/Annotation.yaml
-                    - $ref: ../../commons/components/schemas/DateAnnotation.yaml
+                  anyOf:
+                    - $ref: ../components/schemas/StoredAnnotation.yaml
+                    - $ref: ../components/schemas/StoredDateAnnotation.yaml
             allOf:
               - $ref: ../../commons/components/schemas/PageResponse.yaml
       description: Success

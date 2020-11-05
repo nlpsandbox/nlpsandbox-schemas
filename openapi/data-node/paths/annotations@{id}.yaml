@@ -30,8 +30,8 @@ get:
         application/json:
           schema:
             oneOf:
-              - $ref: ../../commons/components/schemas/Annotation.yaml
-              - $ref: ../../commons/components/schemas/DateAnnotation.yaml
+              - $ref: ../components/schemas/StoredAnnotation.yaml
+              - $ref: ../components/schemas/StoredDateAnnotation.yaml
     '403':
       $ref: ../../commons/components/responses/Unauthorized.yaml
     '404':
@@ -68,8 +68,8 @@ delete:
         application/json:
           schema:
             oneOf:
-              - $ref: ../../commons/components/schemas/Annotation.yaml
-              - $ref: ../../commons/components/schemas/DateAnnotation.yaml
+              - $ref: ../components/schemas/StoredAnnotation.yaml
+              - $ref: ../components/schemas/StoredDateAnnotation.yaml
     '403':
       $ref: ../../commons/components/responses/Unauthorized.yaml
     '404':
