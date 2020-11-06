@@ -35,6 +35,7 @@ get:
         type: integer
         default: 10
         minimum: 10
+        # maximum: 100
     - in: query
       name: offset
       description: Index of the first result that must be returned
