@@ -16,7 +16,7 @@ get:
     - AnnotationStore
   summary: Get an annotation store by ID
   description: Returns the annotation store for a given ID
-  operationId: "annotationStores.read"
+  operationId: "getAnnotationStore"
   responses:
     '200':
       description: Success
@@ -33,7 +33,7 @@ delete:
     - AnnotationStore
   summary: Delete an annotation store by ID
   description: Deletes the annotation store for a given ID
-  operationId: "annotationStores.delete"
+  operationId: "deleteAnnotationStore"
   responses:
     '200':
       description: Success

@@ -16,7 +16,7 @@ post:
     - Annotation
   summary: Create an annotation linked to a dataset ID and store ID
   description: Create an annotation
-  operationId: "annotations.create"
+  operationId: "createAnnotation"
   requestBody:
     content:
       application/json:
@@ -42,7 +42,7 @@ get:
     - Annotation
   summary: Get all annotations linked to a dataset ID and store ID
   description: Returns the annotations for a given dataset ID and store ID
-  operationId: "annotations.read_all"
+  operationId: "listAnnotations"
   parameters:
     - in: query
       name: limit

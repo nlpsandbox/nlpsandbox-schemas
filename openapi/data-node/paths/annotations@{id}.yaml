@@ -16,7 +16,7 @@ get:
     - Annotation
   summary: Get an annotation by ID
   description: Returns the annotation for a given ID
-  operationId: "annotations.read"
+  operationId: "getAnnotation"
   parameters:
     - name: id
       in: path
@@ -42,7 +42,7 @@ delete:
     - Annotation
   summary: Delete an annotation by ID
   description: Deletes the annotation for a given ID
-  operationId: "annotations.delete"
+  operationId: "deleteAnnotation"
   parameters:
     - name: id
       in: path

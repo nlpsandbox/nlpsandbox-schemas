@@ -1,10 +1,10 @@
 {
   "shared": {
     "operations": {
-      "no_operation_id": "warning",
+      "no_operation_id": "error",
       "operation_id_case_convention": [
         "warning",
-        "lower_snake_case"
+        "lower_camel_case"
       ],
       "no_summary": "warning",
       "no_array_responses": "error",
@@ -30,7 +30,7 @@
     },
     "paths": {
       "missing_path_parameter": "error",
-      "duplicate_path_parameter": "warning",
+      "duplicate_path_parameter": "error",
       "snake_case_only": "off",
       "paths_case_convention": [
         "error",

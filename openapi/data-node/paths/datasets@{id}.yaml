@@ -10,7 +10,7 @@ get:
     - Dataset
   summary: Get a dataset by ID
   description: Returns the dataset for a given ID
-  operationId: "datasets.read"
+  operationId: "getDataset"
   responses:
     '200':
       description: Success
@@ -27,7 +27,7 @@ delete:
     - Dataset
   summary: Delete a dataset by ID
   description: Deletes the dataset for a given ID
-  operationId: "datasets.delete"
+  operationId: "deleteDataset"
   responses:
     '200':
       description: Success

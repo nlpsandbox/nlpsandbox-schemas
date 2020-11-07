@@ -10,7 +10,7 @@ post:
     - NoteStore
   summary: Create a note store linked to a dataset ID
   description: Create a note store with the name specified
-  operationId: "noteStores.create"
+  operationId: "createNoteStore"
   requestBody:
     content:
       application/json:
@@ -32,7 +32,7 @@ get:
     - NoteStore
   summary: Get all note stores by dataset ID
   description: Returns the note stores for a given dataset ID
-  operationId: "noteStores.read_all"
+  operationId: "listNoteStores"
   parameters:
     - in: query
       name: limit

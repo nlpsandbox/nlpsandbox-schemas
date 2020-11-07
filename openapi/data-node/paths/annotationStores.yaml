@@ -10,7 +10,7 @@ post:
     - AnnotationStore
   summary: Create an annotation store linked to a dataset ID
   description: Create an annotation store with the name specified
-  operationId: "annotationStores.create"
+  operationId: "createAnnotationStore"
   requestBody:
     content:
       application/json:
@@ -32,7 +32,7 @@ get:
     - AnnotationStore
   summary: Get all annotation stores by dataset ID
   description: Returns the annotation stores for a given dataset ID
-  operationId: "annotationStores.read_all"
+  operationId: "listAnnotationStores"
   parameters:
     - in: query
       name: limit

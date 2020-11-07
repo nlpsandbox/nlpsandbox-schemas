@@ -16,7 +16,7 @@ get:
     - NoteStore
   summary: Get a note store by ID
   description: Returns the note store for a given ID
-  operationId: "noteStores.read"
+  operationId: "getNoteStore"
   responses:
     '200':
       description: Success
@@ -33,7 +33,7 @@ delete:
     - NoteStore
   summary: Delete a note store by ID
   description: Deletes the note store for a given ID
-  operationId: "noteStores.delete"
+  operationId: "deleteNoteStore"
   responses:
     '200':
       description: Success

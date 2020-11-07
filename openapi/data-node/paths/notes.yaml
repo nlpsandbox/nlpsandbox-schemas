@@ -16,7 +16,7 @@ post:
     - Note
   summary: Create a note linked to a dataset ID and store ID
   description: Create a note
-  operationId: "notes.create"
+  operationId: "createNote"
   requestBody:
     content:
       application/json:
@@ -38,7 +38,7 @@ get:
     - Note
   summary: Get all notes linked to a dataset ID and store ID
   description: Returns the notes for a given dataset ID and store ID
-  operationId: "notes.read_all"
+  operationId: "listNotes"
   parameters:
     - in: query
       name: limit

@@ -22,7 +22,7 @@ get:
     - Note
   summary: Get a note by ID
   description: Returns the note for a given ID
-  operationId: "notes.read"
+  operationId: "getNote"
   responses:
     '200':
       description: Success
@@ -39,7 +39,7 @@ delete:
     - Note
   summary: Delete an note by ID
   description: Deletes the note for a given ID
-  operationId: "notes.delete"
+  operationId: "deleteNote"
   responses:
     '200':
       description: Success
