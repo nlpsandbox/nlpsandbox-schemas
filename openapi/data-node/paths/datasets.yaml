@@ -55,6 +55,7 @@ get:
               - type: object
                 properties:
                   items:
+                    description: A page of datasets
                     type: array
                     items:
                       $ref: ../components/schemas/Dataset.yaml

@@ -72,6 +72,7 @@ get:
               - type: object
                 properties:
                   items:
+                    description: A page of annotations
                     type: array
                     items:
                       anyOf:

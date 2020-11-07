@@ -68,6 +68,7 @@ get:
               - type: object
                 properties:
                   items:
+                    description: A page of notes
                     type: array
                     items:
                       $ref: ../../commons/components/schemas/Note.yaml

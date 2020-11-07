@@ -62,6 +62,7 @@ get:
               - type: object
                 properties:
                   items:
+                    description: A page of annotation stores
                     type: array
                     items:
                       $ref: ../components/schemas/AnnotationStore.yaml
