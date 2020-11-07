@@ -48,6 +48,7 @@ get:
         type: integer
         default: 10
         minimum: 10
+        maximum: 100
     - in: query
       name: offset
       description: Index of the first result that must be returned
@@ -62,13 +63,14 @@ get:
         application/json:
           schema:
             type: object
-            properties:
-              items:
-                type: array
-                items:
-                  $ref: ../../commons/components/schemas/Note.yaml
             allOf:
               - $ref: ../../commons/components/schemas/PageResponse.yaml
+              - type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: ../../commons/components/schemas/Note.yaml
       description: Success
     '403':
       $ref: ../../commons/components/responses/Unauthorized.yaml

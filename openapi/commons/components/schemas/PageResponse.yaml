@@ -5,11 +5,21 @@ properties:
   #   description: Number of results in the page
   #   type: number
   #   example: 10
+  offset:
+    description: Index of the first result that must be returned
+    type: integer
+  limit:
+    description: Maximum number of results returned
+    type: integer
   links:
     description: Links to navigate to different pages of results
     type: object
     properties:
       next:
-        description: Link to the enxt page of results
+        description: Link to the next page of results
         type: string
         format: uri
+required:
+  - offset
+  - limit
+  - links
