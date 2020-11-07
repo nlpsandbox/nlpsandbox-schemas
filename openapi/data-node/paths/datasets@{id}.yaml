@@ -1,16 +1,16 @@
+parameters:
+  - in: path
+    name: id
+    description: The ID of the dataset
+    required: true
+    schema:
+      type: string
 get:
   tags:
     - Dataset
   summary: Get a dataset by ID
   description: Returns the dataset for a given ID
   operationId: "datasets.read"
-  parameters:
-    - name: id
-      in: path
-      description: The ID of the dataset to fetch
-      required: true
-      schema:
-        type: string
   responses:
     '200':
       description: Success
@@ -28,13 +28,6 @@ delete:
   summary: Delete a dataset by ID
   description: Deletes the dataset for a given ID
   operationId: "datasets.delete"
-  parameters:
-    - name: id
-      in: path
-      description: The ID of the dataset to delete
-      required: true
-      schema:
-        type: string
   responses:
     '200':
       description: Success

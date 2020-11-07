@@ -1,3 +1,16 @@
+parameters:
+  - in: path
+    name: datasetId
+    description: The ID of the dataset
+    required: true
+    schema:
+      type: string
+  - in: path
+    name: storeId
+    description: The ID of the store
+    required: true
+    schema:
+      type: string
 get:
   tags:
     - Annotation
@@ -5,18 +18,6 @@ get:
   description: Returns the annotation for a given ID
   operationId: "annotations.read"
   parameters:
-    - name: datasetId
-      in: path
-      description: The ID of the dataset to use
-      required: true
-      schema:
-        type: string
-    - name: storeId
-      in: path
-      description: The ID of the store to use
-      required: true
-      schema:
-        type: string
     - name: id
       in: path
       description: The ID of the annotation to fetch
@@ -43,18 +44,6 @@ delete:
   description: Deletes the annotation for a given ID
   operationId: "annotations.delete"
   parameters:
-    - name: datasetId
-      in: path
-      description: The ID of the dataset to use
-      required: true
-      schema:
-        type: string
-    - name: storeId
-      in: path
-      description: The ID of the store to use
-      required: true
-      schema:
-        type: string
     - name: id
       in: path
       description: The ID of the dataset to delete

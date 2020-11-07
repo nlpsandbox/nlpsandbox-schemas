@@ -54,7 +54,7 @@
       "no_property_description": "warning",
       "description_mentions_json": "warning",
       "array_of_arrays": "warning",
-      "inconsistent_property_type": "warning",
+      "inconsistent_property_type": "off",
       "property_case_convention": [
         "error",
         "lower_camel_case"

@@ -1,22 +1,22 @@
+parameters:
+  - in: path
+    name: datasetId
+    description: The ID of the dataset
+    required: true
+    schema:
+      type: string
+  - in: path
+    name: id
+    description: The ID of the note store
+    required: true
+    schema:
+      type: string
 get:
   tags:
     - NoteStore
   summary: Get a note store by ID
   description: Returns the note store for a given ID
   operationId: "noteStores.read"
-  parameters:
-    - name: datasetId
-      in: path
-      description: The ID of the dataset to use
-      required: true
-      schema:
-        type: string
-    - name: id
-      in: path
-      description: The ID of the note store to fetch
-      required: true
-      schema:
-        type: string
   responses:
     '200':
       description: Success
@@ -34,19 +34,6 @@ delete:
   summary: Delete a note store by ID
   description: Deletes the note store for a given ID
   operationId: "noteStores.delete"
-  parameters:
-    - name: datasetId
-      in: path
-      description: The ID of the dataset to use
-      required: true
-      schema:
-        type: string
-    - name: id
-      in: path
-      description: The ID of the note store to delete
-      required: true
-      schema:
-        type: string
   responses:
     '200':
       description: Success

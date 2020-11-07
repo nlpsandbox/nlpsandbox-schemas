@@ -1,22 +1,22 @@
+parameters:
+  - in: path
+    name: datasetId
+    description: The ID of the dataset
+    required: true
+    schema:
+      type: string
+  - in: path
+    name: storeId
+    description: The ID of the store
+    required: true
+    schema:
+      type: string
 post:
   tags:
     - Annotation
   summary: Create an annotation linked to a dataset ID and store ID
   description: Create an annotation
   operationId: "annotations.create"
-  parameters:
-    - name: datasetId
-      in: path
-      description: The ID of the dataset to use
-      required: true
-      schema:
-        type: string
-    - name: storeId
-      in: path
-      description: The ID of the store to use
-      required: true
-      schema:
-        type: string
   requestBody:
     content:
       application/json:
@@ -44,18 +44,6 @@ get:
   description: Returns the annotations for a given dataset ID and store ID
   operationId: "annotations.read_all"
   parameters:
-    - name: datasetId
-      in: path
-      description: The ID of the dataset to use
-      required: true
-      schema:
-        type: string
-    - name: storeId
-      in: path
-      description: The ID of the store to use
-      required: true
-      schema:
-        type: string
     - in: query
       name: limit
       description: Maximum number of results returned
