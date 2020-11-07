@@ -1,0 +1,13 @@
+type: object
+description: A page of annotations
+allOf:
+  - $ref: ../../../commons/components/schemas/PageResponse.yaml
+  - type: object
+    properties:
+      items:
+        description: An array of annotations
+        type: array
+        items:
+          anyOf:
+            - $ref: ../schemas/StoredAnnotation.yaml
+            - $ref: ../schemas/StoredDateAnnotation.yaml

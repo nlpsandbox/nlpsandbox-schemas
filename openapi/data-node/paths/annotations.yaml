@@ -66,18 +66,7 @@ get:
       content:
         application/json:
           schema:
-            type: object
-            allOf:
-              - $ref: ../../commons/components/schemas/PageResponse.yaml
-              - type: object
-                properties:
-                  items:
-                    description: A page of annotations
-                    type: array
-                    items:
-                      anyOf:
-                        - $ref: ../components/schemas/StoredAnnotation.yaml
-                        - $ref: ../components/schemas/StoredDateAnnotation.yaml
+            $ref: ../components/responses/PageOfAnnotations.yaml
       description: Success
     '403':
       $ref: ../../commons/components/responses/Unauthorized.yaml

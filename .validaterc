@@ -38,7 +38,7 @@
       ]
     },
     "responses": {
-      "inline_response_schema": "warning"
+      "inline_response_schema": "error"
     },
     "security_definitions": {
       "unused_security_schemes": "warning",

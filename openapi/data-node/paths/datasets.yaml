@@ -49,16 +49,7 @@ get:
       content:
         application/json:
           schema:
-            type: object
-            allOf:
-              - $ref: ../../commons/components/schemas/PageResponse.yaml
-              - type: object
-                properties:
-                  items:
-                    description: A page of datasets
-                    type: array
-                    items:
-                      $ref: ../components/schemas/Dataset.yaml
+            $ref: ../components/responses/PageOfDatasets.yaml
       description: Success
     '403':
       $ref: ../../commons/components/responses/Unauthorized.yaml
