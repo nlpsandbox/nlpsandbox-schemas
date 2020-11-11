@@ -1,13 +1,6 @@
 type: object
 description: A new clinical note
 properties:
-  name:
-    description: The name of the note
-    type: string
-    minLength: 3
-    maxLength: 60
-    pattern: "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-    example: awesome-note
   text:
     description: A text
     type: string
@@ -16,3 +9,6 @@ properties:
     description: The note type (LOINC concept)
     type: string
     example: "loinc:LP29684-5"
+  patientId:
+    description: The patient ID
+    type: string

@@ -5,5 +5,5 @@ allOf:
   - type: object
     properties:
       id:
-        description: The ID of the dataset
+        description: The ID of the note
         type: string

@@ -6,15 +6,15 @@ parameters:
     schema:
       type: string
   - in: path
-    name: storeId
-    description: The ID of the store
+    name: fhirStoreId
+    description: The ID of the FHIR store
     required: true
     schema:
       type: string
 post:
   tags:
     - Note
-  summary: Create a note linked to a dataset ID and store ID
+  summary: Create a note
   description: Create a note
   operationId: "createNote"
   requestBody:
@@ -36,8 +36,8 @@ post:
 get:
   tags:
     - Note
-  summary: Get all notes linked to a dataset ID and store ID
-  description: Returns the notes for a given dataset ID and store ID
+  summary: List notes
+  description: Returns the notes in a FHIR store
   operationId: "listNotes"
   parameters:
     - in: query

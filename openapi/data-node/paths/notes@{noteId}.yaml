@@ -6,13 +6,13 @@ parameters:
     schema:
       type: string
   - in: path
-    name: storeId
-    description: The ID of the store
+    name: fhirStoreId
+    description: The ID of the FHIR store
     required: true
     schema:
       type: string
   - in: path
-    name: id
+    name: noteId
     description: The ID of the note
     required: true
     schema:
@@ -20,8 +20,8 @@ parameters:
 get:
   tags:
     - Note
-  summary: Get a note by ID
-  description: Returns the note for a given ID
+  summary: Get a note
+  description: Returns the note specified
   operationId: "getNote"
   responses:
     '200':
@@ -37,8 +37,8 @@ get:
 delete:
   tags:
     - Note
-  summary: Delete an note by ID
-  description: Deletes the note for a given ID
+  summary: Delete a note
+  description: Deletes the note specified
   operationId: "deleteNote"
   responses:
     '200':
