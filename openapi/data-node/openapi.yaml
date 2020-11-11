@@ -57,7 +57,8 @@ paths:
     $ref: 'paths/fhirStores@{fhirStoreId}.yaml'
   /datasets/{datasetId}/fhirStores/{fhirStoreId}/fhir/patients:
     $ref: 'paths/patients.yaml'
-
+  /datasets/{datasetId}/fhirStores/{fhirStoreId}/fhir/patients/{patientId}:
+    $ref: 'paths/patients@{patientId}.yaml'
   # /datasets/{datasetId}/annotationStore:
   #   $ref: 'paths/annotationStores.yaml'
   # /datasets/{datasetId}/annotationStore/{id}:

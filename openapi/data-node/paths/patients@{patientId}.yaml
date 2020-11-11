@@ -1,0 +1,53 @@
+parameters:
+  - in: path
+    name: datasetId
+    description: The ID of the dataset
+    required: true
+    schema:
+      type: string
+  - in: path
+    name: fhirStoreId
+    description: The ID of the FHIR store
+    required: true
+    schema:
+      type: string
+  - in: path
+    name: patientId
+    description: The ID of the FHIR Patient
+    required: true
+    schema:
+      type: string
+get:
+  tags:
+    - Patient
+  summary: Get a FHIR Patient
+  description: Returns the FHIR Patient specified
+  operationId: "getPatient"
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: ../../commons/components/schemas/patient.yaml
+    '403':
+      $ref: ../../commons/components/responses/Unauthorized.yaml
+    '404':
+      $ref: ../../commons/components/responses/NotFound.yaml
+delete:
+  tags:
+    - Patient
+  summary: Delete a FHIR Patient
+  description: Deletes the FHIR Patient specified
+  operationId: "deletePatient"
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: ../../commons/components/schemas/patient.yaml
+    '403':
+      $ref: ../../commons/components/responses/Unauthorized.yaml
+    '404':
+      $ref: ../../commons/components/responses/NotFound.yaml
