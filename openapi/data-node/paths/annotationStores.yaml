@@ -8,14 +8,20 @@ parameters:
 post:
   tags:
     - AnnotationStore
-  summary: Create an annotation store linked to a dataset ID
-  description: Create an annotation store with the name specified
+  summary: Create an annotation store
+  description: Create an annotation store with the ID specified
   operationId: "createAnnotationStore"
-  requestBody:
-    content:
-      application/json:
-        schema:
-          $ref: ../components/schemas/NewAnnotationStore.yaml
+  parameters:
+    - in: query
+      name: annotationStoreId
+      description: The ID of the annotation store that is being created.
+      required: true
+      schema:
+        type: string
+        minLength: 3
+        maxLength: 60
+        pattern: "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        example: awesome-annotation-store
   responses:
     '200':
       content:
@@ -30,33 +36,15 @@ post:
 get:
   tags:
     - AnnotationStore
-  summary: Get all annotation stores by dataset ID
-  description: Returns the annotation stores for a given dataset ID
+  summary: List the annotation stores in a dataset
+  description: Returns the annotation stores
   operationId: "listAnnotationStores"
-  parameters:
-    - in: query
-      name: limit
-      description: Maximum number of results returned
-      required: false
-      schema:
-        type: integer
-        default: 10
-        minimum: 10
-        maximum: 100
-    - in: query
-      name: offset
-      description: Index of the first result that must be returned
-      required: false
-      schema:
-        type: integer
-        default: 0
-        minimum: 0
   responses:
     '200':
       content:
         application/json:
           schema:
-            $ref: ../components/responses/PageOfAnnotationStores.yaml
+            $ref: ../components/responses/AnnotationStores.yaml
       description: Success
     '403':
       $ref: ../../commons/components/responses/Unauthorized.yaml

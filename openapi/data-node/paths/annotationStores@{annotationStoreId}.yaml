@@ -6,7 +6,7 @@ parameters:
     schema:
       type: string
   - in: path
-    name: id
+    name: annotationStoreId
     description: The ID of the annotation store
     required: true
     schema:
@@ -14,8 +14,8 @@ parameters:
 get:
   tags:
     - AnnotationStore
-  summary: Get an annotation store by ID
-  description: Returns the annotation store for a given ID
+  summary: Get an annotation store
+  description: Returns the annotation store specified
   operationId: "getAnnotationStore"
   responses:
     '200':
@@ -31,8 +31,8 @@ get:
 delete:
   tags:
     - AnnotationStore
-  summary: Delete an annotation store by ID
-  description: Deletes the annotation store for a given ID
+  summary: Delete an annotation store
+  description: Deletes the annotation store specified
   operationId: "deleteAnnotationStore"
   responses:
     '200':

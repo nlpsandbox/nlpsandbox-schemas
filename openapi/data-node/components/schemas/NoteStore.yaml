@@ -1,9 +1,0 @@
-type: object
-description: A note store
-allOf:
-  - $ref: NewNoteStore.yaml
-  - type: object
-    properties:
-      id:
-        description: The ID of the store
-        type: string

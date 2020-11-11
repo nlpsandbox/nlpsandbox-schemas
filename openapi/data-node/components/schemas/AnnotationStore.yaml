@@ -1,9 +1,6 @@
 type: object
 description: An annotation store
-allOf:
-  - $ref: NewAnnotationStore.yaml
-  - type: object
-    properties:
-      id:
-        description: The ID of the store
-        type: string
+properties:
+  name:
+    description: Resource name of the annotation store, of the form datasets/{datasetId}/annotationStore/{annotationStoreId}
+    type: string
