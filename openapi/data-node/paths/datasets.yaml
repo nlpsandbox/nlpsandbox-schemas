@@ -4,11 +4,17 @@ post:
   summary: Create a dataset
   description: Create a dataset with the name specified
   operationId: "createDataset"
-  requestBody:
-    content:
-      application/json:
-        schema:
-          $ref: ../components/schemas/NewDataset.yaml
+  parameters:
+    - in: query
+      name: datasetId
+      description: The ID of the dataset that is being created.
+      required: true
+      schema:
+        type: string
+        minLength: 3
+        maxLength: 60
+        pattern: "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        example: awesome-dataset
   responses:
     '200':
       content:

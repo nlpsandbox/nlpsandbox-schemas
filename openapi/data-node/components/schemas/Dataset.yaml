@@ -1,9 +1,6 @@
 type: object
 description: A dataset
-allOf:
-  - $ref: NewDataset.yaml
-  - type: object
-    properties:
-      id:
-        description: The ID of the dataset
-        type: string
+properties:
+  name:
+    description: Resource name of the dataset, of the form datasets/{datasetId}
+    type: string

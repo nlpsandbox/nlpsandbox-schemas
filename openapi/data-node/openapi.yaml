@@ -25,18 +25,20 @@ info:
     For the sake of benchmarking NLP Tool, a Data Node can also give access to
     the gold standard that the NLP Tool is expected to infer (e.g. annotations).
 tags:
-  - name: Annotation
-    description: Operations about annotations
-  - name: AnnotationStore
-    description: Operations about annotation stores
+  # - name: Annotation
+  #   description: Operations about annotations
+  # - name: AnnotationStore
+  #   description: Operations about annotation stores
   - name: Dataset
     description: Operations about datasets
   - name: Health
     description: Operations about service health
-  - name: NoteStore
-    description: Operations about note stores
-  - name: Note
-    description: Operations about notes
+  - name: FhirStore
+    description: Operations about FHIR stores
+  # - name: NoteStore
+  #   description: Operations about note stores
+  # - name: Note
+  #   description: Operations about notes
   - name: Service
     description: Operations about NLP services
 servers:
@@ -47,22 +49,25 @@ paths:
     $ref: 'paths/datasets.yaml'
   /datasets/{id}:
     $ref: 'paths/datasets@{id}.yaml'
-  /datasets/{datasetId}/annotationStore:
-    $ref: 'paths/annotationStores.yaml'
-  /datasets/{datasetId}/annotationStore/{id}:
-    $ref: 'paths/annotationStores@{id}.yaml'
-  /datasets/{datasetId}/annotationStore/{storeId}/annotations:
-    $ref: 'paths/annotations.yaml'
-  /datasets/{datasetId}/annotationStore/{storeId}/annotations/{id}:
-    $ref: 'paths/annotations@{id}.yaml'
-  /datasets/{datasetId}/noteStore:
-    $ref: 'paths/noteStores.yaml'
-  /datasets/{datasetId}/noteStore/{id}:
-    $ref: 'paths/noteStores@{id}.yaml'
-  /datasets/{datasetId}/noteStore/{storeId}/notes:
-    $ref: 'paths/notes.yaml'
-  /datasets/{datasetId}/noteStore/{storeId}/notes/{id}:
-    $ref: 'paths/notes@{id}.yaml'
+  /datasets/{datasetId}/fhirStores:
+    $ref: 'paths/fhirStores.yaml'
+
+  # /datasets/{datasetId}/annotationStore:
+  #   $ref: 'paths/annotationStores.yaml'
+  # /datasets/{datasetId}/annotationStore/{id}:
+  #   $ref: 'paths/annotationStores@{id}.yaml'
+  # /datasets/{datasetId}/annotationStore/{storeId}/annotations:
+  #   $ref: 'paths/annotations.yaml'
+  # /datasets/{datasetId}/annotationStore/{storeId}/annotations/{id}:
+  #   $ref: 'paths/annotations@{id}.yaml'
+  # /datasets/{datasetId}/noteStore:
+  #   $ref: 'paths/noteStores.yaml'
+  # /datasets/{datasetId}/noteStore/{id}:
+  #   $ref: 'paths/noteStores@{id}.yaml'
+  # /datasets/{datasetId}/noteStore/{storeId}/notes:
+  #   $ref: 'paths/notes.yaml'
+  # /datasets/{datasetId}/noteStore/{storeId}/notes/{id}:
+  #   $ref: 'paths/notes@{id}.yaml'
   /health:
     $ref: '../commons/paths/health.yaml'
   /service:
