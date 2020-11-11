@@ -1,0 +1,11 @@
+type: object
+description: A page of FHIR Patients
+allOf:
+  - $ref: ../../../commons/components/schemas/PageResponse.yaml
+  - type: object
+    properties:
+      items:
+        description: An array of FHIR Patients
+        type: array
+        items:
+          $ref: ../../../commons/components/schemas/Patient.yaml

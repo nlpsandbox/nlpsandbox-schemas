@@ -1,0 +1,14 @@
+type: object
+description: A new FHIR Patient
+properties:
+  identifier:
+    description: An identifier for this patient
+    type: string
+  gender:
+    description: Gender of the patient
+    type: string
+    enum:
+      - male
+      - female
+      - other
+      - unknown

@@ -1,0 +1,53 @@
+parameters:
+  - in: path
+    name: datasetId
+    description: The ID of the dataset
+    required: true
+    schema:
+      type: string
+  - in: path
+    name: fhirStoreId
+    description: The ID of the FHIR store
+    required: true
+    schema:
+      type: string
+post:
+  tags:
+    - Patient
+  summary: Create a FHIR Patient
+  description: Create a FHIR Patient
+  operationId: "createPatient"
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../../commons/components/schemas/NewPatient.yaml
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: ../../commons/components/schemas/Patient.yaml
+      description: Success
+    '403':
+      $ref: ../../commons/components/responses/Unauthorized.yaml
+    '404':
+      $ref: ../../commons/components/responses/NotFound.yaml
+get:
+  tags:
+    - Patient
+  summary: List the
+  description: Returns the Patients in a FHIR store
+  operationId: "listPatients"
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: ../components/responses/PageOfPatients.yaml
+      description: Success
+    '403':
+      $ref: ../../commons/components/responses/Unauthorized.yaml
+    '404':
+      $ref: ../../commons/components/responses/NotFound.yaml
+

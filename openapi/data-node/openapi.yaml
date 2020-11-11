@@ -35,6 +35,8 @@ tags:
     description: Operations about service health
   - name: FhirStore
     description: Operations about FHIR stores
+  - name: Patient
+    description: Operations about patients
   # - name: NoteStore
   #   description: Operations about note stores
   # - name: Note
@@ -53,6 +55,8 @@ paths:
     $ref: 'paths/fhirStores.yaml'
   /datasets/{datasetId}/fhirStores/{fhirStoreId}:
     $ref: 'paths/fhirStores@{fhirStoreId}.yaml'
+  /datasets/{datasetId}/fhirStores/{fhirStoreId}/fhir/patients:
+    $ref: 'paths/patients.yaml'
 
   # /datasets/{datasetId}/annotationStore:
   #   $ref: 'paths/annotationStores.yaml'

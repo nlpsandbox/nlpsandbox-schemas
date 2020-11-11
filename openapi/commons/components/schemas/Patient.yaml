@@ -1,0 +1,9 @@
+type: object
+description: A FHIR Patient
+allOf:
+  - $ref: NewPatient.yaml
+  - type: object
+    properties:
+      id:
+        description: The patient ID
+        type: string
