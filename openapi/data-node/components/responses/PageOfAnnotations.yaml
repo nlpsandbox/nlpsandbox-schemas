@@ -9,5 +9,5 @@ allOf:
         type: array
         items:
           anyOf:
-            - $ref: ../schemas/StoredAnnotation.yaml
-            - $ref: ../schemas/StoredDateAnnotation.yaml
+            - $ref: ../schemas/Annotation.yaml
+            - $ref: ../schemas/DateAnnotation.yaml

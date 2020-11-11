@@ -8,7 +8,7 @@ post:
     content:
       application/json:
         schema:
-          $ref: ../components/schemas/Dataset.yaml
+          $ref: ../components/schemas/NewDataset.yaml
   responses:
     '200':
       content:

@@ -1,19 +1,9 @@
 type: object
 description: A clinical note
 allOf:
-  - $ref: Text.yaml
+  - $ref: NewNote.yaml
   - type: object
     properties:
-      name:
-        description: The name of the note
+      id:
+        description: The ID of the dataset
         type: string
-        minLength: 3
-        maxLength: 60
-        pattern: "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-        example: awesome-note
-      type:
-        description: The note type (LOINC concept)
-        type: string
-        example: "loinc:LP29684-5"
-required:
-  - name

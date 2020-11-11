@@ -22,16 +22,16 @@ post:
       application/json:
         schema:
           oneOf:
-            - $ref: ../components/schemas/StoredAnnotation.yaml
-            - $ref: ../components/schemas/StoredDateAnnotation.yaml
+            - $ref: ../../commons/components/schemas/NewAnnotation.yaml
+            - $ref: ../../commons/components/schemas/NewDateAnnotation.yaml
   responses:
     '200':
       content:
         application/json:
           schema:
             oneOf:
-              - $ref: ../components/schemas/StoredAnnotation.yaml
-              - $ref: ../components/schemas/StoredDateAnnotation.yaml
+              - $ref: ../components/schemas/Annotation.yaml
+              - $ref: ../components/schemas/DateAnnotation.yaml
       description: Success
     '403':
       $ref: ../../commons/components/responses/Unauthorized.yaml

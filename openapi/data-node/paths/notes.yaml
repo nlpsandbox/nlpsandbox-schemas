@@ -21,7 +21,7 @@ post:
     content:
       application/json:
         schema:
-          $ref: ../../commons/components/schemas/Note.yaml
+          $ref: ../../commons/components/schemas/NewNote.yaml
   responses:
     '200':
       content:

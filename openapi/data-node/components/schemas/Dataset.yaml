@@ -1,10 +1,9 @@
 type: object
 description: A dataset
-properties:
-  name:
-    description: The name of the dataset
-    type: string
-    minLength: 3
-    maxLength: 60
-    pattern: "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-    example: awesome-dataset
+allOf:
+  - $ref: NewDataset.yaml
+  - type: object
+    properties:
+      id:
+        description: The ID of the dataset
+        type: string

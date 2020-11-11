@@ -15,7 +15,7 @@ post:
     content:
       application/json:
         schema:
-          $ref: ../components/schemas/NoteStore.yaml
+          $ref: ../components/schemas/NewNoteStore.yaml
   responses:
     '200':
       content:

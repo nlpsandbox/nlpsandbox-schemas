@@ -1,7 +1,7 @@
 type: object
 description: A date annotation in a text
 allOf:
-  - $ref: Annotation.yaml
+  - $ref: NewAnnotation.yaml
   - type: object
     properties:
       format:

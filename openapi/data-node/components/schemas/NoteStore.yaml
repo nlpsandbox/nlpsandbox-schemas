@@ -1,13 +1,9 @@
 type: object
 description: A note store
-properties:
-  name:
-    description: The name of the store
-    type: string
-    minLength: 3
-    maxLength: 60
-    pattern: "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-    example: awesome-note-store
-  datasetId:
-    description: The ID of the dataset
-    type: string
+allOf:
+  - $ref: NewNoteStore.yaml
+  - type: object
+    properties:
+      id:
+        description: The ID of the store
+        type: string
