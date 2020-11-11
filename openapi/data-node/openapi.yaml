@@ -47,10 +47,12 @@ servers:
 paths:
   /datasets:
     $ref: 'paths/datasets.yaml'
-  /datasets/{id}:
-    $ref: 'paths/datasets@{id}.yaml'
+  /datasets/{datasetId}:
+    $ref: 'paths/datasets@{datasetId}.yaml'
   /datasets/{datasetId}/fhirStores:
     $ref: 'paths/fhirStores.yaml'
+  /datasets/{datasetId}/fhirStores/{fhirStoreId}:
+    $ref: 'paths/fhirStores@{fhirStoreId}.yaml'
 
   # /datasets/{datasetId}/annotationStore:
   #   $ref: 'paths/annotationStores.yaml'

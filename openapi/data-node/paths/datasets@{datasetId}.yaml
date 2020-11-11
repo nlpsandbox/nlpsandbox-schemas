@@ -1,6 +1,6 @@
 parameters:
   - in: path
-    name: id
+    name: datasetId
     description: The ID of the dataset
     required: true
     schema:
