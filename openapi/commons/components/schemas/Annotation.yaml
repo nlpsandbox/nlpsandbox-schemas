@@ -7,5 +7,19 @@ properties:
     readOnly: true
   annotationSource:
     $ref: AnnotationSource.yaml
-  textAnnotation:
-    $ref: TextAnnotation.yaml
+  annotationType:
+    description: The type of the annotation
+    type: string
+    enum:
+      - text_date
+      - text_person_name
+      - text_physical_address
+  # annotation:
+  #   oneOf:
+  #     - $ref: TextDateAnnotation.yaml
+  #     - $ref: TextPersonNameAnnotation.yaml
+  #     - $ref: TextPhysicalAddressAnnotation.yaml
+  # discriminator:
+  #   propertyName: annotationType
+  # textAnnotation:
+  #   $ref: TextAnnotation.yaml

@@ -1,15 +1,18 @@
 type: object
 description: A date annotation in a text
-properties:
-  start:
-    description: The position of the first character
-    type: integer
-  length:
-    description: The length of the annotation
-    type: integer
-  text:
-    description: The string annotated
-    type: string
-  dateFormat:
-    description: Date format (ISO 8601)
-    type: string
+allOf:
+  - $ref: Annotation.yaml
+  - type: object
+    properties:
+      start:
+        description: The position of the first character
+        type: integer
+      length:
+        description: The length of the annotation
+        type: integer
+      text:
+        description: The string annotated
+        type: string
+      dateFormat:
+        description: Date format (ISO 8601)
+        type: string

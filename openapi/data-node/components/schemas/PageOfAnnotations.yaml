@@ -8,4 +8,7 @@ allOf:
         description: An array of annotations
         type: array
         items:
-          $ref: ../../../commons/components/schemas/Annotation.yaml
+          anyOf:
+            - $ref: ../../../commons/components/schemas/TextDateAnnotation.yaml
+            - $ref: ../../../commons/components/schemas/TextPersonNameAnnotation.yaml
+            - $ref: ../../../commons/components/schemas/TextPhysicalAddressAnnotation.yaml
