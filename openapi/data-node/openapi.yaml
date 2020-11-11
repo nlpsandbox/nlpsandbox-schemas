@@ -25,8 +25,8 @@ info:
     For the sake of benchmarking NLP Tool, a Data Node can also give access to
     the gold standard that the NLP Tool is expected to infer (e.g. annotations).
 tags:
-  # - name: Annotation
-  #   description: Operations about annotations
+  - name: Annotation
+    description: Operations about annotations
   - name: AnnotationStore
     description: Operations about annotation stores
   - name: Dataset
@@ -53,30 +53,22 @@ paths:
     $ref: 'paths/annotationStores.yaml'
   /datasets/{datasetId}/annotationStore/{annotationStoreId}:
     $ref: 'paths/annotationStores@{annotationStoreId}.yaml'
+  /datasets/{datasetId}/annotationStore/{annotationStoreId}/annotations:
+    $ref: 'paths/annotations.yaml'
+  /datasets/{datasetId}/annotationStore/{annotationStoreId}/annotations/{annotationId}:
+    $ref: 'paths/annotations@{annotationId}.yaml'
   /datasets/{datasetId}/fhirStores:
     $ref: 'paths/fhirStores.yaml'
   /datasets/{datasetId}/fhirStores/{fhirStoreId}:
     $ref: 'paths/fhirStores@{fhirStoreId}.yaml'
-  /datasets/{datasetId}/fhirStores/{fhirStoreId}/fhir/patients:
+  /datasets/{datasetId}/fhirStores/{fhirStoreId}/fhir/Patient:
     $ref: 'paths/patients.yaml'
-  /datasets/{datasetId}/fhirStores/{fhirStoreId}/fhir/patients/{patientId}:
+  /datasets/{datasetId}/fhirStores/{fhirStoreId}/fhir/Patient/{patientId}:
     $ref: 'paths/patients@{patientId}.yaml'
   /datasets/{datasetId}/fhirStores/{fhirStoreId}/notes:
     $ref: 'paths/notes.yaml'
   /datasets/{datasetId}/fhirStores/{fhirStoreId}/notes/{noteId}:
     $ref: 'paths/notes@{noteId}.yaml'
-  # /datasets/{datasetId}/annotationStore/{storeId}/annotations:
-  #   $ref: 'paths/annotations.yaml'
-  # /datasets/{datasetId}/annotationStore/{storeId}/annotations/{id}:
-  #   $ref: 'paths/annotations@{id}.yaml'
-  # /datasets/{datasetId}/noteStore:
-  #   $ref: 'paths/noteStores.yaml'
-  # /datasets/{datasetId}/noteStore/{id}:
-  #   $ref: 'paths/noteStores@{id}.yaml'
-  # /datasets/{datasetId}/noteStore/{storeId}/notes:
-  #   $ref: 'paths/notes.yaml'
-  # /datasets/{datasetId}/noteStore/{storeId}/notes/{id}:
-  #   $ref: 'paths/notes@{id}.yaml'
   /health:
     $ref: '../commons/paths/health.yaml'
   /service:

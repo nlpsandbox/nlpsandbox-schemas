@@ -21,7 +21,7 @@ post:
     content:
       application/json:
         schema:
-          $ref: ../../commons/components/schemas/NewNote.yaml
+          $ref: ../../commons/components/schemas/Note.yaml
   responses:
     '200':
       content:
@@ -62,7 +62,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: ../components/responses/PageOfNotes.yaml
+            $ref: ../components/schemas/PageOfNotes.yaml
       description: Success
     '403':
       $ref: ../../commons/components/responses/Unauthorized.yaml

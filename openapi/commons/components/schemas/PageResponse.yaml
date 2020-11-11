@@ -1,10 +1,6 @@
 type: object
 description: A page of results
 properties:
-  # count:
-  #   description: Number of results in the page
-  #   type: number
-  #   example: 10
   offset:
     description: Index of the first result that must be returned
     type: integer

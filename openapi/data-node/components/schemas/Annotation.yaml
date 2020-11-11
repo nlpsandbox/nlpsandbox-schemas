@@ -1,9 +1,0 @@
-type: object
-description: An annotation
-allOf:
-  - $ref: ../../../commons/components/schemas/NewAnnotation.yaml
-  - type: object
-    properties:
-      id:
-        description: The ID of the annotation
-        type: string

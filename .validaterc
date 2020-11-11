@@ -33,7 +33,7 @@
       "duplicate_path_parameter": "error",
       "snake_case_only": "off",
       "paths_case_convention": [
-        "error",
+        "warning",
         "lower_camel_case"
       ]
     },
@@ -61,7 +61,7 @@
       ],
       "property_case_collision": "error",
       "enum_case_convention": [
-        "warning",
+        "error",
         "lower_snake_case"
       ],
       "undefined_required_properties": "warning"

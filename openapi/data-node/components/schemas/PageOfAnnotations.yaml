@@ -8,6 +8,4 @@ allOf:
         description: An array of annotations
         type: array
         items:
-          anyOf:
-            - $ref: ../schemas/Annotation.yaml
-            - $ref: ../schemas/DateAnnotation.yaml
+          $ref: ../../../commons/components/schemas/Annotation.yaml

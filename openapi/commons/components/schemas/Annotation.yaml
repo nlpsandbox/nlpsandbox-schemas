@@ -1,0 +1,11 @@
+type: object
+description: A annotation record
+properties:
+  name:
+    description: Resource name of the annotation
+    type: string
+    readOnly: true
+  annotationSource:
+    $ref: AnnotationSource.yaml
+  textAnnotation:
+    $ref: TextAnnotation.yaml

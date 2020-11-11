@@ -1,0 +1,18 @@
+type: object
+description: Annotations in a text
+properties:
+  dates:
+    description: An array of annotations that represent dates
+    type: array
+    items:
+      $ref: TextDateAnnotation.yaml
+  personNames:
+    description: An array of annotations that represent person names
+    type: array
+    items:
+      $ref: TextPersonNameAnnotation.yaml
+  physicalAddresses:
+    description: An array of annotations that represent physical addresses
+    type: array
+    items:
+      $ref: TextPhysicalAddressAnnotation.yaml

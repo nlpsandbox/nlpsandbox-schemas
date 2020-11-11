@@ -21,7 +21,7 @@ post:
     content:
       application/json:
         schema:
-          $ref: ../../commons/components/schemas/NewPatient.yaml
+          $ref: ../../commons/components/schemas/Patient.yaml
   responses:
     '200':
       content:
@@ -36,15 +36,33 @@ post:
 get:
   tags:
     - Patient
-  summary: List the
+  summary: List the Patients in a FHIR store
   description: Returns the Patients in a FHIR store
   operationId: "listPatients"
+  parameters:
+    - in: query
+      name: limit
+      description: Maximum number of results returned
+      required: false
+      schema:
+        type: integer
+        default: 10
+        minimum: 10
+        maximum: 100
+    - in: query
+      name: offset
+      description: Index of the first result that must be returned
+      required: false
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
   responses:
     '200':
       content:
         application/json:
           schema:
-            $ref: ../components/responses/PageOfPatients.yaml
+            $ref: ../components/schemas/PageOfPatients.yaml
       description: Success
     '403':
       $ref: ../../commons/components/responses/Unauthorized.yaml

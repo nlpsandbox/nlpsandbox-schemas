@@ -1,9 +1,0 @@
-type: object
-description: A date annotation
-allOf:
-  - $ref: ../../../commons/components/schemas/NewDateAnnotation.yaml
-  - type: object
-    properties:
-      id:
-        description: The ID of the date annotation
-        type: string

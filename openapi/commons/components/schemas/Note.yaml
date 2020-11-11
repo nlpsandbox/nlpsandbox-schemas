@@ -1,9 +1,18 @@
 type: object
-description: A clinical note
-allOf:
-  - $ref: NewNote.yaml
-  - type: object
-    properties:
-      id:
-        description: The ID of the note
-        type: string
+description: A new clinical note
+properties:
+  id:
+    description: The ID of the note
+    type: string
+    readOnly: true
+  text:
+    description: A text
+    type: string
+    example: "This is a text."
+  type:
+    description: The note type (LOINC concept)
+    type: string
+    example: "loinc:LP29684-5"
+  patientId:
+    description: The patient ID
+    type: string

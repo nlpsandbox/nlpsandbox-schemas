@@ -6,33 +6,30 @@ parameters:
     schema:
       type: string
   - in: path
-    name: storeId
-    description: The ID of the store
+    name: annotationStoreId
+    description: The ID of the annotation store
+    required: true
+    schema:
+      type: string
+  - in: path
+    name: annotationId
+    description: The ID of the annotation
     required: true
     schema:
       type: string
 get:
   tags:
     - Annotation
-  summary: Get an annotation by ID
-  description: Returns the annotation for a given ID
+  summary: Get an annotation
+  description: Returns the annotation specified
   operationId: "getAnnotation"
-  parameters:
-    - name: id
-      in: path
-      description: The ID of the annotation to fetch
-      required: true
-      schema:
-        type: string
   responses:
     '200':
       description: Success
       content:
         application/json:
           schema:
-            oneOf:
-              - $ref: ../components/schemas/Annotation.yaml
-              - $ref: ../components/schemas/DateAnnotation.yaml
+            $ref: ../../commons/components/schemas/Annotation.yaml
     '403':
       $ref: ../../commons/components/responses/Unauthorized.yaml
     '404':
@@ -40,25 +37,16 @@ get:
 delete:
   tags:
     - Annotation
-  summary: Delete an annotation by ID
-  description: Deletes the annotation for a given ID
+  summary: Delete an annotation
+  description: Deletes the annotation specified
   operationId: "deleteAnnotation"
-  parameters:
-    - name: id
-      in: path
-      description: The ID of the dataset to delete
-      required: true
-      schema:
-        type: string
   responses:
     '200':
       description: Success
       content:
         application/json:
           schema:
-            oneOf:
-              - $ref: ../components/schemas/Annotation.yaml
-              - $ref: ../components/schemas/DateAnnotation.yaml
+            $ref: ../../commons/components/schemas/Annotation.yaml
     '403':
       $ref: ../../commons/components/responses/Unauthorized.yaml
     '404':

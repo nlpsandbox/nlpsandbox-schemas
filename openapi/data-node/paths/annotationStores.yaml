@@ -44,7 +44,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: ../components/responses/AnnotationStores.yaml
+            $ref: ../components/schemas/AnnotationStores.yaml
       description: Success
     '403':
       $ref: ../../commons/components/responses/Unauthorized.yaml
