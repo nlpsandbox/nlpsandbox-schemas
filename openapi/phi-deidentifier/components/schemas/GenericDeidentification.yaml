@@ -15,4 +15,3 @@ anyOf:
         type: string
         enum:
           - entity_type
-          - entity_address
