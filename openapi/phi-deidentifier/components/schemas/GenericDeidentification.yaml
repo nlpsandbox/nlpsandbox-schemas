@@ -1,0 +1,18 @@
+type: object
+description: Configuration for deidentification of any entity type other than dates
+anyOf:
+  - properties:
+      deidentificationType:
+        type: string
+        enum:
+          - masking_character
+      maskingCharacter:
+        type: string
+        maxLength: 1
+        default: "*"
+  - properties:
+      deidentificationType:
+        type: string
+        enum:
+          - entity_type
+          - entity_address

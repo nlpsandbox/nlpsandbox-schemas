@@ -1,0 +1,16 @@
+type: object
+description: A request to de-identify a note
+properties:
+  name:
+    $ref: ./GenericDeidentification.yaml
+    description: Configuration for de-identifying name entities
+  address:
+    $ref: ./GenericDeidentification.yaml
+    description: Configuration for de-identifying address entities
+  date:
+    $ref: ./DateDeidentification.yaml
+    description: Configuration for de-identifying date entities
+  note:
+    $ref: ../../../commons/components/schemas/Note.yaml
+required:
+  - note

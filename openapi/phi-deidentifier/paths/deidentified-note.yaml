@@ -1,0 +1,20 @@
+post:
+  tags:
+    - Deidentified Notes
+  summary: Get deidentified note
+  description: Returns the deidentified note
+  operationId: "deidentified_note.read"
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/DeidentifyRequest.yaml
+  responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: ../../commons/components/schemas/Note.yaml
+      '403':
+        $ref: ../../commons/components/responses/Unauthorized.yaml
