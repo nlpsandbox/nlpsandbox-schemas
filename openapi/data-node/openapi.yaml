@@ -65,9 +65,9 @@ paths:
     $ref: 'paths/patients.yaml'
   /datasets/{datasetId}/fhirStores/{fhirStoreId}/fhir/Patient/{patientId}:
     $ref: 'paths/patients@{patientId}.yaml'
-  /datasets/{datasetId}/fhirStores/{fhirStoreId}/notes:
+  /datasets/{datasetId}/fhirStores/{fhirStoreId}/fhir/Note:
     $ref: 'paths/notes.yaml'
-  /datasets/{datasetId}/fhirStores/{fhirStoreId}/notes/{noteId}:
+  /datasets/{datasetId}/fhirStores/{fhirStoreId}/fhir/Note/{noteId}:
     $ref: 'paths/notes@{noteId}.yaml'
   /health:
     $ref: '../commons/paths/health.yaml'
