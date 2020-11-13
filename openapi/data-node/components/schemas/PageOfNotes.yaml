@@ -4,7 +4,7 @@ allOf:
   - $ref: ../../../commons/components/schemas/PageResponse.yaml
   - type: object
     properties:
-      items:
+      notes:
         description: An array of notes
         type: array
         items:

@@ -4,7 +4,7 @@ allOf:
   - $ref: ../../../commons/components/schemas/PageResponse.yaml
   - type: object
     properties:
-      items:
+      patients:
         description: An array of FHIR Patients
         type: array
         items:
