@@ -4,4 +4,3 @@ properties:
   name:
     description: Resource name of the dataset, of the form datasets/{datasetId}
     type: string
-    readOnly: true
