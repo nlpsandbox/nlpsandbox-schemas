@@ -26,7 +26,7 @@ post:
             - $ref: ../../commons/components/schemas/TextPersonNameAnnotation.yaml
             - $ref: ../../commons/components/schemas/TextPhysicalAddressAnnotation.yaml
   responses:
-    '200':
+    '201':
       content:
         application/json:
           schema:

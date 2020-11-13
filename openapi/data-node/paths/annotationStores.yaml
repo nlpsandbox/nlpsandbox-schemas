@@ -28,7 +28,7 @@ post:
         schema:
           $ref: ../components/schemas/AnnotationStore.yaml
   responses:
-    '200':
+    '201':
       content:
         application/json:
           schema:

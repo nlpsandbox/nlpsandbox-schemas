@@ -1,5 +1,5 @@
 type: object
-description: A new clinical note
+description: A clinical note
 properties:
   id:
     description: The ID of the note
@@ -9,7 +9,7 @@ properties:
     description: A text
     type: string
     example: "This is a text."
-  type:
+  noteType:
     description: The note type (LOINC concept)
     type: string
     example: "loinc:LP29684-5"

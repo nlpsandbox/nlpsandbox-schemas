@@ -21,7 +21,7 @@ post:
         schema:
           $ref: ../components/schemas/Dataset.yaml
   responses:
-    '200':
+    '201':
       content:
         application/json:
           schema:
