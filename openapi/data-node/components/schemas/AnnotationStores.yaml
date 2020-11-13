@@ -1,8 +1,0 @@
-type: object
-description: A list of annotation stores
-properties:
-  fhirStores:
-    description: A list of annotation stores
-    type: array
-    items:
-      $ref: ../schemas/AnnotationStore.yaml
