@@ -31,8 +31,6 @@ tags:
     description: Operations about annotation stores
   - name: Dataset
     description: Operations about datasets
-  - name: Health
-    description: Operations about service health
   - name: FhirStore
     description: Operations about FHIR stores
   - name: Note
@@ -69,7 +67,5 @@ paths:
     $ref: 'paths/notes.yaml'
   /datasets/{datasetId}/fhirStores/{fhirStoreId}/fhir/Note/{noteId}:
     $ref: 'paths/notes@{noteId}.yaml'
-  /health:
-    $ref: '../commons/paths/health.yaml'
   /service:
     $ref: '../commons/paths/service.yaml'

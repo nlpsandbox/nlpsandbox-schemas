@@ -1,19 +1,19 @@
 type: object
 description: A person name annotation in a text
 allOf:
-  - $ref: Annotation.yaml
+  - $ref: TextAnnotation.yaml
   - type: object
     properties:
-      start:
-        description: The position of the first character
-        type: integer
-      length:
-        description: The length of the annotation
-        type: integer
-      text:
-        description: The string annotated
-        type: string
-      type:
+      # start:
+      #   description: The position of the first character
+      #   type: integer
+      # length:
+      #   description: The length of the annotation
+      #   type: integer
+      # text:
+      #   description: The string annotated
+      #   type: string
+      addressType:
         description: Type of address information
         type: string
         enum:
