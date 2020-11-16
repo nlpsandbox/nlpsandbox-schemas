@@ -41,9 +41,9 @@ jobs:
         api:
         - "data-node"
         - "date-annotator"
-        - "person-name-annotator"
-        - "phi-deidentifier"
-        - "physical-address-annotator"
+        # - "person-name-annotator"
+        # - "phi-deidentifier"
+        # - "physical-address-annotator"
     steps:
     - uses: actions/checkout@v2
     - name: Prepare
