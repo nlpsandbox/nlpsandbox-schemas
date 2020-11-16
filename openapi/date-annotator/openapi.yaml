@@ -21,8 +21,6 @@ info:
 tags:
   - name: DateAnnotation
     description: Operations about date annotations
-  - name: Health
-    description: Operations about API health
   - name: Service
     description: Operations about NLP services
 servers:
@@ -31,7 +29,5 @@ servers:
 paths:
   /annotations/dates:
     $ref: 'paths/dates.yaml'
-  /health:
-    $ref: '../commons/paths/health.yaml'
   /service:
     $ref: '../commons/paths/service.yaml'
