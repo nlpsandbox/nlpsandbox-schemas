@@ -29,7 +29,10 @@ jobs:
         node-version: ${{ env.node_version }}
     - run: npm install
     - name: Lint openapi specifications
-      run: npm run lint:all
+      # run: npm run lint:all
+      run: |
+        npm run lint --entrypoint=openapi/data-node/openapi.yaml
+        npm run lint --entrypoint=openapi/date-annotator/openapi.yaml
 
   build-and-publish:
     needs: [lint]
