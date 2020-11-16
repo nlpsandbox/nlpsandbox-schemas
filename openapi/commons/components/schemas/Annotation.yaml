@@ -1,11 +1,8 @@
 type: object
 description: A annotation record
 properties:
-  # name:
-  #   description: Resource name of the annotation, of the form datasets/{datasetId}/annotationStores/{annotationStoreId}/annotations/{annotationId}
-  #   type: string
-  id:
-    description: The ID of the annotation
+  name:
+    description: Resource name of the annotation store, of the form datasets/{datasetId}/annotationStores/{annotationStoreId}/annotations/{annotationId}
     type: string
     readOnly: true
   annotationSource:

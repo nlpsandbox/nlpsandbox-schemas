@@ -1,7 +1,7 @@
 type: object
 description: A page of annotation stores
 allOf:
-  - $ref: ../../../commons/components/schemas/PageResponse.yaml
+  - $ref: ../../../commons/components/schemas/ResponsePageMetadata.yaml
   - type: object
     properties:
       annotationStores:

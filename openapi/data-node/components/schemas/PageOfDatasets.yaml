@@ -1,7 +1,7 @@
 type: object
 description: A page of datasets
 allOf:
-  - $ref: ../../../commons/components/schemas/PageResponse.yaml
+  - $ref: ../../../commons/components/schemas/ResponsePageMetadata.yaml
   - type: object
     properties:
       datasets:
