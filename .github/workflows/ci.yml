@@ -40,7 +40,7 @@ jobs:
       matrix:
         api:
         - "data-node"
-        # - "date-annotator"
+        - "date-annotator"
         # - "person-name-annotator"
         # - "phi-deidentifier"
         # - "physical-address-annotator"
