@@ -1,0 +1,20 @@
+post:
+  tags:
+    - TextDateAnnotation
+  summary: Get all date annotations in a clinical note
+  description: Returns the date annotations detected in the clinical note specified
+  operationId: "dateAnnotations.detect_all"
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../../commons/components/schemas/Note.yaml
+  responses:
+    '201':
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: ../../commons/components/schemas/TextDateAnnotation.yaml
+    '403':
+      $ref: ../../commons/components/responses/Unauthorized.yaml
