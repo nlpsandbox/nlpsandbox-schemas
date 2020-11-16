@@ -32,25 +32,13 @@ post:
     content:
       application/json:
         schema:
-          anyOf:
-            - $ref: ../../commons/components/schemas/TextDateAnnotation.yaml
-            - $ref: ../../commons/components/schemas/TextPersonNameAnnotation.yaml
-            - $ref: ../../commons/components/schemas/TextPhysicalAddressAnnotation.yaml
+          $ref: ../../commons/components/schemas/Annotation.yaml
   responses:
     '201':
       content:
         application/json:
           schema:
-            anyOf:
-              - $ref: ../../commons/components/schemas/TextDateAnnotation.yaml
-              - $ref: ../../commons/components/schemas/TextPersonNameAnnotation.yaml
-              - $ref: ../../commons/components/schemas/TextPhysicalAddressAnnotation.yaml
-            # discriminator:
-            #   propertyName: annotationType
-            #   mapping:
-            #     text_date: ../../commons/components/schemas/TextDateAnnotation.yaml
-            #     text_person_name: ../../commons/components/schemas/TextPersonNameAnnotation.yaml
-            #     text_physical_address: ../../commons/components/schemas/TextPhysicalAddressAnnotation.yaml
+            $ref: ../../commons/components/schemas/Annotation.yaml
       description: Success
     '403':
       $ref: ../../commons/components/responses/Unauthorized.yaml

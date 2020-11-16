@@ -29,10 +29,7 @@ get:
       content:
         application/json:
           schema:
-            anyOf:
-              - $ref: ../../commons/components/schemas/TextDateAnnotation.yaml
-              - $ref: ../../commons/components/schemas/TextPersonNameAnnotation.yaml
-              - $ref: ../../commons/components/schemas/TextPhysicalAddressAnnotation.yaml
+            $ref: ../../commons/components/schemas/Annotation.yaml
     '403':
       $ref: ../../commons/components/responses/Unauthorized.yaml
     '404':
@@ -49,10 +46,7 @@ delete:
       content:
         application/json:
           schema:
-            anyOf:
-              - $ref: ../../commons/components/schemas/TextDateAnnotation.yaml
-              - $ref: ../../commons/components/schemas/TextPersonNameAnnotation.yaml
-              - $ref: ../../commons/components/schemas/TextPhysicalAddressAnnotation.yaml
+            $ref: ../../commons/components/schemas/Annotation.yaml
     '403':
       $ref: ../../commons/components/responses/Unauthorized.yaml
     '404':
