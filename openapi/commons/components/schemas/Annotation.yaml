@@ -1,5 +1,5 @@
 type: object
-description: A annotation record
+description: An annotation record
 properties:
   name:
     description: Resource name of the annotation record, of the form datasets/{datasetId}/annotationStores/{annotationStoreId}/annotations/{annotationId}
@@ -7,15 +7,18 @@ properties:
     readOnly: true
   annotationSource:
     $ref: AnnotationSource.yaml
-  annotationType:
-    description: The type of the annotation
-    type: string
-    enum:
-      - text_date
-      - text_person_name
-      - text_physical_address
-  annotation:
-    oneOf:
-      - $ref: TextDateAnnotation.yaml
-      - $ref: TextPersonNameAnnotation.yaml
-      - $ref: TextPhysicalAddressAnnotation.yaml
+  textDateAnnotations:
+    description: Date annotations in a text
+    type: array
+    items:
+      $ref: TextDateAnnotation.yaml
+  textPersonNameAnnotations:
+    description: Person name annotations in a text
+    type: array
+    items:
+      $ref: TextPersonNameAnnotation.yaml
+  textPhysicalAddressAnnotations:
+    description: Physical address annotations in a text
+    type: array
+    items:
+      $ref: TextPhysicalAddressAnnotation.yaml
