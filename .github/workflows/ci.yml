@@ -29,7 +29,10 @@ jobs:
         node-version: ${{ env.node_version }}
     - run: npm install
     - name: Lint openapi specifications
-      run: npm run lint:all
+      # run: npm run lint:all
+      run: |
+        npm run lint --entrypoint=openapi/data-node/openapi.yaml
+        npm run lint --entrypoint=openapi/date-annotator/openapi.yaml
 
   build-and-publish:
     needs: [lint]
@@ -41,9 +44,9 @@ jobs:
         api:
         - "data-node"
         - "date-annotator"
-        - "person-name-annotator"
-        - "phi-deidentifier"
-        - "physical-address-annotator"
+        # - "person-name-annotator"
+        # - "phi-deidentifier"
+        # - "physical-address-annotator"
     steps:
     - uses: actions/checkout@v2
     - name: Prepare
