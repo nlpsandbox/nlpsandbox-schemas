@@ -18,3 +18,8 @@ allOf:
           - state
           - street
           - zip
+example:
+  start: 42
+  length: 11
+  text: Seattle
+  addressType: city
