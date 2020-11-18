@@ -6,32 +6,28 @@ parameters:
     schema:
       type: string
   - in: path
-    name: storeId
-    description: The ID of the store
+    name: annotationStoreId
+    description: The ID of the annotation store
     required: true
     schema:
       type: string
 post:
   tags:
     - Annotation
-  summary: Create an annotation linked to a dataset ID and store ID
+  summary: Create an annotation
   description: Create an annotation
   operationId: "createAnnotation"
   requestBody:
     content:
       application/json:
         schema:
-          oneOf:
-            - $ref: ../components/schemas/StoredAnnotation.yaml
-            - $ref: ../components/schemas/StoredDateAnnotation.yaml
+          $ref: ../../commons/components/schemas/Annotation.yaml
   responses:
-    '200':
+    '201':
       content:
         application/json:
           schema:
-            oneOf:
-              - $ref: ../components/schemas/StoredAnnotation.yaml
-              - $ref: ../components/schemas/StoredDateAnnotation.yaml
+            $ref: ../../commons/components/schemas/Annotation.yaml
       description: Success
     '403':
       $ref: ../../commons/components/responses/Unauthorized.yaml
@@ -40,8 +36,8 @@ post:
 get:
   tags:
     - Annotation
-  summary: Get all annotations linked to a dataset ID and store ID
-  description: Returns the annotations for a given dataset ID and store ID
+  summary: List the annotations in an annotation store
+  description: Returns the annotations in an annotation store
   operationId: "listAnnotations"
   parameters:
     - in: query
@@ -61,12 +57,22 @@ get:
         type: integer
         default: 0
         minimum: 0
+    - in: query
+      name: annotationType
+      description: Type of the annotations that must be returned
+      required: false
+      schema:
+        type: string
+        enum:
+          - text_date
+          - text_person_name
+          - text_physical_address
   responses:
     '200':
       content:
         application/json:
           schema:
-            $ref: ../components/responses/PageOfAnnotations.yaml
+            $ref: ../components/schemas/PageOfAnnotations.yaml
       description: Success
     '403':
       $ref: ../../commons/components/responses/Unauthorized.yaml

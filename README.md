@@ -1,7 +1,7 @@
 # NLP Sandbox OpenAPI Specifications
 
-[![GitHub CI](https://img.shields.io/github/workflow/status/Sage-Bionetworks/nlp-sandbox-schemas/ci.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github)](https://github.com/Sage-Bionetworks/nlp-sandbox-schemas)
 [![GitHub Release](https://img.shields.io/github/release/Sage-Bionetworks/nlp-sandbox-schemas.svg?include_prereleases&color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github)](https://github.com/Sage-Bionetworks/nlp-sandbox-schemas/releases)
+[![GitHub CI](https://img.shields.io/github/workflow/status/Sage-Bionetworks/nlp-sandbox-schemas/ci.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github)](https://github.com/Sage-Bionetworks/nlp-sandbox-schemas)
 [![GitHub License](https://img.shields.io/github/license/Sage-Bionetworks/nlp-sandbox-schemas.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github)](https://github.com/Sage-Bionetworks/nlp-sandbox-schemas)
 
 ## OpenAPI specifications
@@ -11,10 +11,10 @@ order.
 
 | API | Type | Version |
 |---|---|---|
-| [Data Node](/openapi/data-node) | Data Node | 0.1.6 |
-| [Date Annotator](/openapi/date-annotator) | NLP Tool | 0.1.6 |
-| [Person Name Annotator](/openapi/person-name-annotator) | NLP Tool | 0.1.6 |
-| [Physical Address Annotator](/openapi/physical-address-annotator) | NLP Tool | 0.1.6 |
+| [Data Node](/openapi/data-node) | Data Node | 0.2.0 |
+| [Date Annotator](/openapi/date-annotator) | NLP Tool | 0.2.0 |
+| [Person Name Annotator](/openapi/person-name-annotator) | NLP Tool | 0.2.0 |
+| [Physical Address Annotator](/openapi/physical-address-annotator) | NLP Tool | 0.2.0 |
 
 ## Web services
 
@@ -62,6 +62,10 @@ TBA
 
 - List paths in alphanumerical order
 - Add schemas and paths used in more than one API to `commons`
+
+## TODO
+
+> "description": "Creates a new Annotation record. It is valid to create Annotation objects for the same source more than once since a unique ID is assigned to each record by this service.",
 
 <!-- Definitions -->
 

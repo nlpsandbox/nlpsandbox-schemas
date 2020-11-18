@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 0.1.6
+  version: 0.2.0
   title: NLP Sandbox Date Annotator API
   contact:
     name: The NLP Sandbox Team
@@ -19,19 +19,15 @@ info:
     This NLP tool detects date references in the clinical note specified and
     returns a list of date annotations.
 tags:
-  - name: DateAnnotation
-    description: Operations about date annotations
-  - name: Health
-    description: Operations about API health
+  - name: TextDateAnnotation
+    description: Operations about text date annotations
   - name: Service
-    description: Operations about NLP services
+    description: Operations about this API service
 servers:
   - url: 'http://example.com/api/v1'
   - url: 'https://example.com/api/v1'
 paths:
-  /annotations/dates:
-    $ref: 'paths/dates.yaml'
-  /health:
-    $ref: '../commons/paths/health.yaml'
+  /annotations/textDateAnnotations:
+    $ref: 'paths/textDateAnnotations.yaml'
   /service:
     $ref: '../commons/paths/service.yaml'

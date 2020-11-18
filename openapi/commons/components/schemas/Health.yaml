@@ -1,9 +1,0 @@
-type: object
-description: "Information about the health of the service"
-properties:
-  status:
-    description: Health status
-    type: string
-    enum:
-      - pass
-      - warn

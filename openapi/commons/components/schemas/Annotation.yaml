@@ -1,15 +1,24 @@
 type: object
-description: An annotation in a text
+description: An annotation record
 properties:
-  start:
-    description: The position of the first character
-    type: integer
-  length:
-    description: The length of the annotation
-    type: integer
-  text:
-    description: The string annotated
+  name:
+    description: Resource name of the annotation record, of the form datasets/{datasetId}/annotationStores/{annotationStoreId}/annotations/{annotationId}
     type: string
-required:
-  - start
-  - length
+    readOnly: true
+  annotationSource:
+    $ref: AnnotationSource.yaml
+  textDateAnnotations:
+    description: Date annotations in a text
+    type: array
+    items:
+      $ref: TextDateAnnotation.yaml
+  textPersonNameAnnotations:
+    description: Person name annotations in a text
+    type: array
+    items:
+      $ref: TextPersonNameAnnotation.yaml
+  textPhysicalAddressAnnotations:
+    description: Physical address annotations in a text
+    type: array
+    items:
+      $ref: TextPhysicalAddressAnnotation.yaml
