@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.2",
   "info": {
-    "version": "0.1.6",
+    "version": "0.2.0",
     "title": "NLP Sandbox Data Node API",
     "contact": {
       "name": "The NLP Sandbox Team",
@@ -19,12 +19,32 @@
   },
   "tags": [
     {
-      "name": "Note",
-      "description": "Operations about clinical notes"
+      "name": "Annotation",
+      "description": "Operations about annotations"
     },
     {
-      "name": "Health",
-      "description": "Operations about API health"
+      "name": "AnnotationStore",
+      "description": "Operations about annotation stores"
+    },
+    {
+      "name": "Dataset",
+      "description": "Operations about datasets"
+    },
+    {
+      "name": "FhirStore",
+      "description": "Operations about FHIR stores"
+    },
+    {
+      "name": "Note",
+      "description": "Operations about notes"
+    },
+    {
+      "name": "Patient",
+      "description": "Operations about patients"
+    },
+    {
+      "name": "Service",
+      "description": "Operations about this API service"
     }
   ],
   "servers": [
@@ -36,14 +56,64 @@
     }
   ],
   "paths": {
-    "/annotations/dates": {
+    "/datasets": {
+      "post": {
+        "tags": [
+          "Dataset"
+        ],
+        "summary": "Create a dataset",
+        "description": "Create a dataset with the name specified",
+        "operationId": "createDataset",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "datasetId",
+            "description": "The ID of the dataset that is being created.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 60,
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+              "example": "awesome-dataset"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Dataset"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Dataset"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "403": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        }
+      },
       "get": {
         "tags": [
-          "Date"
+          "Dataset"
         ],
-        "summary": "Get all date annotations",
-        "description": "Returns the date annotations",
-        "operationId": "dates.read_all",
+        "summary": "Get all datasets",
+        "description": "Returns the datasets",
+        "operationId": "listDatasets",
         "parameters": [
           {
             "in": "query",
@@ -53,7 +123,8 @@
             "schema": {
               "type": "integer",
               "default": 10,
-              "minimum": 10
+              "minimum": 10,
+              "maximum": 100
             }
           },
           {
@@ -73,20 +144,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "items": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/DateAnnotation"
-                      }
-                    }
-                  },
-                  "allOf": [
-                    {
-                      "$ref": "#/components/schemas/PageResponse"
-                    }
-                  ]
+                  "$ref": "#/components/schemas/PageOfDatasets"
                 }
               }
             },
@@ -101,21 +159,58 @@
         }
       }
     },
-    "/health": {
+    "/datasets/{datasetId}": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "datasetId",
+          "description": "The ID of the dataset",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
       "get": {
         "tags": [
-          "Health"
+          "Dataset"
         ],
-        "summary": "Get Health",
-        "description": "Get the health of the API",
-        "operationId": "health",
+        "summary": "Get a dataset by ID",
+        "description": "Returns the dataset for a given ID",
+        "operationId": "getDataset",
         "responses": {
           "200": {
             "description": "Success",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Health"
+                  "$ref": "#/components/schemas/Dataset"
+                }
+              }
+            }
+          },
+          "403": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Dataset"
+        ],
+        "summary": "Delete a dataset by ID",
+        "description": "Deletes the dataset for a given ID",
+        "operationId": "deleteDataset",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Dataset"
                 }
               }
             }
@@ -129,14 +224,75 @@
         }
       }
     },
-    "/notes": {
+    "/datasets/{datasetId}/annotationStore": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "datasetId",
+          "description": "The ID of the dataset",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "post": {
+        "tags": [
+          "AnnotationStore"
+        ],
+        "summary": "Create an annotation store",
+        "description": "Create an annotation store with the ID specified",
+        "operationId": "createAnnotationStore",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "annotationStoreId",
+            "description": "The ID of the annotation store that is being created.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 60,
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+              "example": "awesome-annotation-store"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AnnotationStore"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnnotationStore"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "403": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        }
+      },
       "get": {
         "tags": [
-          "Note"
+          "AnnotationStore"
         ],
-        "summary": "Get all clinical notes",
-        "description": "Returns the clinical notes",
-        "operationId": "notes.read_all",
+        "summary": "List the annotation stores in a dataset",
+        "description": "Returns the annotation stores",
+        "operationId": "listAnnotationStores",
         "parameters": [
           {
             "in": "query",
@@ -146,7 +302,8 @@
             "schema": {
               "type": "integer",
               "default": 10,
-              "minimum": 10
+              "minimum": 10,
+              "maximum": 100
             }
           },
           {
@@ -166,20 +323,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "items": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/Note"
-                      }
-                    }
-                  },
-                  "allOf": [
-                    {
-                      "$ref": "#/components/schemas/PageResponse"
-                    }
-                  ]
+                  "$ref": "#/components/schemas/PageOfAnnotationStores"
                 }
               }
             },
@@ -194,25 +338,810 @@
         }
       }
     },
-    "/notes/{id}": {
+    "/datasets/{datasetId}/annotationStore/{annotationStoreId}": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "datasetId",
+          "description": "The ID of the dataset",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "in": "path",
+          "name": "annotationStoreId",
+          "description": "The ID of the annotation store",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "tags": [
+          "AnnotationStore"
+        ],
+        "summary": "Get an annotation store",
+        "description": "Returns the annotation store specified",
+        "operationId": "getAnnotationStore",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnnotationStore"
+                }
+              }
+            }
+          },
+          "403": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AnnotationStore"
+        ],
+        "summary": "Delete an annotation store",
+        "description": "Deletes the annotation store specified",
+        "operationId": "deleteAnnotationStore",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnnotationStore"
+                }
+              }
+            }
+          },
+          "403": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        }
+      }
+    },
+    "/datasets/{datasetId}/annotationStore/{annotationStoreId}/annotations": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "datasetId",
+          "description": "The ID of the dataset",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "in": "path",
+          "name": "annotationStoreId",
+          "description": "The ID of the annotation store",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "post": {
+        "tags": [
+          "Annotation"
+        ],
+        "summary": "Create an annotation",
+        "description": "Create an annotation",
+        "operationId": "createAnnotation",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Annotation"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Annotation"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "403": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Annotation"
+        ],
+        "summary": "List the annotations in an annotation store",
+        "description": "Returns the annotations in an annotation store",
+        "operationId": "listAnnotations",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "description": "Maximum number of results returned",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 10,
+              "minimum": 10,
+              "maximum": 100
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "description": "Index of the first result that must be returned",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 0,
+              "minimum": 0
+            }
+          },
+          {
+            "in": "query",
+            "name": "annotationType",
+            "description": "Type of the annotations that must be returned",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "text_date",
+                "text_person_name",
+                "text_physical_address"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageOfAnnotations"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "403": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        }
+      }
+    },
+    "/datasets/{datasetId}/annotationStore/{annotationStoreId}/annotations/{annotationId}": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "datasetId",
+          "description": "The ID of the dataset",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "in": "path",
+          "name": "annotationStoreId",
+          "description": "The ID of the annotation store",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "in": "path",
+          "name": "annotationId",
+          "description": "The ID of the annotation",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "tags": [
+          "Annotation"
+        ],
+        "summary": "Get an annotation",
+        "description": "Returns the annotation specified",
+        "operationId": "getAnnotation",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Annotation"
+                }
+              }
+            }
+          },
+          "403": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Annotation"
+        ],
+        "summary": "Delete an annotation",
+        "description": "Deletes the annotation specified",
+        "operationId": "deleteAnnotation",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Annotation"
+                }
+              }
+            }
+          },
+          "403": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        }
+      }
+    },
+    "/datasets/{datasetId}/fhirStores": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "datasetId",
+          "description": "The ID of the dataset",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "post": {
+        "tags": [
+          "FhirStore"
+        ],
+        "summary": "Create a FHIR store",
+        "description": "Create a FHIR store with the ID specified",
+        "operationId": "createFhirStore",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "fhirStoreId",
+            "description": "The ID of the FHIR store that is being created.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 60,
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+              "example": "awesome-fhir-store"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FhirStore"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FhirStore"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "403": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "FhirStore"
+        ],
+        "summary": "List the FHIR stores in a dataset",
+        "description": "Returns the FHIR stores",
+        "operationId": "listFhirStores",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FhirStores"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "403": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        }
+      }
+    },
+    "/datasets/{datasetId}/fhirStores/{fhirStoreId}": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "datasetId",
+          "description": "The ID of the dataset",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "in": "path",
+          "name": "fhirStoreId",
+          "description": "The ID of the FHIR store",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "tags": [
+          "FhirStore"
+        ],
+        "summary": "Get a FHIR store",
+        "description": "Returns the FHIR store specified",
+        "operationId": "getFhirStore",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FhirStore"
+                }
+              }
+            }
+          },
+          "403": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "FhirStore"
+        ],
+        "summary": "Delete a FHIR store",
+        "description": "Deletes the FHIR store specified",
+        "operationId": "deleteFhirStore",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FhirStore"
+                }
+              }
+            }
+          },
+          "403": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        }
+      }
+    },
+    "/datasets/{datasetId}/fhirStores/{fhirStoreId}/fhir/Patient": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "datasetId",
+          "description": "The ID of the dataset",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "in": "path",
+          "name": "fhirStoreId",
+          "description": "The ID of the FHIR store",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "post": {
+        "tags": [
+          "Patient"
+        ],
+        "summary": "Create a FHIR Patient",
+        "description": "Create a FHIR Patient",
+        "operationId": "createPatient",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Patient"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Patient"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "403": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Patient"
+        ],
+        "summary": "List the Patients in a FHIR store",
+        "description": "Returns the Patients in a FHIR store",
+        "operationId": "listPatients",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "description": "Maximum number of results returned",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 10,
+              "minimum": 10,
+              "maximum": 100
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "description": "Index of the first result that must be returned",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 0,
+              "minimum": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageOfPatients"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "403": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        }
+      }
+    },
+    "/datasets/{datasetId}/fhirStores/{fhirStoreId}/fhir/Patient/{patientId}": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "datasetId",
+          "description": "The ID of the dataset",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "in": "path",
+          "name": "fhirStoreId",
+          "description": "The ID of the FHIR store",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "in": "path",
+          "name": "patientId",
+          "description": "The ID of the FHIR Patient",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "tags": [
+          "Patient"
+        ],
+        "summary": "Get a FHIR Patient",
+        "description": "Returns the FHIR Patient specified",
+        "operationId": "getPatient",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Patient"
+                }
+              }
+            }
+          },
+          "403": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Patient"
+        ],
+        "summary": "Delete a FHIR Patient",
+        "description": "Deletes the FHIR Patient specified",
+        "operationId": "deletePatient",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Patient"
+                }
+              }
+            }
+          },
+          "403": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        }
+      }
+    },
+    "/datasets/{datasetId}/fhirStores/{fhirStoreId}/fhir/Note": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "datasetId",
+          "description": "The ID of the dataset",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "in": "path",
+          "name": "fhirStoreId",
+          "description": "The ID of the FHIR store",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "post": {
+        "tags": [
+          "Note"
+        ],
+        "summary": "Create a note",
+        "description": "Create a note",
+        "operationId": "createNote",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Note"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Note"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "403": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        }
+      },
       "get": {
         "tags": [
           "Note"
         ],
-        "summary": "Get a clinical note by ID",
-        "description": "Returns the clinical note for a given ID",
-        "operationId": "notes.read",
+        "summary": "List notes",
+        "description": "Returns the notes in a FHIR store",
+        "operationId": "listNotes",
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
-            "description": "The ID of the clinical note to fetch",
-            "required": true,
+            "in": "query",
+            "name": "limit",
+            "description": "Maximum number of results returned",
+            "required": false,
             "schema": {
-              "type": "string"
+              "type": "integer",
+              "default": 10,
+              "minimum": 10,
+              "maximum": 100
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "description": "Index of the first result that must be returned",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 0,
+              "minimum": 0
             }
           }
         ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageOfNotes"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "403": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        }
+      }
+    },
+    "/datasets/{datasetId}/fhirStores/{fhirStoreId}/fhir/Note/{noteId}": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "datasetId",
+          "description": "The ID of the dataset",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "in": "path",
+          "name": "fhirStoreId",
+          "description": "The ID of the FHIR store",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "in": "path",
+          "name": "noteId",
+          "description": "The ID of the note",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "get": {
+        "tags": [
+          "Note"
+        ],
+        "summary": "Get a note",
+        "description": "Returns the note specified",
+        "operationId": "getNote",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Note"
+                }
+              }
+            }
+          },
+          "403": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Note"
+        ],
+        "summary": "Delete a note",
+        "description": "Deletes the note specified",
+        "operationId": "deleteNote",
         "responses": {
           "200": {
             "description": "Success",
@@ -232,131 +1161,98 @@
           }
         }
       }
+    },
+    "/service": {
+      "get": {
+        "tags": [
+          "Service"
+        ],
+        "summary": "Get service information",
+        "description": "Get information about the service",
+        "operationId": "service",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Service"
+                }
+              }
+            }
+          },
+          "403": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
-      "PageResponse": {
+      "ResponsePageMetadata": {
         "type": "object",
         "description": "A page of results",
         "properties": {
+          "offset": {
+            "description": "Index of the first result that must be returned",
+            "type": "integer"
+          },
+          "limit": {
+            "description": "Maximum number of results returned",
+            "type": "integer"
+          },
           "links": {
             "description": "Links to navigate to different pages of results",
             "type": "object",
             "properties": {
               "next": {
-                "description": "Link to the enxt page of results",
+                "description": "Link to the next page of results",
                 "type": "string",
                 "format": "uri"
               }
             }
           }
-        }
-      },
-      "Email": {
-        "description": "User email address",
-        "type": "string",
-        "format": "test",
-        "example": "john.smith@example.com"
-      },
-      "User": {
-        "type": "object",
-        "properties": {
-          "username": {
-            "type": "string",
-            "minLength": 4,
-            "example": "John78"
-          },
-          "firstName": {
-            "type": "string",
-            "example": "John"
-          },
-          "lastName": {
-            "type": "string",
-            "example": "Smith"
-          },
-          "email": {
-            "$ref": "#/components/schemas/Email"
-          }
         },
         "required": [
-          "username",
-          "firstName",
-          "lastName",
-          "email"
+          "offset",
+          "limit",
+          "links"
         ]
       },
-      "Entity": {
+      "Dataset": {
         "type": "object",
+        "description": "A dataset",
         "properties": {
-          "id": {
-            "description": "ID",
-            "type": "integer",
-            "example": 0
-          },
-          "createdBy": {
-            "description": "The User who created this entity",
-            "$ref": "#/components/schemas/User"
-          },
-          "createdAt": {
-            "description": "When the entity has been created",
+          "name": {
+            "description": "Resource name of the dataset, of the form datasets/{datasetId}",
             "type": "string",
-            "format": "date-time"
-          },
-          "updatedBy": {
-            "description": "The User who update this entity",
-            "$ref": "#/components/schemas/User"
-          },
-          "updatedAt": {
-            "description": "When the entity has been updated",
-            "type": "string",
-            "format": "date-time"
+            "readOnly": true
           }
+        },
+        "example": {
+          "name": "datasets/awesome-dataset"
         }
       },
-      "Annotation": {
+      "PageOfDatasets": {
         "type": "object",
-        "description": "An annotation in a text",
+        "description": "A page of datasets",
         "allOf": [
           {
-            "$ref": "#/components/schemas/Entity"
+            "$ref": "#/components/schemas/ResponsePageMetadata"
           },
           {
             "type": "object",
             "properties": {
-              "noteId": {
-                "description": "The note ID",
-                "type": "integer"
-              },
-              "start": {
-                "description": "The position of the first character",
-                "type": "integer"
-              },
-              "length": {
-                "description": "The length of the annotation",
-                "type": "integer"
-              },
-              "text": {
-                "description": "The string annotated",
-                "type": "string"
-              }
-            }
-          }
-        ]
-      },
-      "DateAnnotation": {
-        "type": "object",
-        "description": "A date annotation in a text",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Annotation"
-          },
-          {
-            "type": "object",
-            "properties": {
-              "format": {
-                "description": "Date format (ISO 8601)",
-                "type": "string"
+              "datasets": {
+                "description": "An array of datasets",
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Dataset"
+                }
               }
             }
           }
@@ -364,6 +1260,7 @@
       },
       "Error": {
         "type": "object",
+        "description": "Problem details (tools.ietf.org/html/rfc7807)",
         "properties": {
           "title": {
             "type": "string",
@@ -387,45 +1284,364 @@
           "status"
         ]
       },
-      "Health": {
+      "AnnotationStore": {
         "type": "object",
+        "description": "An annotation store",
         "properties": {
-          "status": {
-            "description": "Health status",
+          "name": {
+            "description": "Resource name of the annotation store, of the form datasets/{datasetId}/annotationStore/{annotationStoreId}",
             "type": "string",
-            "enum": [
-              "pass",
-              "warn"
-            ]
+            "readOnly": true
           }
         }
       },
-      "Note": {
+      "PageOfAnnotationStores": {
         "type": "object",
-        "description": "A clinical note",
+        "description": "A page of annotation stores",
         "allOf": [
           {
-            "$ref": "#/components/schemas/Entity"
+            "$ref": "#/components/schemas/ResponsePageMetadata"
           },
           {
             "type": "object",
             "properties": {
-              "text": {
-                "description": "The content of the note",
-                "type": "string",
-                "example": "On 09-03-1999, Ms Chloe Price met with Dr Joe."
-              },
-              "type": {
-                "description": "The note type",
-                "type": "string",
-                "enum": [
-                  "pathology",
-                  "phone_call"
-                ]
+              "annotationStores": {
+                "description": "An array of annotation stores",
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/AnnotationStore"
+                }
               }
             }
           }
         ]
+      },
+      "AnnotationSource": {
+        "type": "object",
+        "description": "The source of an annotation record",
+        "properties": {
+          "name": {
+            "description": "The source of the annotation record",
+            "type": "string"
+          }
+        }
+      },
+      "TextAnnotation": {
+        "type": "object",
+        "description": "An annotation in a text",
+        "properties": {
+          "start": {
+            "description": "The position of the first character",
+            "type": "integer"
+          },
+          "length": {
+            "description": "The length of the annotation",
+            "type": "integer"
+          },
+          "text": {
+            "description": "The string annotated",
+            "type": "string"
+          }
+        }
+      },
+      "TextDateAnnotation": {
+        "type": "object",
+        "description": "A date annotation in a text",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TextAnnotation"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "dateFormat": {
+                "description": "Date format (ISO 8601)",
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "example": {
+          "start": 42,
+          "length": 10,
+          "text": "10/26/2020",
+          "dateFormat": "MM/DD/YYYY"
+        }
+      },
+      "TextPersonNameAnnotation": {
+        "type": "object",
+        "description": "A person name annotation in a text",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TextAnnotation"
+          }
+        ],
+        "example": {
+          "start": 42,
+          "length": 11,
+          "text": "Chloe Price"
+        }
+      },
+      "TextPhysicalAddressAnnotation": {
+        "type": "object",
+        "description": "A person name annotation in a text",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TextAnnotation"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "addressType": {
+                "description": "Type of address information",
+                "type": "string",
+                "enum": [
+                  "city",
+                  "country",
+                  "department",
+                  "hospital",
+                  "organization",
+                  "other",
+                  "room",
+                  "state",
+                  "street",
+                  "zip"
+                ]
+              }
+            }
+          }
+        ],
+        "example": {
+          "start": 42,
+          "length": 11,
+          "text": "Seattle",
+          "addressType": "city"
+        }
+      },
+      "Annotation": {
+        "type": "object",
+        "description": "An annotation record",
+        "properties": {
+          "name": {
+            "description": "Resource name of the annotation record, of the form datasets/{datasetId}/annotationStores/{annotationStoreId}/annotations/{annotationId}",
+            "type": "string",
+            "readOnly": true
+          },
+          "annotationSource": {
+            "$ref": "#/components/schemas/AnnotationSource"
+          },
+          "textDateAnnotations": {
+            "description": "Date annotations in a text",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextDateAnnotation"
+            }
+          },
+          "textPersonNameAnnotations": {
+            "description": "Person name annotations in a text",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextPersonNameAnnotation"
+            }
+          },
+          "textPhysicalAddressAnnotations": {
+            "description": "Physical address annotations in a text",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextPhysicalAddressAnnotation"
+            }
+          }
+        }
+      },
+      "PageOfAnnotations": {
+        "type": "object",
+        "description": "A page of annotations",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ResponsePageMetadata"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "annotations": {
+                "description": "An array of annotations",
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Annotation"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "FhirStore": {
+        "type": "object",
+        "description": "A FHIR store",
+        "properties": {
+          "name": {
+            "description": "Resource name of the FHIR store, of the form datasets/{datasetId}/fhirStores/{fhirStoreId}",
+            "type": "string",
+            "readOnly": true
+          }
+        }
+      },
+      "FhirStores": {
+        "type": "object",
+        "description": "A list of FHIR stores",
+        "properties": {
+          "fhirStores": {
+            "description": "A list of FHIR stores",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FhirStore"
+            }
+          }
+        }
+      },
+      "Patient": {
+        "type": "object",
+        "description": "A FHIR Patient",
+        "properties": {
+          "id": {
+            "description": "The patient ID",
+            "type": "string",
+            "readOnly": true
+          },
+          "identifier": {
+            "description": "An identifier for this patient",
+            "type": "string"
+          },
+          "gender": {
+            "description": "Gender of the patient",
+            "type": "string",
+            "enum": [
+              "male",
+              "female",
+              "other",
+              "unknown"
+            ]
+          }
+        }
+      },
+      "PageOfPatients": {
+        "type": "object",
+        "description": "A page of FHIR Patients",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ResponsePageMetadata"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "patients": {
+                "description": "An array of FHIR Patients",
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Patient"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "Note": {
+        "type": "object",
+        "description": "A clinical note",
+        "properties": {
+          "id": {
+            "description": "The ID of the note",
+            "type": "string",
+            "readOnly": true
+          },
+          "text": {
+            "description": "A text",
+            "type": "string",
+            "example": "This is a text."
+          },
+          "noteType": {
+            "description": "The note type (LOINC concept)",
+            "type": "string",
+            "example": "loinc:LP29684-5"
+          },
+          "patientId": {
+            "description": "The patient ID",
+            "type": "string"
+          }
+        }
+      },
+      "PageOfNotes": {
+        "type": "object",
+        "description": "A page of notes",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ResponsePageMetadata"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "notes": {
+                "description": "An array of notes",
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Note"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "Service": {
+        "type": "object",
+        "description": "Information about an NLP service",
+        "properties": {
+          "name": {
+            "description": "The service name",
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 60,
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+            "example": "awesome-date-annotator"
+          },
+          "version": {
+            "description": "The version of the service (SemVer string)",
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$",
+            "example": "1.0.0"
+          },
+          "license": {
+            "description": "The license of this service (spdx.org/licenses Identifier)",
+            "type": "string",
+            "example": "Apache-2.0"
+          },
+          "repository": {
+            "description": "The place where the code lives",
+            "type": "string",
+            "example": "github:awesome-org/awesome-date-annotator"
+          },
+          "description": {
+            "description": "A short, one-sentence summary of the service",
+            "type": "string",
+            "maxLength": 100,
+            "example": "An awesome Date Annotator based on regex patterns"
+          },
+          "author": {
+            "description": "The author of the service",
+            "type": "string",
+            "example": "Example Author"
+          },
+          "authorEmail": {
+            "description": "The email address of the author",
+            "type": "string",
+            "format": "email",
+            "example": "author@example.com"
+          },
+          "url": {
+            "description": "The URL to the homepage of the service",
+            "type": "string",
+            "format": "uri"
+          }
+        }
       }
     },
     "responses": {
