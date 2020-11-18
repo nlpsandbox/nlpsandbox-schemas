@@ -31,8 +31,8 @@ jobs:
     - name: Lint openapi specifications
       # run: npm run lint:all
       run: |
-        npm run lint --entrypoint=openapi/data-node/openapi.yaml
-        npm run lint --entrypoint=openapi/date-annotator/openapi.yaml
+        npm run lint:ibm --entrypoint=openapi/data-node/openapi.yaml
+        npm run lint:ibm --entrypoint=openapi/date-annotator/openapi.yaml
 
   build-and-publish:
     needs: [lint]
