@@ -33,6 +33,7 @@ jobs:
       run: |
         npm run lint:ibm --entrypoint=openapi/data-node/openapi.yaml
         npm run lint:ibm --entrypoint=openapi/date-annotator/openapi.yaml
+        npm run lint:ibm --entrypoint=openapi/phi-deidentifier/openapi.yaml
 
   build-and-publish:
     needs: [lint]
