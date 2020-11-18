@@ -4,7 +4,7 @@ allOf:
   - $ref: ../../../commons/components/schemas/ResponsePageMetadata.yaml
   - type: object
     properties:
-      items:
+      annotations:
         description: An array of annotations
         type: array
         items:
