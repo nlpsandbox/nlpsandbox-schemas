@@ -20,17 +20,13 @@ info:
 tags:
   - name: Deidentified Notes
     description: Operations about deidentified notes
-  - name: Health
-    description: Operations about API health
   - name: Service
-    description: Operations about NLP services
+    description: Operations about this API service
 servers:
   - url: 'http://example.com/api/v1'
   - url: 'https://example.com/api/v1'
 paths:
   /deidentified-notes:
     $ref: 'paths/deidentified-notes.yaml'
-  /health:
-    $ref: '../commons/paths/health.yaml'
   /service:
     $ref: '../commons/paths/service.yaml'
