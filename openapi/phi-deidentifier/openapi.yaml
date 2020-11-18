@@ -30,7 +30,5 @@ servers:
 paths:
   /deidentified-notes:
     $ref: 'paths/deidentified-note.yaml'
-  /health:
-    $ref: '../commons/paths/health.yaml'
   /service:
     $ref: '../commons/paths/service.yaml'
