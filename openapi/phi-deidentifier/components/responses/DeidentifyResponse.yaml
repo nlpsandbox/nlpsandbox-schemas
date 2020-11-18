@@ -1,0 +1,10 @@
+type: object
+description: response to deidentification request, including annotations with indexes in both the original note and the
+  deidentified note.
+properties:
+  originalAnnotations:
+    $ref: ../../../commons/components/schemas/Annotation.yaml
+  deidentifiedAnnotations:
+    $ref: ../../../commons/components/schemas/Annotation.yaml
+  deidentifiedNote:
+    $ref: ../../../commons/components/schemas/Note.yaml

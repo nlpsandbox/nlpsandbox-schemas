@@ -1,0 +1,31 @@
+type: object
+properties:
+  deidentificationStrategy:
+    type: object
+    description: the method/strategy used to de-identify the note's text
+    properties:
+      maskingCharConfig:
+        type: object
+        properties:
+          maskingChar:
+            type: string
+            maxLength: 1
+            default: "*"
+      redactConfig:
+        type: object
+      annotationTypeConfig:
+        type: object
+      dateOffsetConfig:
+        type: object
+        properties:
+          offsetDays:
+            type: integer
+  annotationTypes:
+    type: array
+    description: the types of annotations to which the de-identifer should apply the selected strategy
+    items:
+      type: string
+      enum:
+        - "STREET_ADDRESS"
+        - "DATE"
+        - "PERSON_NAME"
