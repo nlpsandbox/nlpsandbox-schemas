@@ -1,0 +1,11 @@
+type: object
+description: A page of datasets
+allOf:
+  - $ref: ../../../commons/components/schemas/ResponsePageMetadata.yaml
+  - type: object
+    properties:
+      datasets:
+        description: An array of datasets
+        type: array
+        items:
+          $ref: ../schemas/Dataset.yaml

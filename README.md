@@ -63,6 +63,10 @@ TBA
 - List paths in alphanumerical order
 - Add schemas and paths used in more than one API to `commons`
 
+## TODO
+
+> "description": "Creates a new Annotation record. It is valid to create Annotation objects for the same source more than once since a unique ID is assigned to each record by this service.",
+
 <!-- Definitions -->
 
 [data_node_yaml]: https://Sage-Bionetworks.github.io//nlp-sandbox-schemas/data-node/develop/openapi.yaml

@@ -1,0 +1,53 @@
+parameters:
+  - in: path
+    name: datasetId
+    description: The ID of the dataset
+    required: true
+    schema:
+      type: string
+  - in: path
+    name: fhirStoreId
+    description: The ID of the FHIR store
+    required: true
+    schema:
+      type: string
+  - in: path
+    name: noteId
+    description: The ID of the note
+    required: true
+    schema:
+      type: string
+get:
+  tags:
+    - Note
+  summary: Get a note
+  description: Returns the note specified
+  operationId: "getNote"
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: ../../commons/components/schemas/Note.yaml
+    '403':
+      $ref: ../../commons/components/responses/Unauthorized.yaml
+    '404':
+      $ref: ../../commons/components/responses/NotFound.yaml
+delete:
+  tags:
+    - Note
+  summary: Delete a note
+  description: Deletes the note specified
+  operationId: "deleteNote"
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: ../../commons/components/schemas/Note.yaml
+    '403':
+      $ref: ../../commons/components/responses/Unauthorized.yaml
+    '404':
+      $ref: ../../commons/components/responses/NotFound.yaml

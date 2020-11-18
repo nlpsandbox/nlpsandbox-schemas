@@ -1,18 +1,18 @@
 type: object
 description: A clinical note
-allOf:
-  - $ref: Entity.yaml
-  - type: object
-    properties:
-      text:
-        description: The content of the note
-        type: string
-        example: On 09-03-1999, Ms Chloe Price met with Dr Joe.
-      type:
-        description: The note type
-        type: string
-        enum:
-          - pathology
-          - phone_call
-# required:
-#   - text
+properties:
+  id:
+    description: The ID of the note
+    type: string
+    readOnly: true
+  text:
+    description: A text
+    type: string
+    example: "This is a text."
+  noteType:
+    description: The note type (LOINC concept)
+    type: string
+    example: "loinc:LP29684-5"
+  patientId:
+    description: The patient ID
+    type: string

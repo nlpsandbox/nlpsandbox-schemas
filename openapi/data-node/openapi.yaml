@@ -25,23 +25,47 @@ info:
     For the sake of benchmarking NLP Tool, a Data Node can also give access to
     the gold standard that the NLP Tool is expected to infer (e.g. annotations).
 tags:
+  - name: Annotation
+    description: Operations about annotations
+  - name: AnnotationStore
+    description: Operations about annotation stores
+  - name: Dataset
+    description: Operations about datasets
+  - name: FhirStore
+    description: Operations about FHIR stores
   - name: Note
-    description: Operations about clinical notes
-  - name: Health
-    description: Operations about API health
+    description: Operations about notes
+  - name: Patient
+    description: Operations about patients
   - name: Service
-    description: Operations about NLP services
+    description: Operations about this API service
 servers:
   - url: 'http://example.com/api/v1'
   - url: 'https://example.com/api/v1'
 paths:
-  /annotations/dates:
-    $ref: 'paths/annotations/dates.yaml'
-  /health:
-    $ref: '../commons/paths/health.yaml'
-  /notes:
+  /datasets:
+    $ref: 'paths/datasets.yaml'
+  /datasets/{datasetId}:
+    $ref: 'paths/datasets@{datasetId}.yaml'
+  /datasets/{datasetId}/annotationStore:
+    $ref: 'paths/annotationStores.yaml'
+  /datasets/{datasetId}/annotationStore/{annotationStoreId}:
+    $ref: 'paths/annotationStores@{annotationStoreId}.yaml'
+  /datasets/{datasetId}/annotationStore/{annotationStoreId}/annotations:
+    $ref: 'paths/annotations.yaml'
+  /datasets/{datasetId}/annotationStore/{annotationStoreId}/annotations/{annotationId}:
+    $ref: 'paths/annotations@{annotationId}.yaml'
+  /datasets/{datasetId}/fhirStores:
+    $ref: 'paths/fhirStores.yaml'
+  /datasets/{datasetId}/fhirStores/{fhirStoreId}:
+    $ref: 'paths/fhirStores@{fhirStoreId}.yaml'
+  /datasets/{datasetId}/fhirStores/{fhirStoreId}/fhir/Patient:
+    $ref: 'paths/patients.yaml'
+  /datasets/{datasetId}/fhirStores/{fhirStoreId}/fhir/Patient/{patientId}:
+    $ref: 'paths/patients@{patientId}.yaml'
+  /datasets/{datasetId}/fhirStores/{fhirStoreId}/fhir/Note:
     $ref: 'paths/notes.yaml'
-  /notes/{id}:
-    $ref: 'paths/notes@{id}.yaml'
+  /datasets/{datasetId}/fhirStores/{fhirStoreId}/fhir/Note/{noteId}:
+    $ref: 'paths/notes@{noteId}.yaml'
   /service:
     $ref: '../commons/paths/service.yaml'

@@ -13,21 +13,21 @@ parameters:
       type: string
 post:
   tags:
-    - Note
-  summary: Create a note
-  description: Create a note
-  operationId: "createNote"
+    - Patient
+  summary: Create a FHIR Patient
+  description: Create a FHIR Patient
+  operationId: "createPatient"
   requestBody:
     content:
       application/json:
         schema:
-          $ref: ../../commons/components/schemas/Note.yaml
+          $ref: ../../commons/components/schemas/Patient.yaml
   responses:
     '201':
       content:
         application/json:
           schema:
-            $ref: ../../commons/components/schemas/Note.yaml
+            $ref: ../../commons/components/schemas/Patient.yaml
       description: Success
     '403':
       $ref: ../../commons/components/responses/Unauthorized.yaml
@@ -35,10 +35,10 @@ post:
       $ref: ../../commons/components/responses/NotFound.yaml
 get:
   tags:
-    - Note
-  summary: List notes
-  description: Returns the notes in a FHIR store
-  operationId: "listNotes"
+    - Patient
+  summary: List the Patients in a FHIR store
+  description: Returns the Patients in a FHIR store
+  operationId: "listPatients"
   parameters:
     - in: query
       name: limit
@@ -62,9 +62,10 @@ get:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/PageOfNotes.yaml
+            $ref: ../components/schemas/PageOfPatients.yaml
       description: Success
     '403':
       $ref: ../../commons/components/responses/Unauthorized.yaml
     '404':
       $ref: ../../commons/components/responses/NotFound.yaml
+

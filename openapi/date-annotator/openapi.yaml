@@ -19,19 +19,15 @@ info:
     This NLP tool detects date references in the clinical note specified and
     returns a list of date annotations.
 tags:
-  - name: Date
-    description: Operations about dates
-  - name: Health
-    description: Operations about API health
+  - name: TextDateAnnotation
+    description: Operations about text date annotations
   - name: Service
-    description: Operations about NLP services
+    description: Operations about this API service
 servers:
   - url: 'http://example.com/api/v1'
   - url: 'https://example.com/api/v1'
 paths:
-  /dates:
-    $ref: 'paths/dates.yaml'
-  /health:
-    $ref: '../commons/paths/health.yaml'
+  /annotations/textDateAnnotations:
+    $ref: 'paths/textDateAnnotations.yaml'
   /service:
     $ref: '../commons/paths/service.yaml'

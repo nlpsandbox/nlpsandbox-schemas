@@ -1,33 +1,31 @@
-parameters:
-  - in: path
-    name: datasetId
-    description: The ID of the dataset
-    required: true
-    schema:
-      type: string
-  - in: path
-    name: fhirStoreId
-    description: The ID of the FHIR store
-    required: true
-    schema:
-      type: string
 post:
   tags:
-    - Note
-  summary: Create a note
-  description: Create a note
-  operationId: "createNote"
+    - Dataset
+  summary: Create a dataset
+  description: Create a dataset with the name specified
+  operationId: "createDataset"
+  parameters:
+    - in: query
+      name: datasetId
+      description: The ID of the dataset that is being created.
+      required: true
+      schema:
+        type: string
+        minLength: 3
+        maxLength: 60
+        pattern: "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        example: awesome-dataset
   requestBody:
     content:
       application/json:
         schema:
-          $ref: ../../commons/components/schemas/Note.yaml
+          $ref: ../components/schemas/Dataset.yaml
   responses:
     '201':
       content:
         application/json:
           schema:
-            $ref: ../../commons/components/schemas/Note.yaml
+            $ref: ../components/schemas/Dataset.yaml
       description: Success
     '403':
       $ref: ../../commons/components/responses/Unauthorized.yaml
@@ -35,10 +33,10 @@ post:
       $ref: ../../commons/components/responses/NotFound.yaml
 get:
   tags:
-    - Note
-  summary: List notes
-  description: Returns the notes in a FHIR store
-  operationId: "listNotes"
+    - Dataset
+  summary: Get all datasets
+  description: Returns the datasets
+  operationId: "listDatasets"
   parameters:
     - in: query
       name: limit
@@ -62,9 +60,10 @@ get:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/PageOfNotes.yaml
+            $ref: ../components/schemas/PageOfDatasets.yaml
       description: Success
     '403':
       $ref: ../../commons/components/responses/Unauthorized.yaml
     '404':
       $ref: ../../commons/components/responses/NotFound.yaml
+

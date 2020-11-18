@@ -1,0 +1,7 @@
+type: object
+description: A FHIR store
+properties:
+  name:
+    description: Resource name of the FHIR store, of the form datasets/{datasetId}/fhirStores/{fhirStoreId}
+    type: string
+    readOnly: true

@@ -1,0 +1,9 @@
+type: object
+description: A dataset
+properties:
+  name:
+    description: Resource name of the dataset, of the form datasets/{datasetId}
+    type: string
+    readOnly: true
+example:
+  name: datasets/awesome-dataset
