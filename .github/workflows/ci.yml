@@ -22,8 +22,6 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     strategy:
-      # Need to process one api at a time to prevent race condition
-      max-parallel: 1
       matrix:
         api:
         - "data-node"
