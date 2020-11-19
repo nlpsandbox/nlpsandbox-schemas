@@ -1,0 +1,8 @@
+type: object
+description: A list of text person name annotations
+properties:
+  textDateAnnotations:
+    description: A list of text person name annotations
+    type: array
+    items:
+      $ref: ../../../commons/components/schemas/TextPersonNameAnnotation.yaml
