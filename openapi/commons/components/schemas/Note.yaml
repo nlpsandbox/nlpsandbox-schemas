@@ -17,3 +17,6 @@ properties:
     description: The patient ID
     type: string
     example: "507f1f77bcf86cd799439011"
+required:
+  - text
+  - noteType

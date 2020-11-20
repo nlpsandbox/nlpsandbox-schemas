@@ -12,3 +12,6 @@ properties:
   text:
     description: The string annotated
     type: string
+required:
+  - start
+  - length
