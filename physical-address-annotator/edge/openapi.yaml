@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 0.1.6
+  version: 0.2.0
   title: NLP Sandbox Physical Address Annotator API
   contact:
     name: The NLP Sandbox Team
@@ -20,59 +20,35 @@ info:
     This NLP tool detects references of physical addresses in the clinical notes
     given as input and returns a list of physical address annotations.
 tags:
-  - name: Physical Address
-    description: Operations about physical addresses
-  - name: Health
-    description: Operations about API health
+  - name: TextPhysicalAddressAnnotation
+    description: Operations about text physical address annotations
   - name: Service
-    description: Operations about NLP services
+    description: Operations about this API service
 servers:
   - url: 'http://example.com/api/v1'
   - url: 'https://example.com/api/v1'
 paths:
-  /physical-addresses:
+  /textPhysicalAddressAnnotations:
     post:
       tags:
-        - Physical Address
-      summary: Get all physical address annotations
-      description: Returns the physical address annotations
-      operationId: physical_addresses.read_all
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/PhysicalAddressAnnotation'
-        '403':
-          description: Forbidden
+        - TextPhysicalAddressAnnotation
+      summary: Annotate physical addresses in a clinical note
+      description: Return the physical addresse annotations found in a clinical note
+      operationId: createTextPhysicalAddressAnnotations
       requestBody:
         content:
           application/json:
             schema:
-              type: array
-              items:
-                $ref: '#/components/schemas/Note'
-  /health:
-    get:
-      tags:
-        - Health
-      summary: Get Health
-      description: Get the health of the API
-      operationId: health
+              $ref: '#/components/schemas/Note'
       responses:
-        '200':
+        '201':
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Health'
+                $ref: '#/components/schemas/TextPhysicalAddressAnnotations'
         '403':
           $ref: '#/components/responses/Unauthorized'
-        '404':
-          $ref: '#/components/responses/NotFound'
   /service:
     get:
       tags:
@@ -93,120 +69,76 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    Email:
-      description: User email address
-      type: string
-      format: test
-      example: john.smith@example.com
-    User:
-      type: object
-      properties:
-        username:
-          type: string
-          minLength: 4
-          example: John78
-        firstName:
-          type: string
-          example: John
-        lastName:
-          type: string
-          example: Smith
-        email:
-          $ref: '#/components/schemas/Email'
-      required:
-        - username
-        - firstName
-        - lastName
-        - email
-    Entity:
-      type: object
-      properties:
-        id:
-          description: ID
-          type: integer
-          example: 0
-        createdBy:
-          description: The User who created this entity
-          $ref: '#/components/schemas/User'
-        createdAt:
-          description: When the entity has been created
-          type: string
-          format: date-time
-        updatedBy:
-          description: The User who update this entity
-          $ref: '#/components/schemas/User'
-        updatedAt:
-          description: When the entity has been updated
-          type: string
-          format: date-time
     Note:
       type: object
       description: A clinical note
-      allOf:
-        - $ref: '#/components/schemas/Entity'
-        - type: object
-          properties:
-            text:
-              description: The content of the note
-              type: string
-              example: 'On 09-03-1999, Ms Chloe Price met with Dr Joe.'
-            type:
-              description: The note type
-              type: string
-              enum:
-                - pathology
-                - phone_call
-    Annotation:
+      properties:
+        id:
+          description: The ID of the note
+          type: string
+          readOnly: true
+        text:
+          description: A text
+          type: string
+          example: This is a text.
+        noteType:
+          description: The note type (LOINC concept)
+          type: string
+          example: 'loinc:LP29684-5'
+        patientId:
+          description: The patient ID
+          type: string
+    TextAnnotation:
       type: object
       description: An annotation in a text
-      allOf:
-        - $ref: '#/components/schemas/Entity'
-        - type: object
-          properties:
-            noteId:
-              description: The note ID
-              type: integer
-            start:
-              description: The position of the first character
-              type: integer
-            length:
-              description: The length of the annotation
-              type: integer
-            text:
-              description: The string annotated
-              type: string
-    PhysicalAddressAnnotation:
+      properties:
+        start:
+          description: The position of the first character
+          type: integer
+        length:
+          description: The length of the annotation
+          type: integer
+        text:
+          description: The string annotated
+          type: string
+    TextPhysicalAddressAnnotation:
       type: object
-      description: A physical address annotation in a text
+      description: A person name annotation in a text
       allOf:
-        - $ref: '#/components/schemas/Annotation'
+        - $ref: '#/components/schemas/TextAnnotation'
         - type: object
           properties:
-            type:
+            addressType:
               description: Type of address information
               type: string
               enum:
-                - City
-                - Country
-                - Department
-                - Hospital
-                - Organization
-                - Other
-                - Room
-                - State
-                - Street
-                - Zip
-    Health:
+                - city
+                - country
+                - department
+                - hospital
+                - organization
+                - other
+                - room
+                - state
+                - street
+                - zip
+      example:
+        start: 42
+        length: 11
+        text: Seattle
+        addressType: city
+    TextPhysicalAddressAnnotations:
       type: object
+      description: A list of text physical address annotations
       properties:
-        status:
-          description: Health status
-          type: string
-          enum:
-            - pass
-            - warn
+        textDateAnnotations:
+          description: A list of text physical address annotations
+          type: array
+          items:
+            $ref: '#/components/schemas/TextPhysicalAddressAnnotation'
     Error:
       type: object
+      description: Problem details (tools.ietf.org/html/rfc7807)
       properties:
         title:
           type: string
