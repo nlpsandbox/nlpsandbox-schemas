@@ -16,3 +16,4 @@ properties:
   patientId:
     description: The patient ID
     type: string
+    example: "507f1f77bcf86cd799439011"
