@@ -26,6 +26,6 @@ properties:
     items:
       type: string
       enum:
-        - "physical_address"
-        - "date"
-        - "person_name"
+        - "text_physical_address"
+        - "text_date"
+        - "text_person_name"
