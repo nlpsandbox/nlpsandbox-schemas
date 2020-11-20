@@ -21,17 +21,13 @@ info:
 tags:
   - name: Physical Address
     description: Operations about physical addresses
-  - name: Health
-    description: Operations about API health
   - name: Service
-    description: Operations about NLP services
+    description: Operations about this API service
 servers:
   - url: 'http://example.com/api/v1'
   - url: 'https://example.com/api/v1'
 paths:
   /physical-addresses:
     $ref: 'paths/physical-addresses.yaml'
-  /health:
-    $ref: '../commons/paths/health.yaml'
   /service:
     $ref: '../commons/paths/service.yaml'
