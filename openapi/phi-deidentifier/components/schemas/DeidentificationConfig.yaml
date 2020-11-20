@@ -2,10 +2,13 @@ type: object
 properties:
   deidentificationStrategy:
     type: object
-    description: the method/strategy used to de-identify the note's text
+    description: The strategy used to de-identify the note's text. Only one field may be set.
     properties:
       maskingCharConfig:
         type: object
+        description:
+          Configuration for the masking char strategy. E.g. "John Smith lives at 123 Main St" -> "********* lives at
+          ***********".
         properties:
           maskingChar:
             type: string
@@ -13,10 +16,18 @@ properties:
             default: "*"
       redactConfig:
         type: object
+        description:
+          Configuration for the redaction strategy. E.g. "John Smith lives at 123 Main St" -> "lives at".
       annotationTypeConfig:
         type: object
+        description:
+          Configuration for the "annotation type" strategy. E.g. "John Smith lives at 123 Main St" -> "[PERSON_NAME]
+          lives at [PHYSICAL_ADDRESS]".
       dateOffsetConfig:
         type: object
+        description:
+          Configuration for the "date offset" strategy. E.g. "John Smith visited on 1 January 2020" ->
+          "John Smith visited on 29 October 2025". Note: can only be set with the "text_date" annotation type.
         properties:
           offsetDays:
             type: integer
