@@ -6,9 +6,9 @@ properties:
     type: string
     readOnly: true
   text:
-    description: A text
+    description: The content of the clinical note
     type: string
-    example: "This is a text."
+    example: "This is the content of a clinical note."
   noteType:
     description: The note type (LOINC concept)
     type: string
