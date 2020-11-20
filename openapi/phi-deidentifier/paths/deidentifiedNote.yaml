@@ -10,7 +10,7 @@ post:
         schema:
           $ref: ../components/schemas/DeidentifyRequest.yaml
   responses:
-      '200':
+      '201':
         description: Success
         content:
           application/json:
