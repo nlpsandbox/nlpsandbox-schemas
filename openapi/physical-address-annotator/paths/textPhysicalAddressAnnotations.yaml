@@ -1,9 +1,9 @@
 post:
   tags:
-    - TextDateAnnotation
-  summary: Annotate dates in a clinical note
-  description: Return the date annotations found in a clinical note
-  operationId: "createTextDateAnnotations"
+    - TextPhysicalAddressAnnotation
+  summary: Annotate physical addresses in a clinical note
+  description: Return the physical addresse annotations found in a clinical note
+  operationId: "createTextPhysicalAddressAnnotations"
   requestBody:
     content:
       application/json:
@@ -15,6 +15,6 @@ post:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/TextDateAnnotations.yaml
+            $ref: ../components/schemas/TextPhysicalAddressAnnotations.yaml
     '403':
       $ref: ../../commons/components/responses/Unauthorized.yaml

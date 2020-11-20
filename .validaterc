@@ -3,7 +3,7 @@
     "operations": {
       "no_operation_id": "error",
       "operation_id_case_convention": [
-        "warning",
+        "error",
         "lower_camel_case"
       ],
       "no_summary": "warning",
