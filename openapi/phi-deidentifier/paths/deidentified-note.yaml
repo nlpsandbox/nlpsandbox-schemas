@@ -3,7 +3,7 @@ post:
     - Deidentified Notes
   summary: Get deidentified note
   description: Returns the deidentified note
-  operationId: "deidentified_note.read"
+  operationId: "deidentifiedNote.read"
   requestBody:
     content:
       application/json:
