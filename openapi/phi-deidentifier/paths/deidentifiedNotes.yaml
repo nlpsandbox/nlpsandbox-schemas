@@ -1,0 +1,20 @@
+post:
+  tags:
+    - DeidentifiedNotes
+  summary: Deidentify a clinical note
+  description: Returns the deidentified note
+  operationId: "createDeidentifiedNotes"
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/DeidentifyRequest.yaml
+  responses:
+      '201':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: ../components/responses/DeidentifyResponse.yaml
+      '403':
+        $ref: ../../commons/components/responses/Unauthorized.yaml
