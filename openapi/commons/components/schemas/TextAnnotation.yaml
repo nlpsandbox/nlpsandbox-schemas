@@ -4,9 +4,14 @@ properties:
   start:
     description: The position of the first character
     type: integer
+    example: 42
   length:
     description: The length of the annotation
     type: integer
+    example: 10
   text:
     description: The string annotated
     type: string
+required:
+  - start
+  - length
