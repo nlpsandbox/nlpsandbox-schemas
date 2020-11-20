@@ -1,6 +1,5 @@
 type: object
-description: response to deidentification request, including annotations with indexes in both the original note and the
-  deidentified note.
+description: Response to deidentification request
 properties:
   originalAnnotations:
     $ref: ../../../commons/components/schemas/Annotation.yaml
