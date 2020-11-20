@@ -166,9 +166,9 @@
             "readOnly": true
           },
           "text": {
-            "description": "A text",
+            "description": "The content of the clinical note",
             "type": "string",
-            "example": "This is a text."
+            "example": "This is the content of a clinical note."
           },
           "noteType": {
             "description": "The note type (LOINC concept)",
@@ -177,9 +177,14 @@
           },
           "patientId": {
             "description": "The patient ID",
-            "type": "string"
+            "type": "string",
+            "example": "507f1f77bcf86cd799439011"
           }
-        }
+        },
+        "required": [
+          "text",
+          "noteType"
+        ]
       },
       "DeidentifyRequest": {
         "type": "object",
@@ -216,17 +221,23 @@
         "properties": {
           "start": {
             "description": "The position of the first character",
-            "type": "integer"
+            "type": "integer",
+            "example": 42
           },
           "length": {
             "description": "The length of the annotation",
-            "type": "integer"
+            "type": "integer",
+            "example": 10
           },
           "text": {
             "description": "The string annotated",
             "type": "string"
           }
-        }
+        },
+        "required": [
+          "start",
+          "length"
+        ]
       },
       "TextDateAnnotation": {
         "type": "object",
@@ -240,7 +251,8 @@
             "properties": {
               "dateFormat": {
                 "description": "Date format (ISO 8601)",
-                "type": "string"
+                "type": "string",
+                "example": "MM/DD/YYYY"
               }
             }
           }
