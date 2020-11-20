@@ -27,13 +27,13 @@ servers:
   - url: 'http://example.com/api/v1'
   - url: 'https://example.com/api/v1'
 paths:
-  /annotations/textDateAnnotations:
+  /textDateAnnotations:
     post:
       tags:
         - TextDateAnnotation
-      summary: Get all date annotations in a clinical note
-      description: Returns the date annotations detected in the clinical note specified
-      operationId: dateAnnotations.detect_all
+      summary: Annotate dates in a clinical note
+      description: Return the date annotations found in a clinical note
+      operationId: createTextDateAnnotations
       requestBody:
         content:
           application/json:
@@ -45,7 +45,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TextDateAnnotation'
+                $ref: '#/components/schemas/TextDateAnnotations'
         '403':
           $ref: '#/components/responses/Unauthorized'
   /service:
@@ -115,6 +115,15 @@ components:
         length: 10
         text: 10/26/2020
         dateFormat: MM/DD/YYYY
+    TextDateAnnotations:
+      type: object
+      description: A list of text date annotations
+      properties:
+        textDateAnnotations:
+          description: A list of text date annotations
+          type: array
+          items:
+            $ref: '#/components/schemas/TextDateAnnotation'
     Error:
       type: object
       description: Problem details (tools.ietf.org/html/rfc7807)
