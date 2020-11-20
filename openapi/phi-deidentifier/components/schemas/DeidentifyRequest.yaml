@@ -1,7 +1,7 @@
 type: object
 description: A request to de-identify a note
 properties:
-  deidentifications:
+  deidentificationConfigurations:
     type: array
     description: A list of deidentification strategies and the entity types on which to perform them. De-identification
       priority (i.e. which annotation to use when two annotations overlap) is determined by the order of this array and
