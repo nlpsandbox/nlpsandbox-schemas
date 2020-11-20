@@ -1,9 +1,9 @@
 post:
   tags:
-    - Deidentified Notes
-  summary: Get deidentified note
+    - DeidentifiedNotes
+  summary: Deidentify a clinical note
   description: Returns the deidentified note
-  operationId: "deidentifiedNote.read"
+  operationId: "createDeidentifiedNotes"
   requestBody:
     content:
       application/json:
