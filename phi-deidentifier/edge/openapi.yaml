@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 0.1.6
+  version: 0.2.0
   title: NLP Sandbox Deidentifier API
   contact:
     name: The NLP Sandbox Team
@@ -16,59 +16,35 @@ info:
     # Overview
     TBA
 tags:
-  - name: Deidentified Notes
+  - name: DeidentifiedNotes
     description: Operations about deidentified notes
-  - name: Health
-    description: Operations about API health
   - name: Service
-    description: Operations about NLP services
+    description: Operations about this API service
 servers:
   - url: 'http://example.com/api/v1'
   - url: 'https://example.com/api/v1'
 paths:
-  /deidentified-notes:
+  /deidentifiedNotes:
     post:
       tags:
-        - Deidentified Notes
-      summary: Get deidentified notes
-      description: Returns the deidentified notes
-      operationId: deidentified_notes.read_all
+        - DeidentifiedNotes
+      summary: Deidentify a clinical note
+      description: Returns the deidentified note
+      operationId: createDeidentifiedNotes
       requestBody:
         content:
           application/json:
             schema:
-              type: array
-              items:
-                $ref: '#/components/schemas/Note'
+              $ref: '#/components/schemas/DeidentifyRequest'
       responses:
-        '200':
+        '201':
           description: Success
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Note'
+                $ref: '#/components/schemas/DeidentifyResponse'
         '403':
           $ref: '#/components/responses/Unauthorized'
-  /health:
-    get:
-      tags:
-        - Health
-      summary: Get Health
-      description: Get the health of the API
-      operationId: health
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Health'
-        '403':
-          $ref: '#/components/responses/Unauthorized'
-        '404':
-          $ref: '#/components/responses/NotFound'
   /service:
     get:
       tags:
@@ -89,71 +65,210 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    Email:
-      description: User email address
-      type: string
-      format: test
-      example: john.smith@example.com
-    User:
+    DeidentificationConfig:
       type: object
+      description: >-
+        Configuration of one deidentification strategy and a list of annotation
+        types to apply it to.
       properties:
-        username:
-          type: string
-          minLength: 4
-          example: John78
-        firstName:
-          type: string
-          example: John
-        lastName:
-          type: string
-          example: Smith
-        email:
-          $ref: '#/components/schemas/Email'
-      required:
-        - username
-        - firstName
-        - lastName
-        - email
-    Entity:
-      type: object
-      properties:
-        id:
-          description: ID
-          type: integer
-          example: 0
-        createdBy:
-          description: The User who created this entity
-          $ref: '#/components/schemas/User'
-        createdAt:
-          description: When the entity has been created
-          type: string
-          format: date-time
-        updatedBy:
-          description: The User who update this entity
-          $ref: '#/components/schemas/User'
-        updatedAt:
-          description: When the entity has been updated
-          type: string
-          format: date-time
+        deidentificationStrategy:
+          type: object
+          description: >-
+            The strategy used to de-identify the note's text. Only one field may
+            be set.
+          properties:
+            maskingCharConfig:
+              type: object
+              description: >-
+                Configuration for the masking char strategy. E.g. "John Smith
+                lives at 123 Main St" -> "********* lives at ***********".
+              properties:
+                maskingChar:
+                  type: string
+                  description: Character used to mask annotated PII text.
+                  minLength: 1
+                  maxLength: 1
+                  default: '*'
+            redactConfig:
+              type: object
+              description: >-
+                Configuration for the redaction strategy. E.g. "John Smith lives
+                at 123 Main St" -> "lives at".
+            annotationTypeConfig:
+              type: object
+              description: >-
+                Configuration for the "annotation type" strategy. E.g. "John
+                Smith lives at 123 Main St" -> "[PERSON_NAME] lives at
+                [PHYSICAL_ADDRESS]".
+            dateOffsetConfig:
+              type: object
+              description: >-
+                Configuration for the "date offset" strategy. E.g. "John Smith
+                visited on 1 January 2020" -> "John Smith visited on 29 October
+                2025". Note, can only be set with the "text_date" annotation
+                type.
+              properties:
+                offsetDays:
+                  type: integer
+                  description: Number of days by which to offset annotated dates.
+        annotationTypes:
+          type: array
+          description: >-
+            the types of annotations to which the de-identifer should apply the
+            selected strategy
+          items:
+            type: string
+            enum:
+              - text_physical_address
+              - text_date
+              - text_person_name
     Note:
       type: object
       description: A clinical note
+      properties:
+        id:
+          description: The ID of the note
+          type: string
+          readOnly: true
+        text:
+          description: A text
+          type: string
+          example: This is a text.
+        noteType:
+          description: The note type (LOINC concept)
+          type: string
+          example: 'loinc:LP29684-5'
+        patientId:
+          description: The patient ID
+          type: string
+    DeidentifyRequest:
+      type: object
+      description: A request to de-identify a note
+      properties:
+        deidentificationConfigurations:
+          type: array
+          description: >-
+            A list of deidentification strategies and the entity types on which
+            to perform them. De-identification priority (i.e. which annotation
+            to use when two annotations overlap) is determined by the order of
+            this array and the order of the annotationTypes array inside of each
+            deidentificationConfig.
+          items:
+            $ref: '#/components/schemas/DeidentificationConfig'
+        note:
+          $ref: '#/components/schemas/Note'
+      required:
+        - note
+    AnnotationSource:
+      type: object
+      description: The source of an annotation record
+      properties:
+        name:
+          description: The source of the annotation record
+          type: string
+    TextAnnotation:
+      type: object
+      description: An annotation in a text
+      properties:
+        start:
+          description: The position of the first character
+          type: integer
+        length:
+          description: The length of the annotation
+          type: integer
+        text:
+          description: The string annotated
+          type: string
+    TextDateAnnotation:
+      type: object
+      description: A date annotation in a text
       allOf:
-        - $ref: '#/components/schemas/Entity'
+        - $ref: '#/components/schemas/TextAnnotation'
         - type: object
           properties:
-            text:
-              description: The content of the note
+            dateFormat:
+              description: Date format (ISO 8601)
               type: string
-              example: 'On 09-03-1999, Ms Chloe Price met with Dr Joe.'
-            type:
-              description: The note type
+      example:
+        start: 42
+        length: 10
+        text: 10/26/2020
+        dateFormat: MM/DD/YYYY
+    TextPersonNameAnnotation:
+      type: object
+      description: A person name annotation in a text
+      allOf:
+        - $ref: '#/components/schemas/TextAnnotation'
+      example:
+        start: 42
+        length: 11
+        text: Chloe Price
+    TextPhysicalAddressAnnotation:
+      type: object
+      description: A person name annotation in a text
+      allOf:
+        - $ref: '#/components/schemas/TextAnnotation'
+        - type: object
+          properties:
+            addressType:
+              description: Type of address information
               type: string
               enum:
-                - pathology
-                - phone_call
+                - city
+                - country
+                - department
+                - hospital
+                - organization
+                - other
+                - room
+                - state
+                - street
+                - zip
+      example:
+        start: 42
+        length: 11
+        text: Seattle
+        addressType: city
+    Annotation:
+      type: object
+      description: An annotation record
+      properties:
+        name:
+          description: >-
+            Resource name of the annotation record, of the form
+            datasets/{datasetId}/annotationStores/{annotationStoreId}/annotations/{annotationId}
+          type: string
+          readOnly: true
+        annotationSource:
+          $ref: '#/components/schemas/AnnotationSource'
+        textDateAnnotations:
+          description: Date annotations in a text
+          type: array
+          items:
+            $ref: '#/components/schemas/TextDateAnnotation'
+        textPersonNameAnnotations:
+          description: Person name annotations in a text
+          type: array
+          items:
+            $ref: '#/components/schemas/TextPersonNameAnnotation'
+        textPhysicalAddressAnnotations:
+          description: Physical address annotations in a text
+          type: array
+          items:
+            $ref: '#/components/schemas/TextPhysicalAddressAnnotation'
+    DeidentifyResponse:
+      type: object
+      description: Response to deidentification request
+      properties:
+        originalAnnotations:
+          $ref: '#/components/schemas/Annotation'
+        deidentifiedAnnotations:
+          $ref: '#/components/schemas/Annotation'
+        deidentifiedNote:
+          $ref: '#/components/schemas/Note'
     Error:
       type: object
+      description: Problem details (tools.ietf.org/html/rfc7807)
       properties:
         title:
           type: string
@@ -172,15 +287,6 @@ components:
       required:
         - title
         - status
-    Health:
-      type: object
-      properties:
-        status:
-          description: Health status
-          type: string
-          enum:
-            - pass
-            - warn
     Service:
       type: object
       description: Information about an NLP service
