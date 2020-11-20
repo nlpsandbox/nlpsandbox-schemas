@@ -20,8 +20,6 @@ info:
 tags:
   - name: Deidentified Notes
     description: Operations about deidentified notes
-  - name: Health
-    description: Operations about API health
   - name: Service
     description: Operations about NLP services
 servers:
