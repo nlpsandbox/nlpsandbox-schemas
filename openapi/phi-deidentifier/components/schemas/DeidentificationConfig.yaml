@@ -1,4 +1,5 @@
 type: object
+description: Configuration of one deidentification strategy and a list of annotation types to apply it to.
 properties:
   deidentificationStrategy:
     type: object
@@ -12,6 +13,8 @@ properties:
         properties:
           maskingChar:
             type: string
+            description: Character used to mask annotated PII text.
+            minLength: 1
             maxLength: 1
             default: "*"
       redactConfig:
@@ -31,6 +34,7 @@ properties:
         properties:
           offsetDays:
             type: integer
+            description: Number of days by which to offset annotated dates.
   annotationTypes:
     type: array
     description: the types of annotations to which the de-identifer should apply the selected strategy
