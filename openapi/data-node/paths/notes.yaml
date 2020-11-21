@@ -23,7 +23,7 @@ post:
         schema:
           $ref: ../../commons/components/schemas/Note.yaml
   responses:
-    '201':
+    '200':
       content:
         application/json:
           schema:
