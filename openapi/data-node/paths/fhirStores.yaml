@@ -38,6 +38,8 @@ post:
       $ref: ../../commons/components/responses/Unauthorized.yaml
     '404':
       $ref: ../../commons/components/responses/NotFound.yaml
+    '409':
+      $ref: ../../commons/components/responses/Conflict.yaml
 get:
   tags:
     - FhirStore
