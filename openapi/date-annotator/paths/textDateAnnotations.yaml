@@ -10,7 +10,7 @@ post:
         schema:
           $ref: ../../commons/components/schemas/Note.yaml
   responses:
-    '201':
+    '200':
       description: Success
       content:
         application/json:
