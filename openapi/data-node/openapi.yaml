@@ -47,13 +47,13 @@ paths:
     $ref: 'paths/datasets.yaml'
   /datasets/{datasetId}:
     $ref: 'paths/datasets@{datasetId}.yaml'
-  /datasets/{datasetId}/annotationStore:
+  /datasets/{datasetId}/annotationStores:
     $ref: 'paths/annotationStores.yaml'
-  /datasets/{datasetId}/annotationStore/{annotationStoreId}:
+  /datasets/{datasetId}/annotationStores/{annotationStoreId}:
     $ref: 'paths/annotationStores@{annotationStoreId}.yaml'
-  /datasets/{datasetId}/annotationStore/{annotationStoreId}/annotations:
+  /datasets/{datasetId}/annotationStores/{annotationStoreId}/annotations:
     $ref: 'paths/annotations.yaml'
-  /datasets/{datasetId}/annotationStore/{annotationStoreId}/annotations/{annotationId}:
+  /datasets/{datasetId}/annotationStores/{annotationStoreId}/annotations/{annotationId}:
     $ref: 'paths/annotations@{annotationId}.yaml'
   /datasets/{datasetId}/fhirStores:
     $ref: 'paths/fhirStores.yaml'
