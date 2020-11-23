@@ -46,6 +46,24 @@ get:
   summary: List the FHIR stores in a dataset
   description: Returns the FHIR stores
   operationId: "listFhirStores"
+  parameters:
+    - in: query
+      name: limit
+      description: Maximum number of results returned
+      required: false
+      schema:
+        type: integer
+        default: 10
+        minimum: 10
+        maximum: 100
+    - in: query
+      name: offset
+      description: Index of the first result that must be returned
+      required: false
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
   responses:
     '200':
       content:
