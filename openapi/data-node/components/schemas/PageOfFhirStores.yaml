@@ -1,0 +1,11 @@
+type: object
+description: A page of FHIR stores
+allOf:
+  - $ref: ../../../commons/components/schemas/ResponsePageMetadata.yaml
+  - type: object
+    properties:
+      annotationStores:
+        description: An array of FHIR stores
+        type: array
+        items:
+          $ref: ../schemas/FhirStore.yaml
