@@ -156,7 +156,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
-  '/datasets/{datasetId}/annotationStore':
+  '/datasets/{datasetId}/annotationStores':
     parameters:
       - in: path
         name: datasetId
@@ -234,7 +234,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
-  '/datasets/{datasetId}/annotationStore/{annotationStoreId}':
+  '/datasets/{datasetId}/annotationStores/{annotationStoreId}':
     parameters:
       - in: path
         name: datasetId
@@ -282,7 +282,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
-  '/datasets/{datasetId}/annotationStore/{annotationStoreId}/annotations':
+  '/datasets/{datasetId}/annotationStores/{annotationStoreId}/annotations':
     parameters:
       - in: path
         name: datasetId
@@ -365,7 +365,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
-  '/datasets/{datasetId}/annotationStore/{annotationStoreId}/annotations/{annotationId}':
+  '/datasets/{datasetId}/annotationStores/{annotationStoreId}/annotations/{annotationId}':
     parameters:
       - in: path
         name: datasetId
