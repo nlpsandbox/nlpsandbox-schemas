@@ -1038,7 +1038,7 @@ components:
         - $ref: '#/components/schemas/ResponsePageMetadata'
         - type: object
           properties:
-            annotationStores:
+            fhirStores:
               description: An array of FHIR stores
               type: array
               items:
