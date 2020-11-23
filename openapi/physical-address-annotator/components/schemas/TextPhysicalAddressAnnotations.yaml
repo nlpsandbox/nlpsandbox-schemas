@@ -1,7 +1,7 @@
 type: object
 description: A list of text physical address annotations
 properties:
-  textDateAnnotations:
+  textPhysicalAddressAnnotations:
     description: A list of text physical address annotations
     type: array
     items:
