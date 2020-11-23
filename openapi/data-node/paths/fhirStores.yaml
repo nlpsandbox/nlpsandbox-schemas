@@ -51,7 +51,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/FhirStores.yaml
+            $ref: ../components/schemas/PageOfFhirStores.yaml
       description: Success
     '403':
       $ref: ../../commons/components/responses/Unauthorized.yaml

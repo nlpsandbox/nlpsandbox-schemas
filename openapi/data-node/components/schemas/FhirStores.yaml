@@ -1,8 +1,0 @@
-type: object
-description: A list of FHIR stores
-properties:
-  fhirStores:
-    description: A list of FHIR stores
-    type: array
-    items:
-      $ref: ../schemas/FhirStore.yaml
