@@ -4,7 +4,7 @@ allOf:
   - $ref: ../../../commons/components/schemas/ResponsePageMetadata.yaml
   - type: object
     properties:
-      annotationStores:
+      fhirStores:
         description: An array of FHIR stores
         type: array
         items:
