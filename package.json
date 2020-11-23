@@ -4,7 +4,7 @@
   "license": "Apache-2.0",
   "repository": "github:Sage-Bionetworks/nlp-sandbox-schemas",
   "devDependencies": {
-    "@redocly/openapi-cli": "^1.0.0-beta.21",
+    "@redocly/openapi-cli": "^1.0.0-beta.22",
     "gh-openapi-docs-ts": "^0.3.4",
     "ibm-openapi-validator": "^0.31.1"
   },
