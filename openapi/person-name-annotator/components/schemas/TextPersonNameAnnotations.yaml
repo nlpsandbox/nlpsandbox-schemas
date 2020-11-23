@@ -1,7 +1,7 @@
 type: object
 description: A list of text person name annotations
 properties:
-  textDateAnnotations:
+  textPersonNameAnnotations:
     description: A list of text person name annotations
     type: array
     items:
