@@ -473,7 +473,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FhirStores'
+                $ref: '#/components/schemas/PageOfFhirStores'
           description: Success
         '403':
           $ref: '#/components/responses/Unauthorized'
@@ -1013,15 +1013,18 @@ components:
             datasets/{datasetId}/fhirStores/{fhirStoreId}
           type: string
           readOnly: true
-    FhirStores:
+    PageOfFhirStores:
       type: object
-      description: A list of FHIR stores
-      properties:
-        fhirStores:
-          description: A list of FHIR stores
-          type: array
-          items:
-            $ref: '#/components/schemas/FhirStore'
+      description: A page of FHIR stores
+      allOf:
+        - $ref: '#/components/schemas/ResponsePageMetadata'
+        - type: object
+          properties:
+            annotationStores:
+              description: An array of FHIR stores
+              type: array
+              items:
+                $ref: '#/components/schemas/FhirStore'
     Patient:
       type: object
       description: A FHIR Patient
