@@ -106,6 +106,13 @@ components:
         text:
           description: The string annotated
           type: string
+        confidence:
+          description: The confidence in the accuracy of the annotation
+          type: number
+          format: float
+          minimum: 0
+          maximum: 100
+          example: 95
       required:
         - start
         - length
