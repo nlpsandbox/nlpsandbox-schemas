@@ -1,5 +1,5 @@
 type: object
-description: A NLP Sandbox Data Node API resource.
+description: A NLP Sandbox Data Node API resource
 properties:
   name:
-    description: Full path of a Data Node API resource.
+    description: Full path of a Data Node API resource
