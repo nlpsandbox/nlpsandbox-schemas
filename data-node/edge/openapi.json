@@ -1359,13 +1359,21 @@
           }
         ]
       },
+      "LocalSource": {
+        "type": "object",
+        "description": "A local API resource",
+        "properties": {
+          "name": {
+            "description": "Full path of a Data Node API resource"
+          }
+        }
+      },
       "AnnotationSource": {
         "type": "object",
         "description": "The source of an annotation record",
         "properties": {
-          "name": {
-            "description": "The source of the annotation record",
-            "type": "string"
+          "localSource": {
+            "$ref": "#/components/schemas/LocalSource"
           }
         }
       },
