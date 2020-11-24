@@ -468,12 +468,30 @@ paths:
       summary: List the FHIR stores in a dataset
       description: Returns the FHIR stores
       operationId: listFhirStores
+      parameters:
+        - in: query
+          name: limit
+          description: Maximum number of results returned
+          required: false
+          schema:
+            type: integer
+            default: 10
+            minimum: 10
+            maximum: 100
+        - in: query
+          name: offset
+          description: Index of the first result that must be returned
+          required: false
+          schema:
+            type: integer
+            default: 0
+            minimum: 0
       responses:
         '200':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FhirStores'
+                $ref: '#/components/schemas/PageOfFhirStores'
           description: Success
         '403':
           $ref: '#/components/responses/Unauthorized'
@@ -910,6 +928,13 @@ components:
         text:
           description: The string annotated
           type: string
+        confidence:
+          description: The confidence in the accuracy of the annotation
+          type: number
+          format: float
+          minimum: 0
+          maximum: 100
+          example: 95
       required:
         - start
         - length
@@ -1013,15 +1038,18 @@ components:
             datasets/{datasetId}/fhirStores/{fhirStoreId}
           type: string
           readOnly: true
-    FhirStores:
+    PageOfFhirStores:
       type: object
-      description: A list of FHIR stores
-      properties:
-        fhirStores:
-          description: A list of FHIR stores
-          type: array
-          items:
-            $ref: '#/components/schemas/FhirStore'
+      description: A page of FHIR stores
+      allOf:
+        - $ref: '#/components/schemas/ResponsePageMetadata'
+        - type: object
+          properties:
+            fhirStores:
+              description: An array of FHIR stores
+              type: array
+              items:
+                $ref: '#/components/schemas/FhirStore'
     Patient:
       type: object
       description: A FHIR Patient
