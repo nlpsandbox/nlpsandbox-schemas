@@ -1,6 +1,5 @@
 type: object
 description: The source of an annotation record
 properties:
-  name:
-    description: The source of the annotation record
-    type: string
+  localSource:
+    $ref: LocalSource.yaml

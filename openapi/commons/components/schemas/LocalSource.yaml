@@ -1,0 +1,5 @@
+type: object
+description: A local API resource
+properties:
+  name:
+    description: Full path of a Data Node API resource
