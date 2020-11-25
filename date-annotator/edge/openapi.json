@@ -48,7 +48,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/AnnotationRequest"
+                "$ref": "#/components/schemas/TextDateAnnotationRequest"
               }
             }
           }
@@ -131,7 +131,7 @@
           "noteType"
         ]
       },
-      "AnnotationRequest": {
+      "TextDateAnnotationRequest": {
         "type": "object",
         "description": "An annotation request",
         "properties": {
