@@ -906,13 +906,19 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/AnnotationStore'
+    ResourceSource:
+      type: object
+      description: An API resource source
+      properties:
+        name:
+          description: Full path of an API resource
+          type: string
     AnnotationSource:
       type: object
       description: The source of an annotation record
       properties:
-        name:
-          description: The source of the annotation record
-          type: string
+        resourceSource:
+          $ref: '#/components/schemas/ResourceSource'
     TextAnnotation:
       type: object
       description: An annotation in a text
