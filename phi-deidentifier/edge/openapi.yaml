@@ -163,18 +163,19 @@ components:
           $ref: '#/components/schemas/Note'
       required:
         - note
-    LocalSource:
+    ResourceSource:
       type: object
-      description: A local API resource
+      description: An API resource source
       properties:
         name:
-          description: Full path of a Data Node API resource
+          description: Full path of an API resource
+          type: string
     AnnotationSource:
       type: object
       description: The source of an annotation record
       properties:
-        localSource:
-          $ref: '#/components/schemas/LocalSource'
+        resourceSource:
+          $ref: '#/components/schemas/ResourceSource'
     TextAnnotation:
       type: object
       description: An annotation in a text
