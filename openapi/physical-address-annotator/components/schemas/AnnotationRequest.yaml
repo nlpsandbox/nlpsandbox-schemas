@@ -1,0 +1,5 @@
+type: object
+description: An annotation request
+properties:
+  note:
+    $ref: ../../../commons/components/schemas/Note.yaml
