@@ -39,7 +39,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AnnotationRequest'
+              $ref: '#/components/schemas/TextPhysicalAddressAnnotationRequest'
       responses:
         '200':
           description: Success
@@ -92,7 +92,7 @@ components:
       required:
         - text
         - noteType
-    AnnotationRequest:
+    TextPhysicalAddressAnnotationRequest:
       type: object
       description: An annotation request
       properties:
