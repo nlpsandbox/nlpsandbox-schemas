@@ -8,7 +8,7 @@ properties:
   text:
     description: The content of the clinical note
     type: string
-    example: "This is the content of a clinical note."
+    example: "On 12/26/2020, Ms. Chloe Price met with Dr. Nathan Prescott."
   noteType:
     description: The note type (LOINC concept)
     type: string
