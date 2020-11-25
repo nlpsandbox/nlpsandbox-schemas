@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.2",
   "info": {
-    "version": "0.2.0",
+    "version": "0.2.2",
     "title": "NLP Sandbox Date Annotator API",
     "contact": {
       "name": "The NLP Sandbox Team",
@@ -36,30 +36,30 @@
     }
   ],
   "paths": {
-    "/annotations/textDateAnnotations": {
+    "/textDateAnnotations": {
       "post": {
         "tags": [
           "TextDateAnnotation"
         ],
-        "summary": "Get all date annotations in a clinical note",
-        "description": "Returns the date annotations detected in the clinical note specified",
-        "operationId": "dateAnnotations.detect_all",
+        "summary": "Annotate dates in a clinical note",
+        "description": "Return the date annotations found in a clinical note",
+        "operationId": "createTextDateAnnotations",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Note"
+                "$ref": "#/components/schemas/TextDateAnnotationRequest"
               }
             }
           }
         },
         "responses": {
-          "201": {
+          "200": {
             "description": "Success",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TextDateAnnotation"
+                  "$ref": "#/components/schemas/TextDateAnnotations"
                 }
               }
             }
@@ -111,9 +111,9 @@
             "readOnly": true
           },
           "text": {
-            "description": "A text",
+            "description": "The content of the clinical note",
             "type": "string",
-            "example": "This is a text."
+            "example": "On 12/26/2020, Ms. Chloe Price met with Dr. Prescott."
           },
           "noteType": {
             "description": "The note type (LOINC concept)",
@@ -122,7 +122,21 @@
           },
           "patientId": {
             "description": "The patient ID",
-            "type": "string"
+            "type": "string",
+            "example": "507f1f77bcf86cd799439011"
+          }
+        },
+        "required": [
+          "text",
+          "noteType"
+        ]
+      },
+      "TextDateAnnotationRequest": {
+        "type": "object",
+        "description": "An annotation request",
+        "properties": {
+          "note": {
+            "$ref": "#/components/schemas/Note"
           }
         }
       },
@@ -132,17 +146,31 @@
         "properties": {
           "start": {
             "description": "The position of the first character",
-            "type": "integer"
+            "type": "integer",
+            "example": 42
           },
           "length": {
             "description": "The length of the annotation",
-            "type": "integer"
+            "type": "integer",
+            "example": 10
           },
           "text": {
             "description": "The string annotated",
             "type": "string"
+          },
+          "confidence": {
+            "description": "The confidence in the accuracy of the annotation",
+            "type": "number",
+            "format": "float",
+            "minimum": 0,
+            "maximum": 100,
+            "example": 95
           }
-        }
+        },
+        "required": [
+          "start",
+          "length"
+        ]
       },
       "TextDateAnnotation": {
         "type": "object",
@@ -156,7 +184,8 @@
             "properties": {
               "dateFormat": {
                 "description": "Date format (ISO 8601)",
-                "type": "string"
+                "type": "string",
+                "example": "MM/DD/YYYY"
               }
             }
           }
@@ -166,6 +195,19 @@
           "length": 10,
           "text": "10/26/2020",
           "dateFormat": "MM/DD/YYYY"
+        }
+      },
+      "TextDateAnnotations": {
+        "type": "object",
+        "description": "A list of text date annotations",
+        "properties": {
+          "textDateAnnotations": {
+            "description": "A list of text date annotations",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextDateAnnotation"
+            }
+          }
         }
       },
       "Error": {
