@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.2",
   "info": {
-    "version": "0.2.0",
+    "version": "0.2.2",
     "title": "NLP Sandbox Data Node API",
     "contact": {
       "name": "The NLP Sandbox Team",
