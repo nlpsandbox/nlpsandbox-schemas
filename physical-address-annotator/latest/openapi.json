@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.2",
   "info": {
-    "version": "0.1.6",
+    "version": "0.2.2",
     "title": "NLP Sandbox Physical Address Annotator API",
     "contact": {
       "name": "The NLP Sandbox Team",
@@ -19,12 +19,12 @@
   },
   "tags": [
     {
-      "name": "Physical Address",
-      "description": "Operations about physical addresses"
+      "name": "TextPhysicalAddressAnnotation",
+      "description": "Operations about text physical address annotations"
     },
     {
-      "name": "Health",
-      "description": "Operations about API health"
+      "name": "Service",
+      "description": "Operations about this API service"
     }
   ],
   "servers": [
@@ -36,61 +36,55 @@
     }
   ],
   "paths": {
-    "/physical-addresses": {
-      "get": {
+    "/textPhysicalAddressAnnotations": {
+      "post": {
         "tags": [
-          "Physical Address"
+          "TextPhysicalAddressAnnotation"
         ],
-        "summary": "Get all physical address annotations",
-        "description": "Returns the physical address annotations",
-        "operationId": "physical_addresses.read_all",
+        "summary": "Annotate physical addresses in a clinical note",
+        "description": "Return the physical addresse annotations found in a clinical note",
+        "operationId": "createTextPhysicalAddressAnnotations",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TextPhysicalAddressAnnotationRequest"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Success",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/PhysicalAddressAnnotation"
-                  }
+                  "$ref": "#/components/schemas/TextPhysicalAddressAnnotations"
                 }
               }
             }
           },
           "403": {
-            "description": "Forbidden"
-          }
-        },
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/Note"
-                }
-              }
-            }
+            "$ref": "#/components/responses/Unauthorized"
           }
         }
       }
     },
-    "/health": {
+    "/service": {
       "get": {
         "tags": [
-          "Health"
+          "Service"
         ],
-        "summary": "Get Health",
-        "description": "Get the health of the API",
-        "operationId": "health",
+        "summary": "Get service information",
+        "description": "Get information about the service",
+        "operationId": "service",
         "responses": {
           "200": {
             "description": "Success",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Health"
+                  "$ref": "#/components/schemas/Service"
                 }
               }
             }
@@ -107,148 +101,129 @@
   },
   "components": {
     "schemas": {
-      "Email": {
-        "description": "User email address",
-        "type": "string",
-        "format": "test",
-        "example": "john.smith@example.com"
-      },
-      "User": {
-        "type": "object",
-        "properties": {
-          "username": {
-            "type": "string",
-            "minLength": 4,
-            "example": "John78"
-          },
-          "firstName": {
-            "type": "string",
-            "example": "John"
-          },
-          "lastName": {
-            "type": "string",
-            "example": "Smith"
-          },
-          "email": {
-            "$ref": "#/components/schemas/Email"
-          }
-        },
-        "required": [
-          "username",
-          "firstName",
-          "lastName",
-          "email"
-        ]
-      },
-      "Entity": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "description": "ID",
-            "type": "integer",
-            "example": 0
-          },
-          "createdBy": {
-            "description": "The User who created this entity",
-            "$ref": "#/components/schemas/User"
-          },
-          "createdAt": {
-            "description": "When the entity has been created",
-            "type": "string",
-            "format": "date-time"
-          },
-          "updatedBy": {
-            "description": "The User who update this entity",
-            "$ref": "#/components/schemas/User"
-          },
-          "updatedAt": {
-            "description": "When the entity has been updated",
-            "type": "string",
-            "format": "date-time"
-          }
-        }
-      },
       "Note": {
         "type": "object",
         "description": "A clinical note",
+        "properties": {
+          "id": {
+            "description": "The ID of the note",
+            "type": "string",
+            "readOnly": true
+          },
+          "text": {
+            "description": "The content of the clinical note",
+            "type": "string",
+            "example": "On 12/26/2020, Ms. Chloe Price met with Dr. Prescott."
+          },
+          "noteType": {
+            "description": "The note type (LOINC concept)",
+            "type": "string",
+            "example": "loinc:LP29684-5"
+          },
+          "patientId": {
+            "description": "The patient ID",
+            "type": "string",
+            "example": "507f1f77bcf86cd799439011"
+          }
+        },
+        "required": [
+          "text",
+          "noteType"
+        ]
+      },
+      "TextPhysicalAddressAnnotationRequest": {
+        "type": "object",
+        "description": "An annotation request",
+        "properties": {
+          "note": {
+            "$ref": "#/components/schemas/Note"
+          }
+        }
+      },
+      "TextAnnotation": {
+        "type": "object",
+        "description": "An annotation in a text",
+        "properties": {
+          "start": {
+            "description": "The position of the first character",
+            "type": "integer",
+            "example": 42
+          },
+          "length": {
+            "description": "The length of the annotation",
+            "type": "integer",
+            "example": 10
+          },
+          "text": {
+            "description": "The string annotated",
+            "type": "string"
+          },
+          "confidence": {
+            "description": "The confidence in the accuracy of the annotation",
+            "type": "number",
+            "format": "float",
+            "minimum": 0,
+            "maximum": 100,
+            "example": 95
+          }
+        },
+        "required": [
+          "start",
+          "length"
+        ]
+      },
+      "TextPhysicalAddressAnnotation": {
+        "type": "object",
+        "description": "A person name annotation in a text",
         "allOf": [
           {
-            "$ref": "#/components/schemas/Entity"
+            "$ref": "#/components/schemas/TextAnnotation"
           },
           {
             "type": "object",
             "properties": {
-              "text": {
-                "description": "The content of the note",
-                "type": "string",
-                "example": "On 09-03-1999, Ms Chloe Price met with Dr Joe."
-              },
-              "type": {
-                "description": "The note type",
+              "addressType": {
+                "description": "Type of address information",
                 "type": "string",
                 "enum": [
-                  "pathology",
-                  "phone_call"
+                  "city",
+                  "country",
+                  "department",
+                  "hospital",
+                  "organization",
+                  "other",
+                  "room",
+                  "state",
+                  "street",
+                  "zip"
                 ]
               }
             }
           }
-        ]
+        ],
+        "example": {
+          "start": 42,
+          "length": 11,
+          "text": "Seattle",
+          "addressType": "city"
+        }
       },
-      "Annotation": {
+      "TextPhysicalAddressAnnotations": {
         "type": "object",
-        "description": "An annotation in a text",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Entity"
-          },
-          {
-            "type": "object",
-            "properties": {
-              "noteId": {
-                "description": "The note ID",
-                "type": "integer"
-              },
-              "start": {
-                "description": "The position of the first character",
-                "type": "integer"
-              },
-              "length": {
-                "description": "The length of the annotation",
-                "type": "integer"
-              },
-              "text": {
-                "description": "The string annotated",
-                "type": "string"
-              }
-            }
-          }
-        ]
-      },
-      "PhysicalAddressAnnotation": {
-        "type": "object",
-        "description": "A physical address annotation in a text",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Annotation"
-          }
-        ]
-      },
-      "Health": {
-        "type": "object",
+        "description": "A list of text physical address annotations",
         "properties": {
-          "status": {
-            "description": "Health status",
-            "type": "string",
-            "enum": [
-              "pass",
-              "warn"
-            ]
+          "textPhysicalAddressAnnotations": {
+            "description": "A list of text physical address annotations",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextPhysicalAddressAnnotation"
+            }
           }
         }
       },
       "Error": {
         "type": "object",
+        "description": "Problem details (tools.ietf.org/html/rfc7807)",
         "properties": {
           "title": {
             "type": "string",
@@ -271,6 +246,59 @@
           "title",
           "status"
         ]
+      },
+      "Service": {
+        "type": "object",
+        "description": "Information about an NLP service",
+        "properties": {
+          "name": {
+            "description": "The service name",
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 60,
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+            "example": "awesome-date-annotator"
+          },
+          "version": {
+            "description": "The version of the service (SemVer string)",
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$",
+            "example": "1.0.0"
+          },
+          "license": {
+            "description": "The license of this service (spdx.org/licenses Identifier)",
+            "type": "string",
+            "example": "Apache-2.0"
+          },
+          "repository": {
+            "description": "The place where the code lives",
+            "type": "string",
+            "example": "github:awesome-org/awesome-date-annotator"
+          },
+          "description": {
+            "description": "A short, one-sentence summary of the service",
+            "type": "string",
+            "maxLength": 100,
+            "example": "An awesome Date Annotator based on regex patterns"
+          },
+          "author": {
+            "description": "The author of the service",
+            "type": "string",
+            "example": "Example Author"
+          },
+          "authorEmail": {
+            "description": "The email address of the author",
+            "type": "string",
+            "format": "email",
+            "example": "author@example.com"
+          },
+          "url": {
+            "description": "The URL to the homepage of the service",
+            "type": "string",
+            "format": "uri"
+          }
+        }
       }
     },
     "responses": {
