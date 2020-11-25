@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 0.2.0
+  version: 0.2.1
   title: NLP Sandbox Person Name Annotator API
   contact:
     name: The NLP Sandbox Team
@@ -38,7 +38,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Note'
+              $ref: '#/components/schemas/AnnotationRequest'
       responses:
         '200':
           description: Success
@@ -79,7 +79,7 @@ components:
         text:
           description: The content of the clinical note
           type: string
-          example: This is the content of a clinical note.
+          example: 'On 12/26/2020, Ms. Chloe Price met with Dr. Prescott.'
         noteType:
           description: The note type (LOINC concept)
           type: string
@@ -91,6 +91,12 @@ components:
       required:
         - text
         - noteType
+    AnnotationRequest:
+      type: object
+      description: An annotation request
+      properties:
+        note:
+          $ref: '#/components/schemas/Note'
     TextAnnotation:
       type: object
       description: An annotation in a text
