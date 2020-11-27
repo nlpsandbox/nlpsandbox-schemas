@@ -14,7 +14,7 @@ on:
 env:
   node_version: 12.x
   # github.event.repository.clone_url not available for on: schedule
-  clone_url: https://github.com/Sage-Bionetworks/nlp-sandbox-schemas.git
+  clone_url: https://github.com/nlpsandbox/nlpsandbox-schemas.git
   # github.event.repository.default_branch not available for on: schedule
   default_branch: develop
 

@@ -1,8 +1,8 @@
 # NLP Sandbox OpenAPI Specifications
 
-[![GitHub Release](https://img.shields.io/github/release/Sage-Bionetworks/nlp-sandbox-schemas.svg?include_prereleases&color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github)](https://github.com/Sage-Bionetworks/nlp-sandbox-schemas/releases)
-[![GitHub CI](https://img.shields.io/github/workflow/status/Sage-Bionetworks/nlp-sandbox-schemas/ci.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github)](https://github.com/Sage-Bionetworks/nlp-sandbox-schemas)
-[![GitHub License](https://img.shields.io/github/license/Sage-Bionetworks/nlp-sandbox-schemas.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github)](https://github.com/Sage-Bionetworks/nlp-sandbox-schemas)
+[![GitHub Release](https://img.shields.io/github/release/nlpsandbox/nlpsandbox-schemas.svg?include_prereleases&color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github)](https://github.com/nlpsandbox/nlpsandbox-schemas/releases)
+[![GitHub CI](https://img.shields.io/github/workflow/status/nlpsandbox/nlpsandbox-schemas/ci.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github)](https://github.com/nlpsandbox/nlpsandbox-schemas)
+[![GitHub License](https://img.shields.io/github/license/nlpsandbox/nlpsandbox-schemas.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github)](https://github.com/nlpsandbox/nlpsandbox-schemas)
 
 ## OpenAPI specifications
 
@@ -22,10 +22,10 @@ You can find below example implementations of the APIs defined by the NLP Sandbo
 
 | GitHub repository | API |
 |---|---|
-| [Sage-Bionetworks/nlp-sandbox-data-node-i2b2-2014](https://github.com/Sage-Bionetworks/nlp-sandbox-data-node-i2b2-2014) | Data Node |
-| [Sage-Bionetworks/nlp-sandbox-date-annotator-example](https://github.com/Sage-Bionetworks/nlp-sandbox-date-annotator-example) | Date Annotator |
-| [Sage-Bionetworks/nlp-sandbox-person-name-annotator-example](https://github.com/Sage-Bionetworks/nlp-sandbox-person-name-annotator-example) | Person Name Annotator |
-| [Sage-Bionetworks/nlp-sandbox-physical-address-annotator-example](https://github.com/Sage-Bionetworks/nlp-sandbox-physical-address-annotator-example) | Physical Address Annotator |
+| [nlpsandbox/data-node](https://github.com/nlpsandbox/data-node) | Data Node |
+| [nlpsandbox/date-annotator-example](https://github.com/nlpsandbox/date-annotator-example) | Date Annotator |
+| [nlpsandbox/person-name-annotator-example](https://github.com/nlpsandbox/person-name-annotator-example) | Person Name Annotator |
+| [nlpsandbox/physical-address-annotator-example](https://github.com/nlpsandbox/physical-address-annotator-example) | Physical Address Annotator |
 
 ## Development
 
@@ -69,6 +69,6 @@ TBA
 
 <!-- Definitions -->
 
-[data_node_yaml]: https://Sage-Bionetworks.github.io//nlp-sandbox-schemas/data-node/develop/openapi.yaml
-[data_node_json]: https://Sage-Bionetworks.github.io//nlp-sandbox-schemas/data-node/develop/openapi.json
-[data_node_html]: https://Sage-Bionetworks.github.io//nlp-sandbox-schemas/data-node/develop/docs/index.html
+[data_node_yaml]: https://nlpsandbox.github.io//nlpsandbox-schemas/data-node/develop/openapi.yaml
+[data_node_json]: https://nlpsandbox.github.io//nlpsandbox-schemas/data-node/develop/openapi.json
+[data_node_html]: https://nlpsandbox.github.io//nlpsandbox-schemas/data-node/develop/docs/index.html
