@@ -5,12 +5,12 @@ info:
   contact:
     name: The NLP Sandbox Team
     email: thomas.schaffter@sagebionetworks.org
-    url: 'https://Sage-Bionetworks.github.io/nlp-sandbox-schemas'
+    url: 'https://nlpsandbox.github.io/nlpsandbox-schemas'
   license:
     name: Apache 2.0
-    url: 'https://github.com/Sage-Bionetworks/nlp-sandbox/blob/main/LICENSE'
+    url: 'https://nlpsandbox.github.io/nlpsandbox-schemas/blob/develop/LICENSE'
   x-logo:
-    url: 'https://Sage-Bionetworks.github.io/nlp-sandbox-schemas/logo.png'
+    url: 'https://nlpsandbox.github.io/nlpsandbox-schemas/logo.png'
   description: |
     The OpenAPI specification implemented by NLP Sandbox PHI Deidentifiers.
     # Overview
