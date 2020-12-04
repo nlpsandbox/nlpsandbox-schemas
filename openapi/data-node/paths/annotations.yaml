@@ -59,16 +59,6 @@ get:
         type: integer
         default: 0
         minimum: 0
-    - in: query
-      name: annotationType
-      description: Type of the annotations that must be returned
-      required: false
-      schema:
-        type: string
-        enum:
-          - text_date
-          - text_person_name
-          - text_physical_address
   responses:
     '200':
       content:
