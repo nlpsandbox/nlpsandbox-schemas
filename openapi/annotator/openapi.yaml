@@ -32,10 +32,10 @@ servers:
   - url: 'https://example.com/api/v1'
 paths:
   /textDateAnnotations:
-    $ref: '../data-node/paths/textDateAnnotations.yaml'
+    $ref: '../date-annotator/paths/textDateAnnotations.yaml'
   /textPersonNameAnnotations:
     $ref: '../person-name-annotator/paths/textPersonNameAnnotations.yaml'
-  /textDateAnnotations:
-    $ref: '../physical-address-annotator/paths/textDateAnnotations.yaml'
+  /textPhysicalAddressAnnotations:
+    $ref: '../physical-address-annotator/paths/textPhysicalAddressAnnotations.yaml'
   /service:
     $ref: '../commons/paths/service.yaml'
