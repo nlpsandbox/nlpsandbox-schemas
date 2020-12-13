@@ -1,6 +1,14 @@
 type: object
 description: Configuration of one deidentification strategy and a list of annotation types to apply it to.
 properties:
+  confidenceThreshold:
+    type: number
+    format: float
+    description: The minimum confidence level for a given annotation to be de-identified
+    minimum: 0
+    maximum: 100
+    example: 42.4
+    default: 0
   deidentificationStrategy:
     type: object
     description: The strategy used to de-identify the note's text. Only one field may be set.
