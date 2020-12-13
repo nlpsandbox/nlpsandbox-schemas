@@ -39,21 +39,19 @@ You can find below example implementations of the APIs defined by the NLP Sandbo
 
 Lint one OpenAPI specification, for example
 
-    npm run lint openapi/date-annotator/openapi.yaml
-    npm run lint openapi/person-name-annotator/openapi.yaml
-    npm run lint openapi/physical-address-annotator/openapi.yaml
-    npm run lint openapi/data-node/openapi.yaml
+    npm run lint:ibm --entrypoint=openapi/date-annotator/openapi.yaml
+    npm run lint:ibm --entrypoint=openapi/person-name-annotator/openapi.yaml
+    npm run lint:ibm --entrypoint=openapi/physical-address-annotator/openapi.yaml
+    npm run lint:ibm --entrypoint=openapi/data-node/openapi.yaml
+    npm run lint:ibm --entrypoint=openapi/phi-deidentifier/openapi.yaml
 
-Lint all the specifications
-
-    npm run lint:all
-
-Starts the preview server for a given specification, for example
+Build a bundled API file for one of the specifications:
 
     npm run build openapi/date-annotator/openapi.yaml
     npm run build openapi/person-name-annotator/openapi.yaml
     npm run build openapi/physical-address-annotator/openapi.yaml
     npm run build openapi/data-node/openapi.yaml
+    npm run build openapi/phi-deidentifier/openapi.yaml
 
 You can then preview the OpenAPI docs in your browser: http://localhost:8080
 
