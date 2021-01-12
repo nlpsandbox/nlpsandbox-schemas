@@ -4,13 +4,13 @@ parameters:
     description: The ID of the dataset
     required: true
     schema:
-      type: string
+      $ref: ../components/parameters/DatasetId.yaml
   - in: path
     name: fhirStoreId
     description: The ID of the FHIR store
     required: true
     schema:
-      type: string
+      $ref: ../components/parameters/FhirStoreId.yaml
 get:
   tags:
     - FhirStore
@@ -24,8 +24,6 @@ get:
         application/json:
           schema:
             $ref: ../components/schemas/FhirStore.yaml
-    '403':
-      $ref: ../../commons/components/responses/Unauthorized.yaml
     '404':
       $ref: ../../commons/components/responses/NotFound.yaml
 delete:
@@ -40,8 +38,6 @@ delete:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/FhirStore.yaml
-    '403':
-      $ref: ../../commons/components/responses/Unauthorized.yaml
+            $ref: ../../commons/components/schemas/EmptyResponse.yaml
     '404':
       $ref: ../../commons/components/responses/NotFound.yaml

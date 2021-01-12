@@ -24,14 +24,14 @@ post:
         schema:
           $ref: ../components/schemas/FhirStoreCreateRequest.yaml
   responses:
-    '200':
+    '201':
       content:
         application/json:
           schema:
             $ref: ../components/schemas/FhirStoreCreateResponse.yaml
       description: Success
-    '404':
-      $ref: ../../commons/components/responses/NotFound.yaml
+    '400':
+      $ref: ../../commons/components/responses/BadRequest.yaml
     '409':
       $ref: ../../commons/components/responses/Conflict.yaml
 get:
@@ -60,6 +60,6 @@ get:
           schema:
             $ref: ../components/schemas/PageOfFhirStores.yaml
       description: Success
-    '404':
-      $ref: ../../commons/components/responses/NotFound.yaml
+    '400':
+      $ref: ../../commons/components/responses/BadRequest.yaml
 
