@@ -4,38 +4,32 @@ parameters:
     description: The ID of the dataset
     required: true
     schema:
-      type: string
+      $ref: ../components/parameters/DatasetId.yaml
 post:
   tags:
     - FhirStore
   summary: Create a FHIR store
   description: Create a FHIR store with the ID specified
-  operationId: "createFhirStore"
+  operationId: createFhirStore
   parameters:
     - in: query
       name: fhirStoreId
       description: The ID of the FHIR store that is being created.
       required: true
       schema:
-        type: string
-        minLength: 3
-        maxLength: 60
-        pattern: "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-        example: awesome-fhir-store
+        $ref: ../components/parameters/FhirStoreId.yaml
   requestBody:
     content:
       application/json:
         schema:
-          $ref: ../components/schemas/FhirStore.yaml
+          $ref: ../components/schemas/FhirStoreCreateRequest.yaml
   responses:
     '200':
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/FhirStore.yaml
+            $ref: ../components/schemas/FhirStoreCreateResponse.yaml
       description: Success
-    '403':
-      $ref: ../../commons/components/responses/Unauthorized.yaml
     '404':
       $ref: ../../commons/components/responses/NotFound.yaml
     '409':
@@ -45,7 +39,7 @@ get:
     - FhirStore
   summary: List the FHIR stores in a dataset
   description: Returns the FHIR stores
-  operationId: "listFhirStores"
+  operationId: listFhirStores
   parameters:
     - in: query
       name: limit
@@ -71,8 +65,6 @@ get:
           schema:
             $ref: ../components/schemas/PageOfFhirStores.yaml
       description: Success
-    '403':
-      $ref: ../../commons/components/responses/Unauthorized.yaml
     '404':
       $ref: ../../commons/components/responses/NotFound.yaml
 
