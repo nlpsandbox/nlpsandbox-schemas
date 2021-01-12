@@ -18,8 +18,6 @@ get:
         application/json:
           schema:
             $ref: ../components/schemas/Dataset.yaml
-    '403':
-      $ref: ../../commons/components/responses/Unauthorized.yaml
     '404':
       $ref: ../../commons/components/responses/NotFound.yaml
 delete:
@@ -35,7 +33,5 @@ delete:
         application/json:
           schema:
             $ref: ../components/schemas/Dataset.yaml
-    '403':
-      $ref: ../../commons/components/responses/Unauthorized.yaml
     '404':
       $ref: ../../commons/components/responses/NotFound.yaml

@@ -3,7 +3,7 @@ post:
     - Dataset
   summary: Create a dataset
   description: Create a dataset with the name specified
-  operationId: "createDataset"
+  operationId: createDataset
   parameters:
     - in: query
       name: datasetId
@@ -23,10 +23,8 @@ post:
           schema:
             $ref: ../components/schemas/Dataset.yaml
       description: Success
-    '403':
-      $ref: ../../commons/components/responses/Unauthorized.yaml
-    '404':
-      $ref: ../../commons/components/responses/NotFound.yaml
+    '400':
+      $ref: ../../commons/components/responses/BadRequest.yaml
     '409':
       $ref: ../../commons/components/responses/Conflict.yaml
 get:
@@ -34,7 +32,7 @@ get:
     - Dataset
   summary: Get all datasets
   description: Returns the datasets
-  operationId: "listDatasets"
+  operationId: listDatasets
   parameters:
     - in: query
       name: limit
@@ -60,8 +58,6 @@ get:
           schema:
             $ref: ../components/schemas/PageOfDatasets.yaml
       description: Success
-    '403':
-      $ref: ../../commons/components/responses/Unauthorized.yaml
     '404':
       $ref: ../../commons/components/responses/NotFound.yaml
 
