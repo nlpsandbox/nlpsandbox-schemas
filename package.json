@@ -6,7 +6,7 @@
   "devDependencies": {
     "@redocly/openapi-cli": "1.0.0-beta.22",
     "gh-openapi-docs-ts": "0.3.4",
-    "ibm-openapi-validator": "0.31.1"
+    "ibm-openapi-validator": "0.31.2"
   },
   "scripts": {
     "start": "openapi preview-docs $npm_config_entrypoint",

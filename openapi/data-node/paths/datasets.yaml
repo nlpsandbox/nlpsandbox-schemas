@@ -15,13 +15,13 @@ post:
     content:
       application/json:
         schema:
-          $ref: ../components/schemas/Dataset.yaml
+          $ref: ../components/schemas/DatasetCreateRequest.yaml
   responses:
-    '200':
+    '201':
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/Dataset.yaml
+            $ref: ../components/schemas/DatasetCreateResponse.yaml
       description: Success
     '400':
       $ref: ../../commons/components/responses/BadRequest.yaml
