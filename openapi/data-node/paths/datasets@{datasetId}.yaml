@@ -32,6 +32,6 @@ delete:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/Dataset.yaml
+            $ref: ../../commons/components/schemas/EmptyResponse.yaml
     '404':
       $ref: ../../commons/components/responses/NotFound.yaml

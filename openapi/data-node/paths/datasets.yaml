@@ -58,6 +58,8 @@ get:
           schema:
             $ref: ../components/schemas/PageOfDatasets.yaml
       description: Success
+    '400':
+      $ref: ../../commons/components/responses/BadRequest.yaml
     '404':
       $ref: ../../commons/components/responses/NotFound.yaml
 
