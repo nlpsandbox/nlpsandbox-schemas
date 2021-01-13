@@ -4,25 +4,25 @@ parameters:
     description: The ID of the dataset
     required: true
     schema:
-      type: string
+      $ref: ../components/parameters/DatasetId.yaml
   - in: path
     name: annotationStoreId
     description: The ID of the annotation store
     required: true
     schema:
-      type: string
+      $ref: ../components/parameters/FhirStoreId.yaml
   - in: path
     name: annotationId
     description: The ID of the annotation
     required: true
     schema:
-      type: string
+      $ref: ../components/parameters/AnnotationId.yaml
 get:
   tags:
     - Annotation
   summary: Get an annotation
   description: Returns the annotation specified
-  operationId: "getAnnotation"
+  operationId: getAnnotation
   responses:
     '200':
       description: Success
@@ -30,8 +30,6 @@ get:
         application/json:
           schema:
             $ref: ../../commons/components/schemas/Annotation.yaml
-    '403':
-      $ref: ../../commons/components/responses/Unauthorized.yaml
     '404':
       $ref: ../../commons/components/responses/NotFound.yaml
 delete:
@@ -46,8 +44,6 @@ delete:
       content:
         application/json:
           schema:
-            $ref: ../../commons/components/schemas/Annotation.yaml
-    '403':
-      $ref: ../../commons/components/responses/Unauthorized.yaml
+            $ref: ../../commons/components/schemas/EmptyResponse.yaml
     '404':
       $ref: ../../commons/components/responses/NotFound.yaml
