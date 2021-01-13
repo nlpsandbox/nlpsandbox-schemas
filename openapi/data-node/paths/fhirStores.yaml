@@ -62,4 +62,3 @@ get:
       description: Success
     '400':
       $ref: ../../commons/components/responses/BadRequest.yaml
-

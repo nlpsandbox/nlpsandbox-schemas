@@ -4,25 +4,25 @@ parameters:
     description: The ID of the dataset
     required: true
     schema:
-      type: string
+      $ref: ../components/parameters/DatasetId.yaml
   - in: path
     name: fhirStoreId
     description: The ID of the FHIR store
     required: true
     schema:
-      type: string
+      $ref: ../components/parameters/FhirStoreId.yaml
   - in: path
     name: patientId
-    description: The ID of the FHIR Patient
+    description: The ID of the FHIR patient
     required: true
     schema:
-      type: string
+      $ref: ../../commons/components/parameters/PatientResourceId.yaml
 get:
   tags:
     - Patient
-  summary: Get a FHIR Patient
-  description: Returns the FHIR Patient specified
-  operationId: "getPatient"
+  summary: Get a FHIR patient
+  description: Returns the FHIR patient specified
+  operationId: getPatient
   responses:
     '200':
       description: Success
@@ -30,24 +30,20 @@ get:
         application/json:
           schema:
             $ref: ../../commons/components/schemas/Patient.yaml
-    '403':
-      $ref: ../../commons/components/responses/Unauthorized.yaml
     '404':
       $ref: ../../commons/components/responses/NotFound.yaml
 delete:
   tags:
     - Patient
-  summary: Delete a FHIR Patient
-  description: Deletes the FHIR Patient specified
-  operationId: "deletePatient"
+  summary: Delete a FHIR patient
+  description: Deletes the FHIR patient specified
+  operationId: deletePatient
   responses:
     '200':
       description: Success
       content:
         application/json:
           schema:
-            $ref: ../../commons/components/schemas/Patient.yaml
-    '403':
-      $ref: ../../commons/components/responses/Unauthorized.yaml
+            $ref: ../../commons/components/schemas/EmptyResponse.yaml
     '404':
       $ref: ../../commons/components/responses/NotFound.yaml
