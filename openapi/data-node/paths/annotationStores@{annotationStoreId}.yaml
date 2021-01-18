@@ -38,6 +38,6 @@ delete:
       content:
         application/json:
           schema:
-            $ref: ../../commons/components/schemas/EmptyResponse.yaml
+            $ref: ../../commons/components/schemas/EmptyObject.yaml
     '404':
       $ref: ../../commons/components/responses/NotFound.yaml
