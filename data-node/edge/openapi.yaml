@@ -38,7 +38,7 @@ tags:
   - name: Patient
     description: Operations about patients
   - name: Service
-    description: Operations about this API service
+    description: Operations about this service
 servers:
   - url: 'http://example.com/api/v1'
   - url: 'https://example.com/api/v1'
@@ -795,7 +795,7 @@ paths:
         - Service
       summary: Get service information
       description: Get information about the service
-      operationId: service
+      operationId: getService
       responses:
         '200':
           description: Success
@@ -803,8 +803,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Service'
-        '403':
-          $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
 components:
