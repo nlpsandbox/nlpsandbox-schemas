@@ -38,7 +38,7 @@ tags:
   - name: Patient
     description: Operations about patients
   - name: Service
-    description: Operations about this API service
+    description: Operations about this service
 servers:
   - url: "{protocol}://example.com/api/v1"
     variables:
