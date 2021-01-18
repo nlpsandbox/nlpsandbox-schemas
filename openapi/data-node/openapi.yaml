@@ -33,6 +33,8 @@ tags:
     description: Operations about datasets
   - name: FhirStore
     description: Operations about FHIR stores
+  - name: HealthCheck
+    description: Operations about health checks
   - name: Note
     description: Operations about notes
   - name: Patient
@@ -67,5 +69,7 @@ paths:
     $ref: 'paths/notes.yaml'
   /datasets/{datasetId}/fhirStores/{fhirStoreId}/fhir/Note/{noteId}:
     $ref: 'paths/notes@{noteId}.yaml'
+  /healthcheck:
+    $ref: '../commons/paths/healthCheck.yaml'
   /service:
     $ref: '../commons/paths/service.yaml'
