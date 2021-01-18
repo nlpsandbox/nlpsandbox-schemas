@@ -16,7 +16,7 @@ get:
     - FhirStore
   summary: Get a FHIR store
   description: Returns the FHIR store specified
-  operationId: "getFhirStore"
+  operationId: getFhirStore
   responses:
     '200':
       description: Success
@@ -31,7 +31,7 @@ delete:
     - FhirStore
   summary: Delete a FHIR store
   description: Deletes the FHIR store specified
-  operationId: "deleteFhirStore"
+  operationId: deleteFhirStore
   responses:
     '200':
       description: Success
