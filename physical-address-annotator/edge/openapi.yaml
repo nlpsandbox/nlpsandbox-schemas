@@ -55,7 +55,7 @@ paths:
         - Service
       summary: Get service information
       description: Get information about the service
-      operationId: service
+      operationId: getService
       responses:
         '200':
           description: Success
@@ -63,8 +63,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Service'
-        '403':
-          $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
 components:
