@@ -40,7 +40,7 @@ tags:
   - name: Patient
     description: Operations about patients
   - name: Service
-    description: Operations about this API service
+    description: Operations about this service
 servers:
   - url: 'http://example.com/api/v1'
   - url: 'https://example.com/api/v1'
