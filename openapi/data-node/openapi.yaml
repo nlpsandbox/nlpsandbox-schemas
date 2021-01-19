@@ -69,7 +69,7 @@ paths:
     $ref: 'paths/notes.yaml'
   /datasets/{datasetId}/fhirStores/{fhirStoreId}/fhir/Note/{noteId}:
     $ref: 'paths/notes@{noteId}.yaml'
-  /healthcheck:
+  /healthCheck:
     $ref: '../commons/paths/healthCheck.yaml'
   /service:
     $ref: '../commons/paths/service.yaml'
