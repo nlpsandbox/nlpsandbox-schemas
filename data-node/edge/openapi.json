@@ -49,10 +49,16 @@
   ],
   "servers": [
     {
-      "url": "http://example.com/api/v1"
-    },
-    {
-      "url": "https://example.com/api/v1"
+      "url": "{protocol}://example.com/api/v1",
+      "variables": {
+        "protocol": {
+          "enum": [
+            "http",
+            "https"
+          ],
+          "default": "https"
+        }
+      }
     }
   ],
   "paths": {
@@ -68,14 +74,10 @@
           {
             "in": "query",
             "name": "datasetId",
-            "description": "The ID of the dataset that is being created.",
+            "description": "The ID of the dataset that is being created",
             "required": true,
             "schema": {
-              "type": "string",
-              "minLength": 3,
-              "maxLength": 60,
-              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
-              "example": "awesome-dataset"
+              "$ref": "#/components/schemas/DatasetId"
             }
           }
         ],
@@ -83,27 +85,24 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Dataset"
+                "$ref": "#/components/schemas/DatasetCreateRequest"
               }
             }
           }
         },
         "responses": {
-          "200": {
+          "201": {
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Dataset"
+                  "$ref": "#/components/schemas/DatasetCreateResponse"
                 }
               }
             },
             "description": "Success"
           },
-          "403": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
           },
           "409": {
             "$ref": "#/components/responses/Conflict"
@@ -124,10 +123,7 @@
             "description": "Maximum number of results returned",
             "required": false,
             "schema": {
-              "type": "integer",
-              "default": 10,
-              "minimum": 10,
-              "maximum": 100
+              "$ref": "#/components/schemas/PageLimit"
             }
           },
           {
@@ -136,9 +132,7 @@
             "description": "Index of the first result that must be returned",
             "required": false,
             "schema": {
-              "type": "integer",
-              "default": 0,
-              "minimum": 0
+              "$ref": "#/components/schemas/PageOffset"
             }
           }
         ],
@@ -153,11 +147,8 @@
             },
             "description": "Success"
           },
-          "403": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
           }
         }
       }
@@ -170,7 +161,7 @@
           "description": "The ID of the dataset",
           "required": true,
           "schema": {
-            "type": "string"
+            "$ref": "#/components/schemas/DatasetId"
           }
         }
       ],
@@ -192,9 +183,6 @@
               }
             }
           },
-          "403": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
           "404": {
             "$ref": "#/components/responses/NotFound"
           }
@@ -213,13 +201,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Dataset"
+                  "$ref": "#/components/schemas/EmptyObject"
                 }
               }
             }
-          },
-          "403": {
-            "$ref": "#/components/responses/Unauthorized"
           },
           "404": {
             "$ref": "#/components/responses/NotFound"
@@ -235,7 +220,7 @@
           "description": "The ID of the dataset",
           "required": true,
           "schema": {
-            "type": "string"
+            "$ref": "#/components/schemas/DatasetId"
           }
         }
       ],
@@ -253,11 +238,7 @@
             "description": "The ID of the annotation store that is being created.",
             "required": true,
             "schema": {
-              "type": "string",
-              "minLength": 3,
-              "maxLength": 60,
-              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
-              "example": "awesome-annotation-store"
+              "$ref": "#/components/schemas/AnnotationStoreId"
             }
           }
         ],
@@ -265,27 +246,24 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/AnnotationStore"
+                "$ref": "#/components/schemas/AnnotationStoreCreateRequest"
               }
             }
           }
         },
         "responses": {
-          "200": {
+          "201": {
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AnnotationStore"
+                  "$ref": "#/components/schemas/AnnotationStoreCreateResponse"
                 }
               }
             },
             "description": "Success"
           },
-          "403": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
           },
           "409": {
             "$ref": "#/components/responses/Conflict"
@@ -306,10 +284,7 @@
             "description": "Maximum number of results returned",
             "required": false,
             "schema": {
-              "type": "integer",
-              "default": 10,
-              "minimum": 10,
-              "maximum": 100
+              "$ref": "#/components/schemas/PageLimit"
             }
           },
           {
@@ -318,9 +293,7 @@
             "description": "Index of the first result that must be returned",
             "required": false,
             "schema": {
-              "type": "integer",
-              "default": 0,
-              "minimum": 0
+              "$ref": "#/components/schemas/PageOffset"
             }
           }
         ],
@@ -335,11 +308,8 @@
             },
             "description": "Success"
           },
-          "403": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
           }
         }
       }
@@ -352,7 +322,7 @@
           "description": "The ID of the dataset",
           "required": true,
           "schema": {
-            "type": "string"
+            "$ref": "#/components/schemas/DatasetId"
           }
         },
         {
@@ -361,7 +331,7 @@
           "description": "The ID of the annotation store",
           "required": true,
           "schema": {
-            "type": "string"
+            "$ref": "#/components/schemas/AnnotationStoreId"
           }
         }
       ],
@@ -383,9 +353,6 @@
               }
             }
           },
-          "403": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
           "404": {
             "$ref": "#/components/responses/NotFound"
           }
@@ -404,13 +371,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AnnotationStore"
+                  "$ref": "#/components/schemas/EmptyObject"
                 }
               }
             }
-          },
-          "403": {
-            "$ref": "#/components/responses/Unauthorized"
           },
           "404": {
             "$ref": "#/components/responses/NotFound"
@@ -426,7 +390,7 @@
           "description": "The ID of the dataset",
           "required": true,
           "schema": {
-            "type": "string"
+            "$ref": "#/components/schemas/DatasetId"
           }
         },
         {
@@ -435,7 +399,7 @@
           "description": "The ID of the annotation store",
           "required": true,
           "schema": {
-            "type": "string"
+            "$ref": "#/components/schemas/AnnotationStoreId"
           }
         }
       ],
@@ -450,27 +414,24 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Annotation"
+                "$ref": "#/components/schemas/AnnotationCreateRequest"
               }
             }
           }
         },
         "responses": {
-          "200": {
+          "201": {
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Annotation"
+                  "$ref": "#/components/schemas/AnnotationCreateResponse"
                 }
               }
             },
             "description": "Success"
           },
-          "403": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
           },
           "409": {
             "$ref": "#/components/responses/Conflict"
@@ -491,10 +452,7 @@
             "description": "Maximum number of results returned",
             "required": false,
             "schema": {
-              "type": "integer",
-              "default": 10,
-              "minimum": 10,
-              "maximum": 100
+              "$ref": "#/components/schemas/PageLimit"
             }
           },
           {
@@ -503,9 +461,7 @@
             "description": "Index of the first result that must be returned",
             "required": false,
             "schema": {
-              "type": "integer",
-              "default": 0,
-              "minimum": 0
+              "$ref": "#/components/schemas/PageOffset"
             }
           }
         ],
@@ -520,11 +476,8 @@
             },
             "description": "Success"
           },
-          "403": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
           }
         }
       }
@@ -537,7 +490,7 @@
           "description": "The ID of the dataset",
           "required": true,
           "schema": {
-            "type": "string"
+            "$ref": "#/components/schemas/DatasetId"
           }
         },
         {
@@ -546,7 +499,7 @@
           "description": "The ID of the annotation store",
           "required": true,
           "schema": {
-            "type": "string"
+            "$ref": "#/components/schemas/FhirStoreId"
           }
         },
         {
@@ -555,7 +508,7 @@
           "description": "The ID of the annotation",
           "required": true,
           "schema": {
-            "type": "string"
+            "$ref": "#/components/schemas/AnnotationId"
           }
         }
       ],
@@ -577,9 +530,6 @@
               }
             }
           },
-          "403": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
           "404": {
             "$ref": "#/components/responses/NotFound"
           }
@@ -598,13 +548,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Annotation"
+                  "$ref": "#/components/schemas/EmptyObject"
                 }
               }
             }
-          },
-          "403": {
-            "$ref": "#/components/responses/Unauthorized"
           },
           "404": {
             "$ref": "#/components/responses/NotFound"
@@ -620,7 +567,7 @@
           "description": "The ID of the dataset",
           "required": true,
           "schema": {
-            "type": "string"
+            "$ref": "#/components/schemas/DatasetId"
           }
         }
       ],
@@ -638,11 +585,7 @@
             "description": "The ID of the FHIR store that is being created.",
             "required": true,
             "schema": {
-              "type": "string",
-              "minLength": 3,
-              "maxLength": 60,
-              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
-              "example": "awesome-fhir-store"
+              "$ref": "#/components/schemas/FhirStoreId"
             }
           }
         ],
@@ -650,27 +593,24 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/FhirStore"
+                "$ref": "#/components/schemas/FhirStoreCreateRequest"
               }
             }
           }
         },
         "responses": {
-          "200": {
+          "201": {
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/FhirStore"
+                  "$ref": "#/components/schemas/FhirStoreCreateResponse"
                 }
               }
             },
             "description": "Success"
           },
-          "403": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
           },
           "409": {
             "$ref": "#/components/responses/Conflict"
@@ -691,10 +631,7 @@
             "description": "Maximum number of results returned",
             "required": false,
             "schema": {
-              "type": "integer",
-              "default": 10,
-              "minimum": 10,
-              "maximum": 100
+              "$ref": "#/components/schemas/PageLimit"
             }
           },
           {
@@ -703,9 +640,7 @@
             "description": "Index of the first result that must be returned",
             "required": false,
             "schema": {
-              "type": "integer",
-              "default": 0,
-              "minimum": 0
+              "$ref": "#/components/schemas/PageOffset"
             }
           }
         ],
@@ -720,11 +655,8 @@
             },
             "description": "Success"
           },
-          "403": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
           }
         }
       }
@@ -737,7 +669,7 @@
           "description": "The ID of the dataset",
           "required": true,
           "schema": {
-            "type": "string"
+            "$ref": "#/components/schemas/DatasetId"
           }
         },
         {
@@ -746,7 +678,7 @@
           "description": "The ID of the FHIR store",
           "required": true,
           "schema": {
-            "type": "string"
+            "$ref": "#/components/schemas/FhirStoreId"
           }
         }
       ],
@@ -768,9 +700,6 @@
               }
             }
           },
-          "403": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
           "404": {
             "$ref": "#/components/responses/NotFound"
           }
@@ -789,13 +718,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/FhirStore"
+                  "$ref": "#/components/schemas/EmptyObject"
                 }
               }
             }
-          },
-          "403": {
-            "$ref": "#/components/responses/Unauthorized"
           },
           "404": {
             "$ref": "#/components/responses/NotFound"
@@ -811,7 +737,7 @@
           "description": "The ID of the dataset",
           "required": true,
           "schema": {
-            "type": "string"
+            "$ref": "#/components/schemas/DatasetId"
           }
         },
         {
@@ -820,7 +746,7 @@
           "description": "The ID of the FHIR store",
           "required": true,
           "schema": {
-            "type": "string"
+            "$ref": "#/components/schemas/FhirStoreId"
           }
         }
       ],
@@ -828,34 +754,31 @@
         "tags": [
           "Patient"
         ],
-        "summary": "Create a FHIR Patient",
-        "description": "Create a FHIR Patient",
+        "summary": "Create a FHIR patient",
+        "description": "Create a FHIR patient",
         "operationId": "createPatient",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Patient"
+                "$ref": "#/components/schemas/PatientCreateRequest"
               }
             }
           }
         },
         "responses": {
-          "200": {
+          "201": {
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Patient"
+                  "$ref": "#/components/schemas/PatientCreateResponse"
                 }
               }
             },
             "description": "Success"
           },
-          "403": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
           },
           "409": {
             "$ref": "#/components/responses/Conflict"
@@ -876,10 +799,7 @@
             "description": "Maximum number of results returned",
             "required": false,
             "schema": {
-              "type": "integer",
-              "default": 10,
-              "minimum": 10,
-              "maximum": 100
+              "$ref": "#/components/schemas/PageLimit"
             }
           },
           {
@@ -888,9 +808,7 @@
             "description": "Index of the first result that must be returned",
             "required": false,
             "schema": {
-              "type": "integer",
-              "default": 0,
-              "minimum": 0
+              "$ref": "#/components/schemas/PageOffset"
             }
           }
         ],
@@ -905,11 +823,8 @@
             },
             "description": "Success"
           },
-          "403": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
           }
         }
       }
@@ -922,7 +837,7 @@
           "description": "The ID of the dataset",
           "required": true,
           "schema": {
-            "type": "string"
+            "$ref": "#/components/schemas/DatasetId"
           }
         },
         {
@@ -931,16 +846,16 @@
           "description": "The ID of the FHIR store",
           "required": true,
           "schema": {
-            "type": "string"
+            "$ref": "#/components/schemas/FhirStoreId"
           }
         },
         {
           "in": "path",
           "name": "patientId",
-          "description": "The ID of the FHIR Patient",
+          "description": "The ID of the FHIR patient",
           "required": true,
           "schema": {
-            "type": "string"
+            "$ref": "#/components/schemas/PatientResourceId"
           }
         }
       ],
@@ -948,8 +863,8 @@
         "tags": [
           "Patient"
         ],
-        "summary": "Get a FHIR Patient",
-        "description": "Returns the FHIR Patient specified",
+        "summary": "Get a FHIR patient",
+        "description": "Returns the FHIR patient specified",
         "operationId": "getPatient",
         "responses": {
           "200": {
@@ -962,9 +877,6 @@
               }
             }
           },
-          "403": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
           "404": {
             "$ref": "#/components/responses/NotFound"
           }
@@ -974,8 +886,8 @@
         "tags": [
           "Patient"
         ],
-        "summary": "Delete a FHIR Patient",
-        "description": "Deletes the FHIR Patient specified",
+        "summary": "Delete a FHIR patient",
+        "description": "Deletes the FHIR patient specified",
         "operationId": "deletePatient",
         "responses": {
           "200": {
@@ -983,13 +895,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Patient"
+                  "$ref": "#/components/schemas/EmptyObject"
                 }
               }
             }
-          },
-          "403": {
-            "$ref": "#/components/responses/Unauthorized"
           },
           "404": {
             "$ref": "#/components/responses/NotFound"
@@ -1005,7 +914,7 @@
           "description": "The ID of the dataset",
           "required": true,
           "schema": {
-            "type": "string"
+            "$ref": "#/components/schemas/DatasetId"
           }
         },
         {
@@ -1014,7 +923,7 @@
           "description": "The ID of the FHIR store",
           "required": true,
           "schema": {
-            "type": "string"
+            "$ref": "#/components/schemas/FhirStoreId"
           }
         }
       ],
@@ -1029,27 +938,24 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Note"
+                "$ref": "#/components/schemas/NoteCreateRequest"
               }
             }
           }
         },
         "responses": {
-          "200": {
+          "201": {
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Note"
+                  "$ref": "#/components/schemas/NoteCreateResponse"
                 }
               }
             },
             "description": "Success"
           },
-          "403": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
           },
           "409": {
             "$ref": "#/components/responses/Conflict"
@@ -1070,10 +976,7 @@
             "description": "Maximum number of results returned",
             "required": false,
             "schema": {
-              "type": "integer",
-              "default": 10,
-              "minimum": 10,
-              "maximum": 100
+              "$ref": "#/components/schemas/PageLimit"
             }
           },
           {
@@ -1082,9 +985,7 @@
             "description": "Index of the first result that must be returned",
             "required": false,
             "schema": {
-              "type": "integer",
-              "default": 0,
-              "minimum": 0
+              "$ref": "#/components/schemas/PageOffset"
             }
           }
         ],
@@ -1099,11 +1000,8 @@
             },
             "description": "Success"
           },
-          "403": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
           }
         }
       }
@@ -1116,7 +1014,7 @@
           "description": "The ID of the dataset",
           "required": true,
           "schema": {
-            "type": "string"
+            "$ref": "#/components/schemas/DatasetId"
           }
         },
         {
@@ -1125,7 +1023,7 @@
           "description": "The ID of the FHIR store",
           "required": true,
           "schema": {
-            "type": "string"
+            "$ref": "#/components/schemas/FhirStoreId"
           }
         },
         {
@@ -1134,7 +1032,7 @@
           "description": "The ID of the note",
           "required": true,
           "schema": {
-            "type": "string"
+            "$ref": "#/components/schemas/NoteResourceId"
           }
         }
       ],
@@ -1156,9 +1054,6 @@
               }
             }
           },
-          "403": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
           "404": {
             "$ref": "#/components/responses/NotFound"
           }
@@ -1177,13 +1072,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Note"
+                  "$ref": "#/components/schemas/EmptyObject"
                 }
               }
             }
-          },
-          "403": {
-            "$ref": "#/components/responses/Unauthorized"
           },
           "404": {
             "$ref": "#/components/responses/NotFound"
@@ -1219,17 +1111,28 @@
   },
   "components": {
     "schemas": {
+      "PageLimit": {
+        "description": "Maximum number of results returned",
+        "type": "integer",
+        "default": 10,
+        "minimum": 10,
+        "maximum": 100
+      },
+      "PageOffset": {
+        "description": "Index of the first result that must be returned",
+        "type": "integer",
+        "default": 0,
+        "minimum": 0
+      },
       "ResponsePageMetadata": {
         "type": "object",
         "description": "A page of results",
         "properties": {
           "offset": {
-            "description": "Index of the first result that must be returned",
-            "type": "integer"
+            "$ref": "#/components/schemas/PageOffset"
           },
           "limit": {
-            "description": "Maximum number of results returned",
-            "type": "integer"
+            "$ref": "#/components/schemas/PageLimit"
           },
           "links": {
             "description": "Links to navigate to different pages of results",
@@ -1249,18 +1152,18 @@
           "links"
         ]
       },
+      "DatasetName": {
+        "description": "The name of the dataset",
+        "type": "string",
+        "example": "datasets/awesome-dataset"
+      },
       "Dataset": {
         "type": "object",
         "description": "A dataset",
         "properties": {
           "name": {
-            "description": "Resource name of the dataset, of the form datasets/{datasetId}",
-            "type": "string",
-            "readOnly": true
+            "$ref": "#/components/schemas/DatasetName"
           }
-        },
-        "example": {
-          "name": "datasets/awesome-dataset"
         }
       },
       "PageOfDatasets": {
@@ -1310,6 +1213,31 @@
           "status"
         ]
       },
+      "DatasetId": {
+        "description": "The ID of the dataset",
+        "type": "string",
+        "minLength": 3,
+        "maxLength": 60,
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+        "example": "awesome-dataset"
+      },
+      "DatasetCreateRequest": {
+        "type": "object",
+        "description": "An empty object"
+      },
+      "DatasetCreateResponse": {
+        "type": "object",
+        "description": "The reference of the dataset created",
+        "properties": {
+          "name": {
+            "$ref": "#/components/schemas/DatasetName"
+          }
+        }
+      },
+      "EmptyObject": {
+        "type": "object",
+        "description": "An empty object"
+      },
       "AnnotationStore": {
         "type": "object",
         "description": "An annotation store",
@@ -1341,6 +1269,37 @@
             }
           }
         ]
+      },
+      "AnnotationStoreId": {
+        "description": "The ID of the annotation store",
+        "type": "string",
+        "minLength": 3,
+        "maxLength": 60,
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+        "example": "awesome-annotation-store"
+      },
+      "AnnotationStoreCreateRequest": {
+        "type": "object",
+        "description": "An empty object"
+      },
+      "AnnotationStoreName": {
+        "description": "The resource name of the annotation store, of the form datasets/{datasetId}/annotationStores/{annotationStoreId}",
+        "type": "string",
+        "example": "datasets/awesome-dataset/annotationStores/awesome-annotation-store"
+      },
+      "AnnotationStoreCreateResponse": {
+        "type": "object",
+        "description": "The reference to the annotation store created",
+        "properties": {
+          "name": {
+            "$ref": "#/components/schemas/AnnotationStoreName"
+          }
+        }
+      },
+      "AnnotationName": {
+        "description": "Resource name of the annotation record, of the form datasets/{datasetId}/annotationStores/{annotationStoreId}/annotations/{annotationId}",
+        "type": "string",
+        "example": "datasets/awesome-dataset/annotationStores/awesome-annotation-store/annotations/507f1f77bcf86cd799439011"
       },
       "ResourceSource": {
         "type": "object",
@@ -1473,9 +1432,7 @@
         "description": "An annotation record",
         "properties": {
           "name": {
-            "description": "Resource name of the annotation record, of the form datasets/{datasetId}/annotationStores/{annotationStoreId}/annotations/{annotationId}",
-            "type": "string",
-            "readOnly": true
+            "$ref": "#/components/schemas/AnnotationName"
           },
           "annotationSource": {
             "$ref": "#/components/schemas/AnnotationSource"
@@ -1524,6 +1481,58 @@
           }
         ]
       },
+      "AnnotationCreateRequest": {
+        "type": "object",
+        "description": "An annotation record",
+        "properties": {
+          "annotationSource": {
+            "$ref": "#/components/schemas/AnnotationSource"
+          },
+          "textDateAnnotations": {
+            "description": "Date annotations in a text",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextDateAnnotation"
+            }
+          },
+          "textPersonNameAnnotations": {
+            "description": "Person name annotations in a text",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextPersonNameAnnotation"
+            }
+          },
+          "textPhysicalAddressAnnotations": {
+            "description": "Physical address annotations in a text",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextPhysicalAddressAnnotation"
+            }
+          }
+        }
+      },
+      "AnnotationCreateResponse": {
+        "type": "object",
+        "description": "The reference to the annotation created",
+        "properties": {
+          "name": {
+            "$ref": "#/components/schemas/AnnotationName"
+          }
+        }
+      },
+      "FhirStoreId": {
+        "description": "The ID of the FHIR store",
+        "type": "string",
+        "minLength": 3,
+        "maxLength": 60,
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+        "example": "awesome-fhir-store"
+      },
+      "AnnotationId": {
+        "description": "The ID of the annotation",
+        "type": "string",
+        "example": "507f1f77bcf86cd799439011"
+      },
       "FhirStore": {
         "type": "object",
         "description": "A FHIR store",
@@ -1556,14 +1565,35 @@
           }
         ]
       },
+      "FhirStoreCreateRequest": {
+        "type": "object",
+        "description": "An empty object"
+      },
+      "FhirStoreName": {
+        "description": "The resource name of the FHIR store, of the form datasets/{datasetId}/fhirStores/{fhirStoreId}",
+        "type": "string",
+        "example": "datasets/awesome-dataset/fhirStores/awesome-fhir-store"
+      },
+      "FhirStoreCreateResponse": {
+        "type": "object",
+        "description": "The reference to the FHIR store created",
+        "properties": {
+          "name": {
+            "$ref": "#/components/schemas/FhirStoreName"
+          }
+        }
+      },
+      "PatientResourceId": {
+        "description": "The ID of the FHIR patient",
+        "type": "string",
+        "example": "507f1f77bcf86cd799439011"
+      },
       "Patient": {
         "type": "object",
-        "description": "A FHIR Patient",
+        "description": "A FHIR patient",
         "properties": {
           "id": {
-            "description": "The patient ID",
-            "type": "string",
-            "readOnly": true
+            "$ref": "#/components/schemas/PatientResourceId"
           },
           "identifier": {
             "description": "An identifier for this patient",
@@ -1583,7 +1613,7 @@
       },
       "PageOfPatients": {
         "type": "object",
-        "description": "A page of FHIR Patients",
+        "description": "A page of FHIR patients",
         "allOf": [
           {
             "$ref": "#/components/schemas/ResponsePageMetadata"
@@ -1592,7 +1622,7 @@
             "type": "object",
             "properties": {
               "patients": {
-                "description": "An array of FHIR Patients",
+                "description": "An array of FHIR patients",
                 "type": "array",
                 "items": {
                   "$ref": "#/components/schemas/Patient"
@@ -1602,14 +1632,51 @@
           }
         ]
       },
+      "PatientCreateRequest": {
+        "type": "object",
+        "description": "A FHIR patient",
+        "properties": {
+          "identifier": {
+            "description": "An identifier for this patient",
+            "type": "string"
+          },
+          "gender": {
+            "description": "Gender of the patient",
+            "type": "string",
+            "enum": [
+              "male",
+              "female",
+              "other",
+              "unknown"
+            ]
+          }
+        }
+      },
+      "PatientResourceName": {
+        "description": "The resource name of the FHIR patient, of the form datasets/{datasetId}/fhirStores/{fhirStoreId}/Patient/{PatientId}",
+        "type": "string",
+        "example": "datasets/awesome-dataset/fhirStores/awesome-fhir-store/Patient/507f1f77bcf86cd799439011"
+      },
+      "PatientCreateResponse": {
+        "type": "object",
+        "description": "The reference to the patient created",
+        "properties": {
+          "name": {
+            "$ref": "#/components/schemas/PatientResourceName"
+          }
+        }
+      },
+      "NoteResourceId": {
+        "description": "The ID of the clinical note",
+        "type": "string",
+        "example": "507f1f77bcf86cd799439011"
+      },
       "Note": {
         "type": "object",
         "description": "A clinical note",
         "properties": {
           "id": {
-            "description": "The ID of the note",
-            "type": "string",
-            "readOnly": true
+            "$ref": "#/components/schemas/NoteResourceId"
           },
           "text": {
             "description": "The content of the clinical note",
@@ -1622,9 +1689,7 @@
             "example": "loinc:LP29684-5"
           },
           "patientId": {
-            "description": "The patient ID",
-            "type": "string",
-            "example": "507f1f77bcf86cd799439011"
+            "$ref": "#/components/schemas/PatientResourceId"
           }
         },
         "required": [
@@ -1652,6 +1717,43 @@
             }
           }
         ]
+      },
+      "NoteCreateRequest": {
+        "type": "object",
+        "description": "A clinical note",
+        "properties": {
+          "text": {
+            "description": "The content of the clinical note",
+            "type": "string",
+            "example": "On 12/26/2020, Ms. Chloe Price met with Dr. Prescott."
+          },
+          "noteType": {
+            "description": "The note type (LOINC concept)",
+            "type": "string",
+            "example": "loinc:LP29684-5"
+          },
+          "patientId": {
+            "$ref": "#/components/schemas/PatientResourceId"
+          }
+        },
+        "required": [
+          "text",
+          "noteType"
+        ]
+      },
+      "NoteResourceName": {
+        "description": "The resource name of the clinical note, of the form datasets/{datasetId}/fhirStores/{fhirStoreId}/Note/{NoteId}",
+        "type": "string",
+        "example": "datasets/awesome-dataset/fhirStores/awesome-fhir-store/Note/507f1f77bcf86cd799439011"
+      },
+      "NoteCreateResponse": {
+        "type": "object",
+        "description": "The reference to the note created",
+        "properties": {
+          "name": {
+            "$ref": "#/components/schemas/NoteResourceName"
+          }
+        }
       },
       "Service": {
         "type": "object",
@@ -1744,18 +1846,8 @@
       }
     },
     "responses": {
-      "Unauthorized": {
-        "description": "Unauthorized",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/schemas/Error"
-            }
-          }
-        }
-      },
-      "NotFound": {
-        "description": "The specified resource was not found",
+      "BadRequest": {
+        "description": "Invalid request",
         "content": {
           "application/json": {
             "schema": {
@@ -1766,6 +1858,16 @@
       },
       "Conflict": {
         "description": "The request conflicts with current state of the target resource",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "NotFound": {
+        "description": "The specified resource was not found",
         "content": {
           "application/json": {
             "schema": {
