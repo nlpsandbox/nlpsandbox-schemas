@@ -162,14 +162,22 @@
           }
         }
       },
+      "NoteResourceId": {
+        "description": "The ID of the clinical note",
+        "type": "string",
+        "example": "507f1f77bcf86cd799439011"
+      },
+      "PatientResourceId": {
+        "description": "The ID of the FHIR patient",
+        "type": "string",
+        "example": "507f1f77bcf86cd799439011"
+      },
       "Note": {
         "type": "object",
         "description": "A clinical note",
         "properties": {
           "id": {
-            "description": "The ID of the note",
-            "type": "string",
-            "readOnly": true
+            "$ref": "#/components/schemas/NoteResourceId"
           },
           "text": {
             "description": "The content of the clinical note",
@@ -182,9 +190,7 @@
             "example": "loinc:LP29684-5"
           },
           "patientId": {
-            "description": "The patient ID",
-            "type": "string",
-            "example": "507f1f77bcf86cd799439011"
+            "$ref": "#/components/schemas/PatientResourceId"
           }
         },
         "required": [
@@ -210,6 +216,11 @@
         "required": [
           "note"
         ]
+      },
+      "AnnotationName": {
+        "description": "Resource name of the annotation record, of the form datasets/{datasetId}/annotationStores/{annotationStoreId}/annotations/{annotationId}",
+        "type": "string",
+        "example": "datasets/awesome-dataset/annotationStores/awesome-annotation-store/annotations/507f1f77bcf86cd799439011"
       },
       "ResourceSource": {
         "type": "object",
@@ -342,9 +353,7 @@
         "description": "An annotation record",
         "properties": {
           "name": {
-            "description": "Resource name of the annotation record, of the form datasets/{datasetId}/annotationStores/{annotationStoreId}/annotations/{annotationId}",
-            "type": "string",
-            "readOnly": true
+            "$ref": "#/components/schemas/AnnotationName"
           },
           "annotationSource": {
             "$ref": "#/components/schemas/AnnotationSource"
