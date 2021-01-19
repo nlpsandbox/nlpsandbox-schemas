@@ -1,0 +1,3 @@
+description: The resource name of the clinical note, of the form datasets/{datasetId}/fhirStores/{fhirStoreId}/Note/{NoteId}
+type: string
+example: datasets/awesome-dataset/fhirStores/awesome-fhir-store/Note/507f1f77bcf86cd799439011

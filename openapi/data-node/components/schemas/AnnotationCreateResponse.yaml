@@ -1,0 +1,5 @@
+type: object
+description: The reference to the annotation created
+properties:
+  name:
+    $ref: ../../../commons/components/parameters/AnnotationName.yaml

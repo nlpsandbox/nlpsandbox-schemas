@@ -2,11 +2,9 @@ type: object
 description: A page of results
 properties:
   offset:
-    description: Index of the first result that must be returned
-    type: integer
+    $ref: ../parameters/PageOffset.yaml
   limit:
-    description: Maximum number of results returned
-    type: integer
+    $ref: ../parameters/PageLimit.yaml
   links:
     description: Links to navigate to different pages of results
     type: object

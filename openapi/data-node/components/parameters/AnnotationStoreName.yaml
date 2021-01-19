@@ -1,0 +1,3 @@
+description: The resource name of the annotation store, of the form datasets/{datasetId}/annotationStores/{annotationStoreId}
+type: string
+example: datasets/awesome-dataset/annotationStores/awesome-annotation-store
