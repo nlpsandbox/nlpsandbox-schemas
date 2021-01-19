@@ -4,40 +4,34 @@ parameters:
     description: The ID of the dataset
     required: true
     schema:
-      type: string
+      $ref: ../components/parameters/DatasetId.yaml
 post:
   tags:
     - AnnotationStore
   summary: Create an annotation store
   description: Create an annotation store with the ID specified
-  operationId: "createAnnotationStore"
+  operationId: createAnnotationStore
   parameters:
     - in: query
       name: annotationStoreId
       description: The ID of the annotation store that is being created.
       required: true
       schema:
-        type: string
-        minLength: 3
-        maxLength: 60
-        pattern: "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-        example: awesome-annotation-store
+        $ref: ../components/parameters/AnnotationStoreId.yaml
   requestBody:
     content:
       application/json:
         schema:
-          $ref: ../components/schemas/AnnotationStore.yaml
+          $ref: ../components/schemas/AnnotationStoreCreateRequest.yaml
   responses:
-    '200':
+    '201':
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/AnnotationStore.yaml
+            $ref: ../components/schemas/AnnotationStoreCreateResponse.yaml
       description: Success
-    '403':
-      $ref: ../../commons/components/responses/Unauthorized.yaml
-    '404':
-      $ref: ../../commons/components/responses/NotFound.yaml
+    '400':
+      $ref: ../../commons/components/responses/BadRequest.yaml
     '409':
       $ref: ../../commons/components/responses/Conflict.yaml
 get:
@@ -45,25 +39,20 @@ get:
     - AnnotationStore
   summary: List the annotation stores in a dataset
   description: Returns the annotation stores
-  operationId: "listAnnotationStores"
+  operationId: listAnnotationStores
   parameters:
     - in: query
       name: limit
       description: Maximum number of results returned
       required: false
       schema:
-        type: integer
-        default: 10
-        minimum: 10
-        maximum: 100
+        $ref: ../../commons/components/parameters/PageLimit.yaml
     - in: query
       name: offset
       description: Index of the first result that must be returned
       required: false
       schema:
-        type: integer
-        default: 0
-        minimum: 0
+        $ref: ../../commons/components/parameters/PageOffset.yaml
   responses:
     '200':
       content:
@@ -71,7 +60,5 @@ get:
           schema:
             $ref: ../components/schemas/PageOfAnnotationStores.yaml
       description: Success
-    '403':
-      $ref: ../../commons/components/responses/Unauthorized.yaml
-    '404':
-      $ref: ../../commons/components/responses/NotFound.yaml
+    '400':
+      $ref: ../../commons/components/responses/BadRequest.yaml

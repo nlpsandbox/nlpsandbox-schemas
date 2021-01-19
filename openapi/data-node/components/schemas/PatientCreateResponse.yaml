@@ -1,0 +1,5 @@
+type: object
+description: The reference to the patient created
+properties:
+  name:
+    $ref: ../parameters/PatientResourceName.yaml

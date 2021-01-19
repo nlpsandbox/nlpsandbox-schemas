@@ -4,13 +4,13 @@ parameters:
     description: The ID of the dataset
     required: true
     schema:
-      type: string
+      $ref: ../components/parameters/DatasetId.yaml
 get:
   tags:
     - Dataset
   summary: Get a dataset by ID
   description: Returns the dataset for a given ID
-  operationId: "getDataset"
+  operationId: getDataset
   responses:
     '200':
       description: Success
@@ -18,8 +18,6 @@ get:
         application/json:
           schema:
             $ref: ../components/schemas/Dataset.yaml
-    '403':
-      $ref: ../../commons/components/responses/Unauthorized.yaml
     '404':
       $ref: ../../commons/components/responses/NotFound.yaml
 delete:
@@ -27,15 +25,13 @@ delete:
     - Dataset
   summary: Delete a dataset by ID
   description: Deletes the dataset for a given ID
-  operationId: "deleteDataset"
+  operationId: deleteDataset
   responses:
     '200':
       description: Success
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/Dataset.yaml
-    '403':
-      $ref: ../../commons/components/responses/Unauthorized.yaml
+            $ref: ../../commons/components/schemas/EmptyObject.yaml
     '404':
       $ref: ../../commons/components/responses/NotFound.yaml

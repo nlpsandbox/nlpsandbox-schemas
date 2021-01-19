@@ -4,40 +4,34 @@ parameters:
     description: The ID of the dataset
     required: true
     schema:
-      type: string
+      $ref: ../components/parameters/DatasetId.yaml
 post:
   tags:
     - FhirStore
   summary: Create a FHIR store
   description: Create a FHIR store with the ID specified
-  operationId: "createFhirStore"
+  operationId: createFhirStore
   parameters:
     - in: query
       name: fhirStoreId
       description: The ID of the FHIR store that is being created.
       required: true
       schema:
-        type: string
-        minLength: 3
-        maxLength: 60
-        pattern: "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-        example: awesome-fhir-store
+        $ref: ../components/parameters/FhirStoreId.yaml
   requestBody:
     content:
       application/json:
         schema:
-          $ref: ../components/schemas/FhirStore.yaml
+          $ref: ../components/schemas/FhirStoreCreateRequest.yaml
   responses:
-    '200':
+    '201':
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/FhirStore.yaml
+            $ref: ../components/schemas/FhirStoreCreateResponse.yaml
       description: Success
-    '403':
-      $ref: ../../commons/components/responses/Unauthorized.yaml
-    '404':
-      $ref: ../../commons/components/responses/NotFound.yaml
+    '400':
+      $ref: ../../commons/components/responses/BadRequest.yaml
     '409':
       $ref: ../../commons/components/responses/Conflict.yaml
 get:
@@ -45,25 +39,20 @@ get:
     - FhirStore
   summary: List the FHIR stores in a dataset
   description: Returns the FHIR stores
-  operationId: "listFhirStores"
+  operationId: listFhirStores
   parameters:
     - in: query
       name: limit
       description: Maximum number of results returned
       required: false
       schema:
-        type: integer
-        default: 10
-        minimum: 10
-        maximum: 100
+        $ref: ../../commons/components/parameters/PageLimit.yaml
     - in: query
       name: offset
       description: Index of the first result that must be returned
       required: false
       schema:
-        type: integer
-        default: 0
-        minimum: 0
+        $ref: ../../commons/components/parameters/PageOffset.yaml
   responses:
     '200':
       content:
@@ -71,8 +60,5 @@ get:
           schema:
             $ref: ../components/schemas/PageOfFhirStores.yaml
       description: Success
-    '403':
-      $ref: ../../commons/components/responses/Unauthorized.yaml
-    '404':
-      $ref: ../../commons/components/responses/NotFound.yaml
-
+    '400':
+      $ref: ../../commons/components/responses/BadRequest.yaml

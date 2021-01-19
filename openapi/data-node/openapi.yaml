@@ -40,8 +40,13 @@ tags:
   - name: Service
     description: Operations about this service
 servers:
-  - url: 'http://example.com/api/v1'
-  - url: 'https://example.com/api/v1'
+  - url: "{protocol}://example.com/api/v1"
+    variables:
+      protocol:
+        enum:
+          - http
+          - https
+        default: https
 paths:
   /datasets:
     $ref: 'paths/datasets.yaml'
