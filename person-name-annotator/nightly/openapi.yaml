@@ -54,7 +54,7 @@ paths:
         - Service
       summary: Get service information
       description: Get information about the service
-      operationId: service
+      operationId: getService
       responses:
         '200':
           description: Success
@@ -62,20 +62,24 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Service'
-        '403':
-          $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
+    NoteResourceId:
+      description: The ID of the clinical note
+      type: string
+      example: 507f1f77bcf86cd799439011
+    PatientResourceId:
+      description: The ID of the FHIR patient
+      type: string
+      example: 507f1f77bcf86cd799439011
     Note:
       type: object
       description: A clinical note
       properties:
         id:
-          description: The ID of the note
-          type: string
-          readOnly: true
+          $ref: '#/components/schemas/NoteResourceId'
         text:
           description: The content of the clinical note
           type: string
@@ -85,9 +89,7 @@ components:
           type: string
           example: 'loinc:LP29684-5'
         patientId:
-          description: The patient ID
-          type: string
-          example: 507f1f77bcf86cd799439011
+          $ref: '#/components/schemas/PatientResourceId'
       required:
         - text
         - noteType
