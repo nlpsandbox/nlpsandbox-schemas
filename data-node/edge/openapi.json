@@ -35,6 +35,10 @@
       "description": "Operations about FHIR stores"
     },
     {
+      "name": "HealthCheck",
+      "description": "Operations about health checks"
+    },
+    {
       "name": "Note",
       "description": "Operations about notes"
     },
@@ -1083,6 +1087,31 @@
         }
       }
     },
+    "/healthCheck": {
+      "get": {
+        "tags": [
+          "HealthCheck"
+        ],
+        "summary": "Get health check information",
+        "description": "Get information about the health of the service",
+        "operationId": "getHealthCheck",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthCheck"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        }
+      }
+    },
     "/service": {
       "get": {
         "tags": [
@@ -1754,6 +1783,24 @@
             "$ref": "#/components/schemas/NoteResourceName"
           }
         }
+      },
+      "HealthCheck": {
+        "type": "object",
+        "description": "Represents the health of a service",
+        "properties": {
+          "status": {
+            "description": "Indicates whether the service status is acceptable or not",
+            "type": "string",
+            "enum": [
+              "pass",
+              "fail",
+              "warn"
+            ]
+          }
+        },
+        "required": [
+          "status"
+        ]
       },
       "Service": {
         "type": "object",
