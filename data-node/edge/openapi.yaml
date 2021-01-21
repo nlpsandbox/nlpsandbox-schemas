@@ -80,6 +80,8 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '409':
           $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
     get:
       tags:
         - Dataset
@@ -108,6 +110,8 @@ paths:
           description: Success
         '400':
           $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
   '/datasets/{datasetId}':
     parameters:
       - in: path
@@ -131,6 +135,8 @@ paths:
                 $ref: '#/components/schemas/Dataset'
         '404':
           $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
     delete:
       tags:
         - Dataset
@@ -146,6 +152,8 @@ paths:
                 $ref: '#/components/schemas/EmptyObject'
         '404':
           $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
   '/datasets/{datasetId}/annotationStores':
     parameters:
       - in: path
@@ -183,6 +191,8 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '409':
           $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
     get:
       tags:
         - AnnotationStore
@@ -211,6 +221,8 @@ paths:
           description: Success
         '400':
           $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
   '/datasets/{datasetId}/annotationStores/{annotationStoreId}':
     parameters:
       - in: path
@@ -240,6 +252,8 @@ paths:
                 $ref: '#/components/schemas/AnnotationStore'
         '404':
           $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
     delete:
       tags:
         - AnnotationStore
@@ -255,6 +269,8 @@ paths:
                 $ref: '#/components/schemas/EmptyObject'
         '404':
           $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
   '/datasets/{datasetId}/annotationStores/{annotationStoreId}/annotations':
     parameters:
       - in: path
@@ -291,6 +307,8 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '409':
           $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
     get:
       tags:
         - Annotation
@@ -319,6 +337,8 @@ paths:
           description: Success
         '400':
           $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
   '/datasets/{datasetId}/annotationStores/{annotationStoreId}/annotations/{annotationId}':
     parameters:
       - in: path
@@ -354,6 +374,8 @@ paths:
                 $ref: '#/components/schemas/Annotation'
         '404':
           $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
     delete:
       tags:
         - Annotation
@@ -369,6 +391,8 @@ paths:
                 $ref: '#/components/schemas/EmptyObject'
         '404':
           $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
   '/datasets/{datasetId}/fhirStores':
     parameters:
       - in: path
@@ -406,6 +430,8 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '409':
           $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
     get:
       tags:
         - FhirStore
@@ -434,6 +460,8 @@ paths:
           description: Success
         '400':
           $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
   '/datasets/{datasetId}/fhirStores/{fhirStoreId}':
     parameters:
       - in: path
@@ -463,6 +491,8 @@ paths:
                 $ref: '#/components/schemas/FhirStore'
         '404':
           $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
     delete:
       tags:
         - FhirStore
@@ -478,6 +508,8 @@ paths:
                 $ref: '#/components/schemas/EmptyObject'
         '404':
           $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
   '/datasets/{datasetId}/fhirStores/{fhirStoreId}/fhir/Patient':
     parameters:
       - in: path
@@ -514,6 +546,8 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '409':
           $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
     get:
       tags:
         - Patient
@@ -542,6 +576,8 @@ paths:
           description: Success
         '400':
           $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
   '/datasets/{datasetId}/fhirStores/{fhirStoreId}/fhir/Patient/{patientId}':
     parameters:
       - in: path
@@ -577,6 +613,8 @@ paths:
                 $ref: '#/components/schemas/Patient'
         '404':
           $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
     delete:
       tags:
         - Patient
@@ -592,6 +630,8 @@ paths:
                 $ref: '#/components/schemas/EmptyObject'
         '404':
           $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
   '/datasets/{datasetId}/fhirStores/{fhirStoreId}/fhir/Note':
     parameters:
       - in: path
@@ -628,6 +668,8 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '409':
           $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
     get:
       tags:
         - Note
@@ -656,6 +698,8 @@ paths:
           description: Success
         '400':
           $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
   '/datasets/{datasetId}/fhirStores/{fhirStoreId}/fhir/Note/{noteId}':
     parameters:
       - in: path
@@ -691,6 +735,8 @@ paths:
                 $ref: '#/components/schemas/Note'
         '404':
           $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
     delete:
       tags:
         - Note
@@ -706,6 +752,8 @@ paths:
                 $ref: '#/components/schemas/EmptyObject'
         '404':
           $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
   /healthCheck:
     get:
       tags:
@@ -722,6 +770,8 @@ paths:
                 $ref: '#/components/schemas/HealthCheck'
         '404':
           $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
   /service:
     get:
       tags:
@@ -738,6 +788,8 @@ paths:
                 $ref: '#/components/schemas/Service'
         '404':
           $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
 components:
   schemas:
     PageLimit:
@@ -1304,6 +1356,12 @@ components:
   responses:
     BadRequest:
       description: Invalid request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    InternalServerError:
+      description: The request cannot be fulfilled due to an unexpected server error
       content:
         application/json:
           schema:
