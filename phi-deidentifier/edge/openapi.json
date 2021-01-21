@@ -66,6 +66,9 @@
           },
           "403": {
             "$ref": "#/components/responses/Unauthorized"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
           }
         }
       }
@@ -91,6 +94,9 @@
           },
           "404": {
             "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
           }
         }
       }
@@ -515,6 +521,16 @@
     "responses": {
       "Unauthorized": {
         "description": "Unauthorized",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "InternalServerError": {
+        "description": "The request cannot be fulfilled due to an unexpected server error",
         "content": {
           "application/json": {
             "schema": {
