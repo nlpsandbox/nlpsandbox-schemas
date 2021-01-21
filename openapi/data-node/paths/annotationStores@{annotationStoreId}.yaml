@@ -26,6 +26,8 @@ get:
             $ref: ../components/schemas/AnnotationStore.yaml
     '404':
       $ref: ../../commons/components/responses/NotFound.yaml
+    '500':
+      $ref: ../../commons/components/responses/InternalServerError.yaml
 delete:
   tags:
     - AnnotationStore
@@ -41,3 +43,5 @@ delete:
             $ref: ../../commons/components/schemas/EmptyObject.yaml
     '404':
       $ref: ../../commons/components/responses/NotFound.yaml
+    '500':
+      $ref: ../../commons/components/responses/InternalServerError.yaml
