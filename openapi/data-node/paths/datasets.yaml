@@ -27,6 +27,8 @@ post:
       $ref: ../../commons/components/responses/BadRequest.yaml
     '409':
       $ref: ../../commons/components/responses/Conflict.yaml
+    '500':
+      $ref: ../../commons/components/responses/InternalServerError.yaml
 get:
   tags:
     - Dataset
@@ -55,4 +57,5 @@ get:
       description: Success
     '400':
       $ref: ../../commons/components/responses/BadRequest.yaml
-
+    '500':
+      $ref: ../../commons/components/responses/InternalServerError.yaml

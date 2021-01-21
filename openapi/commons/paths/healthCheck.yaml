@@ -13,3 +13,5 @@ get:
             $ref: ../components/schemas/HealthCheck.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
+    '500':
+      $ref: ../components/responses/InternalServerError.yaml

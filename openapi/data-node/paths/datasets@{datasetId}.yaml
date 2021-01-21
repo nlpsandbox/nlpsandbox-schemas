@@ -20,6 +20,8 @@ get:
             $ref: ../components/schemas/Dataset.yaml
     '404':
       $ref: ../../commons/components/responses/NotFound.yaml
+    '500':
+      $ref: ../../commons/components/responses/InternalServerError.yaml
 delete:
   tags:
     - Dataset
@@ -35,3 +37,5 @@ delete:
             $ref: ../../commons/components/schemas/EmptyObject.yaml
     '404':
       $ref: ../../commons/components/responses/NotFound.yaml
+    '500':
+      $ref: ../../commons/components/responses/InternalServerError.yaml
