@@ -1,16 +1,16 @@
 openapi: 3.0.2
 info:
-  version: 0.2.2
+  version: 0.3.0
   title: NLP Sandbox Physical Address Annotator API
   contact:
     name: The NLP Sandbox Team
     email: thomas.schaffter@sagebionetworks.org
-    url: 'https://Sage-Bionetworks.github.io/nlp-sandbox-schemas'
+    url: 'https://nlpsandbox.github.io/nlpsandbox-schemas'
   license:
     name: Apache 2.0
-    url: 'https://github.com/Sage-Bionetworks/nlp-sandbox/blob/main/LICENSE'
+    url: 'https://nlpsandbox.github.io/nlpsandbox-schemas/blob/develop/LICENSE'
   x-logo:
-    url: 'https://Sage-Bionetworks.github.io/nlp-sandbox-schemas/logo.png'
+    url: 'https://nlpsandbox.github.io/nlpsandbox-schemas/logo.png'
   description: >
     The OpenAPI specification implemented by NLP Sandbox Physical Address
     Annotators.
@@ -49,13 +49,15 @@ paths:
                 $ref: '#/components/schemas/TextPhysicalAddressAnnotations'
         '403':
           $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
   /service:
     get:
       tags:
         - Service
       summary: Get service information
       description: Get information about the service
-      operationId: service
+      operationId: getService
       responses:
         '200':
           description: Success
@@ -63,20 +65,26 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Service'
-        '403':
-          $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
 components:
   schemas:
+    NoteResourceId:
+      description: The ID of the clinical note
+      type: string
+      example: 507f1f77bcf86cd799439011
+    PatientResourceId:
+      description: The ID of the FHIR patient
+      type: string
+      example: 507f1f77bcf86cd799439011
     Note:
       type: object
       description: A clinical note
       properties:
         id:
-          description: The ID of the note
-          type: string
-          readOnly: true
+          $ref: '#/components/schemas/NoteResourceId'
         text:
           description: The content of the clinical note
           type: string
@@ -86,9 +94,7 @@ components:
           type: string
           example: 'loinc:LP29684-5'
         patientId:
-          description: The patient ID
-          type: string
-          example: 507f1f77bcf86cd799439011
+          $ref: '#/components/schemas/PatientResourceId'
       required:
         - text
         - noteType
@@ -200,7 +206,42 @@ components:
         license:
           description: The license of this service (spdx.org/licenses Identifier)
           type: string
-          example: Apache-2.0
+          enum:
+            - afl-3.0
+            - apache-2.0
+            - artistic-2.0
+            - bsl-1.0
+            - bsd-2-clause
+            - bsd-3-clause
+            - bsd-3-clause-clear
+            - cc
+            - cc0-1.0
+            - cc-by-4.0
+            - cc-by-sa-4.0
+            - wtfpl
+            - ecl-2.0
+            - epl-1.0
+            - epl-2.0
+            - eupl-1.1
+            - agpl-3.0
+            - gpl
+            - gpl-2.0
+            - gpl-3.0
+            - lgpl
+            - lgpl-2.1
+            - lgpl-3.0
+            - isc
+            - lppl-1.3c
+            - ms-pl
+            - mit
+            - mpl-2.0
+            - osl-3.0
+            - postgresql
+            - ofl-1.1
+            - ncsa
+            - unlicense
+            - zlib
+          example: apache-2.0
         repository:
           description: The place where the code lives
           type: string
@@ -226,6 +267,12 @@ components:
   responses:
     Unauthorized:
       description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    InternalServerError:
+      description: The request cannot be fulfilled due to an unexpected server error
       content:
         application/json:
           schema:
