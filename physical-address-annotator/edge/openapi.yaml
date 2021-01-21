@@ -49,6 +49,8 @@ paths:
                 $ref: '#/components/schemas/TextPhysicalAddressAnnotations'
         '403':
           $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
   /service:
     get:
       tags:
@@ -65,6 +67,8 @@ paths:
                 $ref: '#/components/schemas/Service'
         '404':
           $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
 components:
   schemas:
     NoteResourceId:
@@ -263,6 +267,12 @@ components:
   responses:
     Unauthorized:
       description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    InternalServerError:
+      description: The request cannot be fulfilled due to an unexpected server error
       content:
         application/json:
           schema:
