@@ -18,6 +18,8 @@ info:
 
     TBA
 tags:
+  - name: AnnotatorsInfo
+    description: Operations about annotators service info
   - name: DeidentifiedNotes
     description: Operations about deidentified notes
   - name: Service
@@ -26,6 +28,8 @@ servers:
   - url: 'http://example.com/api/v1'
   - url: 'https://example.com/api/v1'
 paths:
+  /annotatorsInfo:
+    $ref: 'paths/annotatorsInfo.yaml'
   /deidentifiedNotes:
     $ref: 'paths/deidentifiedNotes.yaml'
   /service:
