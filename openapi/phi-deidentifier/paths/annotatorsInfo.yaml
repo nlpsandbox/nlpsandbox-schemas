@@ -1,0 +1,15 @@
+get:
+  tags:
+    - DeidentifiedNotes
+  summary: Get service info for currently loaded annotators
+  description: Returns service info for each annotator
+  operationId: "getAnnotatorsInfo"
+  responses:
+    '200':
+      description: Success
+      content:
+      application/json:
+        schema:
+          $ref: ../components/responses/AnnotatorsInfoResponse.yaml
+    '403':
+      $ref: ../../commons/components/responses/Unauthorized.yaml
