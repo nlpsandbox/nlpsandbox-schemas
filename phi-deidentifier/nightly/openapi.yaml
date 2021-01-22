@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 0.2.2
+  version: 0.3.0
   title: NLP Sandbox Deidentifier API
   contact:
     name: The NLP Sandbox Team
@@ -45,6 +45,8 @@ paths:
                 $ref: '#/components/schemas/DeidentifyResponse'
         '403':
           $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
   /service:
     get:
       tags:
@@ -61,6 +63,8 @@ paths:
                 $ref: '#/components/schemas/Service'
         '404':
           $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
 components:
   schemas:
     DeidentificationConfig:
@@ -407,6 +411,12 @@ components:
   responses:
     Unauthorized:
       description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    InternalServerError:
+      description: The request cannot be fulfilled due to an unexpected server error
       content:
         application/json:
           schema:
