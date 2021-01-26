@@ -53,16 +53,10 @@
   ],
   "servers": [
     {
-      "url": "{protocol}://example.com/api/v1",
-      "variables": {
-        "protocol": {
-          "enum": [
-            "http",
-            "https"
-          ],
-          "default": "https"
-        }
-      }
+      "url": "http://example.com/api/v1"
+    },
+    {
+      "url": "https://example.com/api/v1"
     }
   ],
   "paths": {
