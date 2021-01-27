@@ -31,3 +31,5 @@ paths:
     $ref: 'paths/textPersonNameAnnotations.yaml'
   /tool:
     $ref: '../commons/paths/tool.yaml'
+  /tool/dependencies:
+    $ref: '../commons/paths/dependencies.yaml'
