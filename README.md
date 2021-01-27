@@ -12,10 +12,11 @@ order.
 
 | API | Type | Version |
 |---|---|---|
-| [Data Node](/openapi/data-node) | Data Node | 0.3.0 |
-| [Date Annotator](/openapi/date-annotator) | NLP Tool | 0.3.0 |
-| [Person Name Annotator](/openapi/person-name-annotator) | NLP Tool | 0.3.0 |
-| [Physical Address Annotator](/openapi/physical-address-annotator) | NLP Tool | 0.3.0 |
+| [Data Node](/openapi/data-node) | `nlpsandbox:data-node` | 0.3.1 |
+| [Date Annotator](/openapi/date-annotator) | `nlpsandbox:date-annotator` | 0.3.1 |
+| [Person Name Annotator](/openapi/person-name-annotator) | `nlpsandbox:person-name-annotator` | 0.3.1 |
+| [Physical Address Annotator](/openapi/physical-address-annotator) | `nlpsandbox:physical-address-annotator` | 0.3.1 |
+| [PHI Deidentifier](/openapi/phi-deidentifier) | `nlpsandbox:phi-deidentifier` | 0.3.1 |
 
 ## Web services
 
@@ -27,6 +28,7 @@ You can find below example implementations of the APIs defined by the NLP Sandbo
 | [nlpsandbox/date-annotator-example](https://github.com/nlpsandbox/date-annotator-example) | Date Annotator |
 | [nlpsandbox/person-name-annotator-example](https://github.com/nlpsandbox/person-name-annotator-example) | Person Name Annotator |
 | [nlpsandbox/physical-address-annotator-example](https://github.com/nlpsandbox/physical-address-annotator-example) | Physical Address Annotator |
+| [nlpsandbox/phi-deidentifier](https://github.com/nlpsandbox/phi-deidentifier) | PHI Deidentifier |
 
 ## Development
 

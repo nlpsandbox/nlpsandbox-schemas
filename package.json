@@ -1,12 +1,12 @@
 {
   "name": "nlpsandbox-schemas",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "license": "Apache-2.0",
   "repository": "github:nlpsandbox/nlpsandbox-schemas",
   "devDependencies": {
     "@redocly/openapi-cli": "1.0.0-beta.22",
     "gh-openapi-docs-ts": "0.3.4",
-    "ibm-openapi-validator": "0.33.2"
+    "ibm-openapi-validator": "0.34.0"
   },
   "scripts": {
     "start": "openapi preview-docs $npm_config_entrypoint",
