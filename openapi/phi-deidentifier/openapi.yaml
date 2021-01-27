@@ -20,6 +20,8 @@ info:
 tags:
   - name: DeidentifiedNotes
     description: Operations about deidentified notes
+  - name: HealthCheck
+    description: Operations about health checks
   - name: Tool
     description: Operations about this tool
 servers:
@@ -28,6 +30,8 @@ servers:
 paths:
   /deidentifiedNotes:
     $ref: 'paths/deidentifiedNotes.yaml'
+  /healthCheck:
+    $ref: '../commons/paths/healthCheck.yaml'
   /tool:
     $ref: '../commons/paths/tool.yaml'
   /tool/dependencies:

@@ -19,6 +19,8 @@ info:
     This NLP tool detects references of person names in the clinical notes given
     as input and returns a list of person name annotations.
 tags:
+  - name: HealthCheck
+    description: Operations about health checks
   - name: TextPersonNameAnnotation
     description: Operations about text person name annotations
   - name: Tool
@@ -27,6 +29,8 @@ servers:
   - url: 'http://example.com/api/v1'
   - url: 'https://example.com/api/v1'
 paths:
+  /healthCheck:
+    $ref: '../commons/paths/healthCheck.yaml'
   /textPersonNameAnnotations:
     $ref: 'paths/textPersonNameAnnotations.yaml'
   /tool:

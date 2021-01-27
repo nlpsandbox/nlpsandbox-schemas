@@ -19,6 +19,8 @@ info:
     This NLP tool detects references of physical addresses in the clinical notes
     given as input and returns a list of physical address annotations.
 tags:
+  - name: HealthCheck
+    description: Operations about health checks
   - name: TextPhysicalAddressAnnotation
     description: Operations about text physical address annotations
   - name: Tool
@@ -27,6 +29,8 @@ servers:
   - url: 'http://example.com/api/v1'
   - url: 'https://example.com/api/v1'
 paths:
+  /healthCheck:
+    $ref: '../commons/paths/healthCheck.yaml'
   /textPhysicalAddressAnnotations:
     $ref: 'paths/textPhysicalAddressAnnotations.yaml'
   /tool:
