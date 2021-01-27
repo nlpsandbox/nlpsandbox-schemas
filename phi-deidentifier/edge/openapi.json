@@ -23,6 +23,10 @@
       "description": "Operations about deidentified notes"
     },
     {
+      "name": "HealthCheck",
+      "description": "Operations about health checks"
+    },
+    {
       "name": "Tool",
       "description": "Operations about this tool"
     }
@@ -66,6 +70,34 @@
           },
           "400": {
             "$ref": "#/components/responses/BadRequest"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/healthCheck": {
+      "get": {
+        "tags": [
+          "HealthCheck"
+        ],
+        "summary": "Get health check information",
+        "description": "Get information about the health of the service",
+        "operationId": "getHealthCheck",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthCheck"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
           },
           "500": {
             "$ref": "#/components/responses/InternalServerError"
@@ -454,6 +486,24 @@
         },
         "required": [
           "title",
+          "status"
+        ]
+      },
+      "HealthCheck": {
+        "type": "object",
+        "description": "Represents the health of a service",
+        "properties": {
+          "status": {
+            "description": "Indicates whether the service status is acceptable or not",
+            "type": "string",
+            "enum": [
+              "pass",
+              "fail",
+              "warn"
+            ]
+          }
+        },
+        "required": [
           "status"
         ]
       },
