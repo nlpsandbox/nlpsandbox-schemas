@@ -43,8 +43,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DeidentifyResponse'
-        '403':
-          $ref: '#/components/responses/Unauthorized'
+        '400':
+          $ref: '#/components/responses/BadRequest'
         '500':
           $ref: '#/components/responses/InternalServerError'
   /tool:
@@ -455,8 +455,8 @@ components:
           items:
             $ref: '#/components/schemas/Tool'
   responses:
-    Unauthorized:
-      description: Unauthorized
+    BadRequest:
+      description: Invalid request
       content:
         application/json:
           schema:
