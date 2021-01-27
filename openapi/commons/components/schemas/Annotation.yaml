@@ -2,9 +2,7 @@ type: object
 description: An annotation record
 properties:
   name:
-    description: Resource name of the annotation record, of the form datasets/{datasetId}/annotationStores/{annotationStoreId}/annotations/{annotationId}
-    type: string
-    readOnly: true
+    $ref: ../parameters/AnnotationName.yaml
   annotationSource:
     $ref: AnnotationSource.yaml
   textDateAnnotations:

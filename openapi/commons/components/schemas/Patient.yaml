@@ -1,10 +1,8 @@
 type: object
-description: A FHIR Patient
+description: A FHIR patient
 properties:
   id:
-    description: The patient ID
-    type: string
-    readOnly: true
+    $ref: ../parameters/PatientResourceId.yaml
   identifier:
     description: An identifier for this patient
     type: string

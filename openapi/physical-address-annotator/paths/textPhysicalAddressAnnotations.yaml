@@ -18,3 +18,5 @@ post:
             $ref: ../components/schemas/TextPhysicalAddressAnnotations.yaml
     '403':
       $ref: ../../commons/components/responses/Unauthorized.yaml
+    '500':
+      $ref: ../../commons/components/responses/InternalServerError.yaml

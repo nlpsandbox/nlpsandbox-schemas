@@ -10,11 +10,13 @@ post:
         schema:
           $ref: ../components/schemas/DeidentifyRequest.yaml
   responses:
-      '200':
-        description: Success
-        content:
-          application/json:
-            schema:
-              $ref: ../components/responses/DeidentifyResponse.yaml
-      '403':
-        $ref: ../../commons/components/responses/Unauthorized.yaml
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DeidentifyResponse.yaml
+    '400':
+      $ref: ../../commons/components/responses/BadRequest.yaml
+    '500':
+      $ref: ../../commons/components/responses/InternalServerError.yaml

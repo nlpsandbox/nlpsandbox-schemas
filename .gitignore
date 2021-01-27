@@ -1,5 +1,6 @@
-# Dir for bundles
-dist
-dist.yaml
-node_modules
 .idea
+dist
+node_modules
+
+dist.yaml
+openapi.yaml
