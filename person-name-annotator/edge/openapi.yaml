@@ -128,6 +128,7 @@ components:
       required:
         - start
         - length
+        - text
     TextPersonNameAnnotation:
       type: object
       description: A person name annotation in a text
