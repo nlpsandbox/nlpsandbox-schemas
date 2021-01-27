@@ -12,7 +12,7 @@ order.
 
 | API | Type | Version |
 |---|---|---|
-| [Data Node](/openapi/data-node) | `nlpsandbox:data-node` | 0.3.1 |
+| [Data Node](/openapi/data-node) | | 0.3.1 |
 | [Date Annotator](/openapi/date-annotator) | `nlpsandbox:date-annotator` | 0.3.1 |
 | [Person Name Annotator](/openapi/person-name-annotator) | `nlpsandbox:person-name-annotator` | 0.3.1 |
 | [Physical Address Annotator](/openapi/physical-address-annotator) | `nlpsandbox:physical-address-annotator` | 0.3.1 |
