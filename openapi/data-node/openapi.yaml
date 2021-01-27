@@ -39,8 +39,8 @@ tags:
     description: Operations about notes
   - name: Patient
     description: Operations about patients
-  - name: Service
-    description: Operations about this service
+  - name: Tool
+    description: Operations about this tool
 servers:
   - url: 'http://example.com/api/v1'
   - url: 'https://example.com/api/v1'
@@ -71,5 +71,5 @@ paths:
     $ref: 'paths/notes@{noteId}.yaml'
   /healthCheck:
     $ref: '../commons/paths/healthCheck.yaml'
-  /service:
-    $ref: '../commons/paths/service.yaml'
+  /tool:
+    $ref: '../commons/paths/tool.yaml'

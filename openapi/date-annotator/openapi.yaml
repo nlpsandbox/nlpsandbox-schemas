@@ -21,13 +21,13 @@ info:
 tags:
   - name: TextDateAnnotation
     description: Operations about text date annotations
-  - name: Service
-    description: Operations about this API service
+  - name: Tool
+    description: Operations about this tool
 servers:
   - url: 'http://example.com/api/v1'
   - url: 'https://example.com/api/v1'
 paths:
   /textDateAnnotations:
     $ref: 'paths/textDateAnnotations.yaml'
-  /service:
-    $ref: '../commons/paths/service.yaml'
+  /tool:
+    $ref: '../commons/paths/tool.yaml'
