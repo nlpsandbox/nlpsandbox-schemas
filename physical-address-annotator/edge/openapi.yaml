@@ -129,6 +129,7 @@ components:
       required:
         - start
         - length
+        - text
     TextPhysicalAddressAnnotation:
       type: object
       description: A person name annotation in a text
