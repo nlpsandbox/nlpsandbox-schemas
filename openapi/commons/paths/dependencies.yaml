@@ -1,16 +1,16 @@
 get:
   tags:
-    - Service
-  summary: Get service information
-  description: Get information about the service
-  operationId: getService
+    - Tool
+  summary: Get tool dependencies
+  description: Get the dependencies of this tool
+  operationId: getToolDependencies
   responses:
     '200':
       description: Success
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/Service.yaml
+            $ref: ../components/schemas/ToolDependencies.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
     '500':

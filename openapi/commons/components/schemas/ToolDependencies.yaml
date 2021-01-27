@@ -1,0 +1,8 @@
+type: object
+description: A list of tool dependencies
+properties:
+  toolDependencies:
+    description: A list of tools
+    type: array
+    items:
+      $ref: Tool.yaml

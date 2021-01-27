@@ -1,4 +1,4 @@
-description: The ID of the FHIR patient
+description: ID of the FHIR patient
 type: string
 # minLength: 3
 # maxLength: 60
