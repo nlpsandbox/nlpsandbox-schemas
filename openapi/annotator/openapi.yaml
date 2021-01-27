@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 0.2.2
+  version: 0.3.1
   title: NLP Sandbox Date Annotator API
   contact:
     name: The NLP Sandbox Team
@@ -37,5 +37,7 @@ paths:
     $ref: '../person-name-annotator/paths/textPersonNameAnnotations.yaml'
   /textPhysicalAddressAnnotations:
     $ref: '../physical-address-annotator/paths/textPhysicalAddressAnnotations.yaml'
-  /service:
-    $ref: '../commons/paths/service.yaml'
+  /tool:
+    $ref: '../commons/paths/tool.yaml'
+  /tool/dependencies:
+    $ref: '../commons/paths/dependencies.yaml'
