@@ -19,6 +19,10 @@
   },
   "tags": [
     {
+      "name": "HealthCheck",
+      "description": "Operations about health checks"
+    },
+    {
       "name": "TextPersonNameAnnotation",
       "description": "Operations about text person name annotations"
     },
@@ -36,6 +40,34 @@
     }
   ],
   "paths": {
+    "/healthCheck": {
+      "get": {
+        "tags": [
+          "HealthCheck"
+        ],
+        "summary": "Get health check information",
+        "description": "Get information about the health of the service",
+        "operationId": "getHealthCheck",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthCheck"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
     "/textPersonNameAnnotations": {
       "post": {
         "tags": [
@@ -132,6 +164,50 @@
   },
   "components": {
     "schemas": {
+      "HealthCheck": {
+        "type": "object",
+        "description": "Represents the health of a service",
+        "properties": {
+          "status": {
+            "description": "Indicates whether the service status is acceptable or not",
+            "type": "string",
+            "enum": [
+              "pass",
+              "fail",
+              "warn"
+            ]
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "Error": {
+        "type": "object",
+        "description": "Problem details (tools.ietf.org/html/rfc7807)",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "A human readable documentation for the problem type"
+          },
+          "status": {
+            "type": "integer",
+            "description": "The HTTP status code"
+          },
+          "detail": {
+            "type": "string",
+            "description": "A human readable explanation specific to this occurrence of the problem"
+          },
+          "type": {
+            "type": "string",
+            "description": "An absolute URI that identifies the problem type"
+          }
+        },
+        "required": [
+          "title",
+          "status"
+        ]
+      },
       "NoteResourceId": {
         "description": "ID of the clinical note",
         "type": "string",
@@ -236,32 +312,6 @@
             }
           }
         }
-      },
-      "Error": {
-        "type": "object",
-        "description": "Problem details (tools.ietf.org/html/rfc7807)",
-        "properties": {
-          "title": {
-            "type": "string",
-            "description": "A human readable documentation for the problem type"
-          },
-          "status": {
-            "type": "integer",
-            "description": "The HTTP status code"
-          },
-          "detail": {
-            "type": "string",
-            "description": "A human readable explanation specific to this occurrence of the problem"
-          },
-          "type": {
-            "type": "string",
-            "description": "An absolute URI that identifies the problem type"
-          }
-        },
-        "required": [
-          "title",
-          "status"
-        ]
       },
       "License": {
         "description": "License (license keyword used by GitHub)",
@@ -389,8 +439,8 @@
       }
     },
     "responses": {
-      "Unauthorized": {
-        "description": "Unauthorized",
+      "NotFound": {
+        "description": "The specified resource was not found",
         "content": {
           "application/json": {
             "schema": {
@@ -409,8 +459,8 @@
           }
         }
       },
-      "NotFound": {
-        "description": "The specified resource was not found",
+      "Unauthorized": {
+        "description": "Unauthorized",
         "content": {
           "application/json": {
             "schema": {
