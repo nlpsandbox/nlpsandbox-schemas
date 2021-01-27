@@ -8,8 +8,6 @@ properties:
     maxLength: 60
     pattern: "^[a-z0-9]+(?:-[a-z0-9]+)*$"
     example: awesome-date-annotator
-  toolType:
-    $ref: ../parameters/ToolType.yaml
   version:
     description: The version of the tool (SemVer string)
     type: string
@@ -40,3 +38,15 @@ properties:
     description: The URL to the homepage of the tool
     type: string
     format: uri
+  toolType:
+    $ref: ../parameters/ToolType.yaml
+required:
+  - name
+  - version
+  - license
+  - repository
+  - description
+  - author
+  - authorEmail
+  - url
+  - toolType
