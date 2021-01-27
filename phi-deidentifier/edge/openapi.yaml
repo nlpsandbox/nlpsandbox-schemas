@@ -224,6 +224,7 @@ components:
       required:
         - start
         - length
+        - text
     TextDateAnnotation:
       type: object
       description: A date annotation in a text
