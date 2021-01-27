@@ -1,4 +1,4 @@
-description: The ID of the clinical note
+description: ID of the clinical note
 type: string
 # minLength: 3
 # maxLength: 60

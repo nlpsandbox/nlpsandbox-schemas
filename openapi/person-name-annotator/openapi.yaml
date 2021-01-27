@@ -21,13 +21,15 @@ info:
 tags:
   - name: TextPersonNameAnnotation
     description: Operations about text person name annotations
-  - name: Service
-    description: Operations about this API service
+  - name: Tool
+    description: Operations about this tool
 servers:
   - url: 'http://example.com/api/v1'
   - url: 'https://example.com/api/v1'
 paths:
   /textPersonNameAnnotations:
     $ref: 'paths/textPersonNameAnnotations.yaml'
-  /service:
-    $ref: '../commons/paths/service.yaml'
+  /tool:
+    $ref: '../commons/paths/tool.yaml'
+  /tool/dependencies:
+    $ref: '../commons/paths/dependencies.yaml'

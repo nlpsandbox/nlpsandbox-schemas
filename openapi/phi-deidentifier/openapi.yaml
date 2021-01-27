@@ -22,8 +22,8 @@ tags:
     description: Operations about annotators service info
   - name: DeidentifiedNotes
     description: Operations about deidentified notes
-  - name: Service
-    description: Operations about this service
+  - name: Tool
+    description: Operations about this tool
 servers:
   - url: 'http://example.com/api/v1'
   - url: 'https://example.com/api/v1'
@@ -32,5 +32,7 @@ paths:
     $ref: 'paths/annotatorsInfo.yaml'
   /deidentifiedNotes:
     $ref: 'paths/deidentifiedNotes.yaml'
-  /service:
-    $ref: '../commons/paths/service.yaml'
+  /tool:
+    $ref: '../commons/paths/tool.yaml'
+  /tool/dependencies:
+    $ref: '../commons/paths/dependencies.yaml'
