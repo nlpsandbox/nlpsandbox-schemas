@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.2",
   "info": {
-    "version": "0.3.0",
+    "version": "0.3.1",
     "title": "NLP Sandbox Data Node API",
     "contact": {
       "name": "The NLP Sandbox Team",
@@ -45,24 +45,14 @@
     {
       "name": "Patient",
       "description": "Operations about patients"
-    },
-    {
-      "name": "Service",
-      "description": "Operations about this service"
     }
   ],
   "servers": [
     {
-      "url": "{protocol}://example.com/api/v1",
-      "variables": {
-        "protocol": {
-          "enum": [
-            "http",
-            "https"
-          ],
-          "default": "https"
-        }
-      }
+      "url": "http://example.com/api/v1"
+    },
+    {
+      "url": "https://example.com/api/v1"
     }
   ],
   "paths": {
@@ -1186,34 +1176,6 @@
           }
         }
       }
-    },
-    "/service": {
-      "get": {
-        "tags": [
-          "Service"
-        ],
-        "summary": "Get service information",
-        "description": "Get information about the service",
-        "operationId": "getService",
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Service"
-                }
-              }
-            }
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
-          },
-          "500": {
-            "$ref": "#/components/responses/InternalServerError"
-          }
-        }
-      }
     }
   },
   "components": {
@@ -1456,7 +1418,8 @@
         },
         "required": [
           "start",
-          "length"
+          "length",
+          "text"
         ]
       },
       "TextDateAnnotation": {
@@ -1691,7 +1654,7 @@
         }
       },
       "PatientResourceId": {
-        "description": "The ID of the FHIR patient",
+        "description": "ID of the FHIR patient",
         "type": "string",
         "example": "507f1f77bcf86cd799439011"
       },
@@ -1774,7 +1737,7 @@
         }
       },
       "NoteResourceId": {
-        "description": "The ID of the clinical note",
+        "description": "ID of the clinical note",
         "type": "string",
         "example": "507f1f77bcf86cd799439011"
       },
@@ -1879,95 +1842,6 @@
         "required": [
           "status"
         ]
-      },
-      "Service": {
-        "type": "object",
-        "description": "Information about an NLP service",
-        "properties": {
-          "name": {
-            "description": "The service name",
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 60,
-            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
-            "example": "awesome-date-annotator"
-          },
-          "version": {
-            "description": "The version of the service (SemVer string)",
-            "type": "string",
-            "minLength": 1,
-            "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$",
-            "example": "1.0.0"
-          },
-          "license": {
-            "description": "The license of this service (spdx.org/licenses Identifier)",
-            "type": "string",
-            "enum": [
-              "afl-3.0",
-              "apache-2.0",
-              "artistic-2.0",
-              "bsl-1.0",
-              "bsd-2-clause",
-              "bsd-3-clause",
-              "bsd-3-clause-clear",
-              "cc",
-              "cc0-1.0",
-              "cc-by-4.0",
-              "cc-by-sa-4.0",
-              "wtfpl",
-              "ecl-2.0",
-              "epl-1.0",
-              "epl-2.0",
-              "eupl-1.1",
-              "agpl-3.0",
-              "gpl",
-              "gpl-2.0",
-              "gpl-3.0",
-              "lgpl",
-              "lgpl-2.1",
-              "lgpl-3.0",
-              "isc",
-              "lppl-1.3c",
-              "ms-pl",
-              "mit",
-              "mpl-2.0",
-              "osl-3.0",
-              "postgresql",
-              "ofl-1.1",
-              "ncsa",
-              "unlicense",
-              "zlib"
-            ],
-            "example": "apache-2.0"
-          },
-          "repository": {
-            "description": "The place where the code lives",
-            "type": "string",
-            "example": "github:awesome-org/awesome-date-annotator"
-          },
-          "description": {
-            "description": "A short, one-sentence summary of the service",
-            "type": "string",
-            "maxLength": 100,
-            "example": "An awesome Date Annotator based on regex patterns"
-          },
-          "author": {
-            "description": "The author of the service",
-            "type": "string",
-            "example": "Example Author"
-          },
-          "authorEmail": {
-            "description": "The email address of the author",
-            "type": "string",
-            "format": "email",
-            "example": "author@example.com"
-          },
-          "url": {
-            "description": "The URL to the homepage of the service",
-            "type": "string",
-            "format": "uri"
-          }
-        }
       }
     },
     "responses": {
