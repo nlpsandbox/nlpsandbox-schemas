@@ -1,9 +1,0 @@
-type: object
-description: Info on loaded annotators
-properties:
-  textDateAnnotator:
-    $ref: ../../../commons/components/schemas/Service.yaml
-  textPersonNameAnnotator:
-    $ref: ../../../commons/components/schemas/Service.yaml
-  textPhysicalAddressAnnotator:
-    $ref: ../../../commons/components/schemas/Service.yaml
