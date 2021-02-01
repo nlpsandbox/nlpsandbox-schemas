@@ -20,12 +20,16 @@ tags:
     description: Operations about text person name annotations
   - name: TextPhysicalAddressAnnotation
     description: Operations about text physical address annotations
-  - name: Service
-    description: Operations about this API service
+  - name: HealthCheck
+    description: Operations about health checks
+  - name: Tool
+    description: Operations about this tool
 servers:
   - url: 'http://example.com/api/v1'
   - url: 'https://example.com/api/v1'
 paths:
+  /healthCheck:
+    $ref: '../commons/paths/healthCheck.yaml'
   /textDateAnnotations:
     $ref: '../date-annotator/paths/textDateAnnotations.yaml'
   /textPersonNameAnnotations:
