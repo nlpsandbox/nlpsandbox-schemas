@@ -160,7 +160,7 @@ components:
         text:
           description: The content of the clinical note
           type: string
-          example: 'On 12/26/2020, Ms. Chloe Price met with Dr. Prescott.'
+          example: 'On 12/26/2020, Ms. Chloe Price met with Dr. Prescott in Seattle.'
         noteType:
           description: The note type (LOINC concept)
           type: string
