@@ -16,7 +16,7 @@ post:
         application/json:
           schema:
             $ref: ../components/schemas/TextPersonNameAnnotations.yaml
-    '403':
-      $ref: ../../commons/components/responses/Unauthorized.yaml
+    '400':
+      $ref: ../../commons/components/responses/BadRequest.yaml
     '500':
       $ref: ../../commons/components/responses/InternalServerError.yaml
