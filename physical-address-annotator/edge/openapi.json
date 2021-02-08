@@ -96,8 +96,8 @@
               }
             }
           },
-          "403": {
-            "$ref": "#/components/responses/Unauthorized"
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
           },
           "500": {
             "$ref": "#/components/responses/InternalServerError"
@@ -481,8 +481,8 @@
           }
         }
       },
-      "Unauthorized": {
-        "description": "Unauthorized",
+      "BadRequest": {
+        "description": "Invalid request",
         "content": {
           "application/json": {
             "schema": {

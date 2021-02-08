@@ -67,8 +67,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TextPhysicalAddressAnnotations'
-        '403':
-          $ref: '#/components/responses/Unauthorized'
+        '400':
+          $ref: '#/components/responses/BadRequest'
         '500':
           $ref: '#/components/responses/InternalServerError'
   /tool:
@@ -356,8 +356,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized
+    BadRequest:
+      description: Invalid request
       content:
         application/json:
           schema:
