@@ -12,11 +12,9 @@ info:
   x-logo:
     url: 'https://nlpsandbox.github.io/nlpsandbox-schemas/logo.png'
   description: >
-    The OpenAPI specification implemented by NLP Sandbox Physical Address Annotators.
-
     # Overview
 
-    This NLP tool detects references of physical addresses in the clinical notes
+    This NLP tool detects references of physical addresses in the clinical note
     given as input and returns a list of physical address annotations.
 tags:
   - name: HealthCheck
