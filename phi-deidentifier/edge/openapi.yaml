@@ -11,10 +11,13 @@ info:
     url: 'https://nlpsandbox.github.io/nlpsandbox-schemas/blob/develop/LICENSE'
   x-logo:
     url: 'https://nlpsandbox.github.io/nlpsandbox-schemas/logo.png'
-  description: |
-    The OpenAPI specification implemented by NLP Sandbox PHI Deidentifiers.
+  description: >
     # Overview
-    TBA
+
+    This NLP tool relies on the following tools to deidentify a clinical note
+    given as input.
+
+    - Data Annotator - Person Name Annotator - Physical Address Annotator - TBA
 tags:
   - name: DeidentifiedNotes
     description: Operations about deidentified notes
