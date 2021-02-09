@@ -1,3 +1,4 @@
 description: The resource name of the FHIR patient, of the form datasets/{datasetId}/fhirStores/{fhirStoreId}/Patient/{PatientId}
 type: string
+pattern: ^datasets\/[a-z0-9]+(?:-[a-z0-9]+)*\/fhirStores\/[a-z0-9]+(?:-[a-z0-9]+)*\/Patient\/[a-z0-9]+(?:-[a-z0-9]+)*$
 example: datasets/awesome-dataset/fhirStores/awesome-fhir-store/Patient/507f1f77bcf86cd799439011

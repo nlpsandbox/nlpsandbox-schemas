@@ -14,5 +14,7 @@ properties:
   patientId:
     $ref: ../parameters/PatientId.yaml
 required:
+  - id
   - text
   - noteType
+  - patientId

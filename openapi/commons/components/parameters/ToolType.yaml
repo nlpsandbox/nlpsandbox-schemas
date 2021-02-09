@@ -1,3 +1,6 @@
 description: The type of this tool
 type: string
+minLength: 3
+maxLength: 60
+pattern: ^[a-z0-9]+(?:-[a-z0-9]+)*(:)[a-z0-9]+(?:-[a-z0-9]+)*$
 example: nlpsandbox:date-annotator
