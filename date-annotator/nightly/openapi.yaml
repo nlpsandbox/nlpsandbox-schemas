@@ -12,12 +12,10 @@ info:
   x-logo:
     url: 'https://nlpsandbox.github.io/nlpsandbox-schemas/logo.png'
   description: >
-    The OpenAPI specification implemented by NLP Sandbox Date Annotators.
-
     # Overview
 
-    This NLP tool detects date references in the clinical note specified and
-    returns a list of date annotations.
+    This NLP tool detects references of dates in the clinical note given as
+    input and returns a list of date annotations.
 tags:
   - name: HealthCheck
     description: Operations about health checks
@@ -66,8 +64,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TextDateAnnotations'
-        '403':
-          $ref: '#/components/responses/Unauthorized'
+        '400':
+          $ref: '#/components/responses/BadRequest'
         '500':
           $ref: '#/components/responses/InternalServerError'
   /tool:
@@ -345,8 +343,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized
+    BadRequest:
+      description: Invalid request
       content:
         application/json:
           schema:

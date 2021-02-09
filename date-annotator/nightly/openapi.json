@@ -15,7 +15,7 @@
     "x-logo": {
       "url": "https://nlpsandbox.github.io/nlpsandbox-schemas/logo.png"
     },
-    "description": "The OpenAPI specification implemented by NLP Sandbox Date Annotators.\n# Overview\nThis NLP tool detects date references in the clinical note specified and returns a list of date annotations.\n"
+    "description": "# Overview\nThis NLP tool detects references of dates in the clinical note given as input and returns a list of date annotations.\n"
   },
   "tags": [
     {
@@ -96,8 +96,8 @@
               }
             }
           },
-          "403": {
-            "$ref": "#/components/responses/Unauthorized"
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
           },
           "500": {
             "$ref": "#/components/responses/InternalServerError"
@@ -470,8 +470,8 @@
           }
         }
       },
-      "Unauthorized": {
-        "description": "Unauthorized",
+      "BadRequest": {
+        "description": "Invalid request",
         "content": {
           "application/json": {
             "schema": {
