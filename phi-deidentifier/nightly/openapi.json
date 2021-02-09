@@ -15,7 +15,7 @@
     "x-logo": {
       "url": "https://nlpsandbox.github.io/nlpsandbox-schemas/logo.png"
     },
-    "description": "The OpenAPI specification implemented by NLP Sandbox PHI Deidentifiers.\n# Overview\nTBA\n"
+    "description": "# Overview\nThis NLP tool relies on the following tools to deidentify a clinical note given as input.\n- Data Annotator - Person Name Annotator - Physical Address Annotator - TBA\n"
   },
   "tags": [
     {
