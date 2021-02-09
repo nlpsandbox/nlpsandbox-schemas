@@ -15,7 +15,7 @@
     "x-logo": {
       "url": "https://nlpsandbox.github.io/nlpsandbox-schemas/logo.png"
     },
-    "description": "The OpenAPI specification implemented by NLP Sandbox Person Name Annotators.\n# Overview\nThis NLP tool detects references of person names in the clinical notes given as input and returns a list of person name annotations.\n"
+    "description": "# Overview\nThis NLP tool detects references of person names in the clinical note given as input and returns a list of person name annotations.\n"
   },
   "tags": [
     {
@@ -96,8 +96,8 @@
               }
             }
           },
-          "403": {
-            "$ref": "#/components/responses/Unauthorized"
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
           },
           "500": {
             "$ref": "#/components/responses/InternalServerError"
@@ -459,8 +459,8 @@
           }
         }
       },
-      "Unauthorized": {
-        "description": "Unauthorized",
+      "BadRequest": {
+        "description": "Invalid request",
         "content": {
           "application/json": {
             "schema": {

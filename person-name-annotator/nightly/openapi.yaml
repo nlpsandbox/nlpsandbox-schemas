@@ -12,11 +12,9 @@ info:
   x-logo:
     url: 'https://nlpsandbox.github.io/nlpsandbox-schemas/logo.png'
   description: >
-    The OpenAPI specification implemented by NLP Sandbox Person Name Annotators.
-
     # Overview
 
-    This NLP tool detects references of person names in the clinical notes given
+    This NLP tool detects references of person names in the clinical note given
     as input and returns a list of person name annotations.
 tags:
   - name: HealthCheck
@@ -66,8 +64,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TextPersonNameAnnotations'
-        '403':
-          $ref: '#/components/responses/Unauthorized'
+        '400':
+          $ref: '#/components/responses/BadRequest'
         '500':
           $ref: '#/components/responses/InternalServerError'
   /tool:
@@ -338,8 +336,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized
+    BadRequest:
+      description: Invalid request
       content:
         application/json:
           schema:
