@@ -1,7 +1,7 @@
 type: object
 description: A clinical note
 properties:
-  id:
+  identifier:
     $ref: ../parameters/NoteId.yaml
   text:
     description: The content of the clinical note
