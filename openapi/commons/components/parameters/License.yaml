@@ -1,6 +1,6 @@
 # License keyword from GitHub:
 # https://docs.github.com/en/free-pro-team@latest/github/creating-cloning-and-archiving-repositories/licensing-a-repository
-description: License (license keyword used by GitHub)
+description: The license (license keyword used by GitHub)
 type: string
 enum:
   - afl-3.0

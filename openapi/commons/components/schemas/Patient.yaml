@@ -2,10 +2,7 @@ type: object
 description: A FHIR patient
 properties:
   id:
-    $ref: ../parameters/PatientResourceId.yaml
-  identifier:
-    description: An identifier for this patient
-    type: string
+    $ref: ../parameters/PatientId.yaml
   gender:
     description: Gender of the patient
     type: string

@@ -16,7 +16,7 @@ parameters:
     description: The ID of the FHIR patient
     required: true
     schema:
-      $ref: ../../commons/components/parameters/PatientResourceId.yaml
+      $ref: ../../commons/components/parameters/PatientId.yaml
 get:
   tags:
     - Patient

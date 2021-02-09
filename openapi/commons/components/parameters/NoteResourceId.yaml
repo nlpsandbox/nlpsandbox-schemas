@@ -1,6 +1,0 @@
-description: ID of the clinical note
-type: string
-# minLength: 3
-# maxLength: 60
-# pattern: "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-example: 507f1f77bcf86cd799439011

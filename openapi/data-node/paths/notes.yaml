@@ -17,6 +17,13 @@ post:
   summary: Create a note
   description: Create a note
   operationId: createNote
+  parameters:
+    - in: query
+      name: noteId
+      description: The ID of the note that is being created
+      required: true
+      schema:
+        $ref: ../../commons/components/parameters/NoteId.yaml
   requestBody:
     content:
       application/json:

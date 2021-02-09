@@ -16,7 +16,7 @@ parameters:
     description: The ID of the note
     required: true
     schema:
-      $ref: ../../commons/components/parameters/NoteResourceId.yaml
+      $ref: ../../commons/components/parameters/NoteId.yaml
 get:
   tags:
     - Note
