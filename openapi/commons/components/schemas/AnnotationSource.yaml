@@ -5,3 +5,4 @@ properties:
     $ref: ResourceSource.yaml
   # s3Source:
   #   $ref: S3Source.yaml
+minProperties: 1
