@@ -2,6 +2,4 @@ type: object
 description: An annotation store
 properties:
   name:
-    description: Resource name of the annotation store, of the form datasets/{datasetId}/annotationStore/{annotationStoreId}
-    type: string
-    readOnly: true
+    $ref: ../parameters/AnnotationStoreName.yaml
