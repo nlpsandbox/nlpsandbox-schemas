@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 0.3.1
+  version: 1.0.0
   title: NLP Sandbox Person Name Annotator API
   contact:
     name: The NLP Sandbox Team
