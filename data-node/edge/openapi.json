@@ -428,6 +428,17 @@
         "summary": "Create an annotation",
         "description": "Create an annotation",
         "operationId": "createAnnotation",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "annotationId",
+            "description": "The ID of the annotation that is being created",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/AnnotationId"
+            }
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -799,6 +810,17 @@
         "summary": "Create a FHIR patient",
         "description": "Create a FHIR patient",
         "operationId": "createPatient",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "patientId",
+            "description": "The ID of the patient that is being created",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/PatientId"
+            }
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -903,7 +925,7 @@
           "description": "The ID of the FHIR patient",
           "required": true,
           "schema": {
-            "$ref": "#/components/schemas/PatientResourceId"
+            "$ref": "#/components/schemas/PatientId"
           }
         }
       ],
@@ -988,6 +1010,17 @@
         "summary": "Create a note",
         "description": "Create a note",
         "operationId": "createNote",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "noteId",
+            "description": "The ID of the note that is being created",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/NoteId"
+            }
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -1092,7 +1125,7 @@
           "description": "The ID of the note",
           "required": true,
           "schema": {
-            "$ref": "#/components/schemas/NoteResourceId"
+            "$ref": "#/components/schemas/NoteId"
           }
         }
       ],
@@ -1181,14 +1214,14 @@
   "components": {
     "schemas": {
       "PageLimit": {
-        "description": "Maximum number of results returned",
+        "description": "The maximum number of results returned",
         "type": "integer",
         "default": 10,
         "minimum": 10,
         "maximum": 100
       },
       "PageOffset": {
-        "description": "Index of the first result that must be returned",
+        "description": "The index of the first result that must be returned",
         "type": "integer",
         "default": 0,
         "minimum": 0
@@ -1224,6 +1257,7 @@
       "DatasetName": {
         "description": "The name of the dataset",
         "type": "string",
+        "pattern": "^datasets\\/[a-z0-9]+(?:-[a-z0-9]+)*$",
         "example": "datasets/awesome-dataset"
       },
       "Dataset": {
@@ -1307,14 +1341,18 @@
         "type": "object",
         "description": "An empty object"
       },
+      "AnnotationStoreName": {
+        "description": "The resource name of the annotation store, of the form datasets/{datasetId}/annotationStores/{annotationStoreId}",
+        "type": "string",
+        "pattern": "^datasets\\/[a-z0-9]+(?:-[a-z0-9]+)*\\/annotationStores\\/[a-z0-9]+(?:-[a-z0-9]+)*$",
+        "example": "datasets/awesome-dataset/annotationStores/awesome-annotation-store"
+      },
       "AnnotationStore": {
         "type": "object",
         "description": "An annotation store",
         "properties": {
           "name": {
-            "description": "Resource name of the annotation store, of the form datasets/{datasetId}/annotationStore/{annotationStoreId}",
-            "type": "string",
-            "readOnly": true
+            "$ref": "#/components/schemas/AnnotationStoreName"
           }
         }
       },
@@ -1351,11 +1389,6 @@
         "type": "object",
         "description": "An empty object"
       },
-      "AnnotationStoreName": {
-        "description": "The resource name of the annotation store, of the form datasets/{datasetId}/annotationStores/{annotationStoreId}",
-        "type": "string",
-        "example": "datasets/awesome-dataset/annotationStores/awesome-annotation-store"
-      },
       "AnnotationStoreCreateResponse": {
         "type": "object",
         "description": "The reference to the annotation store created",
@@ -1366,9 +1399,10 @@
         }
       },
       "AnnotationName": {
-        "description": "Resource name of the annotation record, of the form datasets/{datasetId}/annotationStores/{annotationStoreId}/annotations/{annotationId}",
+        "description": "The resource name of the annotation record, of the form datasets/{datasetId}/annotationStores/{annotationStoreId}/annotations/{annotationId}",
         "type": "string",
-        "example": "datasets/awesome-dataset/annotationStores/awesome-annotation-store/annotations/507f1f77bcf86cd799439011"
+        "pattern": "^datasets\\/[a-z0-9]+(?:-[a-z0-9]+)*\\/annotationStores\\/[a-z0-9]+(?:-[a-z0-9]+)*\\/annotations\\/[a-z0-9]+(?:-[a-z0-9]+)*$",
+        "example": "datasets/awesome-dataset/annotationStores/awesome-annotation-store/annotations/awesome-annotation"
       },
       "ResourceSource": {
         "type": "object",
@@ -1387,7 +1421,8 @@
           "resourceSource": {
             "$ref": "#/components/schemas/ResourceSource"
           }
-        }
+        },
+        "minProperties": 1
       },
       "TextAnnotation": {
         "type": "object",
@@ -1551,6 +1586,14 @@
           }
         ]
       },
+      "AnnotationId": {
+        "description": "The ID of the annotation",
+        "type": "string",
+        "minLength": 3,
+        "maxLength": 60,
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+        "example": "awesome-annotation"
+      },
       "AnnotationCreateRequest": {
         "type": "object",
         "description": "An annotation record",
@@ -1579,7 +1622,10 @@
               "$ref": "#/components/schemas/TextPhysicalAddressAnnotation"
             }
           }
-        }
+        },
+        "required": [
+          "annotationSource"
+        ]
       },
       "AnnotationCreateResponse": {
         "type": "object",
@@ -1598,19 +1644,18 @@
         "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
         "example": "awesome-fhir-store"
       },
-      "AnnotationId": {
-        "description": "The ID of the annotation",
+      "FhirStoreName": {
+        "description": "The resource name of the FHIR store, of the form datasets/{datasetId}/fhirStores/{fhirStoreId}",
         "type": "string",
-        "example": "507f1f77bcf86cd799439011"
+        "pattern": "^datasets\\/[a-z0-9]+(?:-[a-z0-9]+)*\\/fhirStores\\/[a-z0-9]+(?:-[a-z0-9]+)*$",
+        "example": "datasets/awesome-dataset/fhirStores/awesome-fhir-store"
       },
       "FhirStore": {
         "type": "object",
         "description": "A FHIR store",
         "properties": {
           "name": {
-            "description": "Resource name of the FHIR store, of the form datasets/{datasetId}/fhirStores/{fhirStoreId}",
-            "type": "string",
-            "readOnly": true
+            "$ref": "#/components/schemas/FhirStoreName"
           }
         }
       },
@@ -1639,11 +1684,6 @@
         "type": "object",
         "description": "An empty object"
       },
-      "FhirStoreName": {
-        "description": "The resource name of the FHIR store, of the form datasets/{datasetId}/fhirStores/{fhirStoreId}",
-        "type": "string",
-        "example": "datasets/awesome-dataset/fhirStores/awesome-fhir-store"
-      },
       "FhirStoreCreateResponse": {
         "type": "object",
         "description": "The reference to the FHIR store created",
@@ -1653,21 +1693,20 @@
           }
         }
       },
-      "PatientResourceId": {
-        "description": "ID of the FHIR patient",
+      "PatientId": {
+        "description": "The ID of the FHIR patient",
         "type": "string",
-        "example": "507f1f77bcf86cd799439011"
+        "minLength": 3,
+        "maxLength": 60,
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+        "example": "awesome-patient"
       },
       "Patient": {
         "type": "object",
         "description": "A FHIR patient",
         "properties": {
-          "id": {
-            "$ref": "#/components/schemas/PatientResourceId"
-          },
           "identifier": {
-            "description": "An identifier for this patient",
-            "type": "string"
+            "$ref": "#/components/schemas/PatientId"
           },
           "gender": {
             "description": "Gender of the patient",
@@ -1706,10 +1745,6 @@
         "type": "object",
         "description": "A FHIR patient",
         "properties": {
-          "identifier": {
-            "description": "An identifier for this patient",
-            "type": "string"
-          },
           "gender": {
             "description": "Gender of the patient",
             "type": "string",
@@ -1725,6 +1760,7 @@
       "PatientResourceName": {
         "description": "The resource name of the FHIR patient, of the form datasets/{datasetId}/fhirStores/{fhirStoreId}/Patient/{PatientId}",
         "type": "string",
+        "pattern": "^datasets\\/[a-z0-9]+(?:-[a-z0-9]+)*\\/fhirStores\\/[a-z0-9]+(?:-[a-z0-9]+)*\\/Patient\\/[a-z0-9]+(?:-[a-z0-9]+)*$",
         "example": "datasets/awesome-dataset/fhirStores/awesome-fhir-store/Patient/507f1f77bcf86cd799439011"
       },
       "PatientCreateResponse": {
@@ -1736,17 +1772,20 @@
           }
         }
       },
-      "NoteResourceId": {
-        "description": "ID of the clinical note",
+      "NoteId": {
+        "description": "The ID of the clinical note",
         "type": "string",
-        "example": "507f1f77bcf86cd799439011"
+        "minLength": 3,
+        "maxLength": 60,
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+        "example": "awesome-note"
       },
       "Note": {
         "type": "object",
         "description": "A clinical note",
         "properties": {
-          "id": {
-            "$ref": "#/components/schemas/NoteResourceId"
+          "identifier": {
+            "$ref": "#/components/schemas/NoteId"
           },
           "text": {
             "description": "The content of the clinical note",
@@ -1759,12 +1798,14 @@
             "example": "loinc:LP29684-5"
           },
           "patientId": {
-            "$ref": "#/components/schemas/PatientResourceId"
+            "$ref": "#/components/schemas/PatientId"
           }
         },
         "required": [
+          "identifier",
           "text",
-          "noteType"
+          "noteType",
+          "patientId"
         ]
       },
       "PageOfNotes": {
@@ -1795,7 +1836,7 @@
           "text": {
             "description": "The content of the clinical note",
             "type": "string",
-            "example": "On 12/26/2020, Ms. Chloe Price met with Dr. Prescott."
+            "example": "On 12/26/2020, Ms. Chloe Price met with Dr. Prescott in Seattle."
           },
           "noteType": {
             "description": "The note type (LOINC concept)",
@@ -1803,18 +1844,20 @@
             "example": "loinc:LP29684-5"
           },
           "patientId": {
-            "$ref": "#/components/schemas/PatientResourceId"
+            "$ref": "#/components/schemas/PatientId"
           }
         },
         "required": [
           "text",
-          "noteType"
+          "noteType",
+          "patientId"
         ]
       },
       "NoteResourceName": {
         "description": "The resource name of the clinical note, of the form datasets/{datasetId}/fhirStores/{fhirStoreId}/Note/{NoteId}",
         "type": "string",
-        "example": "datasets/awesome-dataset/fhirStores/awesome-fhir-store/Note/507f1f77bcf86cd799439011"
+        "pattern": "^datasets\\/[a-z0-9]+(?:-[a-z0-9]+)*\\/fhirStores\\/[a-z0-9]+(?:-[a-z0-9]+)*\\/Note\\/[a-z0-9]+(?:-[a-z0-9]+)*$",
+        "example": "datasets/awesome-dataset/fhirStores/awesome-fhir-store/Note/awesome-note"
       },
       "NoteCreateResponse": {
         "type": "object",
