@@ -9,14 +9,17 @@ properties:
     description: Date annotations in a text
     type: array
     items:
-      $ref: TextDateAnnotation.yaml
+      $ref: ../../../commons/components/schemas/TextDateAnnotation.yaml
   textPersonNameAnnotations:
     description: Person name annotations in a text
     type: array
     items:
-      $ref: TextPersonNameAnnotation.yaml
+      $ref: ../../../commons/components/schemas/TextPersonNameAnnotation.yaml
   textPhysicalAddressAnnotations:
     description: Physical address annotations in a text
     type: array
     items:
-      $ref: TextPhysicalAddressAnnotation.yaml
+      $ref: ../../../commons/components/schemas/TextPhysicalAddressAnnotation.yaml
+required:
+  - name
+  - annotationSource

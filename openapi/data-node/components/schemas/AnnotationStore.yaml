@@ -3,3 +3,5 @@ description: An annotation store
 properties:
   name:
     $ref: ../parameters/AnnotationStoreName.yaml
+required:
+  - name

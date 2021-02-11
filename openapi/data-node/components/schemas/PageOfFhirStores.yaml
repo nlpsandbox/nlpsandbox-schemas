@@ -9,3 +9,9 @@ allOf:
         type: array
         items:
           $ref: ../schemas/FhirStore.yaml
+required:
+  - offset
+  - limit
+  - links
+  - totalResults
+  - fhirStores

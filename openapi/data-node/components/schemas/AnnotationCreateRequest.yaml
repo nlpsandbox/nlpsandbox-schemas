@@ -2,7 +2,7 @@ type: object
 description: An annotation record
 properties:
   annotationSource:
-    $ref: ../../../commons/components/schemas/AnnotationSource.yaml
+    $ref: AnnotationSource.yaml
   textDateAnnotations:
     description: Date annotations in a text
     type: array
