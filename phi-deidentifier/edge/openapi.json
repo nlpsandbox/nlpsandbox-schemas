@@ -381,7 +381,7 @@
       },
       "TextPhysicalAddressAnnotation": {
         "type": "object",
-        "description": "A person name annotation in a text",
+        "description": "A physical address annotation in a text",
         "allOf": [
           {
             "$ref": "#/components/schemas/TextAnnotation"
