@@ -1,0 +1,18 @@
+type: object
+description: Set of annotations of all types for a text
+properties:
+  textDateAnnotations:
+    description: Date annotations in a text
+    type: array
+    items:
+      $ref: ../../../commons/components/schemas/TextDateAnnotation.yaml
+  textPersonNameAnnotations:
+    description: Person name annotations in a text
+    type: array
+    items:
+      $ref: ../../../commons/components/schemas/TextPersonNameAnnotation.yaml
+  textPhysicalAddressAnnotations:
+    description: Physical address annotations in a text
+    type: array
+    items:
+      $ref: ../../../commons/components/schemas/TextPhysicalAddressAnnotation.yaml
