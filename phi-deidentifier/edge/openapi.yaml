@@ -175,20 +175,26 @@ components:
               - text_physical_address
               - text_date
               - text_person_name
-    NoteResourceId:
-      description: ID of the clinical note
+    NoteId:
+      description: The ID of the clinical note
       type: string
-      example: 507f1f77bcf86cd799439011
-    PatientResourceId:
-      description: ID of the FHIR patient
+      minLength: 3
+      maxLength: 60
+      pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+      example: awesome-note
+    PatientId:
+      description: The ID of the FHIR patient
       type: string
-      example: 507f1f77bcf86cd799439011
+      minLength: 3
+      maxLength: 60
+      pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+      example: awesome-patient
     Note:
       type: object
       description: A clinical note
       properties:
-        id:
-          $ref: '#/components/schemas/NoteResourceId'
+        identifier:
+          $ref: '#/components/schemas/NoteId'
         text:
           description: The content of the clinical note
           type: string
@@ -198,10 +204,12 @@ components:
           type: string
           example: 'loinc:LP29684-5'
         patientId:
-          $ref: '#/components/schemas/PatientResourceId'
+          $ref: '#/components/schemas/PatientId'
       required:
+        - identifier
         - text
         - noteType
+        - patientId
     DeidentifyRequest:
       type: object
       description: A request to de-identify a note
@@ -222,11 +230,13 @@ components:
         - note
     AnnotationName:
       description: >-
-        Resource name of the annotation record, of the form
+        The resource name of the annotation record, of the form
         datasets/{datasetId}/annotationStores/{annotationStoreId}/annotations/{annotationId}
       type: string
+      pattern: >-
+        ^datasets\/[a-z0-9]+(?:-[a-z0-9]+)*\/annotationStores\/[a-z0-9]+(?:-[a-z0-9]+)*\/annotations\/[a-z0-9]+(?:-[a-z0-9]+)*$
       example: >-
-        datasets/awesome-dataset/annotationStores/awesome-annotation-store/annotations/507f1f77bcf86cd799439011
+        datasets/awesome-dataset/annotationStores/awesome-annotation-store/annotations/awesome-annotation
     ResourceSource:
       type: object
       description: An API resource source
@@ -240,6 +250,7 @@ components:
       properties:
         resourceSource:
           $ref: '#/components/schemas/ResourceSource'
+      minProperties: 1
     TextAnnotation:
       type: object
       description: An annotation in a text
@@ -385,7 +396,7 @@ components:
       required:
         - status
     License:
-      description: License (license keyword used by GitHub)
+      description: The license (license keyword used by GitHub)
       type: string
       enum:
         - afl-3.0
@@ -424,8 +435,11 @@ components:
         - zlib
       example: apache-2.0
     ToolType:
-      description: Type of this tool
+      description: The type of this tool
       type: string
+      minLength: 3
+      maxLength: 60
+      pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*(:)[a-z0-9]+(?:-[a-z0-9]+)*$'
       example: 'nlpsandbox:date-annotator'
     Tool:
       type: object
