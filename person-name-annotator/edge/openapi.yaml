@@ -140,20 +140,26 @@ components:
       required:
         - title
         - status
-    NoteResourceId:
-      description: ID of the clinical note
+    NoteId:
+      description: The ID of the clinical note
       type: string
-      example: 507f1f77bcf86cd799439011
-    PatientResourceId:
-      description: ID of the FHIR patient
+      minLength: 3
+      maxLength: 60
+      pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+      example: awesome-note
+    PatientId:
+      description: The ID of the FHIR patient
       type: string
-      example: 507f1f77bcf86cd799439011
+      minLength: 3
+      maxLength: 60
+      pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+      example: awesome-patient
     Note:
       type: object
       description: A clinical note
       properties:
-        id:
-          $ref: '#/components/schemas/NoteResourceId'
+        identifier:
+          $ref: '#/components/schemas/NoteId'
         text:
           description: The content of the clinical note
           type: string
@@ -163,10 +169,12 @@ components:
           type: string
           example: 'loinc:LP29684-5'
         patientId:
-          $ref: '#/components/schemas/PatientResourceId'
+          $ref: '#/components/schemas/PatientId'
       required:
+        - identifier
         - text
         - noteType
+        - patientId
     TextPersonNameAnnotationRequest:
       type: object
       description: An annotation request
@@ -218,7 +226,7 @@ components:
           items:
             $ref: '#/components/schemas/TextPersonNameAnnotation'
     License:
-      description: License (license keyword used by GitHub)
+      description: The license (license keyword used by GitHub)
       type: string
       enum:
         - afl-3.0
@@ -257,8 +265,11 @@ components:
         - zlib
       example: apache-2.0
     ToolType:
-      description: Type of this tool
+      description: The type of this tool
       type: string
+      minLength: 3
+      maxLength: 60
+      pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*(:)[a-z0-9]+(?:-[a-z0-9]+)*$'
       example: 'nlpsandbox:date-annotator'
     Tool:
       type: object
