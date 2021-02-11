@@ -17,6 +17,13 @@ post:
   summary: Create an annotation
   description: Create an annotation
   operationId: createAnnotation
+  parameters:
+    - in: query
+      name: annotationId
+      description: The ID of the annotation that is being created
+      required: true
+      schema:
+        $ref: ../components/parameters/AnnotationId.yaml
   requestBody:
     content:
       application/json:

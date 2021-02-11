@@ -1,8 +1,8 @@
 type: object
 description: A clinical note
 properties:
-  id:
-    $ref: ../parameters/NoteResourceId.yaml
+  identifier:
+    $ref: ../parameters/NoteId.yaml
   text:
     description: The content of the clinical note
     type: string
@@ -12,7 +12,9 @@ properties:
     type: string
     example: "loinc:LP29684-5"
   patientId:
-    $ref: ../parameters/PatientResourceId.yaml
+    $ref: ../parameters/PatientId.yaml
 required:
+  - identifier
   - text
   - noteType
+  - patientId
