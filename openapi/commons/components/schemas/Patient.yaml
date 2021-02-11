@@ -11,3 +11,9 @@ properties:
       - female
       - other
       - unknown
+required:
+  - identifier
+  - gender
+example:
+  identifier: awesome-patient
+  gender: male

@@ -7,9 +7,10 @@ allOf:
       dateFormat:
         description: Date format (ISO 8601)
         type: string
-        example: "MM/DD/YYYY"
+        example: MM/DD/YYYY
 example:
   start: 42
   length: 10
   text: 10/26/2020
-  dateFormat: "MM/DD/YYYY"
+  dateFormat: MM/DD/YYYY
+  confidence: 95
