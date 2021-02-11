@@ -1,8 +1,0 @@
-type: object
-description: The source of an annotation record
-properties:
-  resourceSource:
-    $ref: ResourceSource.yaml
-  # s3Source:
-  #   $ref: S3Source.yaml
-minProperties: 1
