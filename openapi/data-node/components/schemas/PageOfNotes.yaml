@@ -9,3 +9,9 @@ allOf:
         type: array
         items:
           $ref: ../../../commons/components/schemas/Note.yaml
+required:
+  - offset
+  - limit
+  - links
+  - totalResults
+  - notes

@@ -13,7 +13,6 @@ properties:
       - unknown
 required:
   - identifier
-  - gender
 example:
   identifier: awesome-patient
   gender: male

@@ -20,3 +20,4 @@ required:
   - offset
   - limit
   - links
+  - totalResults

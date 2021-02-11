@@ -1,0 +1,25 @@
+type: object
+description: An annotation record
+properties:
+  name:
+    $ref: ../parameters/AnnotationName.yaml
+  annotationSource:
+    $ref: AnnotationSource.yaml
+  textDateAnnotations:
+    description: Date annotations in a text
+    type: array
+    items:
+      $ref: ../../../commons/components/schemas/TextDateAnnotation.yaml
+  textPersonNameAnnotations:
+    description: Person name annotations in a text
+    type: array
+    items:
+      $ref: ../../../commons/components/schemas/TextPersonNameAnnotation.yaml
+  textPhysicalAddressAnnotations:
+    description: Physical address annotations in a text
+    type: array
+    items:
+      $ref: ../../../commons/components/schemas/TextPhysicalAddressAnnotation.yaml
+required:
+  - name
+  - annotationSource
