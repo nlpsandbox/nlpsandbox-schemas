@@ -1,4 +1,4 @@
 description: The resource name of the annotation store, of the form datasets/{datasetId}/annotationStores/{annotationStoreId}
 type: string
-pattern: ^datasets\/[a-z0-9]+(?:-[a-z0-9]+)*\/annotationStores\/[a-z0-9]+(?:-[a-z0-9]+)*$
+pattern: "^datasets\/[a-z0-9]+(?:-[a-z0-9]+)*\/annotationStores\/[a-z0-9]+(?:-[a-z0-9]+)*$"
 example: datasets/awesome-dataset/annotationStores/awesome-annotation-store
