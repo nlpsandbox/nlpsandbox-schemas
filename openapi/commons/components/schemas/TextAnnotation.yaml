@@ -12,7 +12,8 @@ properties:
     type: string
   confidence:
     description: The confidence in the accuracy of the annotation
-    type: integer
+    type: number
+    format: float
     minimum: 0
     maximum: 100
 required:
@@ -23,4 +24,4 @@ example:
   start: 42
   length: 19
   text: the annotation text
-  confidence: 95
+  confidence: 95.5
