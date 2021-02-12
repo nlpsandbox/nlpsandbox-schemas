@@ -819,8 +819,6 @@ components:
           description: Total number of results in the result set
           type: integer
       required:
-        - offset
-        - limit
         - links
         - totalResults
     DatasetName:
