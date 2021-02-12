@@ -1,14 +1,14 @@
-openapi: 3.0.2
+openapi: 3.0.3
 info:
-  version: 0.3.1
+  version: 1.0.0
   title: NLP Sandbox Date Annotator API
   contact:
     name: The NLP Sandbox Team
     email: thomas.schaffter@sagebionetworks.org
-    url: 'https://nlpsandbox.github.io/nlpsandbox-schemas'
+    url: 'https://nlpsandbox.io'
   license:
     name: Apache 2.0
-    url: 'https://nlpsandbox.github.io/nlpsandbox-schemas/blob/develop/LICENSE'
+    url: 'https://github.com/nlpsandbox/nlpsandbox-schemas/blob/develop/LICENSE'
   x-logo:
     url: 'https://nlpsandbox.github.io/nlpsandbox-schemas/logo.png'
   description: >
@@ -163,11 +163,9 @@ components:
         text:
           description: The content of the clinical note
           type: string
-          example: 'On 12/26/2020, Ms. Chloe Price met with Dr. Prescott in Seattle.'
         noteType:
           description: The note type (LOINC concept)
           type: string
-          example: 'loinc:LP29684-5'
         patientId:
           $ref: '#/components/schemas/PatientId'
       required:
@@ -175,12 +173,19 @@ components:
         - text
         - noteType
         - patientId
+      example:
+        identifier: awesome-note
+        text: 'On 12/26/2020, Ms. Chloe Price met with Dr. Prescott in Seattle.'
+        noteType: 'loinc:LP29684-5'
+        patientId: awesome-patient
     TextDateAnnotationRequest:
       type: object
       description: An annotation request
       properties:
         note:
           $ref: '#/components/schemas/Note'
+      required:
+        - note
     TextAnnotation:
       type: object
       description: An annotation in a text
@@ -188,11 +193,9 @@ components:
         start:
           description: The position of the first character
           type: integer
-          example: 42
         length:
           description: The length of the annotation
           type: integer
-          example: 10
         text:
           description: The string annotated
           type: string
@@ -202,11 +205,15 @@ components:
           format: float
           minimum: 0
           maximum: 100
-          example: 95
       required:
         - start
         - length
         - text
+      example:
+        start: 42
+        length: 19
+        text: the annotation text
+        confidence: 95.5
     TextDateAnnotation:
       type: object
       description: A date annotation in a text
@@ -223,6 +230,7 @@ components:
         length: 10
         text: 10/26/2020
         dateFormat: MM/DD/YYYY
+        confidence: 95.5
     TextDateAnnotations:
       type: object
       description: A list of text date annotations
@@ -232,6 +240,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/TextDateAnnotation'
+      required:
+        - textDateAnnotations
     License:
       description: The license (license keyword used by GitHub)
       type: string
@@ -288,40 +298,40 @@ components:
           minLength: 3
           maxLength: 60
           pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
-          example: awesome-date-annotator
         version:
           description: The version of the tool (SemVer string)
           type: string
           minLength: 1
           pattern: >-
-            ^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$
-          example: 1.0.0
+            ^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$
         license:
           $ref: '#/components/schemas/License'
         repository:
           description: The place where the code lives
           type: string
-          example: 'github:awesome-org/awesome-date-annotator'
         description:
           description: 'A short, one-sentence summary of the tool'
           type: string
           maxLength: 100
-          example: An awesome Date Annotator based on regex patterns
         author:
           description: The author of the tool
           type: string
-          example: Example Author
         authorEmail:
           description: The email address of the author
           type: string
           format: email
-          example: author@example.com
         url:
           description: The URL to the homepage of the tool
           type: string
           format: uri
         toolType:
           $ref: '#/components/schemas/ToolType'
+        toolApiVersion:
+          description: The version of the tool OpenAPI specification
+          type: string
+          minLength: 1
+          pattern: >-
+            ^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$
       required:
         - name
         - version
@@ -332,6 +342,18 @@ components:
         - authorEmail
         - url
         - toolType
+        - toolApiVersion
+      example:
+        name: awesome-nlp-tool
+        version: 1.0.6
+        license: apache-2.0
+        repository: 'github:awesome-org/awesome-nlp-tool'
+        description: An awesome NLP Tool that takes as input X and outputs Y.
+        author: Awesome Team
+        authorEmail: author@example.com
+        url: 'https://example.com'
+        toolType: 'nlpsandbox:date-annotator'
+        toolApiVersion: 1.0.0
     ToolDependencies:
       type: object
       description: A list of tool dependencies
@@ -341,6 +363,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Tool'
+      required:
+        - toolDependencies
   responses:
     NotFound:
       description: The specified resource was not found
