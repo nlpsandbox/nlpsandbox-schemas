@@ -13,4 +13,4 @@ example:
   length: 10
   text: 10/26/2020
   dateFormat: MM/DD/YYYY
-  confidence: 95
+  confidence: 95.5

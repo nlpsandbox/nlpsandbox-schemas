@@ -1,14 +1,13 @@
 type: object
-description: A request to de-identify a note
+description: A request to de-identify a clinical note
 properties:
-  deidentificationConfigurations:
-    type: array
-    description: A list of deidentification strategies and the entity types on which to perform them. De-identification
-      priority (i.e. which annotation to use when two annotations overlap) is determined by the order of this array and
-      the order of the annotationTypes array inside of each deidentificationConfig.
-    items:
-      $ref: ./DeidentificationConfig.yaml
   note:
     $ref: ../../../commons/components/schemas/Note.yaml
+  deidentificationSteps:
+    type: array
+    description: A list of deidentification steps
+    items:
+      $ref: DeidentificationStep.yaml
 required:
   - note
+  - deidentificationSteps

@@ -6,3 +6,5 @@ properties:
     type: array
     items:
       $ref: ../../../commons/components/schemas/TextDateAnnotation.yaml
+required:
+  - textDateAnnotations

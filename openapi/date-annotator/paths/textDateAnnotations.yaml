@@ -3,7 +3,7 @@ post:
     - TextDateAnnotation
   summary: Annotate dates in a clinical note
   description: Return the date annotations found in a clinical note
-  operationId: "createTextDateAnnotations"
+  operationId: createTextDateAnnotations
   requestBody:
     content:
       application/json:
