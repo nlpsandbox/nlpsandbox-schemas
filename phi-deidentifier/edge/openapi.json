@@ -223,10 +223,7 @@
             "maxLength": 1,
             "default": "*"
           }
-        },
-        "required": [
-          "maskingChar"
-        ]
+        }
       },
       "AnnotationTypeMaskConfig": {
         "type": "object",
@@ -259,7 +256,7 @@
             "description": "The minimum confidence level for a given annotation to be de-identified",
             "minimum": 0,
             "maximum": 100,
-            "example": 42.4,
+            "example": 95.5,
             "default": 0
           },
           "maskingCharConfig": {
@@ -286,7 +283,10 @@
               ]
             }
           }
-        }
+        },
+        "required": [
+          "annotationTypes"
+        ]
       },
       "DeidentifyRequest": {
         "type": "object",
