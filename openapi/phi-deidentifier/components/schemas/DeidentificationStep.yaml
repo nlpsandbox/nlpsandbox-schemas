@@ -7,7 +7,7 @@ properties:
     description: The minimum confidence level for a given annotation to be de-identified
     minimum: 0
     maximum: 100
-    example: 42.4
+    example: 95.5
     default: 0
   maskingCharConfig:
     $ref: MaskingCharConfig.yaml
@@ -26,3 +26,5 @@ properties:
         - "text_physical_address"
         - "text_date"
         - "text_person_name"
+required:
+  - annotationTypes
