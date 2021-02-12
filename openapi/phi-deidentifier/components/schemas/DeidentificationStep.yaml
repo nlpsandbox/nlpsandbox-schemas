@@ -11,8 +11,8 @@ properties:
     default: 0
   maskingCharConfig:
     $ref: MaskingCharConfig.yaml
-  maskingAnnotationTypeConfig:
-    $ref: MaskingAnnotationTypeConfig.yaml
+  annotationTypeMaskConfig:
+    $ref: AnnotationTypeMaskConfig.yaml
   redactConfig:
     $ref: RedactConfig.yaml
   dateOffsetConfig:

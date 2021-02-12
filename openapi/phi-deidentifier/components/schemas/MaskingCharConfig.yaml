@@ -5,7 +5,7 @@ description:
 properties:
   maskingChar:
     type: string
-    description: Character used to mask annotated PII text.
+    description: Character used to mask sensitive information
     minLength: 1
     maxLength: 1
     default: "*"
