@@ -6,40 +6,39 @@ properties:
     type: string
     minLength: 3
     maxLength: 60
-    pattern: "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-    example: awesome-date-annotator
+    pattern: ^[a-z0-9]+(?:-[a-z0-9]+)*$
   version:
     description: The version of the tool (SemVer string)
     type: string
     minLength: 1
-    pattern: "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$"
-    example: 1.0.0
+    pattern: ^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$
   license:
     $ref: ../parameters/License.yaml
   repository:
     description: The place where the code lives
     type: string
-    example: github:awesome-org/awesome-date-annotator
   description:
     description: A short, one-sentence summary of the tool
     type: string
     maxLength: 100
-    example: An awesome Date Annotator based on regex patterns
   author:
     description: The author of the tool
     type: string
-    example: Example Author
   authorEmail:
     description: The email address of the author
     type: string
     format: email
-    example: author@example.com
   url:
     description: The URL to the homepage of the tool
     type: string
     format: uri
   toolType:
     $ref: ../parameters/ToolType.yaml
+  toolApiVersion:
+    description: The version of the tool OpenAPI specification
+    type: string
+    minLength: 1
+    pattern: ^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$
 required:
   - name
   - version
@@ -50,3 +49,15 @@ required:
   - authorEmail
   - url
   - toolType
+  - toolApiVersion
+example:
+  name: awesome-nlp-tool
+  version: 1.0.6
+  license: apache-2.0
+  repository: github:awesome-org/awesome-nlp-tool
+  description: An awesome NLP Tool that takes as input X and outputs Y.
+  author: Awesome Team
+  authorEmail: author@example.com
+  url: https://example.com
+  toolType: nlpsandbox:date-annotator
+  toolApiVersion: 1.0.0

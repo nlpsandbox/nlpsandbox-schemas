@@ -9,3 +9,9 @@ allOf:
         type: array
         items:
           $ref: ../../../commons/components/schemas/Patient.yaml
+required:
+  - offset
+  - limit
+  - links
+  - totalResults
+  - patients

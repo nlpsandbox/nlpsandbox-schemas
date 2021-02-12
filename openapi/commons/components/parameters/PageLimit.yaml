@@ -1,4 +1,4 @@
-description: Maximum number of results returned
+description: The maximum number of results returned
 type: integer
 default: 10
 minimum: 10

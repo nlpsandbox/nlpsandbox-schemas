@@ -4,11 +4,9 @@ properties:
   start:
     description: The position of the first character
     type: integer
-    example: 42
   length:
     description: The length of the annotation
     type: integer
-    example: 10
   text:
     description: The string annotated
     type: string
@@ -18,8 +16,12 @@ properties:
     format: float
     minimum: 0
     maximum: 100
-    example: 95
 required:
   - start
   - length
   - text
+example:
+  start: 42
+  length: 19
+  text: the annotation text
+  confidence: 95.5

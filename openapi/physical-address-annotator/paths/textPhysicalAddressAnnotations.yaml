@@ -3,7 +3,7 @@ post:
     - TextPhysicalAddressAnnotation
   summary: Annotate physical addresses in a clinical note
   description: Return the physical addresse annotations found in a clinical note
-  operationId: "createTextPhysicalAddressAnnotations"
+  operationId: createTextPhysicalAddressAnnotations
   requestBody:
     content:
       application/json:
@@ -16,7 +16,7 @@ post:
         application/json:
           schema:
             $ref: ../components/schemas/TextPhysicalAddressAnnotations.yaml
-    '403':
-      $ref: ../../commons/components/responses/Unauthorized.yaml
+    '400':
+      $ref: ../../commons/components/responses/BadRequest.yaml
     '500':
       $ref: ../../commons/components/responses/InternalServerError.yaml

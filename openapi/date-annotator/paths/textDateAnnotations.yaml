@@ -3,7 +3,7 @@ post:
     - TextDateAnnotation
   summary: Annotate dates in a clinical note
   description: Return the date annotations found in a clinical note
-  operationId: "createTextDateAnnotations"
+  operationId: createTextDateAnnotations
   requestBody:
     content:
       application/json:
@@ -16,7 +16,7 @@ post:
         application/json:
           schema:
             $ref: ../components/schemas/TextDateAnnotations.yaml
-    '403':
-      $ref: ../../commons/components/responses/Unauthorized.yaml
+    '400':
+      $ref: ../../commons/components/responses/BadRequest.yaml
     '500':
       $ref: ../../commons/components/responses/InternalServerError.yaml

@@ -6,3 +6,5 @@ properties:
     type: array
     items:
       $ref: Tool.yaml
+required:
+  - toolDependencies

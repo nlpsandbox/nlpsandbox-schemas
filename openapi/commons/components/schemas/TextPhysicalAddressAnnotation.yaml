@@ -1,5 +1,5 @@
 type: object
-description: A person name annotation in a text
+description: A physical address annotation in a text
 allOf:
   - $ref: TextAnnotation.yaml
   - type: object
@@ -20,6 +20,7 @@ allOf:
           - zip
 example:
   start: 42
-  length: 11
+  length: 7
   text: Seattle
   addressType: city
+  confidence: 95.5

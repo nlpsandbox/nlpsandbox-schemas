@@ -12,11 +12,11 @@ order.
 
 | API | Type | Version |
 |---|---|---|
-| [Data Node](/openapi/data-node) | | 0.3.1 |
-| [Date Annotator](/openapi/date-annotator) | `nlpsandbox:date-annotator` | 0.3.1 |
-| [Person Name Annotator](/openapi/person-name-annotator) | `nlpsandbox:person-name-annotator` | 0.3.1 |
-| [Physical Address Annotator](/openapi/physical-address-annotator) | `nlpsandbox:physical-address-annotator` | 0.3.1 |
-| [PHI Deidentifier](/openapi/phi-deidentifier) | `nlpsandbox:phi-deidentifier` | 0.3.1 |
+| [Data Node](/openapi/data-node) | | 1.0.0 |
+| [Date Annotator](/openapi/date-annotator) | `nlpsandbox:date-annotator` | 1.0.0 |
+| [Person Name Annotator](/openapi/person-name-annotator) | `nlpsandbox:person-name-annotator` | 1.0.0 |
+| [Physical Address Annotator](/openapi/physical-address-annotator) | `nlpsandbox:physical-address-annotator` | 1.0.0 |
+| [PHI Deidentifier](/openapi/phi-deidentifier) | `nlpsandbox:phi-deidentifier` | 1.0.0 |
 
 ## Web services
 

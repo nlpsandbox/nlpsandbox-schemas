@@ -13,7 +13,11 @@ properties:
         description: Link to the next page of results
         type: string
         format: uri
+  totalResults:
+    description: Total number of results in the result set
+    type: integer
 required:
   - offset
   - limit
   - links
+  - totalResults

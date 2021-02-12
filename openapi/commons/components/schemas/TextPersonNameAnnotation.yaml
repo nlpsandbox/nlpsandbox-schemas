@@ -6,3 +6,4 @@ example:
   start: 42
   length: 11
   text: Chloe Price
+  confidence: 95.5

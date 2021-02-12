@@ -3,3 +3,5 @@ description: The reference to the note created
 properties:
   name:
     $ref: ../parameters/NoteResourceName.yaml
+required:
+  - name

@@ -1,18 +1,23 @@
 type: object
 description: A clinical note
 properties:
-  id:
-    $ref: ../parameters/NoteResourceId.yaml
+  identifier:
+    $ref: ../parameters/NoteId.yaml
   text:
     description: The content of the clinical note
     type: string
-    example: "On 12/26/2020, Ms. Chloe Price met with Dr. Prescott."
   noteType:
     description: The note type (LOINC concept)
     type: string
-    example: "loinc:LP29684-5"
   patientId:
-    $ref: ../parameters/PatientResourceId.yaml
+    $ref: ../parameters/PatientId.yaml
 required:
+  - identifier
   - text
   - noteType
+  - patientId
+example:
+  identifier: awesome-note
+  text: On 12/26/2020, Ms. Chloe Price met with Dr. Prescott in Seattle.
+  noteType: loinc:LP29684-5
+  patientId: awesome-patient

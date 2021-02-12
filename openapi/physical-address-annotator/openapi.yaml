@@ -1,22 +1,20 @@
-openapi: 3.0.2
+openapi: 3.0.3
 info:
-  version: 0.3.1
+  version: 1.0.0
   title: NLP Sandbox Physical Address Annotator API
   contact:
     name: The NLP Sandbox Team
     email: thomas.schaffter@sagebionetworks.org
-    url: 'https://nlpsandbox.github.io/nlpsandbox-schemas'
+    url: https://nlpsandbox.io
   license:
     name: Apache 2.0
-    url: 'https://nlpsandbox.github.io/nlpsandbox-schemas/blob/develop/LICENSE'
+    url: https://github.com/nlpsandbox/nlpsandbox-schemas/blob/develop/LICENSE
   x-logo:
-    url: 'https://nlpsandbox.github.io/nlpsandbox-schemas/logo.png'
+    url: https://nlpsandbox.github.io/nlpsandbox-schemas/logo.png
   description: >
-    The OpenAPI specification implemented by NLP Sandbox Physical Address Annotators.
-
     # Overview
 
-    This NLP tool detects references of physical addresses in the clinical notes
+    This NLP tool detects references of physical addresses in the clinical note
     given as input and returns a list of physical address annotations.
 tags:
   - name: HealthCheck
@@ -26,14 +24,14 @@ tags:
   - name: Tool
     description: Operations about this tool
 servers:
-  - url: 'http://example.com/api/v1'
-  - url: 'https://example.com/api/v1'
+  - url: http://example.com/api/v1
+  - url: https://example.com/api/v1
 paths:
   /healthCheck:
-    $ref: '../commons/paths/healthCheck.yaml'
+    $ref: ../commons/paths/healthCheck.yaml
   /textPhysicalAddressAnnotations:
-    $ref: 'paths/textPhysicalAddressAnnotations.yaml'
+    $ref: paths/textPhysicalAddressAnnotations.yaml
   /tool:
-    $ref: '../commons/paths/tool.yaml'
+    $ref: ../commons/paths/tool.yaml
   /tool/dependencies:
-    $ref: '../commons/paths/dependencies.yaml'
+    $ref: ../commons/paths/dependencies.yaml
