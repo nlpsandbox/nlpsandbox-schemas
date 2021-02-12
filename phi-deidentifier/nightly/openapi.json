@@ -1,25 +1,25 @@
 {
-  "openapi": "3.0.2",
+  "openapi": "3.0.3",
   "info": {
-    "version": "0.3.1",
-    "title": "NLP Sandbox Deidentifier API",
+    "version": "1.0.0",
+    "title": "NLP Sandbox PHI Deidentifier API",
     "contact": {
       "name": "The NLP Sandbox Team",
       "email": "thomas.schaffter@sagebionetworks.org",
-      "url": "https://nlpsandbox.github.io/nlpsandbox-schemas"
+      "url": "https://nlpsandbox.io"
     },
     "license": {
       "name": "Apache 2.0",
-      "url": "https://nlpsandbox.github.io/nlpsandbox-schemas/blob/develop/LICENSE"
+      "url": "https://github.com/nlpsandbox/nlpsandbox-schemas/blob/develop/LICENSE"
     },
     "x-logo": {
       "url": "https://nlpsandbox.github.io/nlpsandbox-schemas/logo.png"
     },
-    "description": "# Overview\nThis NLP tool relies on the following tools to deidentify a clinical note given as input.\n- Data Annotator - Person Name Annotator - Physical Address Annotator - TBA\n"
+    "description": "# Overview\nThis NLP tool relies on the following NLP tools to deidentify a clinical note given as input.\n- Data Annotator - Person Name Annotator - Physical Address Annotator - TBA\n"
   },
   "tags": [
     {
-      "name": "DeidentifiedNotes",
+      "name": "DeidentifiedNote",
       "description": "Operations about deidentified notes"
     },
     {
@@ -43,7 +43,7 @@
     "/deidentifiedNotes": {
       "post": {
         "tags": [
-          "DeidentifiedNotes"
+          "DeidentifiedNote"
         ],
         "summary": "Deidentify a clinical note",
         "description": "Returns the deidentified note",
@@ -164,9 +164,94 @@
   },
   "components": {
     "schemas": {
-      "DeidentificationConfig": {
+      "NoteId": {
+        "description": "The ID of the clinical note",
+        "type": "string",
+        "minLength": 3,
+        "maxLength": 60,
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+        "example": "awesome-note"
+      },
+      "PatientId": {
+        "description": "The ID of the FHIR patient",
+        "type": "string",
+        "minLength": 3,
+        "maxLength": 60,
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+        "example": "awesome-patient"
+      },
+      "Note": {
         "type": "object",
-        "description": "Configuration of one deidentification strategy and a list of annotation types to apply it to.",
+        "description": "A clinical note",
+        "properties": {
+          "identifier": {
+            "$ref": "#/components/schemas/NoteId"
+          },
+          "text": {
+            "description": "The content of the clinical note",
+            "type": "string"
+          },
+          "noteType": {
+            "description": "The note type (LOINC concept)",
+            "type": "string"
+          },
+          "patientId": {
+            "$ref": "#/components/schemas/PatientId"
+          }
+        },
+        "required": [
+          "identifier",
+          "text",
+          "noteType",
+          "patientId"
+        ],
+        "example": {
+          "identifier": "awesome-note",
+          "text": "On 12/26/2020, Ms. Chloe Price met with Dr. Prescott in Seattle.",
+          "noteType": "loinc:LP29684-5",
+          "patientId": "awesome-patient"
+        }
+      },
+      "MaskingCharConfig": {
+        "type": "object",
+        "description": "Configuration for the masking char strategy. E.g. \"John Smith lives at 123 Main St\" -> \"********* lives at ***********\".",
+        "properties": {
+          "maskingChar": {
+            "type": "string",
+            "description": "Character used to mask sensitive information",
+            "minLength": 1,
+            "maxLength": 1,
+            "default": "*"
+          }
+        },
+        "required": [
+          "maskingChar"
+        ]
+      },
+      "AnnotationTypeMaskConfig": {
+        "type": "object",
+        "description": "Configuration for the \"annotation type\" strategy. E.g. \"John Smith lives at 123 Main St\" -> \"[PERSON_NAME] lives at [PHYSICAL_ADDRESS]\"."
+      },
+      "RedactConfig": {
+        "type": "object",
+        "description": "Configuration for the redaction strategy. E.g. \"John Smith lives at 123 Main St\" -> \"lives at\"."
+      },
+      "DateOffsetConfig": {
+        "type": "object",
+        "description": "Configuration for the \"date offset\" strategy. E.g. \"John Smith visited on 1 January 2020\" -> \"John Smith visited on 29 October 2025\". Note, can only be set with the \"text_date\" annotation type.",
+        "properties": {
+          "offsetDays": {
+            "type": "integer",
+            "description": "Number of days by which to offset annotated dates."
+          }
+        },
+        "required": [
+          "offsetDays"
+        ]
+      },
+      "DeidentificationStep": {
+        "type": "object",
+        "description": "The configuration of a deidentification step",
         "properties": {
           "confidenceThreshold": {
             "type": "number",
@@ -177,46 +262,21 @@
             "example": 42.4,
             "default": 0
           },
-          "deidentificationStrategy": {
-            "type": "object",
-            "description": "The strategy used to de-identify the note's text. Only one field may be set.",
-            "properties": {
-              "maskingCharConfig": {
-                "type": "object",
-                "description": "Configuration for the masking char strategy. E.g. \"John Smith lives at 123 Main St\" -> \"********* lives at ***********\".",
-                "properties": {
-                  "maskingChar": {
-                    "type": "string",
-                    "description": "Character used to mask annotated PII text.",
-                    "minLength": 1,
-                    "maxLength": 1,
-                    "default": "*"
-                  }
-                }
-              },
-              "redactConfig": {
-                "type": "object",
-                "description": "Configuration for the redaction strategy. E.g. \"John Smith lives at 123 Main St\" -> \"lives at\"."
-              },
-              "annotationTypeConfig": {
-                "type": "object",
-                "description": "Configuration for the \"annotation type\" strategy. E.g. \"John Smith lives at 123 Main St\" -> \"[PERSON_NAME] lives at [PHYSICAL_ADDRESS]\"."
-              },
-              "dateOffsetConfig": {
-                "type": "object",
-                "description": "Configuration for the \"date offset\" strategy. E.g. \"John Smith visited on 1 January 2020\" -> \"John Smith visited on 29 October 2025\". Note, can only be set with the \"text_date\" annotation type.",
-                "properties": {
-                  "offsetDays": {
-                    "type": "integer",
-                    "description": "Number of days by which to offset annotated dates."
-                  }
-                }
-              }
-            }
+          "maskingCharConfig": {
+            "$ref": "#/components/schemas/MaskingCharConfig"
+          },
+          "annotationTypeMaskConfig": {
+            "$ref": "#/components/schemas/AnnotationTypeMaskConfig"
+          },
+          "redactConfig": {
+            "$ref": "#/components/schemas/RedactConfig"
+          },
+          "dateOffsetConfig": {
+            "$ref": "#/components/schemas/DateOffsetConfig"
           },
           "annotationTypes": {
             "type": "array",
-            "description": "the types of annotations to which the de-identifer should apply the selected strategy",
+            "description": "The types of annotations to which the de-identifer should apply the selected strategy",
             "items": {
               "type": "string",
               "enum": [
@@ -228,84 +288,25 @@
           }
         }
       },
-      "NoteResourceId": {
-        "description": "ID of the clinical note",
-        "type": "string",
-        "example": "507f1f77bcf86cd799439011"
-      },
-      "PatientResourceId": {
-        "description": "ID of the FHIR patient",
-        "type": "string",
-        "example": "507f1f77bcf86cd799439011"
-      },
-      "Note": {
-        "type": "object",
-        "description": "A clinical note",
-        "properties": {
-          "id": {
-            "$ref": "#/components/schemas/NoteResourceId"
-          },
-          "text": {
-            "description": "The content of the clinical note",
-            "type": "string",
-            "example": "On 12/26/2020, Ms. Chloe Price met with Dr. Prescott in Seattle."
-          },
-          "noteType": {
-            "description": "The note type (LOINC concept)",
-            "type": "string",
-            "example": "loinc:LP29684-5"
-          },
-          "patientId": {
-            "$ref": "#/components/schemas/PatientResourceId"
-          }
-        },
-        "required": [
-          "text",
-          "noteType"
-        ]
-      },
       "DeidentifyRequest": {
         "type": "object",
-        "description": "A request to de-identify a note",
+        "description": "A request to de-identify a clinical note",
         "properties": {
-          "deidentificationConfigurations": {
-            "type": "array",
-            "description": "A list of deidentification strategies and the entity types on which to perform them. De-identification priority (i.e. which annotation to use when two annotations overlap) is determined by the order of this array and the order of the annotationTypes array inside of each deidentificationConfig.",
-            "items": {
-              "$ref": "#/components/schemas/DeidentificationConfig"
-            }
-          },
           "note": {
             "$ref": "#/components/schemas/Note"
+          },
+          "deidentificationSteps": {
+            "type": "array",
+            "description": "A list of deidentification steps",
+            "items": {
+              "$ref": "#/components/schemas/DeidentificationStep"
+            }
           }
         },
         "required": [
-          "note"
+          "note",
+          "deidentificationSteps"
         ]
-      },
-      "AnnotationName": {
-        "description": "Resource name of the annotation record, of the form datasets/{datasetId}/annotationStores/{annotationStoreId}/annotations/{annotationId}",
-        "type": "string",
-        "example": "datasets/awesome-dataset/annotationStores/awesome-annotation-store/annotations/507f1f77bcf86cd799439011"
-      },
-      "ResourceSource": {
-        "type": "object",
-        "description": "An API resource source",
-        "properties": {
-          "name": {
-            "description": "Full path of an API resource",
-            "type": "string"
-          }
-        }
-      },
-      "AnnotationSource": {
-        "type": "object",
-        "description": "The source of an annotation record",
-        "properties": {
-          "resourceSource": {
-            "$ref": "#/components/schemas/ResourceSource"
-          }
-        }
       },
       "TextAnnotation": {
         "type": "object",
@@ -313,13 +314,11 @@
         "properties": {
           "start": {
             "description": "The position of the first character",
-            "type": "integer",
-            "example": 42
+            "type": "integer"
           },
           "length": {
             "description": "The length of the annotation",
-            "type": "integer",
-            "example": 10
+            "type": "integer"
           },
           "text": {
             "description": "The string annotated",
@@ -330,15 +329,20 @@
             "type": "number",
             "format": "float",
             "minimum": 0,
-            "maximum": 100,
-            "example": 95
+            "maximum": 100
           }
         },
         "required": [
           "start",
           "length",
           "text"
-        ]
+        ],
+        "example": {
+          "start": 42,
+          "length": 19,
+          "text": "the annotation text",
+          "confidence": 95.5
+        }
       },
       "TextDateAnnotation": {
         "type": "object",
@@ -362,7 +366,8 @@
           "start": 42,
           "length": 10,
           "text": "10/26/2020",
-          "dateFormat": "MM/DD/YYYY"
+          "dateFormat": "MM/DD/YYYY",
+          "confidence": 95.5
         }
       },
       "TextPersonNameAnnotation": {
@@ -376,7 +381,8 @@
         "example": {
           "start": 42,
           "length": 11,
-          "text": "Chloe Price"
+          "text": "Chloe Price",
+          "confidence": 95.5
         }
       },
       "TextPhysicalAddressAnnotation": {
@@ -410,21 +416,16 @@
         ],
         "example": {
           "start": 42,
-          "length": 11,
+          "length": 7,
           "text": "Seattle",
-          "addressType": "city"
+          "addressType": "city",
+          "confidence": 95.5
         }
       },
-      "Annotation": {
+      "AnnotationSet": {
         "type": "object",
-        "description": "An annotation record",
+        "description": "Set of annotations of all types for a text",
         "properties": {
-          "name": {
-            "$ref": "#/components/schemas/AnnotationName"
-          },
-          "annotationSource": {
-            "$ref": "#/components/schemas/AnnotationSource"
-          },
           "textDateAnnotations": {
             "description": "Date annotations in a text",
             "type": "array",
@@ -446,17 +447,22 @@
               "$ref": "#/components/schemas/TextPhysicalAddressAnnotation"
             }
           }
-        }
+        },
+        "required": [
+          "textDateAnnotations",
+          "textPersonNameAnnotations",
+          "textPhysicalAddressAnnotations"
+        ]
       },
       "DeidentifyResponse": {
         "type": "object",
-        "description": "Response to deidentification request",
+        "description": "The response to a deidentification request",
         "properties": {
           "originalAnnotations": {
-            "$ref": "#/components/schemas/Annotation"
+            "$ref": "#/components/schemas/AnnotationSet"
           },
           "deidentifiedAnnotations": {
-            "$ref": "#/components/schemas/Annotation"
+            "$ref": "#/components/schemas/AnnotationSet"
           },
           "deidentifiedNote": {
             "$ref": "#/components/schemas/Note"
@@ -508,7 +514,7 @@
         ]
       },
       "License": {
-        "description": "License (license keyword used by GitHub)",
+        "description": "The license (license keyword used by GitHub)",
         "type": "string",
         "enum": [
           "afl-3.0",
@@ -549,8 +555,11 @@
         "example": "apache-2.0"
       },
       "ToolType": {
-        "description": "Type of this tool",
+        "description": "The type of this tool",
         "type": "string",
+        "minLength": 3,
+        "maxLength": 60,
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*(:)[a-z0-9]+(?:-[a-z0-9]+)*$",
         "example": "nlpsandbox:date-annotator"
       },
       "Tool": {
@@ -562,40 +571,34 @@
             "type": "string",
             "minLength": 3,
             "maxLength": 60,
-            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
-            "example": "awesome-date-annotator"
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
           },
           "version": {
             "description": "The version of the tool (SemVer string)",
             "type": "string",
             "minLength": 1,
-            "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$",
-            "example": "1.0.0"
+            "pattern": "^(0|[1-9]\\\\d*)\\\\.(0|[1-9]\\\\d*)\\\\.(0|[1-9]\\\\d*)(?:-((?:0|[1-9]\\\\d*|\\\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\\\.(?:0|[1-9]\\\\d*|\\\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\\\+([0-9a-zA-Z-]+(?:\\\\.[0-9a-zA-Z-]+)*))?$"
           },
           "license": {
             "$ref": "#/components/schemas/License"
           },
           "repository": {
             "description": "The place where the code lives",
-            "type": "string",
-            "example": "github:awesome-org/awesome-date-annotator"
+            "type": "string"
           },
           "description": {
             "description": "A short, one-sentence summary of the tool",
             "type": "string",
-            "maxLength": 100,
-            "example": "An awesome Date Annotator based on regex patterns"
+            "maxLength": 100
           },
           "author": {
             "description": "The author of the tool",
-            "type": "string",
-            "example": "Example Author"
+            "type": "string"
           },
           "authorEmail": {
             "description": "The email address of the author",
             "type": "string",
-            "format": "email",
-            "example": "author@example.com"
+            "format": "email"
           },
           "url": {
             "description": "The URL to the homepage of the tool",
@@ -604,6 +607,12 @@
           },
           "toolType": {
             "$ref": "#/components/schemas/ToolType"
+          },
+          "toolApiVersion": {
+            "description": "The version of the tool OpenAPI specification",
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^(0|[1-9]\\\\d*)\\\\.(0|[1-9]\\\\d*)\\\\.(0|[1-9]\\\\d*)(?:-((?:0|[1-9]\\\\d*|\\\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\\\.(?:0|[1-9]\\\\d*|\\\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\\\+([0-9a-zA-Z-]+(?:\\\\.[0-9a-zA-Z-]+)*))?$"
           }
         },
         "required": [
@@ -615,8 +624,21 @@
           "author",
           "authorEmail",
           "url",
-          "toolType"
-        ]
+          "toolType",
+          "toolApiVersion"
+        ],
+        "example": {
+          "name": "awesome-nlp-tool",
+          "version": "1.0.6",
+          "license": "apache-2.0",
+          "repository": "github:awesome-org/awesome-nlp-tool",
+          "description": "An awesome NLP Tool that takes as input X and outputs Y.",
+          "author": "Awesome Team",
+          "authorEmail": "author@example.com",
+          "url": "https://example.com",
+          "toolType": "nlpsandbox:date-annotator",
+          "toolApiVersion": "1.0.0"
+        }
       },
       "ToolDependencies": {
         "type": "object",
@@ -629,7 +651,10 @@
               "$ref": "#/components/schemas/Tool"
             }
           }
-        }
+        },
+        "required": [
+          "toolDependencies"
+        ]
       }
     },
     "responses": {
