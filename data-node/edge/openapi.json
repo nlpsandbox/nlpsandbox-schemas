@@ -1,21 +1,21 @@
 {
-  "openapi": "3.0.2",
+  "openapi": "3.0.3",
   "info": {
-    "version": "0.3.1",
+    "version": "1.0.0",
     "title": "NLP Sandbox Data Node API",
     "contact": {
       "name": "The NLP Sandbox Team",
       "email": "thomas.schaffter@sagebionetworks.org",
-      "url": "https://nlpsandbox.github.io/nlpsandbox-schemas"
+      "url": "https://nlpsandbox.io"
     },
     "license": {
       "name": "Apache 2.0",
-      "url": "https://nlpsandbox.github.io/nlpsandbox-schemas/blob/develop/LICENSE"
+      "url": "https://github.com/nlpsandbox/nlpsandbox-schemas/blob/develop/LICENSE"
     },
     "x-logo": {
       "url": "https://nlpsandbox.github.io/nlpsandbox-schemas/logo.png"
     },
-    "description": "# Overview\nThe NLP Sandbox Data Node is a repository of data used to developed and benchmark NLP Tools like the Date Annotator and Person Name Annotator. The resources that can be stored in a Data Node are listed below:\n- Datasets\n  - FHIR Stores\n    - Patients\n    - Clinical Notes\n  - Annotation Stores\n    - Annotations\n"
+    "description": "# Overview\nThe NLP Sandbox Data Node is a repository of data used to benchmark NLP Tools like the NLP Sandbox Date Annotator and Person Name Annotator. The resources that can be stored in this Data Node and the operations supported are listed below:\n- Create and manage datasets - Create and manage FHIR stores\n  - Store and retrieve FHIR patient profiles\n  - Store and retrieve clinical notes\n- Create and manage annotation stores\n  - Store and retrieve text annotations\n"
   },
   "tags": [
     {
@@ -1246,12 +1246,17 @@
                 "format": "uri"
               }
             }
+          },
+          "totalResults": {
+            "description": "Total number of results in the result set",
+            "type": "integer"
           }
         },
         "required": [
           "offset",
           "limit",
-          "links"
+          "links",
+          "totalResults"
         ]
       },
       "DatasetName": {
@@ -1267,7 +1272,10 @@
           "name": {
             "$ref": "#/components/schemas/DatasetName"
           }
-        }
+        },
+        "required": [
+          "name"
+        ]
       },
       "PageOfDatasets": {
         "type": "object",
@@ -1288,6 +1296,13 @@
               }
             }
           }
+        ],
+        "required": [
+          "offset",
+          "limit",
+          "links",
+          "totalResults",
+          "datasets"
         ]
       },
       "Error": {
@@ -1335,7 +1350,10 @@
           "name": {
             "$ref": "#/components/schemas/DatasetName"
           }
-        }
+        },
+        "required": [
+          "name"
+        ]
       },
       "EmptyObject": {
         "type": "object",
@@ -1354,7 +1372,10 @@
           "name": {
             "$ref": "#/components/schemas/AnnotationStoreName"
           }
-        }
+        },
+        "required": [
+          "name"
+        ]
       },
       "PageOfAnnotationStores": {
         "type": "object",
@@ -1375,6 +1396,13 @@
               }
             }
           }
+        ],
+        "required": [
+          "offset",
+          "limit",
+          "links",
+          "totalResults",
+          "annotationStores"
         ]
       },
       "AnnotationStoreId": {
@@ -1396,7 +1424,10 @@
           "name": {
             "$ref": "#/components/schemas/AnnotationStoreName"
           }
-        }
+        },
+        "required": [
+          "name"
+        ]
       },
       "AnnotationName": {
         "description": "The resource name of the annotation record, of the form datasets/{datasetId}/annotationStores/{annotationStoreId}/annotations/{annotationId}",
@@ -1412,7 +1443,10 @@
             "description": "Full path of an API resource",
             "type": "string"
           }
-        }
+        },
+        "required": [
+          "name"
+        ]
       },
       "AnnotationSource": {
         "type": "object",
@@ -1422,7 +1456,10 @@
             "$ref": "#/components/schemas/ResourceSource"
           }
         },
-        "minProperties": 1
+        "maxProperties": 1,
+        "required": [
+          "resourceSource"
+        ]
       },
       "TextAnnotation": {
         "type": "object",
@@ -1430,13 +1467,11 @@
         "properties": {
           "start": {
             "description": "The position of the first character",
-            "type": "integer",
-            "example": 42
+            "type": "integer"
           },
           "length": {
             "description": "The length of the annotation",
-            "type": "integer",
-            "example": 10
+            "type": "integer"
           },
           "text": {
             "description": "The string annotated",
@@ -1447,15 +1482,20 @@
             "type": "number",
             "format": "float",
             "minimum": 0,
-            "maximum": 100,
-            "example": 95
+            "maximum": 100
           }
         },
         "required": [
           "start",
           "length",
           "text"
-        ]
+        ],
+        "example": {
+          "start": 42,
+          "length": 19,
+          "text": "the annotation text",
+          "confidence": 95.5
+        }
       },
       "TextDateAnnotation": {
         "type": "object",
@@ -1479,7 +1519,8 @@
           "start": 42,
           "length": 10,
           "text": "10/26/2020",
-          "dateFormat": "MM/DD/YYYY"
+          "dateFormat": "MM/DD/YYYY",
+          "confidence": 95.5
         }
       },
       "TextPersonNameAnnotation": {
@@ -1493,7 +1534,8 @@
         "example": {
           "start": 42,
           "length": 11,
-          "text": "Chloe Price"
+          "text": "Chloe Price",
+          "confidence": 95.5
         }
       },
       "TextPhysicalAddressAnnotation": {
@@ -1527,9 +1569,10 @@
         ],
         "example": {
           "start": 42,
-          "length": 11,
+          "length": 7,
           "text": "Seattle",
-          "addressType": "city"
+          "addressType": "city",
+          "confidence": 95.5
         }
       },
       "Annotation": {
@@ -1563,7 +1606,11 @@
               "$ref": "#/components/schemas/TextPhysicalAddressAnnotation"
             }
           }
-        }
+        },
+        "required": [
+          "name",
+          "annotationSource"
+        ]
       },
       "PageOfAnnotations": {
         "type": "object",
@@ -1584,6 +1631,13 @@
               }
             }
           }
+        ],
+        "required": [
+          "offset",
+          "limit",
+          "links",
+          "totalResults",
+          "annotations"
         ]
       },
       "AnnotationId": {
@@ -1634,7 +1688,10 @@
           "name": {
             "$ref": "#/components/schemas/AnnotationName"
           }
-        }
+        },
+        "required": [
+          "name"
+        ]
       },
       "FhirStoreId": {
         "description": "The ID of the FHIR store",
@@ -1657,7 +1714,10 @@
           "name": {
             "$ref": "#/components/schemas/FhirStoreName"
           }
-        }
+        },
+        "required": [
+          "name"
+        ]
       },
       "PageOfFhirStores": {
         "type": "object",
@@ -1678,6 +1738,13 @@
               }
             }
           }
+        ],
+        "required": [
+          "offset",
+          "limit",
+          "links",
+          "totalResults",
+          "fhirStores"
         ]
       },
       "FhirStoreCreateRequest": {
@@ -1691,7 +1758,10 @@
           "name": {
             "$ref": "#/components/schemas/FhirStoreName"
           }
-        }
+        },
+        "required": [
+          "name"
+        ]
       },
       "PatientId": {
         "description": "The ID of the FHIR patient",
@@ -1718,6 +1788,13 @@
               "unknown"
             ]
           }
+        },
+        "required": [
+          "identifier"
+        ],
+        "example": {
+          "identifier": "awesome-patient",
+          "gender": "male"
         }
       },
       "PageOfPatients": {
@@ -1739,6 +1816,13 @@
               }
             }
           }
+        ],
+        "required": [
+          "offset",
+          "limit",
+          "links",
+          "totalResults",
+          "patients"
         ]
       },
       "PatientCreateRequest": {
@@ -1770,7 +1854,10 @@
           "name": {
             "$ref": "#/components/schemas/PatientResourceName"
           }
-        }
+        },
+        "required": [
+          "name"
+        ]
       },
       "NoteId": {
         "description": "The ID of the clinical note",
@@ -1789,13 +1876,11 @@
           },
           "text": {
             "description": "The content of the clinical note",
-            "type": "string",
-            "example": "On 12/26/2020, Ms. Chloe Price met with Dr. Prescott in Seattle."
+            "type": "string"
           },
           "noteType": {
             "description": "The note type (LOINC concept)",
-            "type": "string",
-            "example": "loinc:LP29684-5"
+            "type": "string"
           },
           "patientId": {
             "$ref": "#/components/schemas/PatientId"
@@ -1806,7 +1891,13 @@
           "text",
           "noteType",
           "patientId"
-        ]
+        ],
+        "example": {
+          "identifier": "awesome-note",
+          "text": "On 12/26/2020, Ms. Chloe Price met with Dr. Prescott in Seattle.",
+          "noteType": "loinc:LP29684-5",
+          "patientId": "awesome-patient"
+        }
       },
       "PageOfNotes": {
         "type": "object",
@@ -1827,6 +1918,13 @@
               }
             }
           }
+        ],
+        "required": [
+          "offset",
+          "limit",
+          "links",
+          "totalResults",
+          "notes"
         ]
       },
       "NoteCreateRequest": {
@@ -1866,7 +1964,10 @@
           "name": {
             "$ref": "#/components/schemas/NoteResourceName"
           }
-        }
+        },
+        "required": [
+          "name"
+        ]
       },
       "HealthCheck": {
         "type": "object",

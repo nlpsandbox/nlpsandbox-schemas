@@ -1,29 +1,29 @@
-openapi: 3.0.2
+openapi: 3.0.3
 info:
-  version: 0.3.1
+  version: 1.0.0
   title: NLP Sandbox Data Node API
   contact:
     name: The NLP Sandbox Team
     email: thomas.schaffter@sagebionetworks.org
-    url: 'https://nlpsandbox.github.io/nlpsandbox-schemas'
+    url: 'https://nlpsandbox.io'
   license:
     name: Apache 2.0
-    url: 'https://nlpsandbox.github.io/nlpsandbox-schemas/blob/develop/LICENSE'
+    url: 'https://github.com/nlpsandbox/nlpsandbox-schemas/blob/develop/LICENSE'
   x-logo:
     url: 'https://nlpsandbox.github.io/nlpsandbox-schemas/logo.png'
   description: >
     # Overview
 
-    The NLP Sandbox Data Node is a repository of data used to developed and
-    benchmark NLP Tools like the Date Annotator and Person Name Annotator. The
-    resources that can be stored in a Data Node are listed below:
+    The NLP Sandbox Data Node is a repository of data used to benchmark NLP
+    Tools like the NLP Sandbox Date Annotator and Person Name Annotator. The
+    resources that can be stored in this Data Node and the operations supported
+    are listed below:
 
-    - Datasets
-      - FHIR Stores
-        - Patients
-        - Clinical Notes
-      - Annotation Stores
-        - Annotations
+    - Create and manage datasets - Create and manage FHIR stores
+      - Store and retrieve FHIR patient profiles
+      - Store and retrieve clinical notes
+    - Create and manage annotation stores
+      - Store and retrieve text annotations
 tags:
   - name: Annotation
     description: Operations about annotations
@@ -815,10 +815,14 @@ components:
               description: Link to the next page of results
               type: string
               format: uri
+        totalResults:
+          description: Total number of results in the result set
+          type: integer
       required:
         - offset
         - limit
         - links
+        - totalResults
     DatasetName:
       description: The name of the dataset
       type: string
@@ -830,6 +834,8 @@ components:
       properties:
         name:
           $ref: '#/components/schemas/DatasetName'
+      required:
+        - name
     PageOfDatasets:
       type: object
       description: A page of datasets
@@ -842,6 +848,12 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/Dataset'
+      required:
+        - offset
+        - limit
+        - links
+        - totalResults
+        - datasets
     Error:
       type: object
       description: Problem details (tools.ietf.org/html/rfc7807)
@@ -879,6 +891,8 @@ components:
       properties:
         name:
           $ref: '#/components/schemas/DatasetName'
+      required:
+        - name
     EmptyObject:
       type: object
       description: An empty object
@@ -896,6 +910,8 @@ components:
       properties:
         name:
           $ref: '#/components/schemas/AnnotationStoreName'
+      required:
+        - name
     PageOfAnnotationStores:
       type: object
       description: A page of annotation stores
@@ -908,6 +924,12 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/AnnotationStore'
+      required:
+        - offset
+        - limit
+        - links
+        - totalResults
+        - annotationStores
     AnnotationStoreId:
       description: The ID of the annotation store
       type: string
@@ -924,6 +946,8 @@ components:
       properties:
         name:
           $ref: '#/components/schemas/AnnotationStoreName'
+      required:
+        - name
     AnnotationName:
       description: >-
         The resource name of the annotation record, of the form
@@ -940,13 +964,17 @@ components:
         name:
           description: Full path of an API resource
           type: string
+      required:
+        - name
     AnnotationSource:
       type: object
       description: The source of an annotation record
       properties:
         resourceSource:
           $ref: '#/components/schemas/ResourceSource'
-      minProperties: 1
+      maxProperties: 1
+      required:
+        - resourceSource
     TextAnnotation:
       type: object
       description: An annotation in a text
@@ -954,11 +982,9 @@ components:
         start:
           description: The position of the first character
           type: integer
-          example: 42
         length:
           description: The length of the annotation
           type: integer
-          example: 10
         text:
           description: The string annotated
           type: string
@@ -968,11 +994,15 @@ components:
           format: float
           minimum: 0
           maximum: 100
-          example: 95
       required:
         - start
         - length
         - text
+      example:
+        start: 42
+        length: 19
+        text: the annotation text
+        confidence: 95.5
     TextDateAnnotation:
       type: object
       description: A date annotation in a text
@@ -989,6 +1019,7 @@ components:
         length: 10
         text: 10/26/2020
         dateFormat: MM/DD/YYYY
+        confidence: 95.5
     TextPersonNameAnnotation:
       type: object
       description: A person name annotation in a text
@@ -998,6 +1029,7 @@ components:
         start: 42
         length: 11
         text: Chloe Price
+        confidence: 95.5
     TextPhysicalAddressAnnotation:
       type: object
       description: A physical address annotation in a text
@@ -1021,9 +1053,10 @@ components:
                 - zip
       example:
         start: 42
-        length: 11
+        length: 7
         text: Seattle
         addressType: city
+        confidence: 95.5
     Annotation:
       type: object
       description: An annotation record
@@ -1047,6 +1080,9 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/TextPhysicalAddressAnnotation'
+      required:
+        - name
+        - annotationSource
     PageOfAnnotations:
       type: object
       description: A page of annotations
@@ -1059,6 +1095,12 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/Annotation'
+      required:
+        - offset
+        - limit
+        - links
+        - totalResults
+        - annotations
     AnnotationId:
       description: The ID of the annotation
       type: string
@@ -1095,6 +1137,8 @@ components:
       properties:
         name:
           $ref: '#/components/schemas/AnnotationName'
+      required:
+        - name
     FhirStoreId:
       description: The ID of the FHIR store
       type: string
@@ -1116,6 +1160,8 @@ components:
       properties:
         name:
           $ref: '#/components/schemas/FhirStoreName'
+      required:
+        - name
     PageOfFhirStores:
       type: object
       description: A page of FHIR stores
@@ -1128,6 +1174,12 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/FhirStore'
+      required:
+        - offset
+        - limit
+        - links
+        - totalResults
+        - fhirStores
     FhirStoreCreateRequest:
       type: object
       description: An empty object
@@ -1137,6 +1189,8 @@ components:
       properties:
         name:
           $ref: '#/components/schemas/FhirStoreName'
+      required:
+        - name
     PatientId:
       description: The ID of the FHIR patient
       type: string
@@ -1158,6 +1212,11 @@ components:
             - female
             - other
             - unknown
+      required:
+        - identifier
+      example:
+        identifier: awesome-patient
+        gender: male
     PageOfPatients:
       type: object
       description: A page of FHIR patients
@@ -1170,6 +1229,12 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/Patient'
+      required:
+        - offset
+        - limit
+        - links
+        - totalResults
+        - patients
     PatientCreateRequest:
       type: object
       description: A FHIR patient
@@ -1197,6 +1262,8 @@ components:
       properties:
         name:
           $ref: '#/components/schemas/PatientResourceName'
+      required:
+        - name
     NoteId:
       description: The ID of the clinical note
       type: string
@@ -1213,11 +1280,9 @@ components:
         text:
           description: The content of the clinical note
           type: string
-          example: 'On 12/26/2020, Ms. Chloe Price met with Dr. Prescott in Seattle.'
         noteType:
           description: The note type (LOINC concept)
           type: string
-          example: 'loinc:LP29684-5'
         patientId:
           $ref: '#/components/schemas/PatientId'
       required:
@@ -1225,6 +1290,11 @@ components:
         - text
         - noteType
         - patientId
+      example:
+        identifier: awesome-note
+        text: 'On 12/26/2020, Ms. Chloe Price met with Dr. Prescott in Seattle.'
+        noteType: 'loinc:LP29684-5'
+        patientId: awesome-patient
     PageOfNotes:
       type: object
       description: A page of notes
@@ -1237,6 +1307,12 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/Note'
+      required:
+        - offset
+        - limit
+        - links
+        - totalResults
+        - notes
     NoteCreateRequest:
       type: object
       description: A clinical note
@@ -1269,6 +1345,8 @@ components:
       properties:
         name:
           $ref: '#/components/schemas/NoteResourceName'
+      required:
+        - name
     HealthCheck:
       type: object
       description: Represents the health of a service
