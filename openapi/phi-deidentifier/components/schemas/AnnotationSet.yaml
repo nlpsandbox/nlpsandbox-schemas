@@ -1,8 +1,6 @@
 type: object
-description: An annotation record
+description: Set of annotations of all types for a text
 properties:
-  annotationSource:
-    $ref: AnnotationSource.yaml
   textDateAnnotations:
     description: Date annotations in a text
     type: array
@@ -19,4 +17,6 @@ properties:
     items:
       $ref: ../../../commons/components/schemas/TextPhysicalAddressAnnotation.yaml
 required:
-  - annotationSource
+  - textDateAnnotations
+  - textPersonNameAnnotations
+  - textPhysicalAddressAnnotations

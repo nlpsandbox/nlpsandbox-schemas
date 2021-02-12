@@ -3,3 +3,5 @@ description: A FHIR store
 properties:
   name:
     $ref: ../parameters/FhirStoreName.yaml
+required:
+  - name

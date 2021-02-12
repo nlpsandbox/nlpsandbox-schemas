@@ -2,7 +2,10 @@ type: object
 description: The source of an annotation record
 properties:
   resourceSource:
-    $ref: ResourceSource.yaml
+    $ref: ../../../commons/components/schemas/ResourceSource.yaml
   # s3Source:
   #   $ref: S3Source.yaml
-minProperties: 1
+# minProperties: 1
+maxProperties: 1
+required:
+  - resourceSource

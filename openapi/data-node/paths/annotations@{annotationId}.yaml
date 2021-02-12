@@ -29,7 +29,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: ../../commons/components/schemas/Annotation.yaml
+            $ref: ../components/schemas/Annotation.yaml
     '404':
       $ref: ../../commons/components/responses/NotFound.yaml
     '500':

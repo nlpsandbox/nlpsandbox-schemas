@@ -9,3 +9,9 @@ allOf:
         type: array
         items:
           $ref: ../schemas/Dataset.yaml
+required:
+  - offset
+  - limit
+  - links
+  - totalResults
+  - datasets

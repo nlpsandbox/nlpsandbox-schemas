@@ -1,42 +1,42 @@
-openapi: 3.0.2
+openapi: 3.0.3
 info:
-  version: 0.3.1
-  title: NLP Sandbox Deidentifier API
+  version: 1.0.0
+  title: NLP Sandbox PHI Deidentifier API
   contact:
     name: The NLP Sandbox Team
     email: thomas.schaffter@sagebionetworks.org
-    url: 'https://nlpsandbox.github.io/nlpsandbox-schemas'
+    url: https://nlpsandbox.io
   license:
     name: Apache 2.0
-    url: 'https://nlpsandbox.github.io/nlpsandbox-schemas/blob/develop/LICENSE'
+    url: https://github.com/nlpsandbox/nlpsandbox-schemas/blob/develop/LICENSE
   x-logo:
-    url: 'https://nlpsandbox.github.io/nlpsandbox-schemas/logo.png'
+    url: https://nlpsandbox.github.io/nlpsandbox-schemas/logo.png
   description: >
     # Overview
 
-    This NLP tool relies on the following tools to deidentify a clinical note
-    given as input.
+    This NLP tool relies on the following NLP tools to deidentify a clinical
+    note given as input.
 
     - Data Annotator
     - Person Name Annotator
     - Physical Address Annotator
     - TBA
 tags:
-  - name: DeidentifiedNotes
+  - name: DeidentifiedNote
     description: Operations about deidentified notes
   - name: HealthCheck
     description: Operations about health checks
   - name: Tool
     description: Operations about this tool
 servers:
-  - url: 'http://example.com/api/v1'
-  - url: 'https://example.com/api/v1'
+  - url: http://example.com/api/v1
+  - url: https://example.com/api/v1
 paths:
   /deidentifiedNotes:
-    $ref: 'paths/deidentifiedNotes.yaml'
+    $ref: paths/deidentifiedNotes.yaml
   /healthCheck:
-    $ref: '../commons/paths/healthCheck.yaml'
+    $ref: ../commons/paths/healthCheck.yaml
   /tool:
-    $ref: '../commons/paths/tool.yaml'
+    $ref: ../commons/paths/tool.yaml
   /tool/dependencies:
-    $ref: '../commons/paths/dependencies.yaml'
+    $ref: ../commons/paths/dependencies.yaml

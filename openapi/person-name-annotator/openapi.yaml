@@ -1,16 +1,16 @@
-openapi: 3.0.2
+openapi: 3.0.3
 info:
-  version: 0.3.1
+  version: 1.0.0
   title: NLP Sandbox Person Name Annotator API
   contact:
     name: The NLP Sandbox Team
     email: thomas.schaffter@sagebionetworks.org
-    url: 'https://nlpsandbox.github.io/nlpsandbox-schemas'
+    url: https://nlpsandbox.io
   license:
     name: Apache 2.0
-    url: 'https://nlpsandbox.github.io/nlpsandbox-schemas/blob/develop/LICENSE'
+    url: https://github.com/nlpsandbox/nlpsandbox-schemas/blob/develop/LICENSE
   x-logo:
-    url: 'https://nlpsandbox.github.io/nlpsandbox-schemas/logo.png'
+    url: https://nlpsandbox.github.io/nlpsandbox-schemas/logo.png
   description: >
     # Overview
 
@@ -24,14 +24,14 @@ tags:
   - name: Tool
     description: Operations about this tool
 servers:
-  - url: 'http://example.com/api/v1'
-  - url: 'https://example.com/api/v1'
+  - url: http://example.com/api/v1
+  - url: https://example.com/api/v1
 paths:
   /healthCheck:
-    $ref: '../commons/paths/healthCheck.yaml'
+    $ref: ../commons/paths/healthCheck.yaml
   /textPersonNameAnnotations:
-    $ref: 'paths/textPersonNameAnnotations.yaml'
+    $ref: paths/textPersonNameAnnotations.yaml
   /tool:
-    $ref: '../commons/paths/tool.yaml'
+    $ref: ../commons/paths/tool.yaml
   /tool/dependencies:
-    $ref: '../commons/paths/dependencies.yaml'
+    $ref: ../commons/paths/dependencies.yaml

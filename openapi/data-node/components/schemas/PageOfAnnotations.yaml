@@ -8,4 +8,10 @@ allOf:
         description: An array of annotations
         type: array
         items:
-          $ref: ../../../commons/components/schemas/Annotation.yaml
+          $ref: Annotation.yaml
+required:
+  - offset
+  - limit
+  - links
+  - totalResults
+  - annotations

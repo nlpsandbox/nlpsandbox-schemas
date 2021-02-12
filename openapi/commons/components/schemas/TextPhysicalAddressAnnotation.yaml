@@ -20,6 +20,7 @@ allOf:
           - zip
 example:
   start: 42
-  length: 11
+  length: 7
   text: Seattle
   addressType: city
+  confidence: 95.5

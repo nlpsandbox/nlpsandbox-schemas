@@ -3,3 +3,5 @@ description: A dataset
 properties:
   name:
     $ref: ../parameters/DatasetName.yaml
+required:
+  - name
