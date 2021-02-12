@@ -5,11 +5,10 @@
     "ibm-openapi-validator": "0.34.1"
   },
   "scripts": {
-    "start": "openapi preview-docs $npm_config_entrypoint",
-    "build": "openapi bundle -o openapi.yaml $npm_config_entrypoint",
-    "lint": "openapi lint $npm_config_entrypoint",
+    "start": "openapi preview-docs ./openapi/${npm_config_api}/openapi.yaml",
+    "build": "openapi bundle -o openapi.yaml ./openapi/${npm_config_api}/openapi.yaml",
+    "lint": "openapi lint ./openapi/${npm_config_api}/openapi.yaml",
     "lint:all": "openapi lint openapi/*/openapi.yaml",
-    "lint:ibm": "openapi bundle -o openapi.yaml $npm_config_entrypoint && ./node_modules/.bin/lint-openapi openapi.yaml",
-    "validate:schemas": "python tools/validate/validate.py validate --json_filepath test/json-samples/tool.json --schema_filepath json-schema/schemas/tool.json"
+    "validate": "npm run build --api=${npm_config_api} && ./node_modules/.bin/lint-openapi openapi.yaml"
   }
 }
