@@ -3,7 +3,7 @@ post:
     - TextPhysicalAddressAnnotation
   summary: Annotate physical addresses in a clinical note
   description: Return the physical addresse annotations found in a clinical note
-  operationId: "createTextPhysicalAddressAnnotations"
+  operationId: createTextPhysicalAddressAnnotations
   requestBody:
     content:
       application/json:
