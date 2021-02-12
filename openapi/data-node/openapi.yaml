@@ -41,32 +41,32 @@ tags:
   - name: Patient
     description: Operations about patients
 servers:
-  - url: 'http://example.com/api/v1'
-  - url: 'https://example.com/api/v1'
+  - url: http://example.com/api/v1
+  - url: https://example.com/api/v1
 paths:
   /datasets:
-    $ref: 'paths/datasets.yaml'
+    $ref: paths/datasets.yaml
   /datasets/{datasetId}:
-    $ref: 'paths/datasets@{datasetId}.yaml'
+    $ref: paths/datasets@{datasetId}.yaml
   /datasets/{datasetId}/annotationStores:
-    $ref: 'paths/annotationStores.yaml'
+    $ref: paths/annotationStores.yaml
   /datasets/{datasetId}/annotationStores/{annotationStoreId}:
-    $ref: 'paths/annotationStores@{annotationStoreId}.yaml'
+    $ref: paths/annotationStores@{annotationStoreId}.yaml
   /datasets/{datasetId}/annotationStores/{annotationStoreId}/annotations:
-    $ref: 'paths/annotations.yaml'
+    $ref: paths/annotations.yaml
   /datasets/{datasetId}/annotationStores/{annotationStoreId}/annotations/{annotationId}:
-    $ref: 'paths/annotations@{annotationId}.yaml'
+    $ref: paths/annotations@{annotationId}.yaml
   /datasets/{datasetId}/fhirStores:
-    $ref: 'paths/fhirStores.yaml'
+    $ref: paths/fhirStores.yaml
   /datasets/{datasetId}/fhirStores/{fhirStoreId}:
-    $ref: 'paths/fhirStores@{fhirStoreId}.yaml'
+    $ref: paths/fhirStores@{fhirStoreId}.yaml
   /datasets/{datasetId}/fhirStores/{fhirStoreId}/fhir/Patient:
-    $ref: 'paths/patients.yaml'
+    $ref: paths/patients.yaml
   /datasets/{datasetId}/fhirStores/{fhirStoreId}/fhir/Patient/{patientId}:
-    $ref: 'paths/patients@{patientId}.yaml'
+    $ref: paths/patients@{patientId}.yaml
   /datasets/{datasetId}/fhirStores/{fhirStoreId}/fhir/Note:
-    $ref: 'paths/notes.yaml'
+    $ref: paths/notes.yaml
   /datasets/{datasetId}/fhirStores/{fhirStoreId}/fhir/Note/{noteId}:
-    $ref: 'paths/notes@{noteId}.yaml'
+    $ref: paths/notes@{noteId}.yaml
   /healthCheck:
-    $ref: '../commons/paths/healthCheck.yaml'
+    $ref: ../commons/paths/healthCheck.yaml

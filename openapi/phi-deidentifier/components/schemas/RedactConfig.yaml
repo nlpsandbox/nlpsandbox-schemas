@@ -1,0 +1,4 @@
+type: object
+description:
+  Configuration for the redaction strategy. E.g. "John Smith lives at 123 Main
+  St" -> "lives at".

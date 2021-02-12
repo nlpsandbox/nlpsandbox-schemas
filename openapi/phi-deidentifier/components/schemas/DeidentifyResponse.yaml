@@ -1,5 +1,5 @@
 type: object
-description: Response to deidentification request
+description: The response to deidentification request
 properties:
   originalAnnotations:
     $ref: AnnotationSet.yaml
