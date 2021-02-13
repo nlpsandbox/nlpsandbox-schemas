@@ -1253,8 +1253,6 @@
           }
         },
         "required": [
-          "offset",
-          "limit",
           "links",
           "totalResults"
         ]
@@ -1262,7 +1260,7 @@
       "DatasetName": {
         "description": "The name of the dataset",
         "type": "string",
-        "pattern": "^datasets\\/[a-z0-9]+(?:-[a-z0-9]+)*$",
+        "pattern": "^datasets/[a-z0-9]+(?:-[a-z0-9]+)*$",
         "example": "datasets/awesome-dataset"
       },
       "Dataset": {
@@ -1362,7 +1360,7 @@
       "AnnotationStoreName": {
         "description": "The resource name of the annotation store, of the form datasets/{datasetId}/annotationStores/{annotationStoreId}",
         "type": "string",
-        "pattern": "^datasets\\/[a-z0-9]+(?:-[a-z0-9]+)*\\/annotationStores\\/[a-z0-9]+(?:-[a-z0-9]+)*$",
+        "pattern": "^datasets/[a-z0-9]+(?:-[a-z0-9]+)*/annotationStores/[a-z0-9]+(?:-[a-z0-9]+)*$",
         "example": "datasets/awesome-dataset/annotationStores/awesome-annotation-store"
       },
       "AnnotationStore": {
@@ -1432,7 +1430,7 @@
       "AnnotationName": {
         "description": "The resource name of the annotation record, of the form datasets/{datasetId}/annotationStores/{annotationStoreId}/annotations/{annotationId}",
         "type": "string",
-        "pattern": "^datasets\\/[a-z0-9]+(?:-[a-z0-9]+)*\\/annotationStores\\/[a-z0-9]+(?:-[a-z0-9]+)*\\/annotations\\/[a-z0-9]+(?:-[a-z0-9]+)*$",
+        "pattern": "^datasets/[a-z0-9]+(?:-[a-z0-9]+)*/annotationStores/[a-z0-9]+(?:-[a-z0-9]+)*/annotations/[a-z0-9]+(?:-[a-z0-9]+)*$",
         "example": "datasets/awesome-dataset/annotationStores/awesome-annotation-store/annotations/awesome-annotation"
       },
       "ResourceSource": {
@@ -1704,7 +1702,7 @@
       "FhirStoreName": {
         "description": "The resource name of the FHIR store, of the form datasets/{datasetId}/fhirStores/{fhirStoreId}",
         "type": "string",
-        "pattern": "^datasets\\/[a-z0-9]+(?:-[a-z0-9]+)*\\/fhirStores\\/[a-z0-9]+(?:-[a-z0-9]+)*$",
+        "pattern": "^datasets/[a-z0-9]+(?:-[a-z0-9]+)*/fhirStores/[a-z0-9]+(?:-[a-z0-9]+)*$",
         "example": "datasets/awesome-dataset/fhirStores/awesome-fhir-store"
       },
       "FhirStore": {
@@ -1844,7 +1842,7 @@
       "PatientResourceName": {
         "description": "The resource name of the FHIR patient, of the form datasets/{datasetId}/fhirStores/{fhirStoreId}/Patient/{PatientId}",
         "type": "string",
-        "pattern": "^datasets\\/[a-z0-9]+(?:-[a-z0-9]+)*\\/fhirStores\\/[a-z0-9]+(?:-[a-z0-9]+)*\\/Patient\\/[a-z0-9]+(?:-[a-z0-9]+)*$",
+        "pattern": "^datasets/[a-z0-9]+(?:-[a-z0-9]+)*/fhirStores/[a-z0-9]+(?:-[a-z0-9]+)*/Patient/[a-z0-9]+(?:-[a-z0-9]+)*$",
         "example": "datasets/awesome-dataset/fhirStores/awesome-fhir-store/Patient/507f1f77bcf86cd799439011"
       },
       "PatientCreateResponse": {
@@ -1954,7 +1952,7 @@
       "NoteResourceName": {
         "description": "The resource name of the clinical note, of the form datasets/{datasetId}/fhirStores/{fhirStoreId}/Note/{NoteId}",
         "type": "string",
-        "pattern": "^datasets\\/[a-z0-9]+(?:-[a-z0-9]+)*\\/fhirStores\\/[a-z0-9]+(?:-[a-z0-9]+)*\\/Note\\/[a-z0-9]+(?:-[a-z0-9]+)*$",
+        "pattern": "^datasets/[a-z0-9]+(?:-[a-z0-9]+)*/fhirStores/[a-z0-9]+(?:-[a-z0-9]+)*/Note/[a-z0-9]+(?:-[a-z0-9]+)*$",
         "example": "datasets/awesome-dataset/fhirStores/awesome-fhir-store/Note/awesome-note"
       },
       "NoteCreateResponse": {
