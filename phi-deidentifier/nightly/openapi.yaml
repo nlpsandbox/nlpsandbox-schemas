@@ -158,8 +158,6 @@ components:
           minLength: 1
           maxLength: 1
           default: '*'
-      required:
-        - maskingChar
     AnnotationTypeMaskConfig:
       type: object
       description: >-
@@ -194,7 +192,7 @@ components:
             de-identified
           minimum: 0
           maximum: 100
-          example: 42.4
+          example: 95.5
           default: 0
         maskingCharConfig:
           $ref: '#/components/schemas/MaskingCharConfig'
@@ -215,6 +213,8 @@ components:
               - text_physical_address
               - text_date
               - text_person_name
+      required:
+        - annotationTypes
     DeidentifyRequest:
       type: object
       description: A request to de-identify a clinical note
@@ -439,7 +439,7 @@ components:
           type: string
           minLength: 1
           pattern: >-
-            ^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$
+            ^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$
         license:
           $ref: '#/components/schemas/License'
         repository:
@@ -467,7 +467,7 @@ components:
           type: string
           minLength: 1
           pattern: >-
-            ^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$
+            ^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$
       required:
         - name
         - version
