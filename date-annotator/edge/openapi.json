@@ -15,7 +15,7 @@
     "x-logo": {
       "url": "https://nlpsandbox.github.io/nlpsandbox-schemas/logo.png"
     },
-    "description": "# Overview\nThis NLP tool detects references of dates in the clinical note given as input and returns a list of date annotations.\n"
+    "description": "# Overview\n\nThis NLP tool detects references of dates in the clinical note given as\ninput and returns a list of date annotations.\n\n# Examples\n\n- [NLP Sandbox Date Annotator (Python)](https://github.com/nlpsandbox/date-annotator-example)\n- [NLP Sandbox Date Annotator (Java)](https://github.com/nlpsandbox/date-annotator-example-java)\n"
   },
   "tags": [
     {
@@ -91,7 +91,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TextDateAnnotations"
+                  "$ref": "#/components/schemas/TextDateAnnotationResponse"
                 }
               }
             }
@@ -258,7 +258,7 @@
       },
       "TextDateAnnotationRequest": {
         "type": "object",
-        "description": "An annotation request",
+        "description": "A request to annotate dates in a clinical note",
         "properties": {
           "note": {
             "$ref": "#/components/schemas/Note"
@@ -330,12 +330,12 @@
           "confidence": 95.5
         }
       },
-      "TextDateAnnotations": {
+      "TextDateAnnotationResponse": {
         "type": "object",
-        "description": "A list of text date annotations",
+        "description": "The response to a dates annotation request",
         "properties": {
           "textDateAnnotations": {
-            "description": "A list of text date annotations",
+            "description": "A list of date annotations",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/TextDateAnnotation"
