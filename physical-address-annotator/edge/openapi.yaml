@@ -14,8 +14,17 @@ info:
   description: >
     # Overview
 
+
     This NLP tool detects references of physical addresses in the clinical note
+
     given as input and returns a list of physical address annotations.
+
+
+    # Examples
+
+
+    - [NLP Sandbox Physical Address Annotator
+    (Python)](https://github.com/nlpsandbox/physical-address-annotator-example)
 tags:
   - name: HealthCheck
     description: Operations about health checks
@@ -63,7 +72,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TextPhysicalAddressAnnotations'
+                $ref: '#/components/schemas/TextPhysicalAddressAnnotationResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
         '500':
@@ -180,7 +189,7 @@ components:
         patientId: awesome-patient
     TextPhysicalAddressAnnotationRequest:
       type: object
-      description: An annotation request
+      description: A request to annotate physical addresses in a clinical note
       properties:
         note:
           $ref: '#/components/schemas/Note'
@@ -241,12 +250,12 @@ components:
         text: Seattle
         addressType: city
         confidence: 95.5
-    TextPhysicalAddressAnnotations:
+    TextPhysicalAddressAnnotationResponse:
       type: object
-      description: A list of text physical address annotations
+      description: The response to a physical addresses annotation request
       properties:
         textPhysicalAddressAnnotations:
-          description: A list of text physical address annotations
+          description: A list of physical address annotations
           type: array
           items:
             $ref: '#/components/schemas/TextPhysicalAddressAnnotation'
