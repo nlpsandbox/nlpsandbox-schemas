@@ -1,4 +1,4 @@
-## Contributing
+# Contributing
 
 A big welcome and thank you for considering contributing to this project.
 
