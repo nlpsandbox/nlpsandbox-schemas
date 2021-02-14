@@ -49,9 +49,10 @@ GitHub repository | API Name
 
 You can pull the images published by the NLP Sandbox from [Docker Hub].
 
-## Contribution guidelines
+## Contributing
 
-Coming soon
+Thinking about contributing to this project? Get started by reading our
+[Contributor Guide](CONTRIBUTING.md).
 
 ## License
 
