@@ -11,11 +11,16 @@ info:
     url: https://github.com/nlpsandbox/nlpsandbox-schemas/blob/develop/LICENSE
   x-logo:
     url: https://nlpsandbox.github.io/nlpsandbox-schemas/logo.png
-  description: >
+  description: |
     # Overview
 
     This NLP tool detects references of dates in the clinical note given as
     input and returns a list of date annotations.
+
+    # Examples
+
+    - [NLP Sandbox Date Annotator (Python)](https://github.com/nlpsandbox/date-annotator-example)
+    - [NLP Sandbox Date Annotator (Java)](https://github.com/nlpsandbox/date-annotator-example-java)
 tags:
   - name: HealthCheck
     description: Operations about health checks

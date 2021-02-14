@@ -1,8 +1,8 @@
 type: object
-description: A list of text physical address annotations
+description: The response to a physical addresses annotation request
 properties:
   textPhysicalAddressAnnotations:
-    description: A list of text physical address annotations
+    description: A list of physical address annotations
     type: array
     items:
       $ref: ../../../commons/components/schemas/TextPhysicalAddressAnnotation.yaml

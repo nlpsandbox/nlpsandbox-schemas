@@ -1,8 +1,8 @@
 type: object
-description: A list of text person name annotations
+description: The response to a person names annotation request
 properties:
   textPersonNameAnnotations:
-    description: A list of text person name annotations
+    description: A list of person name annotations
     type: array
     items:
       $ref: ../../../commons/components/schemas/TextPersonNameAnnotation.yaml
