@@ -15,7 +15,7 @@
     "x-logo": {
       "url": "https://nlpsandbox.github.io/nlpsandbox-schemas/logo.png"
     },
-    "description": "# Overview\nThis NLP tool detects references of person names in the clinical note given as input and returns a list of person name annotations.\n"
+    "description": "# Overview\n\nThis NLP tool detects references of person names in the clinical note given\nas input and returns a list of person name annotations.\n\n# Examples\n\n- [NLP Sandbox Person Name Annotator (Python)](https://github.com/nlpsandbox/person-name-annotator-example)\n"
   },
   "tags": [
     {
@@ -91,7 +91,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TextPersonNameAnnotations"
+                  "$ref": "#/components/schemas/TextPersonNameAnnotationResponse"
                 }
               }
             }
@@ -258,7 +258,7 @@
       },
       "TextPersonNameAnnotationRequest": {
         "type": "object",
-        "description": "An annotation request",
+        "description": "A request to annotate person names in a clinical note",
         "properties": {
           "note": {
             "$ref": "#/components/schemas/Note"
@@ -319,12 +319,12 @@
           "confidence": 95.5
         }
       },
-      "TextPersonNameAnnotations": {
+      "TextPersonNameAnnotationResponse": {
         "type": "object",
-        "description": "A list of text person name annotations",
+        "description": "The response to a person names annotation request",
         "properties": {
           "textPersonNameAnnotations": {
-            "description": "A list of text person name annotations",
+            "description": "A list of person name annotations",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/TextPersonNameAnnotation"
