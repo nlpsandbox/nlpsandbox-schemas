@@ -15,7 +15,7 @@ post:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/TextPersonNameAnnotations.yaml
+            $ref: ../components/schemas/TextPersonNameAnnotationResponse.yaml
     '400':
       $ref: ../../commons/components/responses/BadRequest.yaml
     '500':

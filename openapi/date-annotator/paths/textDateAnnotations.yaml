@@ -15,7 +15,7 @@ post:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/TextDateAnnotations.yaml
+            $ref: ../components/schemas/TextDateAnnotationResponse.yaml
     '400':
       $ref: ../../commons/components/responses/BadRequest.yaml
     '500':
