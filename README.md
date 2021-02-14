@@ -37,13 +37,13 @@ automatically tests the tool, and build and publish a Docker image that can then
 be submitted as-is to the [nlpsandbox.io], if you wish to benchmark its
 performance -- just don't expect a high performance!
 
-GitHub repository | API Name
----|---
-[nlpsandbox/date-annotator-example]             | Date Annotator
-[nlpsandbox/date-annotator-example-java]        | Date Annotator
-[nlpsandbox/person-name-annotator-example]      | Person Name Annotator
-[nlpsandbox/physical-address-annotator-example] | Physical Address Annotator
-[nlpsandbox/phi-deidentifier]                   | PHI Deidentifier
+GitHub repository                               | Language
+------------------------------------------------|----------
+[nlpsandbox/date-annotator-example]             | Python
+[nlpsandbox/date-annotator-example-java]        | Java
+[nlpsandbox/person-name-annotator-example]      | Python
+[nlpsandbox/physical-address-annotator-example] | Python
+[nlpsandbox/phi-deidentifier]                   | Python
 
 ## Docker images
 
