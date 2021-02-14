@@ -38,7 +38,8 @@ jobs:
     - run: npm install
     - name: Lint openapi specifications
       run: |
-        npm run lint:ibm --entrypoint=openapi/${{ matrix.api }}/openapi.yaml
+        npm run lint --api=${{ matrix.api }}
+        npm run validate --api=${{ matrix.api }}
 
   build-and-publish:
     needs: [lint]

@@ -9,5 +9,3 @@ properties:
     minLength: 1
     maxLength: 1
     default: "*"
-required:
-  - maskingChar

@@ -1,4 +1,4 @@
 description: The resource name of the FHIR store, of the form datasets/{datasetId}/fhirStores/{fhirStoreId}
 type: string
-pattern: ^datasets\/[a-z0-9]+(?:-[a-z0-9]+)*\/fhirStores\/[a-z0-9]+(?:-[a-z0-9]+)*$
+pattern: "^datasets\/[a-z0-9]+(?:-[a-z0-9]+)*\/fhirStores\/[a-z0-9]+(?:-[a-z0-9]+)*$"
 example: datasets/awesome-dataset/fhirStores/awesome-fhir-store
