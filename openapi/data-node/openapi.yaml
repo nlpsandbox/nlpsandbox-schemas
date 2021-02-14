@@ -11,7 +11,7 @@ info:
     url: https://github.com/nlpsandbox/nlpsandbox-schemas/blob/develop/LICENSE
   x-logo:
     url: https://nlpsandbox.github.io/nlpsandbox-schemas/logo.png
-  description: >
+  description: |
     # Overview
 
     The NLP Sandbox Data Node is a repository of data used to benchmark NLP

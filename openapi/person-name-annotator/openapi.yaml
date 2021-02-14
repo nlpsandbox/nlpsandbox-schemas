@@ -11,11 +11,15 @@ info:
     url: https://github.com/nlpsandbox/nlpsandbox-schemas/blob/develop/LICENSE
   x-logo:
     url: https://nlpsandbox.github.io/nlpsandbox-schemas/logo.png
-  description: >
+  description: |
     # Overview
 
     This NLP tool detects references of person names in the clinical note given
     as input and returns a list of person name annotations.
+
+    # Examples
+
+    - [NLP Sandbox Person Name Annotator (Python)](https://github.com/nlpsandbox/person-name-annotator-example)
 tags:
   - name: HealthCheck
     description: Operations about health checks

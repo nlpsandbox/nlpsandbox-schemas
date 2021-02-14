@@ -11,16 +11,15 @@ info:
     url: https://github.com/nlpsandbox/nlpsandbox-schemas/blob/develop/LICENSE
   x-logo:
     url: https://nlpsandbox.github.io/nlpsandbox-schemas/logo.png
-  description: >
+  description: |
     # Overview
 
-    This NLP tool relies on the following NLP tools to deidentify a clinical
-    note given as input.
+    This NLP tool takes as input a clinical note and returned a de-identified
+    version of the note.
 
-    - Data Annotator
-    - Person Name Annotator
-    - Physical Address Annotator
-    - TBA
+    # Examples
+
+    - [NLP Sandbox PHI Deidentifier](https://github.com/nlpsandbox/phi-deidentifier)
 tags:
   - name: DeidentifiedNote
     description: Operations about deidentified notes
