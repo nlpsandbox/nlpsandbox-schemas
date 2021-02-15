@@ -15,7 +15,7 @@
     "x-logo": {
       "url": "https://nlpsandbox.github.io/nlpsandbox-schemas/logo.png"
     },
-    "description": "# Overview\nThe NLP Sandbox Data Node is a repository of data used to benchmark NLP Tools like the NLP Sandbox Date Annotator and Person Name Annotator. The resources that can be stored in this Data Node and the operations supported are listed below:\n- Create and manage datasets - Create and manage FHIR stores\n  - Store and retrieve FHIR patient profiles\n  - Store and retrieve clinical notes\n- Create and manage annotation stores\n  - Store and retrieve text annotations\n"
+    "description": "# Overview\n\nThe NLP Sandbox Data Node is a repository of data used to benchmark NLP\nTools like the NLP Sandbox Date Annotator and Person Name Annotator.\n\nThe resources that can be stored in this Data Node and the operations\nsupported are listed below:\n\n- Create and manage datasets - Create and manage FHIR stores\n  - Store and retrieve FHIR patient profiles - Store and retrieve clinical\n  notes\n- Create and manage annotation stores\n  - Store and retrieve text annotations\n"
   },
   "tags": [
     {
@@ -1248,7 +1248,7 @@
             }
           },
           "totalResults": {
-            "description": "Total number of results in the result set",
+            "description": "The total number of results in the result set",
             "type": "integer"
           }
         },
