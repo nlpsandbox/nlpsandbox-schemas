@@ -15,7 +15,7 @@
     "x-logo": {
       "url": "https://nlpsandbox.github.io/nlpsandbox-schemas/logo.png"
     },
-    "description": "# Overview\nThis NLP tool detects references of physical addresses in the clinical note given as input and returns a list of physical address annotations.\n"
+    "description": "# Overview\n\nThis NLP tool detects references of physical addresses in the clinical note\ngiven as input and returns a list of physical address annotations.\n\n# Examples\n\n- [NLP Sandbox Physical Address Annotator (Python)](https://github.com/nlpsandbox/physical-address-annotator-example)\n"
   },
   "tags": [
     {
@@ -91,7 +91,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TextPhysicalAddressAnnotations"
+                  "$ref": "#/components/schemas/TextPhysicalAddressAnnotationResponse"
                 }
               }
             }
@@ -258,7 +258,7 @@
       },
       "TextPhysicalAddressAnnotationRequest": {
         "type": "object",
-        "description": "An annotation request",
+        "description": "A request to annotate physical addresses in a clinical note",
         "properties": {
           "note": {
             "$ref": "#/components/schemas/Note"
@@ -341,12 +341,12 @@
           "confidence": 95.5
         }
       },
-      "TextPhysicalAddressAnnotations": {
+      "TextPhysicalAddressAnnotationResponse": {
         "type": "object",
-        "description": "A list of text physical address annotations",
+        "description": "The response to a physical addresses annotation request",
         "properties": {
           "textPhysicalAddressAnnotations": {
-            "description": "A list of text physical address annotations",
+            "description": "A list of physical address annotations",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/TextPhysicalAddressAnnotation"
