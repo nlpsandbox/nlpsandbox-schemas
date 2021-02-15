@@ -1,8 +1,8 @@
 type: object
-description: A list of text date annotations
+description: The response to a dates annotation request
 properties:
   textDateAnnotations:
-    description: A list of text date annotations
+    description: A list of date annotations
     type: array
     items:
       $ref: ../../../commons/components/schemas/TextDateAnnotation.yaml

@@ -15,7 +15,7 @@ post:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/TextPhysicalAddressAnnotations.yaml
+            $ref: ../components/schemas/TextPhysicalAddressAnnotationResponse.yaml
     '400':
       $ref: ../../commons/components/responses/BadRequest.yaml
     '500':

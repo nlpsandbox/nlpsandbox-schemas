@@ -5,71 +5,75 @@
 [![GitHub License](https://img.shields.io/github/license/nlpsandbox/nlpsandbox-schemas.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github)](https://github.com/nlpsandbox/nlpsandbox-schemas)
 [![Discord](https://img.shields.io/discord/770484164393828373.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&label=Discord&logo=discord)](https://discord.gg/Zb4ymtF "Realtime support / chat with the community and the team")
 
-## OpenAPI specifications
+OpenAPI specifications of the NLP Sandbox services
 
-List of APIs defined by the NLP Sandbox sorted by type and name in alphabetic
-order.
+## Overview
 
-| API | Type | Version |
-|---|---|---|
-| [Data Node](/openapi/data-node) | | 1.0.0 |
-| [Date Annotator](/openapi/date-annotator) | `nlpsandbox:date-annotator` | 1.0.0 |
-| [Person Name Annotator](/openapi/person-name-annotator) | `nlpsandbox:person-name-annotator` | 1.0.0 |
-| [Physical Address Annotator](/openapi/physical-address-annotator) | `nlpsandbox:physical-address-annotator` | 1.0.0 |
-| [PHI Deidentifier](/openapi/phi-deidentifier) | `nlpsandbox:phi-deidentifier` | 1.0.0 |
+This repository contains the OpenAPI specifications of the NLP tools and
+services defined by the NLP Sandbox. The NLP Tools that implement these
+specifications can have their performance benchmark on [nlpsandbox.io].
 
-## Web services
+## NLP Tools
 
-You can find below example implementations of the APIs defined by the NLP Sandbox.
+The OpenAPI specifications of the NLP Tools defined by the NLP Sandbox (and
+counting) are listed below. The OpenAPI specification available in JSON and YAML
+formats can be used to generate an NLP Tool "stub" using the [OpenAPI
+Generator]. For more information on how to develop an NLP Tool, please refer to
+the examples listed below. For more information on how to benchmark the
+performance of your tool, please visit [nlpsandbox.io].
 
-| GitHub repository | API |
-|---|---|
-| [nlpsandbox/data-node](https://github.com/nlpsandbox/data-node) | Data Node |
-| [nlpsandbox/date-annotator-example](https://github.com/nlpsandbox/date-annotator-example) | Date Annotator |
-| [nlpsandbox/person-name-annotator-example](https://github.com/nlpsandbox/person-name-annotator-example) | Person Name Annotator |
-| [nlpsandbox/physical-address-annotator-example](https://github.com/nlpsandbox/physical-address-annotator-example) | Physical Address Annotator |
-| [nlpsandbox/phi-deidentifier](https://github.com/nlpsandbox/phi-deidentifier) | PHI Deidentifier |
+API Name                     | Type                                    | Version
+-----------------------------|-----------------------------------------|---
+[Date Annotator]             | `nlpsandbox:date-annotator`             | 1.0.0
+[Person Name Annotator]      | `nlpsandbox:person-name-annotator`      | 1.0.0
+[Physical Address Annotator] | `nlpsandbox:physical-address-annotator` | 1.0.0
+[PHI Deidentifier]           | `nlpsandbox:phi-deidentifier`           | 1.0.0
 
-## Development
+## Examples
 
-### Install
+These repositories provide the source code of examples for each NLP Tools
+defined by the NLP Sandbox. These repositories have a CI/CD workflow that
+automatically tests the tool, and build and publish a Docker image that can then
+be submitted as-is to the [nlpsandbox.io], if you wish to benchmark its
+performance -- just don't expect a high performance!
 
-1. Install [Node JS](https://nodejs.org/).
-2. Clone this repo and run `npm install` in the repo root.
+GitHub repository                               | Language
+------------------------------------------------|----------
+[nlpsandbox/date-annotator-example]             | Python
+[nlpsandbox/date-annotator-example-java]        | Java
+[nlpsandbox/person-name-annotator-example]      | Python
+[nlpsandbox/physical-address-annotator-example] | Python
+[nlpsandbox/phi-deidentifier]                   | Python
 
-### Usage
+## Docker images
 
-Lint one OpenAPI specification, for example
+You can pull the images published by the NLP Sandbox from [Docker Hub].
 
-    npm run lint:ibm --entrypoint=openapi/date-annotator/openapi.yaml
-    npm run lint:ibm --entrypoint=openapi/person-name-annotator/openapi.yaml
-    npm run lint:ibm --entrypoint=openapi/physical-address-annotator/openapi.yaml
-    npm run lint:ibm --entrypoint=openapi/data-node/openapi.yaml
-    npm run lint:ibm --entrypoint=openapi/phi-deidentifier/openapi.yaml
+## Contributing
 
-Build a bundled API file for one of the specifications:
+Thinking about contributing to this project? Get started by reading our
+[Contributor Guide](CONTRIBUTING.md).
 
-    npm run build openapi/date-annotator/openapi.yaml
-    npm run build openapi/person-name-annotator/openapi.yaml
-    npm run build openapi/physical-address-annotator/openapi.yaml
-    npm run build openapi/data-node/openapi.yaml
-    npm run build openapi/phi-deidentifier/openapi.yaml
+## License
 
-You can then preview the OpenAPI docs in your browser: http://localhost:8080
+[Apache License 2.0]
 
-## Contribution guidelines
+<!-- Links -->
 
-TBA
+[nlpsandbox.io]: https://nlpsandbox.io
+[Date Annotator]: https://nlpsandbox.github.io/nlpsandbox-schemas/date-annotator/latest/docs/
+[Person Name Annotator]: https://nlpsandbox.github.io/nlpsandbox-schemas/person-name-annotator/latest/docs/
+[Physical Address Annotator]: https://nlpsandbox.github.io/nlpsandbox-schemas/physical-address-annotator/latest/docs/
+[PHI Deidentifier]: https://nlpsandbox.github.io/nlpsandbox-schemas/phi-deidentifier/latest/docs/
 
-- List paths in alphanumerical order
-- Add schemas and paths used in more than one API to `commons`
+[OpenAPI Generator]: https://github.com/OpenAPITools/openapi-generator
 
-## TODO
+[nlpsandbox/date-annotator-example]: https://github.com/nlpsandbox/date-annotator-example
+[nlpsandbox/date-annotator-example-java]: https://github.com/nlpsandbox/date-annotator-example-java
+[nlpsandbox/person-name-annotator-example]: https://github.com/nlpsandbox/person-name-annotator-example
+[nlpsandbox/physical-address-annotator-example]: https://github.com/nlpsandbox/physical-address-annotator-example
+[nlpsandbox/phi-deidentifier]: https://github.com/nlpsandbox/phi-deidentifier
 
-> "description": "Creates a new Annotation record. It is valid to create Annotation objects for the same source more than once since a unique ID is assigned to each record by this service.",
+[Docker Hub]: https://hub.docker.com/u/nlpsandbox
 
-<!-- Definitions -->
-
-[data_node_yaml]: https://nlpsandbox.github.io//nlpsandbox-schemas/data-node/develop/openapi.yaml
-[data_node_json]: https://nlpsandbox.github.io//nlpsandbox-schemas/data-node/develop/openapi.json
-[data_node_html]: https://nlpsandbox.github.io//nlpsandbox-schemas/data-node/develop/docs/index.html
+[Apache License 2.0]: https://github.com/nlpsandbox/date-annotator-example/blob/develop/LICENSE
