@@ -14,10 +14,17 @@ info:
   description: >
     # Overview
 
-    This NLP tool relies on the following NLP tools to deidentify a clinical
-    note given as input.
 
-    - Data Annotator - Person Name Annotator - Physical Address Annotator - TBA
+    This NLP tool takes as input a clinical note and returned a de-identified
+
+    version of the note.
+
+
+    # Examples
+
+
+    - [NLP Sandbox PHI
+    Deidentifier](https://github.com/nlpsandbox/phi-deidentifier)
 tags:
   - name: DeidentifiedNote
     description: Operations about deidentified notes

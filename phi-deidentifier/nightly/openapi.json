@@ -15,7 +15,7 @@
     "x-logo": {
       "url": "https://nlpsandbox.github.io/nlpsandbox-schemas/logo.png"
     },
-    "description": "# Overview\nThis NLP tool relies on the following NLP tools to deidentify a clinical note given as input.\n- Data Annotator - Person Name Annotator - Physical Address Annotator - TBA\n"
+    "description": "# Overview\n\nThis NLP tool takes as input a clinical note and returned a de-identified\nversion of the note.\n\n# Examples\n\n- [NLP Sandbox PHI Deidentifier](https://github.com/nlpsandbox/phi-deidentifier)\n"
   },
   "tags": [
     {
