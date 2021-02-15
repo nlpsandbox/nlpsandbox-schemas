@@ -14,8 +14,20 @@ info:
   description: >
     # Overview
 
+
     This NLP tool detects references of dates in the clinical note given as
+
     input and returns a list of date annotations.
+
+
+    # Examples
+
+
+    - [NLP Sandbox Date Annotator
+    (Python)](https://github.com/nlpsandbox/date-annotator-example)
+
+    - [NLP Sandbox Date Annotator
+    (Java)](https://github.com/nlpsandbox/date-annotator-example-java)
 tags:
   - name: HealthCheck
     description: Operations about health checks
@@ -63,7 +75,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TextDateAnnotations'
+                $ref: '#/components/schemas/TextDateAnnotationResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
         '500':
@@ -180,7 +192,7 @@ components:
         patientId: awesome-patient
     TextDateAnnotationRequest:
       type: object
-      description: An annotation request
+      description: A request to annotate dates in a clinical note
       properties:
         note:
           $ref: '#/components/schemas/Note'
@@ -231,12 +243,12 @@ components:
         text: 10/26/2020
         dateFormat: MM/DD/YYYY
         confidence: 95.5
-    TextDateAnnotations:
+    TextDateAnnotationResponse:
       type: object
-      description: A list of text date annotations
+      description: The response to a dates annotation request
       properties:
         textDateAnnotations:
-          description: A list of text date annotations
+          description: A list of date annotations
           type: array
           items:
             $ref: '#/components/schemas/TextDateAnnotation'
