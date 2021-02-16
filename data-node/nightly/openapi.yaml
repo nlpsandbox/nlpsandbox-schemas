@@ -21,7 +21,8 @@ info:
     supported are listed below:
 
     - Create and manage datasets - Create and manage FHIR stores
-      - Store and retrieve FHIR patient profiles - Store and retrieve clinical
+      - Store and retrieve FHIR patient profiles
+      - Store and retrieve clinical
       notes
     - Create and manage annotation stores
       - Store and retrieve text annotations
