@@ -28,7 +28,7 @@ example:
       annotationTypes:
         - text_physical_address
   note:
-    identifier: note-123
+    identifier: awesome-note
     text: On 12/26/2020, Ms. Chloe Price met with Dr. Prescott in Seattle.
     noteType: loinc:LP29684-5
-    patientId: patient-123
+    patientId: awesome-patient
