@@ -11,3 +11,24 @@ properties:
 required:
   - note
   - deidentificationSteps
+example:
+  deidentificationSteps:
+    - confidenceThreshold: 20.0
+      maskingCharConfig:
+        maskingChar: "-"
+      annotationTypes:
+        - text_date
+    - confidenceThreshold: 30.0
+      maskingCharConfig:
+        maskingChar: "#"
+      annotationTypes:
+        - text_person_name
+    - confidenceThreshold: 20.0
+      annotationTypeMaskConfig: {}
+      annotationTypes:
+        - text_physical_address
+  note:
+    identifier: note-123
+    text: On 12/26/2020, Ms. Chloe Price met with Dr. Prescott in Seattle.
+    noteType: loinc:LP29684-5
+    patientId: patient-123
