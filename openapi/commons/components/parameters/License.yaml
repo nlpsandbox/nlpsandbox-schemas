@@ -37,4 +37,5 @@ enum:
   - ncsa
   - unlicense
   - zlib
+  - none
 example: apache-2.0
