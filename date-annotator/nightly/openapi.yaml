@@ -1,32 +1,62 @@
-openapi: 3.0.2
+openapi: 3.0.3
 info:
-  version: 0.2.2
+  version: 1.0.0
   title: NLP Sandbox Date Annotator API
   contact:
     name: The NLP Sandbox Team
     email: thomas.schaffter@sagebionetworks.org
-    url: 'https://nlpsandbox.github.io/nlpsandbox-schemas'
+    url: 'https://nlpsandbox.io'
   license:
     name: Apache 2.0
-    url: 'https://nlpsandbox.github.io/nlpsandbox-schemas/blob/develop/LICENSE'
+    url: 'https://github.com/nlpsandbox/nlpsandbox-schemas/blob/develop/LICENSE'
   x-logo:
     url: 'https://nlpsandbox.github.io/nlpsandbox-schemas/logo.png'
   description: >
-    The OpenAPI specification implemented by NLP Sandbox Date Annotators.
-
     # Overview
 
-    This NLP tool detects date references in the clinical note specified and
-    returns a list of date annotations.
+
+    This NLP tool detects references of dates in the clinical note given as
+
+    input and returns a list of date annotations.
+
+
+    # Examples
+
+
+    - [NLP Sandbox Date Annotator
+    (Python)](https://github.com/nlpsandbox/date-annotator-example)
+
+    - [NLP Sandbox Date Annotator
+    (Java)](https://github.com/nlpsandbox/date-annotator-example-java)
 tags:
+  - name: HealthCheck
+    description: Operations about health checks
   - name: TextDateAnnotation
     description: Operations about text date annotations
-  - name: Service
-    description: Operations about this API service
+  - name: Tool
+    description: Operations about this tool
 servers:
   - url: 'http://example.com/api/v1'
   - url: 'https://example.com/api/v1'
 paths:
+  /healthCheck:
+    get:
+      tags:
+        - HealthCheck
+      summary: Get health check information
+      description: Get information about the health of the service
+      operationId: getHealthCheck
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthCheck'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
   /textDateAnnotations:
     post:
       tags:
@@ -45,108 +75,62 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TextDateAnnotations'
-        '403':
-          $ref: '#/components/responses/Unauthorized'
-  /service:
+                $ref: '#/components/schemas/TextDateAnnotationResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /tool:
     get:
       tags:
-        - Service
-      summary: Get service information
-      description: Get information about the service
-      operationId: service
+        - Tool
+      summary: Get tool information
+      description: Get information about the tool
+      operationId: getTool
       responses:
         '200':
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Service'
-        '403':
-          $ref: '#/components/responses/Unauthorized'
+                $ref: '#/components/schemas/Tool'
         '404':
           $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /tool/dependencies:
+    get:
+      tags:
+        - Tool
+      summary: Get tool dependencies
+      description: Get the dependencies of this tool
+      operationId: getToolDependencies
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ToolDependencies'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
 components:
   schemas:
-    Note:
+    HealthCheck:
       type: object
-      description: A clinical note
+      description: Represents the health of a service
       properties:
-        id:
-          description: The ID of the note
+        status:
+          description: Indicates whether the service status is acceptable or not
           type: string
-          readOnly: true
-        text:
-          description: The content of the clinical note
-          type: string
-          example: 'On 12/26/2020, Ms. Chloe Price met with Dr. Prescott.'
-        noteType:
-          description: The note type (LOINC concept)
-          type: string
-          example: 'loinc:LP29684-5'
-        patientId:
-          description: The patient ID
-          type: string
-          example: 507f1f77bcf86cd799439011
+          enum:
+            - pass
+            - fail
+            - warn
       required:
-        - text
-        - noteType
-    TextDateAnnotationRequest:
-      type: object
-      description: An annotation request
-      properties:
-        note:
-          $ref: '#/components/schemas/Note'
-    TextAnnotation:
-      type: object
-      description: An annotation in a text
-      properties:
-        start:
-          description: The position of the first character
-          type: integer
-          example: 42
-        length:
-          description: The length of the annotation
-          type: integer
-          example: 10
-        text:
-          description: The string annotated
-          type: string
-        confidence:
-          description: The confidence in the accuracy of the annotation
-          type: number
-          format: float
-          minimum: 0
-          maximum: 100
-          example: 95
-      required:
-        - start
-        - length
-    TextDateAnnotation:
-      type: object
-      description: A date annotation in a text
-      allOf:
-        - $ref: '#/components/schemas/TextAnnotation'
-        - type: object
-          properties:
-            dateFormat:
-              description: Date format (ISO 8601)
-              type: string
-              example: MM/DD/YYYY
-      example:
-        start: 42
-        length: 10
-        text: 10/26/2020
-        dateFormat: MM/DD/YYYY
-    TextDateAnnotations:
-      type: object
-      description: A list of text date annotations
-      properties:
-        textDateAnnotations:
-          description: A list of text date annotations
-          type: array
-          items:
-            $ref: '#/components/schemas/TextDateAnnotation'
+        - status
     Error:
       type: object
       description: Problem details (tools.ietf.org/html/rfc7807)
@@ -168,94 +152,246 @@ components:
       required:
         - title
         - status
-    Service:
+    NoteId:
+      description: The ID of the clinical note
+      type: string
+      minLength: 3
+      maxLength: 60
+      pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+      example: awesome-note
+    PatientId:
+      description: The ID of the FHIR patient
+      type: string
+      minLength: 3
+      maxLength: 60
+      pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+      example: awesome-patient
+    Note:
       type: object
-      description: Information about an NLP service
+      description: A clinical note
+      properties:
+        identifier:
+          $ref: '#/components/schemas/NoteId'
+        text:
+          description: The content of the clinical note
+          type: string
+        noteType:
+          description: The note type (LOINC concept)
+          type: string
+        patientId:
+          $ref: '#/components/schemas/PatientId'
+      required:
+        - identifier
+        - text
+        - noteType
+        - patientId
+      example:
+        identifier: awesome-note
+        text: 'On 12/26/2020, Ms. Chloe Price met with Dr. Prescott in Seattle.'
+        noteType: 'loinc:LP29684-5'
+        patientId: awesome-patient
+    TextDateAnnotationRequest:
+      type: object
+      description: A request to annotate dates in a clinical note
+      properties:
+        note:
+          $ref: '#/components/schemas/Note'
+      required:
+        - note
+    TextAnnotation:
+      type: object
+      description: An annotation in a text
+      properties:
+        start:
+          description: The position of the first character
+          type: integer
+        length:
+          description: The length of the annotation
+          type: integer
+        text:
+          description: The string annotated
+          type: string
+        confidence:
+          description: The confidence in the accuracy of the annotation
+          type: number
+          format: float
+          minimum: 0
+          maximum: 100
+      required:
+        - start
+        - length
+        - text
+      example:
+        start: 42
+        length: 19
+        text: the annotation text
+        confidence: 95.5
+    TextDateAnnotation:
+      type: object
+      description: A date annotation in a text
+      allOf:
+        - $ref: '#/components/schemas/TextAnnotation'
+        - type: object
+          properties:
+            dateFormat:
+              description: Date format (ISO 8601)
+              type: string
+              example: MM/DD/YYYY
+      example:
+        start: 42
+        length: 10
+        text: 10/26/2020
+        dateFormat: MM/DD/YYYY
+        confidence: 95.5
+    TextDateAnnotationResponse:
+      type: object
+      description: The response to a dates annotation request
+      properties:
+        textDateAnnotations:
+          description: A list of date annotations
+          type: array
+          items:
+            $ref: '#/components/schemas/TextDateAnnotation'
+      required:
+        - textDateAnnotations
+    License:
+      description: The license (license keyword used by GitHub)
+      type: string
+      enum:
+        - afl-3.0
+        - apache-2.0
+        - artistic-2.0
+        - bsl-1.0
+        - bsd-2-clause
+        - bsd-3-clause
+        - bsd-3-clause-clear
+        - cc
+        - cc0-1.0
+        - cc-by-4.0
+        - cc-by-sa-4.0
+        - wtfpl
+        - ecl-2.0
+        - epl-1.0
+        - epl-2.0
+        - eupl-1.1
+        - agpl-3.0
+        - gpl
+        - gpl-2.0
+        - gpl-3.0
+        - lgpl
+        - lgpl-2.1
+        - lgpl-3.0
+        - isc
+        - lppl-1.3c
+        - ms-pl
+        - mit
+        - mpl-2.0
+        - osl-3.0
+        - postgresql
+        - ofl-1.1
+        - ncsa
+        - unlicense
+        - zlib
+      example: apache-2.0
+    ToolType:
+      description: The type of this tool
+      type: string
+      minLength: 3
+      maxLength: 60
+      pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*(:)[a-z0-9]+(?:-[a-z0-9]+)*$'
+      example: 'nlpsandbox:date-annotator'
+    Tool:
+      type: object
+      description: Information about an NLP tool
       properties:
         name:
-          description: The service name
+          description: The tool name
           type: string
           minLength: 3
           maxLength: 60
           pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
-          example: awesome-date-annotator
         version:
-          description: The version of the service (SemVer string)
+          description: The version of the tool (SemVer string)
           type: string
           minLength: 1
           pattern: >-
             ^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$
-          example: 1.0.0
         license:
-          description: The license of this service (spdx.org/licenses Identifier)
-          type: string
-          enum:
-            - afl-3.0
-            - apache-2.0
-            - artistic-2.0
-            - bsl-1.0
-            - bsd-2-clause
-            - bsd-3-clause
-            - bsd-3-clause-clear
-            - cc
-            - cc0-1.0
-            - cc-by-4.0
-            - cc-by-sa-4.0
-            - wtfpl
-            - ecl-2.0
-            - epl-1.0
-            - epl-2.0
-            - eupl-1.1
-            - agpl-3.0
-            - gpl
-            - gpl-2.0
-            - gpl-3.0
-            - lgpl
-            - lgpl-2.1
-            - lgpl-3.0
-            - isc
-            - lppl-1.3c
-            - ms-pl
-            - mit
-            - mpl-2.0
-            - osl-3.0
-            - postgresql
-            - ofl-1.1
-            - ncsa
-            - unlicense
-            - zlib
-          example: apache-2.0
+          $ref: '#/components/schemas/License'
         repository:
           description: The place where the code lives
           type: string
-          example: 'github:awesome-org/awesome-date-annotator'
         description:
-          description: 'A short, one-sentence summary of the service'
+          description: 'A short, one-sentence summary of the tool'
           type: string
           maxLength: 100
-          example: An awesome Date Annotator based on regex patterns
         author:
-          description: The author of the service
+          description: The author of the tool
           type: string
-          example: Example Author
         authorEmail:
           description: The email address of the author
           type: string
           format: email
-          example: author@example.com
         url:
-          description: The URL to the homepage of the service
+          description: The URL to the homepage of the tool
           type: string
           format: uri
+        toolType:
+          $ref: '#/components/schemas/ToolType'
+        toolApiVersion:
+          description: The version of the tool OpenAPI specification
+          type: string
+          minLength: 1
+          pattern: >-
+            ^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$
+      required:
+        - name
+        - version
+        - license
+        - repository
+        - description
+        - author
+        - authorEmail
+        - url
+        - toolType
+        - toolApiVersion
+      example:
+        name: awesome-nlp-tool
+        version: 1.0.6
+        license: apache-2.0
+        repository: 'github:awesome-org/awesome-nlp-tool'
+        description: An awesome NLP Tool that takes as input X and outputs Y.
+        author: Awesome Team
+        authorEmail: author@example.com
+        url: 'https://example.com'
+        toolType: 'nlpsandbox:date-annotator'
+        toolApiVersion: 1.0.0
+    ToolDependencies:
+      type: object
+      description: A list of tool dependencies
+      properties:
+        toolDependencies:
+          description: A list of tools
+          type: array
+          items:
+            $ref: '#/components/schemas/Tool'
+      required:
+        - toolDependencies
   responses:
-    Unauthorized:
-      description: Unauthorized
+    NotFound:
+      description: The specified resource was not found
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The specified resource was not found
+    InternalServerError:
+      description: The request cannot be fulfilled due to an unexpected server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid request
       content:
         application/json:
           schema:

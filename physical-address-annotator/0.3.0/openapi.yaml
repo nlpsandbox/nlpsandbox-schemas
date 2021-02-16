@@ -1,0 +1,285 @@
+openapi: 3.0.2
+info:
+  version: 0.3.0
+  title: NLP Sandbox Physical Address Annotator API
+  contact:
+    name: The NLP Sandbox Team
+    email: thomas.schaffter@sagebionetworks.org
+    url: 'https://nlpsandbox.github.io/nlpsandbox-schemas'
+  license:
+    name: Apache 2.0
+    url: 'https://nlpsandbox.github.io/nlpsandbox-schemas/blob/develop/LICENSE'
+  x-logo:
+    url: 'https://nlpsandbox.github.io/nlpsandbox-schemas/logo.png'
+  description: >
+    The OpenAPI specification implemented by NLP Sandbox Physical Address
+    Annotators.
+
+    # Overview
+
+    This NLP tool detects references of physical addresses in the clinical notes
+    given as input and returns a list of physical address annotations.
+tags:
+  - name: TextPhysicalAddressAnnotation
+    description: Operations about text physical address annotations
+  - name: Service
+    description: Operations about this API service
+servers:
+  - url: 'http://example.com/api/v1'
+  - url: 'https://example.com/api/v1'
+paths:
+  /textPhysicalAddressAnnotations:
+    post:
+      tags:
+        - TextPhysicalAddressAnnotation
+      summary: Annotate physical addresses in a clinical note
+      description: Return the physical addresse annotations found in a clinical note
+      operationId: createTextPhysicalAddressAnnotations
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TextPhysicalAddressAnnotationRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TextPhysicalAddressAnnotations'
+        '403':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /service:
+    get:
+      tags:
+        - Service
+      summary: Get service information
+      description: Get information about the service
+      operationId: getService
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Service'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  schemas:
+    NoteResourceId:
+      description: The ID of the clinical note
+      type: string
+      example: 507f1f77bcf86cd799439011
+    PatientResourceId:
+      description: The ID of the FHIR patient
+      type: string
+      example: 507f1f77bcf86cd799439011
+    Note:
+      type: object
+      description: A clinical note
+      properties:
+        id:
+          $ref: '#/components/schemas/NoteResourceId'
+        text:
+          description: The content of the clinical note
+          type: string
+          example: 'On 12/26/2020, Ms. Chloe Price met with Dr. Prescott.'
+        noteType:
+          description: The note type (LOINC concept)
+          type: string
+          example: 'loinc:LP29684-5'
+        patientId:
+          $ref: '#/components/schemas/PatientResourceId'
+      required:
+        - text
+        - noteType
+    TextPhysicalAddressAnnotationRequest:
+      type: object
+      description: An annotation request
+      properties:
+        note:
+          $ref: '#/components/schemas/Note'
+    TextAnnotation:
+      type: object
+      description: An annotation in a text
+      properties:
+        start:
+          description: The position of the first character
+          type: integer
+          example: 42
+        length:
+          description: The length of the annotation
+          type: integer
+          example: 10
+        text:
+          description: The string annotated
+          type: string
+        confidence:
+          description: The confidence in the accuracy of the annotation
+          type: number
+          format: float
+          minimum: 0
+          maximum: 100
+          example: 95
+      required:
+        - start
+        - length
+    TextPhysicalAddressAnnotation:
+      type: object
+      description: A person name annotation in a text
+      allOf:
+        - $ref: '#/components/schemas/TextAnnotation'
+        - type: object
+          properties:
+            addressType:
+              description: Type of address information
+              type: string
+              enum:
+                - city
+                - country
+                - department
+                - hospital
+                - organization
+                - other
+                - room
+                - state
+                - street
+                - zip
+      example:
+        start: 42
+        length: 11
+        text: Seattle
+        addressType: city
+    TextPhysicalAddressAnnotations:
+      type: object
+      description: A list of text physical address annotations
+      properties:
+        textPhysicalAddressAnnotations:
+          description: A list of text physical address annotations
+          type: array
+          items:
+            $ref: '#/components/schemas/TextPhysicalAddressAnnotation'
+    Error:
+      type: object
+      description: Problem details (tools.ietf.org/html/rfc7807)
+      properties:
+        title:
+          type: string
+          description: A human readable documentation for the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: >-
+            A human readable explanation specific to this occurrence of the
+            problem
+        type:
+          type: string
+          description: An absolute URI that identifies the problem type
+      required:
+        - title
+        - status
+    Service:
+      type: object
+      description: Information about an NLP service
+      properties:
+        name:
+          description: The service name
+          type: string
+          minLength: 3
+          maxLength: 60
+          pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+          example: awesome-date-annotator
+        version:
+          description: The version of the service (SemVer string)
+          type: string
+          minLength: 1
+          pattern: >-
+            ^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$
+          example: 1.0.0
+        license:
+          description: The license of this service (spdx.org/licenses Identifier)
+          type: string
+          enum:
+            - afl-3.0
+            - apache-2.0
+            - artistic-2.0
+            - bsl-1.0
+            - bsd-2-clause
+            - bsd-3-clause
+            - bsd-3-clause-clear
+            - cc
+            - cc0-1.0
+            - cc-by-4.0
+            - cc-by-sa-4.0
+            - wtfpl
+            - ecl-2.0
+            - epl-1.0
+            - epl-2.0
+            - eupl-1.1
+            - agpl-3.0
+            - gpl
+            - gpl-2.0
+            - gpl-3.0
+            - lgpl
+            - lgpl-2.1
+            - lgpl-3.0
+            - isc
+            - lppl-1.3c
+            - ms-pl
+            - mit
+            - mpl-2.0
+            - osl-3.0
+            - postgresql
+            - ofl-1.1
+            - ncsa
+            - unlicense
+            - zlib
+          example: apache-2.0
+        repository:
+          description: The place where the code lives
+          type: string
+          example: 'github:awesome-org/awesome-date-annotator'
+        description:
+          description: 'A short, one-sentence summary of the service'
+          type: string
+          maxLength: 100
+          example: An awesome Date Annotator based on regex patterns
+        author:
+          description: The author of the service
+          type: string
+          example: Example Author
+        authorEmail:
+          description: The email address of the author
+          type: string
+          format: email
+          example: author@example.com
+        url:
+          description: The URL to the homepage of the service
+          type: string
+          format: uri
+  responses:
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    InternalServerError:
+      description: The request cannot be fulfilled due to an unexpected server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The specified resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
