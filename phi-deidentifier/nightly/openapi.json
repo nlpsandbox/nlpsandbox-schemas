@@ -370,7 +370,8 @@
         "required": [
           "start",
           "length",
-          "text"
+          "text",
+          "confidence"
         ],
         "example": {
           "start": 42,
@@ -585,7 +586,8 @@
           "ofl-1.1",
           "ncsa",
           "unlicense",
-          "zlib"
+          "zlib",
+          "none"
         ],
         "example": "apache-2.0"
       },
