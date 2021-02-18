@@ -370,7 +370,8 @@
         "required": [
           "start",
           "length",
-          "text"
+          "text",
+          "confidence"
         ],
         "example": {
           "start": 42,
