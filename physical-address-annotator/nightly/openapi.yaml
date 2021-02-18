@@ -218,6 +218,7 @@ components:
         - start
         - length
         - text
+        - confidence
       example:
         start: 42
         length: 19
@@ -299,6 +300,7 @@ components:
         - ncsa
         - unlicense
         - zlib
+        - none
       example: apache-2.0
     ToolType:
       description: The type of this tool
