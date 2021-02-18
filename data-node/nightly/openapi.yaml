@@ -998,6 +998,7 @@ components:
         - start
         - length
         - text
+        - confidence
       example:
         start: 42
         length: 19
