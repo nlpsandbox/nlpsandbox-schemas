@@ -45,14 +45,14 @@ info:
 
     # Examples
 
-    - [NLP Sandbox Date Annotator Example (Python)]
-    - [NLP Sandbox Date Annotator Example (Java)]
+    - [Date Annotator Example (Python)]
+    - [Date Annotator Example (Java)]
 
     <!-- Links -->
     [nlpsandbox.io]: https://nlpsandbox.io
     [nlpsandbox/date-annotator-example]: https://github.com/nlpsandbox/date-annotator-example
-    [NLP Sandbox Date Annotator Example (Python)]: https://github.com/nlpsandbox/date-annotator-example
-    [NLP Sandbox Date Annotator Example (Java)]: https://github.com/nlpsandbox/date-annotator-example-java
+    [Date Annotator Example (Python)]: https://github.com/nlpsandbox/date-annotator-example
+    [Date Annotator Example (Java)]: https://github.com/nlpsandbox/date-annotator-example-java
 tags:
   - name: HealthCheck
     description: Operations about health checks
