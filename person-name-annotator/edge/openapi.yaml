@@ -12,19 +12,47 @@ info:
   x-logo:
     url: 'https://nlpsandbox.github.io/nlpsandbox-schemas/logo.png'
   description: >
-    # Overview
+    # Introduction
 
+    The Person Name Annotator is one of the first type of NLP Tools that can be
+    benchmarked on [nlpsandbox.io]. A Person Name Annotator takes as input a
+    clinical note and outputs a list of predicted person name annotations found
+    in the clinical note. This OpenAPI document describes the specification of a
+    Person Name Annotator. This specification includes the schemas of the input
+    and output data, and the conditions that this annotator must meet if you
+    want to benchmark its performance on [nlpsandbox.io].
 
-    This NLP tool detects references of person names in the clinical note given
+    # Getting Started
 
-    as input and returns a list of person name annotations.
+    The GitHub repository [nlpsandbox/person-name-annotator-example] provides a
+    simple example implementation of a Python-Flask Person Name Annotator. By
+    the end of the tutorial available in this repository, you will have built a
+    Docker image for a simple Person Name Annotator. You will then be able to
+    submit this image to [nlpsandbox.io] to benchmark its performance.
 
+    # Benchmarking Requirements
+
+    The following conditions must be met by your Person Name Annotator if you
+    want to benchmark its performance on [nlpsandbox.io].
+
+    - The endpoint `/` must redirect to `/api/v1/tool`. - The endpoint `/ui`
+    must redirect to the web interface (UI). - The output of this tool must be
+    reproducible: a given input should always
+      generate the same output.
+    - This tool must not attempt to connect to remote server for
+    reproducibility,
+      robustness, and security reason. When benchmark on [nlpsandbox.io], this
+      tool will be prevented from connecting to remote servers.
 
     # Examples
 
+    - [Person Name Annotator Example (Python)]
 
-    - [NLP Sandbox Person Name Annotator
-    (Python)](https://github.com/nlpsandbox/person-name-annotator-example)
+    <!-- Links --> [nlpsandbox.io]: https://nlpsandbox.io
+    [nlpsandbox/person-name-annotator-example]:
+    https://github.com/nlpsandbox/person-name-annotator-example [Person Name
+    Annotator Example (Python)]:
+    https://github.com/nlpsandbox/person-name-annotator-example
 tags:
   - name: HealthCheck
     description: Operations about health checks
