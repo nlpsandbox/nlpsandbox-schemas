@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "version": "1.0.0",
+    "version": "1.0.1",
     "title": "NLP Sandbox Physical Address Annotator API",
     "contact": {
       "name": "The NLP Sandbox Team",
@@ -15,7 +15,7 @@
     "x-logo": {
       "url": "https://nlpsandbox.github.io/nlpsandbox-schemas/logo.png"
     },
-    "description": "# Overview\n\nThis NLP tool detects references of physical addresses in the clinical note\ngiven as input and returns a list of physical address annotations.\n\n# Examples\n\n- [NLP Sandbox Physical Address Annotator (Python)](https://github.com/nlpsandbox/physical-address-annotator-example)\n"
+    "description": "# Introduction\nThe Physical Address Annotator is one of the first type of NLP Tools that can be benchmarked on [nlpsandbox.io](https://nlpsandbox.io). A Physical Address Annotator takes as input a clinical note and outputs a list of predicted physical address annotations found in the clinical note. This OpenAPI document describes the specification of a Physical Address Annotator. This specification includes the schemas of the input and output data, and the conditions that this annotator must meet if you want to benchmark its performance on [nlpsandbox.io](https://nlpsandbox.io).\n# Getting Started\nThe GitHub repository [nlpsandbox/physical-address-annotator-example](https://github.com/nlpsandbox/physical-address-annotator-example) provides a simple example implementation of a Python-Flask Physical Address Annotator. By the end of the tutorial available in this repository, you will have built a Docker image for a simple Physical Address Annotator. You will then be able to submit this image to [nlpsandbox.io](https://nlpsandbox.io) to benchmark its performance.\n# Benchmarking Requirements\nThe following conditions must be met by your Physical Address Annotator if you want to benchmark its performance on [nlpsandbox.io](https://nlpsandbox.io).\n- The endpoint `/` must redirect to `/api/v1/tool`.\n- The endpoint `/ui` must redirect to the web interface (UI).\n- The output of this tool must be reproducible: a given input should always\n  generate the same output.\n\n- This tool must not attempt to connect to remote server for reproducibility,\n  robustness, and security reasons. When benchmarked on [nlpsandbox.io](https://nlpsandbox.io),\n  this tool will not be able to connect to remote servers.\n\n# Examples\n- [Physical Address Annotator Example (Python)](https://github.com/nlpsandbox/physical-address-annotator-example)\n"
   },
   "tags": [
     {
@@ -295,7 +295,8 @@
         "required": [
           "start",
           "length",
-          "text"
+          "text",
+          "confidence"
         ],
         "example": {
           "start": 42,
@@ -394,7 +395,8 @@
           "ofl-1.1",
           "ncsa",
           "unlicense",
-          "zlib"
+          "zlib",
+          "none"
         ],
         "example": "apache-2.0"
       },
@@ -481,7 +483,7 @@
           "authorEmail": "author@example.com",
           "url": "https://example.com",
           "toolType": "nlpsandbox:date-annotator",
-          "toolApiVersion": "1.0.0"
+          "toolApiVersion": "1.0.1"
         }
       },
       "ToolDependencies": {
