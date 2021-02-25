@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0.0
+  version: 1.0.1
   title: NLP Sandbox PHI Deidentifier API
   contact:
     name: The NLP Sandbox Team
@@ -12,16 +12,14 @@ info:
   x-logo:
     url: 'https://nlpsandbox.github.io/nlpsandbox-schemas/logo.png'
   description: >
-    # Overview
-
+    # Introduction
 
     This NLP tool takes as input a clinical note and returned a de-identified
-
     version of the note.
 
+    This design of this API is a work in progress.
 
     # Examples
-
 
     - [NLP Sandbox PHI
     Deidentifier](https://github.com/nlpsandbox/phi-deidentifier)
@@ -236,6 +234,27 @@ components:
       required:
         - note
         - deidentificationSteps
+      example:
+        deidentificationSteps:
+          - confidenceThreshold: 20
+            maskingCharConfig:
+              maskingChar: '-'
+            annotationTypes:
+              - text_date
+          - confidenceThreshold: 30
+            maskingCharConfig:
+              maskingChar: '#'
+            annotationTypes:
+              - text_person_name
+          - confidenceThreshold: 20
+            annotationTypeMaskConfig: {}
+            annotationTypes:
+              - text_physical_address
+        note:
+          identifier: awesome-note
+          text: 'On 12/26/2020, Ms. Chloe Price met with Dr. Prescott in Seattle.'
+          noteType: 'loinc:LP29684-5'
+          patientId: awesome-patient
     TextAnnotation:
       type: object
       description: An annotation in a text
@@ -259,6 +278,7 @@ components:
         - start
         - length
         - text
+        - confidence
       example:
         start: 42
         length: 19
@@ -423,6 +443,7 @@ components:
         - ncsa
         - unlicense
         - zlib
+        - none
       example: apache-2.0
     ToolType:
       description: The type of this tool
@@ -496,7 +517,7 @@ components:
         authorEmail: author@example.com
         url: 'https://example.com'
         toolType: 'nlpsandbox:date-annotator'
-        toolApiVersion: 1.0.0
+        toolApiVersion: 1.0.1
     ToolDependencies:
       type: object
       description: A list of tool dependencies

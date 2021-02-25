@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "version": "1.0.0",
+    "version": "1.0.1",
     "title": "NLP Sandbox PHI Deidentifier API",
     "contact": {
       "name": "The NLP Sandbox Team",
@@ -15,7 +15,7 @@
     "x-logo": {
       "url": "https://nlpsandbox.github.io/nlpsandbox-schemas/logo.png"
     },
-    "description": "# Overview\n\nThis NLP tool takes as input a clinical note and returned a de-identified\nversion of the note.\n\n# Examples\n\n- [NLP Sandbox PHI Deidentifier](https://github.com/nlpsandbox/phi-deidentifier)\n"
+    "description": "# Introduction\nThis NLP tool takes as input a clinical note and returned a de-identified version of the note.\nThis design of this API is a work in progress.\n# Examples\n- [NLP Sandbox PHI Deidentifier](https://github.com/nlpsandbox/phi-deidentifier)\n"
   },
   "tags": [
     {
@@ -306,7 +306,42 @@
         "required": [
           "note",
           "deidentificationSteps"
-        ]
+        ],
+        "example": {
+          "deidentificationSteps": [
+            {
+              "confidenceThreshold": 20,
+              "maskingCharConfig": {
+                "maskingChar": "-"
+              },
+              "annotationTypes": [
+                "text_date"
+              ]
+            },
+            {
+              "confidenceThreshold": 30,
+              "maskingCharConfig": {
+                "maskingChar": "#"
+              },
+              "annotationTypes": [
+                "text_person_name"
+              ]
+            },
+            {
+              "confidenceThreshold": 20,
+              "annotationTypeMaskConfig": {},
+              "annotationTypes": [
+                "text_physical_address"
+              ]
+            }
+          ],
+          "note": {
+            "identifier": "awesome-note",
+            "text": "On 12/26/2020, Ms. Chloe Price met with Dr. Prescott in Seattle.",
+            "noteType": "loinc:LP29684-5",
+            "patientId": "awesome-patient"
+          }
+        }
       },
       "TextAnnotation": {
         "type": "object",
@@ -335,7 +370,8 @@
         "required": [
           "start",
           "length",
-          "text"
+          "text",
+          "confidence"
         ],
         "example": {
           "start": 42,
@@ -550,7 +586,8 @@
           "ofl-1.1",
           "ncsa",
           "unlicense",
-          "zlib"
+          "zlib",
+          "none"
         ],
         "example": "apache-2.0"
       },
@@ -637,7 +674,7 @@
           "authorEmail": "author@example.com",
           "url": "https://example.com",
           "toolType": "nlpsandbox:date-annotator",
-          "toolApiVersion": "1.0.0"
+          "toolApiVersion": "1.0.1"
         }
       },
       "ToolDependencies": {
