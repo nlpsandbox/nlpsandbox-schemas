@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0.0
+  version: 1.0.1
   title: NLP Sandbox PHI Deidentifier API
   contact:
     name: The NLP Sandbox Team
@@ -11,11 +11,13 @@ info:
     url: https://github.com/nlpsandbox/nlpsandbox-schemas/blob/develop/LICENSE
   x-logo:
     url: https://nlpsandbox.github.io/nlpsandbox-schemas/logo.png
-  description: |
-    # Overview
+  description: >
+    # Introduction
 
     This NLP tool takes as input a clinical note and returned a de-identified
     version of the note.
+
+    This design of this API is a work in progress.
 
     # Examples
 
