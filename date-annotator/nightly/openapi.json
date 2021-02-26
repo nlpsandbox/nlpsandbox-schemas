@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "version": "1.0.0",
+    "version": "1.0.1",
     "title": "NLP Sandbox Date Annotator API",
     "contact": {
       "name": "The NLP Sandbox Team",
@@ -472,7 +472,7 @@
           "authorEmail": "author@example.com",
           "url": "https://example.com",
           "toolType": "nlpsandbox:date-annotator",
-          "toolApiVersion": "1.0.0"
+          "toolApiVersion": "1.0.1"
         }
       },
       "ToolDependencies": {
