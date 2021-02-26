@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0.0
+  version: 1.0.1
   title: NLP Sandbox Person Name Annotator API
   contact:
     name: The NLP Sandbox Team
@@ -11,15 +11,47 @@ info:
     url: https://github.com/nlpsandbox/nlpsandbox-schemas/blob/develop/LICENSE
   x-logo:
     url: https://nlpsandbox.github.io/nlpsandbox-schemas/logo.png
-  description: |
-    # Overview
+  description: >
+    # Introduction
 
-    This NLP tool detects references of person names in the clinical note given
-    as input and returns a list of person name annotations.
+    The Person Name Annotator is one of the first type of NLP Tools that can be
+    benchmarked on [nlpsandbox.io](https://nlpsandbox.io). A Person Name
+    Annotator takes as input a clinical note and outputs a list of predicted
+    person name annotations found in the clinical note. This OpenAPI document
+    describes the specification of a Person Name Annotator. This specification
+    includes the schemas of the input and output data, and the conditions that
+    this annotator must meet if you want to benchmark its performance on
+    [nlpsandbox.io](https://nlpsandbox.io).
+
+    # Getting Started
+
+    The GitHub repository
+    [nlpsandbox/person-name-annotator-example](https://github.com/nlpsandbox/person-name-annotator-example)
+    provides a simple example implementation of a Python-Flask Person Name
+    Annotator. By the end of the tutorial available in this repository, you will
+    have built a Docker image for a simple Person Name Annotator. You will then
+    be able to submit this image to [nlpsandbox.io](https://nlpsandbox.io) to
+    benchmark its performance.
+
+    # Benchmarking Requirements
+
+    The following conditions must be met by your Person Name Annotator if you
+    want to benchmark its performance on [nlpsandbox.io](https://nlpsandbox.io).
+
+    - The endpoint `/` must redirect to `/api/v1/tool`.
+
+    - The endpoint `/ui` must redirect to the web interface (UI).
+
+    - The output of this tool must be reproducible: a given input should always
+      generate the same output.
+
+    - This tool must not attempt to connect to remote server for reproducibility,
+      robustness, and security reasons. When benchmarked on [nlpsandbox.io](https://nlpsandbox.io),
+      this tool will not be able to connect to remote servers.
 
     # Examples
 
-    - [NLP Sandbox Person Name Annotator (Python)](https://github.com/nlpsandbox/person-name-annotator-example)
+    - [Person Name Annotator Example (Python)](https://github.com/nlpsandbox/person-name-annotator-example)
 tags:
   - name: HealthCheck
     description: Operations about health checks
