@@ -4,6 +4,11 @@ allOf:
   - $ref: TextAnnotation.yaml
   - type: object
     properties:
+      date:
+        description: The date contained in the annotation
+        type: string
+        format: date
+        example: 2021-02-11
       dateFormat:
         description: Date format (ISO 8601)
         type: string
