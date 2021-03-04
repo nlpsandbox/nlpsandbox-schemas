@@ -1,10 +1,18 @@
 version: 2
 
 updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    target-branch: "develop"
+    reviewers:
+      - "nlpsandbox/maintainers"
+
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
-      interval: "weekly"
+      interval: "monthly"
     target-branch: "develop"
     reviewers:
-      - "tschaffter"
+      - "nlpsandbox/maintainers"
