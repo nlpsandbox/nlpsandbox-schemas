@@ -1,9 +1,10 @@
 {
   "devDependencies": {
     "@redocly/openapi-cli": "1.0.0-beta.32",
-    "gh-openapi-docs-ts": "0.3.4",
+    "gh-openapi-docs-ts": "0.3.6",
     "ibm-openapi-validator": "0.34.4"
   },
+  "private": true,
   "scripts": {
     "start": "openapi preview-docs ./openapi/${npm_config_api}/openapi.yaml",
     "build": "openapi bundle -o openapi.yaml ./openapi/${npm_config_api}/openapi.yaml",
