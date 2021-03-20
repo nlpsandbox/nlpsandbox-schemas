@@ -24,10 +24,10 @@ performance of your tool, please visit [nlpsandbox.io].
 
 API Name                     | Type                                    | Version
 -----------------------------|-----------------------------------------|---
-[Date Annotator]             | `nlpsandbox:date-annotator`             | 1.0.1
-[Person Name Annotator]      | `nlpsandbox:person-name-annotator`      | 1.0.1
-[Physical Address Annotator] | `nlpsandbox:physical-address-annotator` | 1.0.1
-[PHI Deidentifier]           | `nlpsandbox:phi-deidentifier`           | 1.0.1
+[Date Annotator]             | `nlpsandbox:date-annotator`             | 1.0.2
+[Person Name Annotator]      | `nlpsandbox:person-name-annotator`      | 1.0.2
+[Physical Address Annotator] | `nlpsandbox:physical-address-annotator` | 1.0.2
+[PHI Deidentifier]           | `nlpsandbox:phi-deidentifier`           | 1.0.2
 
 ## Examples
 

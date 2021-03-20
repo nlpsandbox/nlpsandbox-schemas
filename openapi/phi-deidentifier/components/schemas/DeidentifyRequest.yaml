@@ -30,5 +30,5 @@ example:
   note:
     identifier: awesome-note
     text: On 12/26/2020, Ms. Chloe Price met with Dr. Prescott in Seattle.
-    noteType: loinc:LP29684-5
+    type: loinc:LP29684-5
     patientId: awesome-patient

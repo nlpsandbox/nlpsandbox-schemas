@@ -32,9 +32,9 @@ properties:
     description: The URL to the homepage of the tool
     type: string
     format: uri
-  toolType:
+  type:
     $ref: ../parameters/ToolType.yaml
-  toolApiVersion:
+  apiVersion:
     description: The version of the tool OpenAPI specification
     type: string
     minLength: 1
@@ -48,8 +48,8 @@ required:
   - author
   - authorEmail
   - url
-  - toolType
-  - toolApiVersion
+  - type
+  - apiVersion
 example:
   name: awesome-nlp-tool
   version: 1.0.6
@@ -59,5 +59,5 @@ example:
   author: Awesome Team
   authorEmail: author@example.com
   url: https://example.com
-  toolType: nlpsandbox:date-annotator
-  toolApiVersion: 1.0.1
+  type: nlpsandbox:date-annotator
+  apiVersion: 1.0.2
