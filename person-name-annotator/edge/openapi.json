@@ -235,7 +235,7 @@
             "description": "The content of the clinical note",
             "type": "string"
           },
-          "noteType": {
+          "type": {
             "description": "The note type (LOINC concept)",
             "type": "string"
           },
@@ -429,10 +429,10 @@
             "type": "string",
             "format": "uri"
           },
-          "toolType": {
+          "type": {
             "$ref": "#/components/schemas/ToolType"
           },
-          "toolApiVersion": {
+          "apiVersion": {
             "description": "The version of the tool OpenAPI specification",
             "type": "string",
             "minLength": 1,
@@ -448,8 +448,8 @@
           "author",
           "authorEmail",
           "url",
-          "toolType",
-          "toolApiVersion"
+          "type",
+          "apiVersion"
         ],
         "example": {
           "name": "awesome-nlp-tool",
@@ -460,8 +460,8 @@
           "author": "Awesome Team",
           "authorEmail": "author@example.com",
           "url": "https://example.com",
-          "toolType": "nlpsandbox:date-annotator",
-          "toolApiVersion": "1.0.1"
+          "type": "nlpsandbox:date-annotator",
+          "apiVersion": "1.0.1"
         }
       },
       "ToolDependencies": {
