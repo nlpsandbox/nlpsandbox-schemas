@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.0.1
+  version: 1.0.2
   title: NLP Sandbox Person Name Annotator API
   contact:
     name: The NLP Sandbox Team
@@ -201,7 +201,7 @@ components:
         text:
           description: The content of the clinical note
           type: string
-        noteType:
+        type:
           description: The note type (LOINC concept)
           type: string
         patientId:
@@ -209,12 +209,12 @@ components:
       required:
         - identifier
         - text
-        - noteType
+        - type
         - patientId
       example:
         identifier: awesome-note
         text: 'On 12/26/2020, Ms. Chloe Price met with Dr. Prescott in Seattle.'
-        noteType: 'loinc:LP29684-5'
+        type: 'loinc:LP29684-5'
         patientId: awesome-patient
     TextPersonNameAnnotationRequest:
       type: object
@@ -357,9 +357,9 @@ components:
           description: The URL to the homepage of the tool
           type: string
           format: uri
-        toolType:
+        type:
           $ref: '#/components/schemas/ToolType'
-        toolApiVersion:
+        apiVersion:
           description: The version of the tool OpenAPI specification
           type: string
           minLength: 1
@@ -374,8 +374,8 @@ components:
         - author
         - authorEmail
         - url
-        - toolType
-        - toolApiVersion
+        - type
+        - apiVersion
       example:
         name: awesome-nlp-tool
         version: 1.0.6
@@ -385,8 +385,8 @@ components:
         author: Awesome Team
         authorEmail: author@example.com
         url: 'https://example.com'
-        toolType: 'nlpsandbox:date-annotator'
-        toolApiVersion: 1.0.1
+        type: 'nlpsandbox:date-annotator'
+        apiVersion: 1.0.2
     ToolDependencies:
       type: object
       description: A list of tool dependencies
