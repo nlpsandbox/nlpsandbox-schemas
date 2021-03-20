@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "version": "1.0.1",
+    "version": "1.0.2",
     "title": "NLP Sandbox Person Name Annotator API",
     "contact": {
       "name": "The NLP Sandbox Team",
@@ -461,7 +461,7 @@
           "authorEmail": "author@example.com",
           "url": "https://example.com",
           "type": "nlpsandbox:date-annotator",
-          "apiVersion": "1.0.1"
+          "apiVersion": "1.0.2"
         }
       },
       "ToolDependencies": {
