@@ -9,6 +9,7 @@
     "build": "openapi bundle -o openapi.yaml ./openapi/${npm_config_api}/openapi.yaml",
     "lint": "openapi lint ./openapi/${npm_config_api}/openapi.yaml",
     "lint:all": "openapi lint openapi/*/openapi.yaml",
-    "validate": "npm run build --api=${npm_config_api} && ./node_modules/.bin/lint-openapi openapi.yaml"
+    "validate": "npm run build --api=${npm_config_api} && ./node_modules/.bin/lint-openapi openapi.yaml",
+    "lint:ibm": "openapi bundle -o openapi.yaml $npm_config_entrypoint && ./node_modules/.bin/lint-openapi openapi.yaml"
   }
 }
