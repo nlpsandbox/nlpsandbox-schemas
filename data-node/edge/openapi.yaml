@@ -1280,7 +1280,7 @@ components:
         text:
           description: The content of the clinical note
           type: string
-        noteType:
+        type:
           description: The note type (LOINC concept)
           type: string
         patientId:
