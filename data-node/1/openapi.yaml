@@ -1288,12 +1288,12 @@ components:
       required:
         - identifier
         - text
-        - noteType
+        - type
         - patientId
       example:
         identifier: awesome-note
         text: 'On 12/26/2020, Ms. Chloe Price met with Dr. Prescott in Seattle.'
-        noteType: 'loinc:LP29684-5'
+        type: 'loinc:LP29684-5'
         patientId: awesome-patient
     PageOfNotes:
       type: object
@@ -1321,7 +1321,7 @@ components:
           description: The content of the clinical note
           type: string
           example: 'On 12/26/2020, Ms. Chloe Price met with Dr. Prescott in Seattle.'
-        noteType:
+        type:
           description: The note type (LOINC concept)
           type: string
           example: 'loinc:LP29684-5'
@@ -1329,7 +1329,7 @@ components:
           $ref: '#/components/schemas/PatientId'
       required:
         - text
-        - noteType
+        - type
         - patientId
     NoteResourceName:
       description: >-
