@@ -35,7 +35,7 @@ jobs:
       uses: actions/setup-node@v2.1.5
       with:
         node-version: ${{ env.node_version }}
-    - run: npm ci
+    - run: npm ci --no-optional
     - name: Lint openapi specifications
       run: |
         npm run lint --api=${{ matrix.api }}
