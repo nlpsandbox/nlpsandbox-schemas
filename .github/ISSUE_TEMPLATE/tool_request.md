@@ -8,15 +8,10 @@ labels: new tool
   When requesting a new tool please provide the following information:
 -->
 
-### Tool name
-<!--
-  Provide a tool name. As examples, existing tools names include `Date
-  Annotator`, `PHI Deidentifier`.
--->
-
 ### Tool description
 <!--
-  Provide a clear and concise description of what the tool would do.
+  Provide a clear and concise description of what the tool would do. The next
+  two questions focus on the input and output of the tool.
 -->
 
 ### Tool input
@@ -44,12 +39,13 @@ labels: new tool
   performance of the proposed tool?
 -->
 
-### Contact information
-
-**Name of your organization:**
-
-
 ### Additional information
 <!--
   Is there anything else you can add about the request?
 -->
+
+### Contact information
+
+**Your name:**
+**Your email address:**
+**Name of your organization:**
