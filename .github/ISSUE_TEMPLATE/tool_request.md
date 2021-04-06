@@ -44,6 +44,11 @@ labels: new tool
   performance of the proposed tool?
 -->
 
+### Contact information
+
+**Name of your organization:**
+
+
 ### Additional information
 <!--
   Is there anything else you can add about the request?
