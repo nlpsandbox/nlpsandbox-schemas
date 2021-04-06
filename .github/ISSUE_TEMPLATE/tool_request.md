@@ -1,7 +1,7 @@
 ---
 name: Tool request
-about: Request a new NLP Sandbox tool
-labels: new tool
+about: Request a new NLP Sandbox tool.
+labels: New Tool
 ---
 
 <!--
