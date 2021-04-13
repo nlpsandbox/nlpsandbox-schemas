@@ -1,0 +1,21 @@
+type: object
+description: A COVID symptom annotation in a text
+allOf:
+  - $ref: TextAnnotation.yaml
+  - type: object
+    properties:
+      direction:
+        description: >
+          Whether the annotation is positively or negatively corelated with the
+          presence of COVID
+        type: string
+        enum:
+          - positive
+          - negative
+        example: positive
+example:
+  start: 42
+  length: 9
+  text: dry cough
+  dateFormat: MM/DD/YYYY
+  confidence: 95.5

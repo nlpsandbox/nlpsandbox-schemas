@@ -29,6 +29,7 @@ jobs:
         - "person-name-annotator"
         - "phi-deidentifier"
         - "physical-address-annotator"
+        - "covid-symptom-annotator"
     steps:
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ env.node_version }}
@@ -54,6 +55,7 @@ jobs:
         - "person-name-annotator"
         - "phi-deidentifier"
         - "physical-address-annotator"
+        - "covid-symptom-annotator"
     steps:
     - uses: actions/checkout@v2
     - name: Prepare

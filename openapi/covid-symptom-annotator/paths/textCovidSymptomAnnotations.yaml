@@ -1,0 +1,22 @@
+post:
+  tags:
+    - TextCovidSymptomAnnotation
+  summary: Annotate COVID symptoms in a clinical note
+  description: Return the COVID symptom annotations found in a clinical note
+  operationId: createTextCovidSymptomAnnotations
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/TextCovidSymptomAnnotationRequest.yaml
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/TextCovidSymptomAnnotationResponse.yaml
+    '400':
+      $ref: ../../commons/components/responses/BadRequest.yaml
+    '500':
+      $ref: ../../commons/components/responses/InternalServerError.yaml
