@@ -1,0 +1,75 @@
+openapi: 3.0.3
+info:
+  version: 1.0.2
+  title: NLP Sandbox COVID Symptom Annotator API
+  contact:
+    name: The NLP Sandbox Team
+    email: team@nlpsandbox.io
+    url: https://nlpsandbox.io
+  license:
+    name: Apache 2.0
+    url: https://github.com/nlpsandbox/nlpsandbox-schemas/blob/develop/LICENSE
+  x-logo:
+    url: https://nlpsandbox.github.io/nlpsandbox-schemas/logo.png
+  description: >
+    # Introduction
+
+    The Date Annotator is one of the first type of NLP Tools that can be
+    benchmarked on [nlpsandbox.io](https://nlpsandbox.io). A Date Annotator
+    takes as input a clinical note and outputs a list of predicted date
+    annotations found in the clinical note. This OpenAPI document describes the
+    specification of a Date Annotator. This specification includes the schemas
+    of the input and output data, and the conditions that this annotator must
+    meet if you want to benchmark its performance on
+    [nlpsandbox.io](https://nlpsandbox.io).
+
+    # Getting Started
+
+    The GitHub repository
+    [nlpsandbox/date-annotator-example](https://github.com/nlpsandbox/date-annotator-example)
+    provides a simple example implementation of a Python-Flask Date Annotator.
+    By the end of the tutorial available in this repository, you will have built
+    a Docker image for a simple Date Annotator. You will then be able to submit
+    this image to [nlpsandbox.io](https://nlpsandbox.io) to benchmark its
+    performance.
+
+    # Benchmarking Requirements
+
+    The following conditions must be met by your Date Annotator if you want to
+    benchmark its performance on [nlpsandbox.io](https://nlpsandbox.io).
+
+    - The endpoint `/` must redirect to `/api/v1/tool`.
+
+    - The endpoint `/ui` must redirect to the web interface (UI).
+
+    - The output of this tool must be reproducible: a given input should always
+      generate the same output.
+
+    - This tool must not attempt to connect to remote server for reproducibility,
+      robustness, and security reasons. When benchmarked on [nlpsandbox.io](https://nlpsandbox.io),
+      this tool will not be able to connect to remote servers.
+
+    # Examples
+
+    - [Date Annotator Example (Python)](https://github.com/nlpsandbox/date-annotator-example)
+
+    - [Date Annotator Example (Java)](https://github.com/nlpsandbox/date-annotator-example-java)
+tags:
+  - name: HealthCheck
+    description: Operations about health checks
+  - name: TextCovidSymptomAnnotation
+    description: Operations about COVID symptom annotations
+  - name: Tool
+    description: Operations about this tool
+servers:
+  - url: http://example.com/api/v1
+  - url: https://example.com/api/v1
+paths:
+  /healthCheck:
+    $ref: ../commons/paths/healthCheck.yaml
+  /textDateAnnotations:
+    $ref: paths/textCovidSymptomAnnotations.yaml
+  /tool:
+    $ref: ../commons/paths/tool.yaml
+  /tool/dependencies:
+    $ref: ../commons/paths/dependencies.yaml

@@ -3,4 +3,4 @@ dist
 node_modules
 
 dist.yaml
-openapi.yaml
+/openapi.yaml
