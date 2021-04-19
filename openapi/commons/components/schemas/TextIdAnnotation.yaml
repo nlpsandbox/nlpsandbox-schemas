@@ -9,12 +9,12 @@ allOf:
         type: string
         enum:
           - account
-          - bioid
+          - bio_id
           - device
-          - healthplan
-          - idnum
+          - health_plan
+          - id_num
           - license
-          - medicalrecord
+          - medical_record
           - ssn
           - vehicle
 example:
