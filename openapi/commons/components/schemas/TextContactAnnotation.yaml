@@ -1,0 +1,20 @@
+type: object
+description: An contact annotation in a text
+allOf:
+  - $ref: TextAnnotation.yaml
+  - type: object
+    properties:
+      contactType:
+        description: Type of contact information
+        type: string
+        enum:
+          - email
+          - fax
+          - phone
+          - url
+example:
+  start: 42
+  length: 11
+  text: dave@uw.edu
+  contactType: email
+  confidence: 95.5
