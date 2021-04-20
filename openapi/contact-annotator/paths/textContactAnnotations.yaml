@@ -3,7 +3,7 @@ post:
     - TextContactAnnotation
   summary: Annotate Contacts in a clinical note
   description: Return the Contact annotations found in a clinical note
-  operationContact: createTextContactAnnotations
+  operationId: createTextContactAnnotations
   requestBody:
     content:
       application/json:
