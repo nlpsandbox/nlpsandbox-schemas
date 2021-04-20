@@ -15,7 +15,8 @@ info:
     # Introduction
 
     The Contact Annotator is one of the first type of NLP Tools that
-    can be benchmarked on [nlpsandbox.io](https://nlpsandbox.io). An Contact Annotator takes as input a clinical note and outputs a list of
+    can be benchmarked on [nlpsandbox.io](https://nlpsandbox.io). A contact
+    annotator takes as input a clinical note and outputs a list of
     predicted contact annotations found in the clinical note. This
     OpenAPI document describes the specification of a contact
     Annotator. This specification includes the schemas of the input and output

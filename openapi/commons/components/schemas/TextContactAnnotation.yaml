@@ -1,5 +1,5 @@
 type: object
-description: An contact annotation in a text
+description: A contact annotation in a text
 allOf:
   - $ref: TextAnnotation.yaml
   - type: object
@@ -12,6 +12,7 @@ allOf:
           - fax
           - phone
           - url
+          - other
 example:
   start: 42
   length: 11

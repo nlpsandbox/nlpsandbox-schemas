@@ -1,5 +1,5 @@
 type: object
-description: The response to an contact annotation request
+description: The response to a contact annotation request
 properties:
   textContactAnnotations:
     description: A list of contact annotations
