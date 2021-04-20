@@ -1,9 +1,0 @@
-type: object
-description: A person name annotation in a text
-allOf:
-  - $ref: TextAnnotation.yaml
-example:
-  start: 42
-  length: 11
-  text: Chloe Price
-  confidence: 95.5
