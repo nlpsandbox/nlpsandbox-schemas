@@ -1,0 +1,22 @@
+post:
+  tags:
+    - TextIdAnnotation
+  summary: Annotate IDs in a clinical note
+  description: Return the ID annotations found in a clinical note
+  operationId: createTextIdAnnotations
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/TextIdAnnotationRequest.yaml
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/TextIdAnnotationResponse.yaml
+    '400':
+      $ref: ../../commons/components/responses/BadRequest.yaml
+    '500':
+      $ref: ../../commons/components/responses/InternalServerError.yaml
