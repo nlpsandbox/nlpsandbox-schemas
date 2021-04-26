@@ -14,11 +14,11 @@ info:
   description: >
     # Introduction
 
-    The Date Annotator is one of the first type of NLP Tools that can be
-    benchmarked on [nlpsandbox.io](https://nlpsandbox.io). A Date Annotator
-    takes as input a clinical note and outputs a list of predicted date
+    The COVID Symptom Annotator is one of the first type of NLP Tools that can be
+    benchmarked on [nlpsandbox.io](https://nlpsandbox.io). A COVID Symptom Annotator
+    takes as input a clinical note and outputs a list of predicted COVID-19 sign and symptom
     annotations found in the clinical note. This OpenAPI document describes the
-    specification of a Date Annotator. This specification includes the schemas
+    specification of a COVID Symptom Annotator. This specification includes the schemas
     of the input and output data, and the conditions that this annotator must
     meet if you want to benchmark its performance on
     [nlpsandbox.io](https://nlpsandbox.io).
@@ -26,16 +26,16 @@ info:
     # Getting Started
 
     The GitHub repository
-    [nlpsandbox/date-annotator-example](https://github.com/nlpsandbox/date-annotator-example)
-    provides a simple example implementation of a Python-Flask Date Annotator.
+    [nlpsandbox/covid-symptom-annotator-example](https://github.com/nlpsandbox/covid-symptom-annotator-example)
+    provides a simple example implementation of a Python-Flask COVID Symptom Annotator.
     By the end of the tutorial available in this repository, you will have built
-    a Docker image for a simple Date Annotator. You will then be able to submit
+    a Docker image for a simple COVID Symptom Annotator. You will then be able to submit
     this image to [nlpsandbox.io](https://nlpsandbox.io) to benchmark its
     performance.
 
     # Benchmarking Requirements
 
-    The following conditions must be met by your Date Annotator if you want to
+    The following conditions must be met by your COVID Symptom Annotator if you want to
     benchmark its performance on [nlpsandbox.io](https://nlpsandbox.io).
 
     - The endpoint `/` must redirect to `/api/v1/tool`.
@@ -51,9 +51,7 @@ info:
 
     # Examples
 
-    - [Date Annotator Example (Python)](https://github.com/nlpsandbox/date-annotator-example)
-
-    - [Date Annotator Example (Java)](https://github.com/nlpsandbox/date-annotator-example-java)
+    - [COVID Symptom Annotator Example (Python)](https://github.com/nlpsandbox/covid-symptom-annotator-example)
 tags:
   - name: HealthCheck
     description: Operations about health checks
@@ -67,7 +65,7 @@ servers:
 paths:
   /healthCheck:
     $ref: ../commons/paths/healthCheck.yaml
-  /textDateAnnotations:
+  /textCovidSymptomAnnotations:
     $ref: paths/textCovidSymptomAnnotations.yaml
   /tool:
     $ref: ../commons/paths/tool.yaml
