@@ -18,26 +18,26 @@ allOf:
           The sign/symptom type according to CDC definition
         type: string
         enum:
-          - Fever
-          - Chill
-          - Cough
-          - Fatigue
-          - Nasal obstruction
-          - Loss of appetite
-          - Diarrhea
-          - Abdominal pain
-          - Nausea
-          - Vomiting
-          - Sore throat
-          - Headache
-          - Myalgia
-          - Loss of taste
-          - Loss of smell
-          - Dyspnea
-          - Chest pain
-          - Delirium
-          - Hypersomnia
-          - Cyanosis
+          - fever
+          - chill
+          - cough
+          - fatigue
+          - nasal_obstruction
+          - loss_of_appetite
+          - diarrhea
+          - abdominal_pain
+          - nausea
+          - vomiting
+          - sore_throat
+          - headache
+          - myalgia
+          - loss_of_taste
+          - loss_of_smell
+          - dyspnea
+          - chest_pain
+          - delirium
+          - hypersomnia
+          - cyanosis
 example:
   start: 42
   length: 9
