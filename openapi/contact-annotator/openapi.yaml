@@ -14,7 +14,7 @@ info:
   description: >
     # Introduction
 
-    The Contact Annotator is one of the first type of NLP Tools that
+    The Contact Annotator is one of the first NLP Sandbox tools that
     can be benchmarked on [nlpsandbox.io](https://nlpsandbox.io). A contact
     annotator takes as input a clinical note and outputs a list of
     predicted contact annotations found in the clinical note. This
