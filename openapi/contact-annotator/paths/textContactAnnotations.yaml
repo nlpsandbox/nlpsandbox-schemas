@@ -1,7 +1,7 @@
 post:
   tags:
     - TextContactAnnotation
-  summary: Annotate contacts in a clinical note
+  summary: Annotate contact information in a clinical note
   description: Return the contact annotations found in a clinical note
   operationId: createTextContactAnnotations
   requestBody:
