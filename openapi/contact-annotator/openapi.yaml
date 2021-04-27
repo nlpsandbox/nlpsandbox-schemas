@@ -27,7 +27,7 @@ info:
 
     The GitHub repository (will be added later)
     [nlpsandbox/contact-annotator-example](https://github.com/nlpsandbox/contact-annotator-example)
-    provides a simple example implementation of a Python-Flask contact
+    provides a rules-based example implementation of a Python-Flask contact
     Annotator. By the end of the tutorial available in this repository, you will
     have built a Docker image for a simple contact Annotator. You will
     then be able to submit this image to [nlpsandbox.io](https://nlpsandbox.io)
