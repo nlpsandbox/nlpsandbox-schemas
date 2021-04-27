@@ -1,0 +1,73 @@
+openapi: 3.0.3
+info:
+  version: 1.0.2
+  title: NLP Sandbox Contact Annotator API
+  contact:
+    name: The NLP Sandbox Team
+    email: thomas.schaffter@sagebionetworks.org
+    url: https://nlpsandbox.io
+  license:
+    name: Apache 2.0
+    url: https://github.com/nlpsandbox/nlpsandbox-schemas/blob/develop/LICENSE
+  x-logo:
+    url: https://nlpsandbox.github.io/nlpsandbox-schemas/logo.png
+  description: >
+    # Introduction
+
+    The Contact Annotator is one of the first NLP Sandbox tools that
+    can be benchmarked on [nlpsandbox.io](https://nlpsandbox.io). A contact
+    annotator takes as input a clinical note and outputs a list of
+    predicted contact annotations found in the clinical note. This
+    OpenAPI document describes the specification of a contact
+    Annotator. This specification includes the schemas of the input and output
+    data, and the conditions that this annotator must meet if you want to
+    benchmark its performance on [nlpsandbox.io](https://nlpsandbox.io).
+
+    # Getting Started
+
+    The GitHub repository (will be added later)
+    [nlpsandbox/contact-annotator-example](https://github.com/nlpsandbox/contact-annotator-example)
+    provides a rules-based example implementation of a Python-Flask contact
+    Annotator. By the end of the tutorial available in this repository, you will
+    have built a Docker image for a simple contact Annotator. You will
+    then be able to submit this image to [nlpsandbox.io](https://nlpsandbox.io)
+    to benchmark its performance.
+
+    # Benchmarking Requirements
+
+    The following conditions must be met by your Contact Annotator if
+    you want to benchmark its performance on [nlpsandbox.io](https://nlpsandbox.io).
+
+    - The endpoint `/` must redirect to `/api/v1/tool`.
+
+    - The endpoint `/ui` must redirect to the web interface (UI).
+
+    - The output of this tool must be reproducible: a given input should always
+      generate the same output.
+
+    - To ensure results are reproducible, robust, and secure, this tool cannot connect to any remote server.
+       When benchmarked on [nlpsandbox.io](https://nlpsandbox.io),
+      this tool will not be able to connect to remote servers.
+
+    # Examples
+
+    - [Contact Annotator Example (Python)](https://github.com/nlpsandbox/contact-annotator-example)
+tags:
+  - name: HealthCheck
+    description: Operations about health checks
+  - name: TextContactAnnotation
+    description: Operations about text contact annotations
+  - name: Tool
+    description: Operations about this tool
+servers:
+  - url: http://example.com/api/v1
+  - url: https://example.com/api/v1
+paths:
+  /healthCheck:
+    $ref: ../commons/paths/healthCheck.yaml
+  /textContactAnnotations:
+    $ref: paths/textContactAnnotations.yaml
+  /tool:
+    $ref: ../commons/paths/tool.yaml
+  /tool/dependencies:
+    $ref: ../commons/paths/dependencies.yaml
