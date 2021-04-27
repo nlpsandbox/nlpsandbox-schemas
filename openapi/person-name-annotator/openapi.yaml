@@ -14,7 +14,7 @@ info:
   description: >
     # Introduction
 
-    The Person Name Annotator is one of the first type of NLP Tools that can be
+    The Person Name Annotator is one of the first NLP Sandbox tools that can be
     benchmarked on [nlpsandbox.io](https://nlpsandbox.io). A Person Name
     Annotator takes as input a clinical note and outputs a list of predicted
     person name annotations found in the clinical note. This OpenAPI document
@@ -45,9 +45,10 @@ info:
     - The output of this tool must be reproducible: a given input should always
       generate the same output.
 
-    - This tool must not attempt to connect to remote server for reproducibility,
-      robustness, and security reasons. When benchmarked on [nlpsandbox.io](https://nlpsandbox.io),
-      this tool will not be able to connect to remote servers.
+    - To ensure results are reproducible, robust, and secure, this tool cannot
+      connect to any remote server. When benchmarked on
+      [nlpsandbox.io](https://nlpsandbox.io), this tool will not be able to
+      connect to remote servers.
 
     # Examples
 
