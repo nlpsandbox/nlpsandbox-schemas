@@ -1,4 +1,5 @@
 {
+  "name": "nlpsandbox-schemas",
   "devDependencies": {
     "@redocly/openapi-cli": "1.0.0-beta.40",
     "gh-openapi-docs-ts": "0.3.6",
