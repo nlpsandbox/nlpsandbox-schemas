@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   version: 1.0.2
-  title: NLP Sandbox Person Name Annotator API
+  title: NLP Sandbox Contact Annotator API
   contact:
     name: The NLP Sandbox Team
     email: thomas.schaffter@sagebionetworks.org
@@ -14,29 +14,29 @@ info:
   description: >
     # Introduction
 
-    The Person Name Annotator is one of the first NLP Sandbox tools that can be
-    benchmarked on [nlpsandbox.io](https://nlpsandbox.io). A Person Name
-    Annotator takes as input a clinical note and outputs a list of predicted
-    person name annotations found in the clinical note. This OpenAPI document
-    describes the specification of a Person Name Annotator. This specification
-    includes the schemas of the input and output data, and the conditions that
-    this annotator must meet if you want to benchmark its performance on
+    The Contact Annotator is one of the first NLP Sandbox tools that can be
+    benchmarked on [nlpsandbox.io](https://nlpsandbox.io). A contact annotator
+    takes as input a clinical note and outputs a list of predicted contact
+    annotations found in the clinical note. This OpenAPI document describes the
+    specification of a contact Annotator. This specification includes the
+    schemas of the input and output data, and the conditions that this annotator
+    must meet if you want to benchmark its performance on
     [nlpsandbox.io](https://nlpsandbox.io).
 
     # Getting Started
 
-    The GitHub repository
-    [nlpsandbox/person-name-annotator-example](https://github.com/nlpsandbox/person-name-annotator-example)
-    provides a simple example implementation of a Python-Flask Person Name
+    The GitHub repository (will be added later)
+    [nlpsandbox/contact-annotator-example](https://github.com/nlpsandbox/contact-annotator-example)
+    provides a rules-based example implementation of a Python-Flask contact
     Annotator. By the end of the tutorial available in this repository, you will
-    have built a Docker image for a simple Person Name Annotator. You will then
-    be able to submit this image to [nlpsandbox.io](https://nlpsandbox.io) to
+    have built a Docker image for a simple contact Annotator. You will then be
+    able to submit this image to [nlpsandbox.io](https://nlpsandbox.io) to
     benchmark its performance.
 
     # Benchmarking Requirements
 
-    The following conditions must be met by your Person Name Annotator if you
-    want to benchmark its performance on [nlpsandbox.io](https://nlpsandbox.io).
+    The following conditions must be met by your Contact Annotator if
+    you want to benchmark its performance on [nlpsandbox.io](https://nlpsandbox.io).
 
     - The endpoint `/` must redirect to `/api/v1/tool`.
 
@@ -52,12 +52,12 @@ info:
 
     # Examples
 
-    - [Person Name Annotator Example (Python)](https://github.com/nlpsandbox/person-name-annotator-example)
+    - [Contact Annotator Example (Python)](https://github.com/nlpsandbox/contact-annotator-example)
 tags:
   - name: HealthCheck
     description: Operations about health checks
-  - name: TextPersonNameAnnotation
-    description: Operations about text person name annotations
+  - name: TextContactAnnotation
+    description: Operations about text contact annotations
   - name: Tool
     description: Operations about this tool
 servers:
@@ -66,8 +66,8 @@ servers:
 paths:
   /healthCheck:
     $ref: ../commons/paths/healthCheck.yaml
-  /textPersonNameAnnotations:
-    $ref: paths/textPersonNameAnnotations.yaml
+  /textContactAnnotations:
+    $ref: paths/textContactAnnotations.yaml
   /tool:
     $ref: ../commons/paths/tool.yaml
   /tool/dependencies:

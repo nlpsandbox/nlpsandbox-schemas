@@ -30,6 +30,7 @@ jobs:
         - "phi-deidentifier"
         - "physical-address-annotator"
         - "covid-symptom-annotator"
+        - "contact-annotator"
         - "id-annotator"
     steps:
     - uses: actions/checkout@v2
@@ -57,6 +58,7 @@ jobs:
         - "phi-deidentifier"
         - "physical-address-annotator"
         - "covid-symptom-annotator"
+        - "contact-annotator"
         - "id-annotator"
     steps:
     - uses: actions/checkout@v2

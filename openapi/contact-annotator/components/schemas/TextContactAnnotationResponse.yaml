@@ -1,0 +1,10 @@
+type: object
+description: The response to a contact annotation request
+properties:
+  textContactAnnotations:
+    description: A list of contact annotations
+    type: array
+    items:
+      $ref: ../../../commons/components/schemas/TextContactAnnotation.yaml
+required:
+  - textContactAnnotations
