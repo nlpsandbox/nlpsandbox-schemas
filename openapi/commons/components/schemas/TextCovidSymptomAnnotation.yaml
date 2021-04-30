@@ -4,16 +4,6 @@ allOf:
   - $ref: TextAnnotation.yaml
   - type: object
     properties:
-      certainty:
-        description: >
-          Whether the annotation is positively or negatively correlated with the
-          presence of COVID
-        type: string
-        enum:
-          - positive
-          - negated
-          - possible
-        example: positive
       condition:
         description: > 
           The sign/symptom type according to CDC definition
@@ -39,6 +29,22 @@ allOf:
           - delirium
           - hypersomnia
           - cyanosis
+      certainty:
+        description: >
+          Whether the annotation is positively or negatively correlated with the
+          presence of COVID
+        type: string
+        enum:
+          - positive
+          - negated
+          - possible
+required:
+  - start
+  - length
+  - text
+  - confidence
+  - condition
+  - certainty
 example:
   start: 42
   length: 9
