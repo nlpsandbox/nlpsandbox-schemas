@@ -29,6 +29,7 @@ jobs:
         - "person-name-annotator"
         - "phi-deidentifier"
         - "physical-address-annotator"
+        - "covid-symptom-annotator"
         - "contact-annotator"
         - "id-annotator"
     steps:
@@ -56,6 +57,7 @@ jobs:
         - "person-name-annotator"
         - "phi-deidentifier"
         - "physical-address-annotator"
+        - "covid-symptom-annotator"
         - "contact-annotator"
         - "id-annotator"
     steps:

@@ -1,0 +1,54 @@
+type: object
+description: A COVID symptom annotation in a text
+allOf:
+  - $ref: TextAnnotation.yaml
+  - type: object
+    properties:
+      condition:
+        description: > 
+          The sign/symptom type according to CDC definition
+        type: string
+        enum:
+          - fever
+          - chill
+          - cough
+          - fatigue
+          - nasal_obstruction
+          - loss_of_appetite
+          - diarrhea
+          - abdominal_pain
+          - nausea
+          - vomiting
+          - sore_throat
+          - headache
+          - myalgia
+          - loss_of_taste
+          - loss_of_smell
+          - dyspnea
+          - chest_pain
+          - delirium
+          - hypersomnia
+          - cyanosis
+      certainty:
+        description: >
+          Whether the annotation is positively or negatively correlated with the
+          presence of COVID
+        type: string
+        enum:
+          - positive
+          - negated
+          - possible
+required:
+  - start
+  - length
+  - text
+  - confidence
+  - condition
+  - certainty
+example:
+  start: 42
+  length: 9
+  text: dry cough
+  condition: cough
+  certainty: positive
+  confidence: 95.5
