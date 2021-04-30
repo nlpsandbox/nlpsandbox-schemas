@@ -14,7 +14,7 @@ info:
   description: >
     # Introduction
 
-    The COVID Symptom Annotator is one of the first type of NLP Tools that can be
+    The COVID Symptom Annotator is one of the first NLP Sandbox tools that can be
     benchmarked on [nlpsandbox.io](https://nlpsandbox.io). A COVID Symptom Annotator
     takes as input a clinical note and outputs a list of predicted COVID-19 sign and symptom
     annotations found in the clinical note. This OpenAPI document describes the

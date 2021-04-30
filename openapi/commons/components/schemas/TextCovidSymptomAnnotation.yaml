@@ -6,12 +6,13 @@ allOf:
     properties:
       certainty:
         description: >
-          Whether the annotation is positively or negatively corelated with the
+          Whether the annotation is positively or negatively correlated with the
           presence of COVID
         type: string
         enum:
           - positive
           - negated
+          - possible
         example: positive
       condition:
         description: > 
@@ -42,5 +43,6 @@ example:
   start: 42
   length: 9
   text: dry cough
-  dateFormat: MM/DD/YYYY
+  condition: cough
+  certainty: positive
   confidence: 95.5
