@@ -5,7 +5,7 @@ allOf:
   - type: object
     properties:
       condition:
-        description: > 
+        description: >
           The sign/symptom type according to CDC definition
         type: string
         enum:
@@ -38,13 +38,9 @@ allOf:
           - positive
           - negated
           - possible
-required:
-  - start
-  - length
-  - text
-  - confidence
-  - condition
-  - certainty
+    required:
+      - condition
+      - certainty
 example:
   start: 42
   length: 9
