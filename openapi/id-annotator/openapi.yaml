@@ -3,8 +3,8 @@ info:
   version: 1.1.0
   title: NLP Sandbox ID Annotator API
   contact:
-    name: The NLP Sandbox Team
-    email: thomas.schaffter@sagebionetworks.org
+    name: NLP Sandbox Team
+    email: team@nlpsandbox.io
     url: https://nlpsandbox.io
   license:
     name: Apache 2.0
@@ -14,13 +14,11 @@ info:
   description: >
     # Introduction
 
-    The ID Annotator is one of the first NLP Sandbox tools that can be
-    benchmarked on [nlpsandbox.io](https://nlpsandbox.io). An ID Annotator takes
-    as input a clinical note and outputs a list of predicted ID annotations
-    found in the clinical note. This OpenAPI document describes the
-    specification of a ID Annotator. This specification includes the schemas of
-    the input and output data, and the conditions that this annotator must meet
-    if you want to benchmark its performance on
+    An ID Annotator takes as input a clinical note and outputs a list of
+    predicted ID annotations found in the clinical note. This OpenAPI document
+    describes the specification of a ID Annotator. This specification includes
+    the schemas of the input and output data, and the conditions that this
+    annotator must meet if you want to benchmark its performance on
     [nlpsandbox.io](https://nlpsandbox.io).
 
     # Getting Started
@@ -28,15 +26,15 @@ info:
     The GitHub repository (will be added later)
     [nlpsandbox/id-annotator-example](https://github.com/nlpsandbox/id-annotator-example)
     provides a simple example implementation of a Python-Flask ID Annotator. By
-    the end of the tutorial available in this repository, you will have built a
+    the end of the tutorial available in the README, you will have built a
     Docker image for a simple ID Annotator. You will then be able to submit this
     image to [nlpsandbox.io](https://nlpsandbox.io) to benchmark its
     performance.
 
     # Benchmarking Requirements
 
-    The following conditions must be met by your ID Annotator if you want to
-    benchmark its performance on [nlpsandbox.io](https://nlpsandbox.io).
+    The following conditions must be met by your NLP Sandbox tool in order to
+    evaluate its performance on [nlpsandbox.io](https://nlpsandbox.io).
 
     - The endpoint `/` must redirect to `/api/v1/tool`.
 

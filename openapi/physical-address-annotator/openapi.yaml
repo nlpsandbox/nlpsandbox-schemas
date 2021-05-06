@@ -3,8 +3,8 @@ info:
   version: 1.1.0
   title: NLP Sandbox Physical Address Annotator API
   contact:
-    name: The NLP Sandbox Team
-    email: thomas.schaffter@sagebionetworks.org
+    name: NLP Sandbox Team
+    email: team@nlpsandbox.io
     url: https://nlpsandbox.io
   license:
     name: Apache 2.0
@@ -14,11 +14,9 @@ info:
   description: >
     # Introduction
 
-    The Physical Address Annotator is one of the first NLP Sandbox tools that
-    can be can be benchmarked on [nlpsandbox.io](https://nlpsandbox.io). A
-    Physical Address Annotator takes as input a clinical note and outputs a list
-    of predicted physical address annotations found in the clinical note. This
-    OpenAPI document describes the specification of a Physical Address
+    A Physical Address Annotator takes as input a clinical note and outputs a
+    list of predicted physical address annotations found in the clinical note.
+    This OpenAPI document describes the specification of a Physical Address
     Annotator. This specification includes the schemas of the input and output
     data, and the conditions that this annotator must meet if you want to
     benchmark its performance on [nlpsandbox.io](https://nlpsandbox.io).
@@ -28,16 +26,15 @@ info:
     The GitHub repository
     [nlpsandbox/physical-address-annotator-example](https://github.com/nlpsandbox/physical-address-annotator-example)
     provides a simple example implementation of a Python-Flask Physical Address
-    Annotator. By the end of the tutorial available in this repository, you will
+    Annotator. By the end of the tutorial available in the README, you will
     have built a Docker image for a simple Physical Address Annotator. You will
     then be able to submit this image to [nlpsandbox.io](https://nlpsandbox.io)
     to benchmark its performance.
 
     # Benchmarking Requirements
 
-    The following conditions must be met by your Physical Address Annotator if
-    you want to benchmark its performance on
-    [nlpsandbox.io](https://nlpsandbox.io).
+    The following conditions must be met by your NLP Sandbox tool in order to
+    evaluate its performance on [nlpsandbox.io](https://nlpsandbox.io).
 
     - The endpoint `/` must redirect to `/api/v1/tool`.
 
