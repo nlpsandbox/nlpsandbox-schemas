@@ -9,35 +9,40 @@ OpenAPI specifications of the NLP Sandbox services
 
 ## Overview
 
-This repository contains the OpenAPI specifications of the NLP tools and
-services defined by the NLP Sandbox. The NLP Tools that implement these
-specifications can have their performance benchmark on [nlpsandbox.io].
+This repository contains the OpenAPI specifications of the NLP Sandbox tools and
+services. Visit [nlpsandbox.io] for more information on how to develop and
+benchmark NLP Sandbox tools.
 
-## NLP Tools
+## NLP Sandbox tools
 
-The OpenAPI specifications of the NLP Tools defined by the NLP Sandbox (and
-counting) are listed below. The OpenAPI specification available in JSON and YAML
-formats can be used to generate an NLP Tool "stub" using the [OpenAPI
-Generator]. For more information on how to develop an NLP Tool, please refer to
-the examples listed below. For more information on how to benchmark the
-performance of your tool, please visit [nlpsandbox.io].
+The OpenAPI specification - or schemas - of the NLP Sandbox tools listed below
+are available in JSON and YAML formats. These specifications can be given as
+input to the [OpenAPI Generator] to generate tool "stubs". For more information
+on how to develop and benchmark an NLP Sandbox tool, visit [nlpsandbox.io].
 
 API Name                     | Type                                    | Version
------------------------------|-----------------------------------------|---
+-----------------------------|-----------------------------------------|--------
 [Date Annotator]             | `nlpsandbox:date-annotator`             | 1.1.0
 [Person Name Annotator]      | `nlpsandbox:person-name-annotator`      | 1.1.0
 [Physical Address Annotator] | `nlpsandbox:physical-address-annotator` | 1.1.0
 [ID Annotator]               | `nlpsandbox:id-annotator`               | 1.1.0
 [Contact Annotator]          | `nlpsandbox:contact-annotator`          | 1.1.0
 [PHI Deidentifier]           | `nlpsandbox:phi-deidentifier`           | 1.1.0
+[COVID Symptom Annotator]    | `nlpsandbox:covid-symptom-annotator`    | 1.1.0
+
+## NLP Sandbox services
+
+API Name                | Type                                    | Version
+------------------------|-----------------------------------------|--------
+[Data Node]             | `nlpsandbox:data`                       | 1.1.0
 
 ## Examples
 
-These repositories provide the source code of examples for each NLP Tools
-defined by the NLP Sandbox. These repositories have a CI/CD workflow that
-automatically tests the tool, and build and publish a Docker image that can then
-be submitted as-is to the [nlpsandbox.io], if you wish to benchmark its
-performance -- just don't expect a high performance!
+These repositories provide example implementations of each NLP Sandbox tools.
+These repositories have a CI/CD workflow that automatically tests the tool, and
+build and publish a Docker image that can then be submitted as-is to
+[nlpsandbox.io], if you wish to benchmark its performance -- just don't expect a
+high score!
 
 GitHub repository                               | Language
 ------------------------------------------------|----------
@@ -48,6 +53,7 @@ GitHub repository                               | Language
 [nlpsandbox/id-annotator-example]               | Python
 [nlpsandbox/contact-annotator-example]          | Python
 [nlpsandbox/phi-deidentifier]                   | Python
+[nlpsandbox/covid-symptom-annotation-example]   | Python
 
 ## Versioning
 
@@ -92,6 +98,9 @@ Thinking about contributing to this project? Get started by reading our
 [ID Annotator]: https://nlpsandbox.github.io/nlpsandbox-schemas/id-annotator/latest/docs/
 [Contact Annotator]: https://nlpsandbox.github.io/nlpsandbox-schemas/contact-annotator/latest/docs/
 [PHI Deidentifier]: https://nlpsandbox.github.io/nlpsandbox-schemas/phi-deidentifier/latest/docs/
+[COVID Symptom Annotator]: https://nlpsandbox.github.io/nlpsandbox-schemas/covid-symptom-annotator/latest/docs/
+
+[Data Node]: https://nlpsandbox.github.io/nlpsandbox-schemas/data-node/latest/docs/
 
 [OpenAPI Generator]: https://github.com/OpenAPITools/openapi-generator
 
@@ -102,6 +111,7 @@ Thinking about contributing to this project? Get started by reading our
 [nlpsandbox/id-annotator-example]: https://github.com/nlpsandbox/id-annotator-example
 [nlpsandbox/contact-annotator-example]: https://github.com/nlpsandbox/contact-annotator-example
 [nlpsandbox/phi-deidentifier]: https://github.com/nlpsandbox/phi-deidentifier
+[nlpsandbox/covid-symptom-annotation-example]: https://github.com/nlpsandbox/covid-symptom-annotator-example
 
 [Docker Hub]: https://hub.docker.com/u/nlpsandbox
 
