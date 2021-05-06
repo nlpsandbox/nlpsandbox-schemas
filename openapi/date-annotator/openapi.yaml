@@ -14,13 +14,11 @@ info:
   description: >
     # Introduction
 
-    The Date Annotator is one of the first NLP Sandbox tools that can be
-    benchmarked on [nlpsandbox.io](https://nlpsandbox.io). A Date Annotator
-    takes as input a clinical note and outputs a list of predicted date
-    annotations found in the clinical note. This OpenAPI document describes the
-    specification of a Date Annotator. This specification includes the schemas
-    of the input and output data, and the conditions that this annotator must
-    meet if you want to benchmark its performance on
+    A Date Annotator takes as input a clinical note and outputs a list of
+    predicted date annotations found in the clinical note. This OpenAPI document
+    describes the specification of a Date Annotator. This specification includes
+    the schemas of the input and output data, and the conditions that this
+    annotator must meet if you want to benchmark its performance on
     [nlpsandbox.io](https://nlpsandbox.io).
 
     # Getting Started
@@ -28,15 +26,15 @@ info:
     The GitHub repository
     [nlpsandbox/date-annotator-example](https://github.com/nlpsandbox/date-annotator-example)
     provides a simple example implementation of a Python-Flask Date Annotator.
-    By the end of the tutorial available in this repository, you will have built
-    a Docker image for a simple Date Annotator. You will then be able to submit
+    By the end of the tutorial available in the README, you will have built a
+    Docker image for a simple Date Annotator. You will then be able to submit
     this image to [nlpsandbox.io](https://nlpsandbox.io) to benchmark its
     performance.
 
     # Benchmarking Requirements
 
-    The following conditions must be met by your Date Annotator if you want to
-    benchmark its performance on [nlpsandbox.io](https://nlpsandbox.io).
+    The following conditions must be met by your NLP Sandbox tool in order to
+    evaluate its performance on [nlpsandbox.io](https://nlpsandbox.io).
 
     - The endpoint `/` must redirect to `/api/v1/tool`.
 
