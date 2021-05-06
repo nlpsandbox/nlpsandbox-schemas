@@ -3,8 +3,8 @@ info:
   version: 1.1.0
   title: NLP Sandbox Date Annotator API
   contact:
-    name: The NLP Sandbox Team
-    email: thomas.schaffter@sagebionetworks.org
+    name: NLP Sandbox Team
+    email: team@nlpsandbox.io
     url: https://nlpsandbox.io
   license:
     name: Apache 2.0
