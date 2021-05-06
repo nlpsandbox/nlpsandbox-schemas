@@ -49,9 +49,30 @@ GitHub repository                               | Language
 [nlpsandbox/contact-annotator-example]          | Python
 [nlpsandbox/phi-deidentifier]                   | Python
 
-## Docker images
+## Versioning
 
-You can pull the images published by the NLP Sandbox from [Docker Hub].
+### GitHub tags
+
+This repository uses [semantic versioning] to track the releases of this
+project. This repository uses "non-moving" GitHub tags, that is, a tag will
+always point to the same git commit once it has been created.
+
+### Schemas tags
+
+The artifact published by this repository are OpenAPI schemas and documentation
+published to GitHub Pages. The versions of the schemas are aligned with the
+GitHub tags of this repository.
+
+The table below describes the schemas tags available.
+
+| Tag name                        | Moving | Description
+|---------------------------------|--------|------------
+| `latest`                        | Yes    | Latest stable release.
+| `edge`                          | Yes    | Lastest commit made to the default branch.
+| `<major>`                       | Yes    | Latest stable release for the Dnsmasq major version `<major>`.
+| `<major>.<minor>`               | Yes    | Latest stable release for the Dnsmasq version `<major>.<minor>`.
+| `<major>.<minor>.<patch>`       | Yes    | Latest stable release for the Dnsmasq version `<major>.<minor>.<patch>`.
+| `<major>.<minor>.<patch>-<sha>` | No     | Same as above with the reference to the git commit.
 
 ## Contributing
 
