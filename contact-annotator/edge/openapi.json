@@ -502,7 +502,7 @@
           }
         },
         "required": [
-          "toolDependencies"
+          "tools"
         ]
       }
     },
