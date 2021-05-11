@@ -5,3 +5,11 @@ properties:
     $ref: ../../../commons/components/schemas/Note.yaml
 required:
   - note
+example:
+  note:
+    identifier: awesome-note
+    text: >
+      On 12/26/2020, Ms. Chloe Price met with Dr. Prescott in Seattle. Her phone
+      number is 203-555-4545.
+    type: loinc:LP29684-5
+    patientId: awesome-patient
