@@ -16,7 +16,7 @@ benchmark NLP Sandbox tools.
 
 ## NLP Sandbox tools
 
-The OpenAPI specification - or schemas - of the NLP Sandbox tools listed below
+The OpenAPI specifications - or schemas - of the NLP Sandbox tools listed below
 are available in JSON and YAML formats. These specifications can be given as
 input to the [OpenAPI Generator] to generate tool "stubs". For more information
 on how to develop and benchmark an NLP Sandbox tool, visit [nlpsandbox.io].

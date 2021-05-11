@@ -33,8 +33,8 @@ info:
 
     # Benchmarking Requirements
 
-    The following conditions must be met by your NLP Sandbox tool in order to
-    evaluate its performance on [nlpsandbox.io](https://nlpsandbox.io).
+    Your NLP Sandbox tool must meet the following conditions before evaluating
+    its performance on [nlpsandbox.io](https://nlpsandbox.io).
 
     - The endpoint `/` must redirect to `/api/v1/tool`.
 

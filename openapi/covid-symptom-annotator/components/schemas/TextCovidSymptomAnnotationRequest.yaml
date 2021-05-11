@@ -9,7 +9,7 @@ example:
   note:
     identifier: awesome-note
     text: >
-      On 12/26/2020, Ms. Chloe Price met with Dr. Prescott in Seattle. She had a
-      dry cough for almost a week now.
+      On 12/26/2020, Ms. Chloe Price met with Dr. Prescott in Seattle. She's had
+      a dry cough for almost a week now.
     type: loinc:LP29684-5
     patientId: awesome-patient
