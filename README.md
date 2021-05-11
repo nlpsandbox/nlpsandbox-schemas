@@ -76,9 +76,9 @@ The table below describes the schemas tags available.
 |---------------------------------|--------|------------
 | `latest`                        | Yes    | Latest stable release.
 | `edge`                          | Yes    | Lastest commit made to the default branch.
-| `<major>`                       | Yes    | Latest stable release for the Dnsmasq major version `<major>`.
-| `<major>.<minor>`               | Yes    | Latest stable release for the Dnsmasq version `<major>.<minor>`.
-| `<major>.<minor>.<patch>`       | Yes    | Latest stable release for the Dnsmasq version `<major>.<minor>.<patch>`.
+| `<major>`                       | Yes    | Latest stable major release `<major>`.
+| `<major>.<minor>`               | Yes    | Latest stable minor release `<major>.<minor>`.
+| `<major>.<minor>.<patch>`       | Yes    | Latest stable patch release `<major>.<minor>.<patch>`.
 | `<major>.<minor>.<patch>-<sha>` | No     | Same as above with the reference to the git commit.
 
 ## Contributing
