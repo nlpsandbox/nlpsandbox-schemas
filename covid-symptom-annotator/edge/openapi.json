@@ -531,7 +531,7 @@
           }
         },
         "required": [
-          "toolDependencies"
+          "tools"
         ]
       }
     },
