@@ -39,7 +39,7 @@ API Name                | Type                                    | Version
 
 ## Examples
 
-These repositories provide example implementations of each NLP Sandbox tools.
+These repositories provide example implementations of each NLP Sandbox tool.
 These repositories have a CI/CD workflow that automatically tests the tool, and
 build and publish a Docker image that can then be submitted as-is to
 [nlpsandbox.io], if you wish to benchmark its performance -- just don't expect a
