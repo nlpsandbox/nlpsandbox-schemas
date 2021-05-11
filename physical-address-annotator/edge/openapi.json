@@ -499,7 +499,7 @@
           }
         },
         "required": [
-          "toolDependencies"
+          "tools"
         ]
       }
     },

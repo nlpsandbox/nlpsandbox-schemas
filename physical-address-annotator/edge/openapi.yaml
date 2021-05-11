@@ -412,7 +412,7 @@ components:
           items:
             $ref: '#/components/schemas/Tool'
       required:
-        - toolDependencies
+        - tools
   responses:
     NotFound:
       description: The specified resource was not found
