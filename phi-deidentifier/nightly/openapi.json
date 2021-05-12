@@ -1,11 +1,11 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "version": "1.0.2",
+    "version": "1.1.0",
     "title": "NLP Sandbox PHI Deidentifier API",
     "contact": {
-      "name": "The NLP Sandbox Team",
-      "email": "thomas.schaffter@sagebionetworks.org",
+      "name": "NLP Sandbox Team",
+      "email": "team@nlpsandbox.io",
       "url": "https://nlpsandbox.io"
     },
     "license": {
@@ -674,14 +674,14 @@
           "authorEmail": "author@example.com",
           "url": "https://example.com",
           "type": "nlpsandbox:date-annotator",
-          "apiVersion": "1.0.2"
+          "apiVersion": "1.1.0"
         }
       },
       "ToolDependencies": {
         "type": "object",
         "description": "A list of tool dependencies",
         "properties": {
-          "toolDependencies": {
+          "tools": {
             "description": "A list of tools",
             "type": "array",
             "items": {
@@ -690,7 +690,7 @@
           }
         },
         "required": [
-          "toolDependencies"
+          "tools"
         ]
       }
     },
