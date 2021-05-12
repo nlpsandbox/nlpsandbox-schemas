@@ -1,11 +1,11 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "version": "1.0.2",
+    "version": "1.1.0",
     "title": "NLP Sandbox Date Annotator API",
     "contact": {
-      "name": "The NLP Sandbox Team",
-      "email": "thomas.schaffter@sagebionetworks.org",
+      "name": "NLP Sandbox Team",
+      "email": "team@nlpsandbox.io",
       "url": "https://nlpsandbox.io"
     },
     "license": {
@@ -15,7 +15,7 @@
     "x-logo": {
       "url": "https://nlpsandbox.github.io/nlpsandbox-schemas/logo.png"
     },
-    "description": "# Introduction\nThe Date Annotator is one of the first NLP Sandbox tools that can be benchmarked on [nlpsandbox.io](https://nlpsandbox.io). A Date Annotator takes as input a clinical note and outputs a list of predicted date annotations found in the clinical note. This OpenAPI document describes the specification of a Date Annotator. This specification includes the schemas of the input and output data, and the conditions that this annotator must meet if you want to benchmark its performance on [nlpsandbox.io](https://nlpsandbox.io).\n# Getting Started\nThe GitHub repository [nlpsandbox/date-annotator-example](https://github.com/nlpsandbox/date-annotator-example) provides a simple example implementation of a Python-Flask Date Annotator. By the end of the tutorial available in this repository, you will have built a Docker image for a simple Date Annotator. You will then be able to submit this image to [nlpsandbox.io](https://nlpsandbox.io) to benchmark its performance.\n# Benchmarking Requirements\nThe following conditions must be met by your Date Annotator if you want to benchmark its performance on [nlpsandbox.io](https://nlpsandbox.io).\n- The endpoint `/` must redirect to `/api/v1/tool`.\n- The endpoint `/ui` must redirect to the web interface (UI).\n- The output of this tool must be reproducible: a given input should always\n  generate the same output.\n\n- To ensure results are reproducible, robust, and secure, this tool cannot\n  connect to any remote server. When benchmarked on\n  [nlpsandbox.io](https://nlpsandbox.io), this tool will not be able to\n  connect to remote servers.\n\n# Examples\n- [Date Annotator Example (Python)](https://github.com/nlpsandbox/date-annotator-example)\n- [Date Annotator Example (Java)](https://github.com/nlpsandbox/date-annotator-example-java)\n"
+    "description": "# Introduction\nA Date Annotator takes as input a clinical note and outputs a list of predicted date annotations found in the clinical note. This OpenAPI document describes the specification of a Date Annotator. This specification includes the schemas of the input and output data, and the conditions that this annotator must meet if you want to benchmark its performance on [nlpsandbox.io](https://nlpsandbox.io).\n# Getting Started\nThe GitHub repository [nlpsandbox/date-annotator-example](https://github.com/nlpsandbox/date-annotator-example) provides a simple example implementation of a Python-Flask Date Annotator. By the end of the tutorial available in the README, you will have built a Docker image for a simple Date Annotator. You will then be able to submit this image to [nlpsandbox.io](https://nlpsandbox.io) to benchmark its performance.\n# Benchmarking Requirements\nYour NLP Sandbox tool must meet the following conditions before evaluating its performance on [nlpsandbox.io](https://nlpsandbox.io).\n- The endpoint `/` must redirect to `/api/v1/tool`.\n- The endpoint `/ui` must redirect to the web interface (UI).\n- The output of this tool must be reproducible: a given input should always\n  generate the same output.\n\n- To ensure the results are reproducible and robust, and the data are\n  secured, this tool must not connect to any remote server. When benchmarked\n  on [nlpsandbox.io](https://nlpsandbox.io), this tool will not be able to\n  connect to remote servers.\n\n# Examples\n- [Date Annotator Example (Python)](https://github.com/nlpsandbox/date-annotator-example)\n- [Date Annotator Example (Java)](https://github.com/nlpsandbox/date-annotator-example-java)\n"
   },
   "tags": [
     {
@@ -472,14 +472,14 @@
           "authorEmail": "author@example.com",
           "url": "https://example.com",
           "type": "nlpsandbox:date-annotator",
-          "apiVersion": "1.0.2"
+          "apiVersion": "1.1.0"
         }
       },
       "ToolDependencies": {
         "type": "object",
         "description": "A list of tool dependencies",
         "properties": {
-          "toolDependencies": {
+          "tools": {
             "description": "A list of tools",
             "type": "array",
             "items": {
@@ -488,7 +488,7 @@
           }
         },
         "required": [
-          "toolDependencies"
+          "tools"
         ]
       }
     },
