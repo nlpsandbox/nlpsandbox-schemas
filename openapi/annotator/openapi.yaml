@@ -38,6 +38,10 @@ paths:
     $ref: '../person-name-annotator/paths/textPersonNameAnnotations.yaml'
   /textPhysicalAddressAnnotations:
     $ref: '../physical-address-annotator/paths/textPhysicalAddressAnnotations.yaml'
+  /textContactAnnotations:
+    $ref: '../contact-annotator/paths/textContactAnnotations.yaml'
+  /textCovidSymptomAnnotations:
+    $ref: '../covid-symptom-annotator/paths/textCovidSymptomAnnotations.yaml'
   /tool:
     $ref: '../commons/paths/tool.yaml'
   /tool/dependencies:
