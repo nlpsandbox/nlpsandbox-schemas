@@ -18,6 +18,11 @@ properties:
     type: array
     items:
       $ref: ../../../commons/components/schemas/TextPhysicalAddressAnnotation.yaml
+  textIdAnnotations:
+    description: ID annotations in a text
+    type: array
+    items:
+      $ref: ../../../commons/components/schemas/TextIdAnnotation.yaml
   textContactAnnotations:
     description: Contact annotations in a text
     type: array
