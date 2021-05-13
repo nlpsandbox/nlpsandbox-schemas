@@ -270,7 +270,7 @@
         "example": {
           "note": {
             "identifier": "awesome-note",
-            "text": "On 12/26/2020, Ms. Chloe Price met with Dr. Prescott in Seattle. She's had a dry cough for almost a week now.\n",
+            "text": "The patient had a dry cough and fever or chills yesterday. He is also experiencing new loss of taste today and three days ago.\n",
             "type": "loinc:LP29684-5",
             "patientId": "awesome-patient"
           }
