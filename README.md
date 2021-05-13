@@ -23,19 +23,19 @@ on how to develop and benchmark an NLP Sandbox tool, visit [nlpsandbox.io].
 
 API Name                     | Type                                    | Version
 -----------------------------|-----------------------------------------|--------
-[Date Annotator]             | `nlpsandbox:date-annotator`             | 1.1.0
-[Person Name Annotator]      | `nlpsandbox:person-name-annotator`      | 1.1.0
-[Physical Address Annotator] | `nlpsandbox:physical-address-annotator` | 1.1.0
-[ID Annotator]               | `nlpsandbox:id-annotator`               | 1.1.0
-[Contact Annotator]          | `nlpsandbox:contact-annotator`          | 1.1.0
-[PHI Deidentifier]           | `nlpsandbox:phi-deidentifier`           | 1.1.0
-[COVID Symptom Annotator]    | `nlpsandbox:covid-symptom-annotator`    | 1.1.0
+[Date Annotator]             | `nlpsandbox:date-annotator`             | 1.1.1
+[Person Name Annotator]      | `nlpsandbox:person-name-annotator`      | 1.1.1
+[Physical Address Annotator] | `nlpsandbox:physical-address-annotator` | 1.1.1
+[ID Annotator]               | `nlpsandbox:id-annotator`               | 1.1.1
+[Contact Annotator]          | `nlpsandbox:contact-annotator`          | 1.1.1
+[PHI Deidentifier]           | `nlpsandbox:phi-deidentifier`           | 1.1.1
+[COVID Symptom Annotator]    | `nlpsandbox:covid-symptom-annotator`    | 1.1.1
 
 ## NLP Sandbox services
 
 API Name                | Type                                    | Version
 ------------------------|-----------------------------------------|--------
-[Data Node]             | `nlpsandbox:data`                       | 1.1.0
+[Data Node]             | `nlpsandbox:data`                       | 1.1.1
 
 ## Examples
 
