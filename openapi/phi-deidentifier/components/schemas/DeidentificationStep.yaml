@@ -23,8 +23,10 @@ properties:
     items:
       type: string
       enum:
-        - "text_physical_address"
         - "text_date"
         - "text_person_name"
+        - "text_physical_address"
+        - "text_id"
+        - "text_contact"
 required:
   - annotationTypes
