@@ -1,10 +1,10 @@
 openapi: 3.0.3
 info:
   version: 1.1.0
-  title: NLP Sandbox Date Annotator API
+  title: NLP Sandbox Contact Annotator API
   contact:
     name: NLP Sandbox Team
-    email: team@nlpsandbox.io
+    email: thomas.schaffter@sagebionetworks.org
     url: https://nlpsandbox.io
   license:
     name: Apache 2.0
@@ -14,22 +14,22 @@ info:
   description: >
     # Introduction
 
-    A Date Annotator takes as input a clinical note and outputs a list of
-    predicted date annotations found in the clinical note. This OpenAPI document
-    describes the specification of a Date Annotator. This specification includes
-    the schemas of the input and output data, and the conditions that this
-    annotator must meet if you want to benchmark its performance on
-    [nlpsandbox.io](https://nlpsandbox.io).
+    A contact annotator takes as input a clinical note and outputs a list of
+    predicted contact annotations found in the clinical note. This OpenAPI
+    document describes the specification of a contact Annotator. This
+    specification includes the schemas of the input and output data, and the
+    conditions that this annotator must meet if you want to benchmark its
+    performance on [nlpsandbox.io](https://nlpsandbox.io).
 
     # Getting Started
 
-    The GitHub repository
-    [nlpsandbox/date-annotator-example](https://github.com/nlpsandbox/date-annotator-example)
-    provides a simple example implementation of a Python-Flask Date Annotator.
-    By the end of the tutorial available in the README, you will have built a
-    Docker image for a simple Date Annotator. You will then be able to submit
-    this image to [nlpsandbox.io](https://nlpsandbox.io) to benchmark its
-    performance.
+    The GitHub repository (will be added later)
+    [nlpsandbox/contact-annotator-example](https://github.com/nlpsandbox/contact-annotator-example)
+    provides a rules-based example implementation of a Python-Flask contact
+    Annotator. By the end of the tutorial available in the README, you will have
+    built a Docker image for a simple contact Annotator. You will then be able
+    to submit this image to [nlpsandbox.io](https://nlpsandbox.io) to benchmark
+    its performance.
 
     # Benchmarking Requirements
 
@@ -50,14 +50,12 @@ info:
 
     # Examples
 
-    - [Date Annotator Example (Python)](https://github.com/nlpsandbox/date-annotator-example)
-
-    - [Date Annotator Example (Java)](https://github.com/nlpsandbox/date-annotator-example-java)
+    - [Contact Annotator Example (Python)](https://github.com/nlpsandbox/contact-annotator-example)
 tags:
   - name: HealthCheck
     description: Operations about health checks
-  - name: TextDateAnnotation
-    description: Operations about text date annotations
+  - name: TextContactAnnotation
+    description: Operations about text contact annotations
   - name: Tool
     description: Operations about this tool
 servers:
@@ -66,8 +64,8 @@ servers:
 paths:
   /healthCheck:
     $ref: ../commons/paths/healthCheck.yaml
-  /textDateAnnotations:
-    $ref: paths/textDateAnnotations.yaml
+  /textContactAnnotations:
+    $ref: paths/textContactAnnotations.yaml
   /tool:
     $ref: ../commons/paths/tool.yaml
   /tool/dependencies:

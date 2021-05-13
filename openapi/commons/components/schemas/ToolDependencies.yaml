@@ -1,10 +1,10 @@
 type: object
 description: A list of tool dependencies
 properties:
-  toolDependencies:
+  tools:
     description: A list of tools
     type: array
     items:
       $ref: Tool.yaml
 required:
-  - toolDependencies
+  - tools
