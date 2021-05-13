@@ -1574,79 +1574,6 @@
           "confidence": 95.5
         }
       },
-      "Annotation": {
-        "type": "object",
-        "description": "An annotation record",
-        "properties": {
-          "name": {
-            "$ref": "#/components/schemas/AnnotationName"
-          },
-          "annotationSource": {
-            "$ref": "#/components/schemas/AnnotationSource"
-          },
-          "textDateAnnotations": {
-            "description": "Date annotations in a text",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/TextDateAnnotation"
-            }
-          },
-          "textPersonNameAnnotations": {
-            "description": "Person name annotations in a text",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/TextPersonNameAnnotation"
-            }
-          },
-          "textPhysicalAddressAnnotations": {
-            "description": "Physical address annotations in a text",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/TextPhysicalAddressAnnotation"
-            }
-          }
-        },
-        "required": [
-          "name",
-          "annotationSource"
-        ]
-      },
-      "PageOfAnnotations": {
-        "type": "object",
-        "description": "A page of annotations",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/ResponsePageMetadata"
-          },
-          {
-            "type": "object",
-            "properties": {
-              "annotations": {
-                "description": "An array of annotations",
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/Annotation"
-                }
-              }
-            }
-          }
-        ],
-        "required": [
-          "offset",
-          "limit",
-          "links",
-          "totalResults",
-          "annotations"
-        ]
-      },
-      "AnnotationId": {
-        "description": "The ID of the annotation",
-        "type": "string",
-        "minLength": 3,
-        "maxLength": 60,
-        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
-        "example": "awesome-annotation"
-      },
       "TextIdAnnotation": {
         "type": "object",
         "description": "An ID annotation in a text",
@@ -1775,6 +1702,100 @@
           "certainty": "positive",
           "confidence": 95.5
         }
+      },
+      "Annotation": {
+        "type": "object",
+        "description": "An annotation record",
+        "properties": {
+          "name": {
+            "$ref": "#/components/schemas/AnnotationName"
+          },
+          "annotationSource": {
+            "$ref": "#/components/schemas/AnnotationSource"
+          },
+          "textDateAnnotations": {
+            "description": "Date annotations in a text",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextDateAnnotation"
+            }
+          },
+          "textPersonNameAnnotations": {
+            "description": "Person name annotations in a text",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextPersonNameAnnotation"
+            }
+          },
+          "textPhysicalAddressAnnotations": {
+            "description": "Physical address annotations in a text",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextPhysicalAddressAnnotation"
+            }
+          },
+          "textIdAnnotations": {
+            "description": "ID annotations in a text",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextIdAnnotation"
+            }
+          },
+          "textContactAnnotations": {
+            "description": "Contact annotations in a text",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextContactAnnotation"
+            }
+          },
+          "textCovidSymptomAnnotations": {
+            "description": "COVID symptom annotations in a text",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextCovidSymptomAnnotation"
+            }
+          }
+        },
+        "required": [
+          "name",
+          "annotationSource"
+        ]
+      },
+      "PageOfAnnotations": {
+        "type": "object",
+        "description": "A page of annotations",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ResponsePageMetadata"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "annotations": {
+                "description": "An array of annotations",
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Annotation"
+                }
+              }
+            }
+          }
+        ],
+        "required": [
+          "offset",
+          "limit",
+          "links",
+          "totalResults",
+          "annotations"
+        ]
+      },
+      "AnnotationId": {
+        "description": "The ID of the annotation",
+        "type": "string",
+        "minLength": 3,
+        "maxLength": 60,
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+        "example": "awesome-annotation"
       },
       "AnnotationCreateRequest": {
         "type": "object",
