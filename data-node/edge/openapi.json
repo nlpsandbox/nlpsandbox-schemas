@@ -1647,6 +1647,135 @@
         "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
         "example": "awesome-annotation"
       },
+      "TextIdAnnotation": {
+        "type": "object",
+        "description": "An ID annotation in a text",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TextAnnotation"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "idType": {
+                "description": "Type of ID information",
+                "type": "string",
+                "enum": [
+                  "account",
+                  "bio_id",
+                  "device",
+                  "health_plan",
+                  "id_num",
+                  "license",
+                  "medical_record",
+                  "ssn",
+                  "vehicle"
+                ]
+              }
+            }
+          }
+        ],
+        "example": {
+          "start": 42,
+          "length": 11,
+          "text": "203-11-4535",
+          "idType": "ssn",
+          "confidence": 95.5
+        }
+      },
+      "TextContactAnnotation": {
+        "type": "object",
+        "description": "A contact annotation in a text",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TextAnnotation"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "contactType": {
+                "description": "Type of contact information",
+                "type": "string",
+                "enum": [
+                  "email",
+                  "fax",
+                  "phone",
+                  "url",
+                  "other"
+                ]
+              }
+            }
+          }
+        ],
+        "example": {
+          "start": 42,
+          "length": 11,
+          "text": "dave@uw.edu",
+          "contactType": "email",
+          "confidence": 95.5
+        }
+      },
+      "TextCovidSymptomAnnotation": {
+        "type": "object",
+        "description": "A COVID symptom annotation in a text",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TextAnnotation"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "condition": {
+                "description": "The sign/symptom type according to CDC definition\n",
+                "type": "string",
+                "enum": [
+                  "fever",
+                  "chill",
+                  "cough",
+                  "fatigue",
+                  "nasal_obstruction",
+                  "loss_of_appetite",
+                  "diarrhea",
+                  "abdominal_pain",
+                  "nausea",
+                  "vomiting",
+                  "sore_throat",
+                  "headache",
+                  "myalgia",
+                  "loss_of_taste",
+                  "loss_of_smell",
+                  "dyspnea",
+                  "chest_pain",
+                  "delirium",
+                  "hypersomnia",
+                  "cyanosis"
+                ]
+              },
+              "certainty": {
+                "description": "Whether the annotation is positively or negatively correlated with the presence of COVID\n",
+                "type": "string",
+                "enum": [
+                  "positive",
+                  "negated",
+                  "possible"
+                ]
+              }
+            },
+            "required": [
+              "condition",
+              "certainty"
+            ]
+          }
+        ],
+        "example": {
+          "start": 42,
+          "length": 9,
+          "text": "dry cough",
+          "condition": "cough",
+          "certainty": "positive",
+          "confidence": 95.5
+        }
+      },
       "AnnotationCreateRequest": {
         "type": "object",
         "description": "An annotation record",
@@ -1673,6 +1802,27 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/TextPhysicalAddressAnnotation"
+            }
+          },
+          "textIdAnnotations": {
+            "description": "ID annotations in a text",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextIdAnnotation"
+            }
+          },
+          "textContactAnnotations": {
+            "description": "Contact annotations in a text",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextContactAnnotation"
+            }
+          },
+          "textCovidSymptomAnnotations": {
+            "description": "COVID symptom annotations in a text",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextCovidSymptomAnnotation"
             }
           }
         },
