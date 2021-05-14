@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.1.0
+  version: 1.1.1
   title: NLP Sandbox COVID Symptom Annotator API
   contact:
     name: NLP Sandbox Team
@@ -226,8 +226,8 @@ components:
         note:
           identifier: awesome-note
           text: >
-            On 12/26/2020, Ms. Chloe Price met with Dr. Prescott in Seattle.
-            She's had a dry cough for almost a week now.
+            The patient had a dry cough and fever or chills yesterday. He is
+            also experiencing new loss of taste today and three days ago.
           type: 'loinc:LP29684-5'
           patientId: awesome-patient
     TextAnnotation:
@@ -433,7 +433,7 @@ components:
         authorEmail: author@example.com
         url: 'https://example.com'
         type: 'nlpsandbox:date-annotator'
-        apiVersion: 1.1.0
+        apiVersion: 1.1.1
     ToolDependencies:
       type: object
       description: A list of tool dependencies
