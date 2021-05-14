@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.1.0
+  version: 1.1.1
   title: NLP Sandbox PHI Deidentifier API
   contact:
     name: NLP Sandbox Team
@@ -215,9 +215,11 @@ components:
           items:
             type: string
             enum:
-              - text_physical_address
               - text_date
               - text_person_name
+              - text_physical_address
+              - text_id
+              - text_contact
       required:
         - annotationTypes
     DeidentifyRequest:
@@ -332,11 +334,65 @@ components:
                 - state
                 - street
                 - zip
+          required:
+            - addressType
       example:
         start: 42
         length: 7
         text: Seattle
         addressType: city
+        confidence: 95.5
+    TextIdAnnotation:
+      type: object
+      description: An ID annotation in a text
+      allOf:
+        - $ref: '#/components/schemas/TextAnnotation'
+        - type: object
+          properties:
+            idType:
+              description: Type of ID information
+              type: string
+              enum:
+                - account
+                - bio_id
+                - device
+                - health_plan
+                - id_num
+                - license
+                - medical_record
+                - ssn
+                - vehicle
+          required:
+            - idType
+      example:
+        start: 42
+        length: 11
+        text: 203-11-4535
+        idType: ssn
+        confidence: 95.5
+    TextContactAnnotation:
+      type: object
+      description: A contact annotation in a text
+      allOf:
+        - $ref: '#/components/schemas/TextAnnotation'
+        - type: object
+          properties:
+            contactType:
+              description: Type of contact information
+              type: string
+              enum:
+                - email
+                - fax
+                - phone
+                - url
+                - other
+          required:
+            - contactType
+      example:
+        start: 42
+        length: 11
+        text: dave@uw.edu
+        contactType: email
         confidence: 95.5
     AnnotationSet:
       type: object
@@ -357,10 +413,22 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/TextPhysicalAddressAnnotation'
+        textIdAnnotations:
+          description: ID annotations in a text
+          type: array
+          items:
+            $ref: '#/components/schemas/TextIdAnnotation'
+        textContactAnnotations:
+          description: Contact annotations in a text
+          type: array
+          items:
+            $ref: '#/components/schemas/TextContactAnnotation'
       required:
         - textDateAnnotations
         - textPersonNameAnnotations
         - textPhysicalAddressAnnotations
+        - textIdAnnotations
+        - textContactAnnotations
     DeidentifyResponse:
       type: object
       description: The response to a deidentification request
@@ -517,7 +585,7 @@ components:
         authorEmail: author@example.com
         url: 'https://example.com'
         type: 'nlpsandbox:date-annotator'
-        apiVersion: 1.1.0
+        apiVersion: 1.1.1
     ToolDependencies:
       type: object
       description: A list of tool dependencies
