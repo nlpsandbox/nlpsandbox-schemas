@@ -17,6 +17,8 @@ allOf:
           - medical_record
           - ssn
           - vehicle
+    required:
+      - idType
 example:
   start: 42
   length: 11
