@@ -331,7 +331,10 @@
                   "zip"
                 ]
               }
-            }
+            },
+            "required": [
+              "addressType"
+            ]
           }
         ],
         "example": {

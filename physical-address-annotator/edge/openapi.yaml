@@ -272,6 +272,8 @@ components:
                 - state
                 - street
                 - zip
+          required:
+            - addressType
       example:
         start: 42
         length: 7
