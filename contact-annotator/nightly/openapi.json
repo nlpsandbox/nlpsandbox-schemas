@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "version": "1.1.0",
+    "version": "1.1.1",
     "title": "NLP Sandbox Contact Annotator API",
     "contact": {
       "name": "NLP Sandbox Team",
@@ -334,7 +334,10 @@
                   "other"
                 ]
               }
-            }
+            },
+            "required": [
+              "contactType"
+            ]
           }
         ],
         "example": {
@@ -486,7 +489,7 @@
           "authorEmail": "author@example.com",
           "url": "https://example.com",
           "type": "nlpsandbox:date-annotator",
-          "apiVersion": "1.1.0"
+          "apiVersion": "1.1.1"
         }
       },
       "ToolDependencies": {
