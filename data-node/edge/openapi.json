@@ -1563,7 +1563,10 @@
                   "zip"
                 ]
               }
-            }
+            },
+            "required": [
+              "addressType"
+            ]
           }
         ],
         "example": {
@@ -1599,7 +1602,10 @@
                   "vehicle"
                 ]
               }
-            }
+            },
+            "required": [
+              "idType"
+            ]
           }
         ],
         "example": {
@@ -1631,7 +1637,10 @@
                   "other"
                 ]
               }
-            }
+            },
+            "required": [
+              "contactType"
+            ]
           }
         ],
         "example": {

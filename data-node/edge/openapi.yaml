@@ -1052,6 +1052,8 @@ components:
                 - state
                 - street
                 - zip
+          required:
+            - addressType
       example:
         start: 42
         length: 7
@@ -1078,6 +1080,8 @@ components:
                 - medical_record
                 - ssn
                 - vehicle
+          required:
+            - idType
       example:
         start: 42
         length: 11
@@ -1100,6 +1104,8 @@ components:
                 - phone
                 - url
                 - other
+          required:
+            - contactType
       example:
         start: 42
         length: 11
