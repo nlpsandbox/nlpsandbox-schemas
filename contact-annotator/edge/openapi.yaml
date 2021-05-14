@@ -275,6 +275,8 @@ components:
                 - phone
                 - url
                 - other
+          required:
+            - contactType
       example:
         start: 42
         length: 11

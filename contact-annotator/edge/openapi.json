@@ -334,7 +334,10 @@
                   "other"
                 ]
               }
-            }
+            },
+            "required": [
+              "contactType"
+            ]
           }
         ],
         "example": {
