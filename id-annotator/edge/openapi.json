@@ -338,7 +338,10 @@
                   "vehicle"
                 ]
               }
-            }
+            },
+            "required": [
+              "idType"
+            ]
           }
         ],
         "example": {
