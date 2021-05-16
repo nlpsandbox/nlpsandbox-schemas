@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.1.0
+  version: 1.1.1
   title: NLP Sandbox Date Annotator API
   contact:
     name: The NLP Sandbox Team
@@ -42,6 +42,8 @@ paths:
     $ref: '../contact-annotator/paths/textContactAnnotations.yaml'
   /textCovidSymptomAnnotations:
     $ref: '../covid-symptom-annotator/paths/textCovidSymptomAnnotations.yaml'
+  /textIdAnnotations:
+    $ref: '../id-annotator/paths/textIdAnnotations.yaml'
   /tool:
     $ref: '../commons/paths/tool.yaml'
   /tool/dependencies:
