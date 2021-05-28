@@ -10,6 +10,7 @@ allOf:
         enum:
           - email
           - fax
+          - ip_address
           - phone
           - url
           - other
