@@ -1595,11 +1595,12 @@
                   "bio_id",
                   "device",
                   "health_plan",
-                  "id_num",
+                  "id_number",
                   "license",
                   "medical_record",
                   "ssn",
-                  "vehicle"
+                  "vehicle",
+                  "other"
                 ]
               }
             },
@@ -1632,6 +1633,7 @@
                 "enum": [
                   "email",
                   "fax",
+                  "ip_address",
                   "phone",
                   "url",
                   "other"

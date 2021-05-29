@@ -1075,11 +1075,12 @@ components:
                 - bio_id
                 - device
                 - health_plan
-                - id_num
+                - id_number
                 - license
                 - medical_record
                 - ssn
                 - vehicle
+                - other
           required:
             - idType
       example:
@@ -1101,6 +1102,7 @@ components:
               enum:
                 - email
                 - fax
+                - ip_address
                 - phone
                 - url
                 - other
