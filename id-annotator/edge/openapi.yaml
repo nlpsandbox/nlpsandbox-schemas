@@ -279,6 +279,7 @@ components:
                 - medical_record
                 - ssn
                 - vehicle
+                - other
           required:
             - idType
       example:

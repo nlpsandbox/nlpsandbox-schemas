@@ -335,7 +335,8 @@
                   "license",
                   "medical_record",
                   "ssn",
-                  "vehicle"
+                  "vehicle",
+                  "other"
                 ]
               }
             },
