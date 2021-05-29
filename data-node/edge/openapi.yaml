@@ -1075,7 +1075,7 @@ components:
                 - bio_id
                 - device
                 - health_plan
-                - id_num
+                - id_number
                 - license
                 - medical_record
                 - ssn
