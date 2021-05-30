@@ -60,4 +60,4 @@ example:
   authorEmail: author@example.com
   url: https://example.com
   type: nlpsandbox:date-annotator
-  apiVersion: 1.1.1
+  apiVersion: 1.1.2
