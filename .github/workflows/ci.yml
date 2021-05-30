@@ -62,6 +62,7 @@ jobs:
         - "id-annotator"
     steps:
     - uses: actions/checkout@v2
+
     - name: Prepare
       id: prep
       run: |
@@ -102,10 +103,12 @@ jobs:
         echo ::set-output name=version_minor::${MINOR}
         echo ::set-output name=created::$(date -u +'%Y-%m-%dT%H:%M:%SZ')
         echo ::set-output name=push::${PUSH}
+
     - name: Use Node.js ${{ env.node_version }}
       uses: actions/setup-node@v2.1.5
       with:
         node-version: ${{ env.node_version }}
+
     - name: Create .spec-docs.json
       run: |
         printf "%s\n" \
@@ -116,49 +119,72 @@ jobs:
         '"branchPathBase": "preview"' \
         '}' | tee -a .spec-docs.json >/dev/null
         cat .spec-docs.json
-    - run: npm ci
+
+    - name: Install dependencies
+      run: npm ci
+
     - name: Create openapi docs
       run: npx gh-openapi-docs-ts
-    - name: Commit doc changes
-      run: |
-        git clone ${{ env.clone_url }} \
-          --branch gh-pages --single-branch gh-pages
 
-        # Update gh-pages: version specified
-        TARGET_DIR=gh-pages/${{ matrix.api }}/${{ steps.prep.outputs.version }}
-        mkdir -p ${TARGET_DIR}
-        cp -R preview/${{ steps.prep.outputs.branch }}/* ${TARGET_DIR}
-
-        # Update gh-pages: latest, major, and minor versions
-        if [ ! -z "${{ steps.prep.outputs.version_major }}" ]; then
-          # Update major version (e.g. "1.2.3" => "1")
-          TARGET_DIR=gh-pages/${{ matrix.api }}/latest
-          mkdir -p ${TARGET_DIR}
-          cp -R preview/${{ steps.prep.outputs.branch }}/* ${TARGET_DIR}
-
-          # Update major version (e.g. "1.2.3" => "1")
-          TARGET_DIR=gh-pages/${{ matrix.api }}/${{ steps.prep.outputs.version_major }}
-          mkdir -p ${TARGET_DIR}
-          cp -R preview/${{ steps.prep.outputs.branch }}/* ${TARGET_DIR}
-
-          # Update minor version (e.g. "1.2.3" => "1.2")
-          TARGET_DIR=gh-pages/${{ matrix.api }}/${{ steps.prep.outputs.version_minor }}
-          mkdir -p ${TARGET_DIR}
-          cp -R preview/${{ steps.prep.outputs.branch }}/* ${TARGET_DIR}
-        fi
-
-        cd gh-pages
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add .
-        git commit -m "Update documentation" -a || true
-        # The above command will fail if no changes were present, so we ignore
-        # that.
-    - name: Push changes
-      if: steps.prep.outputs.push == 'true'
-      uses: ad-m/github-push-action@master
+    - name: Archive gh-openapi-docs results
+      uses: actions/upload-artifact@v2
       with:
-        branch: gh-pages
-        directory: gh-pages
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        force: true
+        name: dist-without-markdown
+        path: gh-pages/${{ matrix.api }}/${{ steps.prep.outputs.version }}
+
+    # - name: Commit doc changes
+    #   run: |
+    #     git clone ${{ env.clone_url }} \
+    #       --branch gh-pages --single-branch gh-pages
+
+    #     # Update gh-pages: version specified
+    #     TARGET_DIR=gh-pages/${{ matrix.api }}/${{ steps.prep.outputs.version }}
+    #     mkdir -p ${TARGET_DIR}
+    #     cp -R preview/${{ steps.prep.outputs.branch }}/* ${TARGET_DIR}
+
+    #     # Update gh-pages: latest, major, and minor versions
+    #     if [ ! -z "${{ steps.prep.outputs.version_major }}" ]; then
+    #       # Update major version (e.g. "1.2.3" => "1")
+    #       TARGET_DIR=gh-pages/${{ matrix.api }}/latest
+    #       mkdir -p ${TARGET_DIR}
+    #       cp -R preview/${{ steps.prep.outputs.branch }}/* ${TARGET_DIR}
+
+    #       # Update major version (e.g. "1.2.3" => "1")
+    #       TARGET_DIR=gh-pages/${{ matrix.api }}/${{ steps.prep.outputs.version_major }}
+    #       mkdir -p ${TARGET_DIR}
+    #       cp -R preview/${{ steps.prep.outputs.branch }}/* ${TARGET_DIR}
+
+    #       # Update minor version (e.g. "1.2.3" => "1.2")
+    #       TARGET_DIR=gh-pages/${{ matrix.api }}/${{ steps.prep.outputs.version_minor }}
+    #       mkdir -p ${TARGET_DIR}
+    #       cp -R preview/${{ steps.prep.outputs.branch }}/* ${TARGET_DIR}
+    #     fi
+
+    #     cd gh-pages
+    #     git config --local user.email "action@github.com"
+    #     git config --local user.name "GitHub Action"
+    #     git add .
+    #     git commit -m "Update documentation" -a || true
+    #     # The above command will fail if no changes were present, so we ignore
+    #     # that.
+
+    # - name: Push changes
+    #   if: steps.prep.outputs.push == 'true'
+    #   uses: ad-m/github-push-action@master
+    #   with:
+    #     branch: gh-pages
+    #     directory: gh-pages
+    #     github_token: ${{ secrets.GITHUB_TOKEN }}
+    #     force: true
+
+  build-and-publish-2:
+    needs: [build-and-publish]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Download all workflow run artifacts
+      uses: actions/download-artifact@v2
+
+    - name: List all files
+      run: du -a .
