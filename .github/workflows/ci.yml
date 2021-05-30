@@ -130,7 +130,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: gh-openapi-docs
-        path: gh-pages/${{ matrix.api }}/${{ steps.prep.outputs.version }}
+        path: preview/${{ matrix.api }}/${{ steps.prep.outputs.version }}
 
     # - name: Commit doc changes
     #   run: |
