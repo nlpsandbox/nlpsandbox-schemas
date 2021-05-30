@@ -126,7 +126,7 @@ jobs:
     - name: Create openapi docs
       run: |
         npx gh-openapi-docs-ts
-        TARGET_DIR=gh-openapi-docs/${{ matrix.api }}/${{ steps.prep.outputs.version }}
+        TARGET_DIR=artifacts/gh-openapi-docs/${{ matrix.api }}/${{ steps.prep.outputs.version }}
         mkdir -p ${TARGET_DIR}
         cp -R preview/${{ steps.prep.outputs.branch }}/* ${TARGET_DIR}
 
@@ -134,7 +134,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: gh-openapi-docs
-        path: gh-openapi-docs
+        path: artifacts
 
     # - name: Commit doc changes
     #   run: |
