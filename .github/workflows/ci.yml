@@ -48,8 +48,8 @@ jobs:
     needs: [lint]
     runs-on: ubuntu-latest
     strategy:
-      # Need to process one api at a time to prevent race condition
-      max-parallel: 1
+      # # Need to process one api at a time to prevent race condition
+      # max-parallel: 1
       matrix:
         api:
         - "data-node"
@@ -126,10 +126,10 @@ jobs:
     - name: Create openapi docs
       run: npx gh-openapi-docs-ts
 
-    - name: Archive gh-openapi-docs results
+    - name: Archive gh-openapi-docs artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: dist-without-markdown
+        name: gh-openapi-docs
         path: gh-pages/${{ matrix.api }}/${{ steps.prep.outputs.version }}
 
     # - name: Commit doc changes
@@ -183,8 +183,10 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Download all workflow run artifacts
+    - name: Download gh-openapi-docs artifacts
       uses: actions/download-artifact@v2
+      with:
+        name: gh-openapi-docs
 
     - name: List all files
       run: du -a .
