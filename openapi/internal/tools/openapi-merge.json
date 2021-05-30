@@ -1,0 +1,26 @@
+{
+    "inputs": [
+      {
+        "inputFile": "base.openapi.yaml"
+      },
+      {
+        "inputFile": "../../date-annotator/openapi.yaml",
+        "operationSelection": {
+            "excludeTags": [
+                "Tool",
+                "HealthCheck"
+            ]
+        }
+      },
+      {
+        "inputFile": "../../person-name-annotator/openapi.yaml",
+        "operationSelection": {
+            "excludeTags": [
+                "Tool",
+                "HealthCheck"
+            ]
+        }
+      }
+    ],
+    "output": "tools.openapi.yaml"
+  }
