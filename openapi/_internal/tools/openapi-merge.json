@@ -4,7 +4,7 @@
         "inputFile": "base.openapi.yaml"
       },
       {
-        "inputFile": "../../date-annotator/openapi.yaml",
+        "inputFile": "../individuals/date-annotator.openapi.yaml",
         "operationSelection": {
             "excludeTags": [
                 "Tool",
@@ -13,7 +13,7 @@
         }
       },
       {
-        "inputFile": "../../person-name-annotator/openapi.yaml",
+        "inputFile": "../individuals/person-name-annotator.openapi.yaml",
         "operationSelection": {
             "excludeTags": [
                 "Tool",

@@ -14,6 +14,6 @@
     "lint:all": "openapi lint openapi/*/openapi.yaml",
     "validate": "npm run build --api=${npm_config_api} && ./node_modules/.bin/lint-openapi openapi.yaml",
     "lint:ibm": "openapi bundle -o openapi.yaml $npm_config_entrypoint && ./node_modules/.bin/lint-openapi openapi.yaml",
-    "merge:openapi:tools": "./node_modules/.bin/openapi-merge-cli --config openapi/internal/tools/openapi-merge.json"
+    "merge:openapi:tools": "./node_modules/.bin/openapi-merge-cli --config openapi/_internal/tools/openapi-merge.json"
   }
 }

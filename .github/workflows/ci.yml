@@ -44,7 +44,7 @@ jobs:
         npm run lint --api=${{ matrix.api }}
         npm run validate --api=${{ matrix.api }}
 
-  build-and-publish:
+  build-individuals:
     needs: [lint]
     runs-on: ubuntu-latest
     strategy:
@@ -124,9 +124,11 @@ jobs:
       run: npm ci
 
     - name: Create openapi docs
+      run: npx gh-openapi-docs-ts
+
+    - name: Prepare for archiving gh-openapi-docs artifacts
       run: |
-        npx gh-openapi-docs-ts
-        TARGET_DIR=artifacts/gh-openapi-docs/${{ matrix.api }}/${{ steps.prep.outputs.version }}
+        TARGET_DIR=gh-openapi-docs/${{ matrix.api }}/${{ steps.prep.outputs.version }}
         mkdir -p ${TARGET_DIR}
         cp -R preview/${{ steps.prep.outputs.branch }}/* ${TARGET_DIR}
 
@@ -134,7 +136,19 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: gh-openapi-docs
-        path: artifacts
+        path: gh-openapi-docs
+
+    - name: Prepare for openapi-merge
+      run: |
+        mkdir -p openapi/_internal/individuals
+        cp gh-openapi-docs/${{ matrix.api }}/${{ steps.prep.outputs.version }}/openapi.yaml \
+          openapi-merge/openapi/_internal/individuals/${{ matrix.api }}.openapi.yaml
+
+    - name: Archive openapi.yaml for openapi-merge
+      uses: actions/upload-artifact@v2
+      with:
+        name: openapi-merge
+        path: openapi-merge
 
     # - name: Commit doc changes
     #   run: |
@@ -181,17 +195,28 @@ jobs:
     #     github_token: ${{ secrets.GITHUB_TOKEN }}
     #     force: true
 
-  build-and-publish-2:
+  build-aggregates:
     needs: [build-and-publish]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
 
-    - name: Download gh-openapi-docs artifacts
+    - name: Use Node.js ${{ env.node_version }}
+      uses: actions/setup-node@v2.1.5
+      with:
+        node-version: ${{ env.node_version }}
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Download openapi-merge individual openapis
       uses: actions/download-artifact@v2
       with:
-        name: gh-openapi-docs
+        name: openapi-merge
         path: .
 
     - name: List all files
       run: du -a .
+
+    - name: Build all tools API specification
+      run: npm run merge:openapi:tools
