@@ -124,13 +124,17 @@ jobs:
       run: npm ci
 
     - name: Create openapi docs
-      run: npx gh-openapi-docs-ts
+      run: |
+        npx gh-openapi-docs-ts
+        TARGET_DIR=gh-openapi-docs/${{ matrix.api }}/${{ steps.prep.outputs.version }}
+        mkdir -p ${TARGET_DIR}
+        cp -R preview/${{ steps.prep.outputs.branch }}/* ${TARGET_DIR}
 
     - name: Archive gh-openapi-docs artifacts
       uses: actions/upload-artifact@v2
       with:
         name: gh-openapi-docs
-        path: preview/${{ matrix.api }}/${{ steps.prep.outputs.version }}
+        path: gh-openapi-docs
 
     # - name: Commit doc changes
     #   run: |
