@@ -191,6 +191,7 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: gh-openapi-docs
+        working-directory: gh-openapi-docs
 
     - name: List all files
       run: du -a .
