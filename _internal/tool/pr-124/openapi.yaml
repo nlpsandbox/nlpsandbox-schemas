@@ -25,6 +25,14 @@ tags:
     description: Operations about text date annotations
   - name: TextPersonNameAnnotation
     description: Operations about text person name annotations
+  - name: TextPhysicalAddressAnnotation
+    description: Operations about text physical address annotations
+  - name: TextIdAnnotation
+    description: Operations about text ID annotations
+  - name: TextContactAnnotation
+    description: Operations about text contact annotations
+  - name: TextCovidSymptomAnnotation
+    description: Operations about COVID symptom annotations
 paths:
   /healthCheck:
     get:
@@ -122,6 +130,98 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TextPersonNameAnnotationResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /textPhysicalAddressAnnotations:
+    post:
+      tags:
+        - TextPhysicalAddressAnnotation
+      summary: Annotate physical addresses in a clinical note
+      description: Return the physical addresse annotations found in a clinical note
+      operationId: createTextPhysicalAddressAnnotations
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TextPhysicalAddressAnnotationRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TextPhysicalAddressAnnotationResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /textIdAnnotations:
+    post:
+      tags:
+        - TextIdAnnotation
+      summary: Annotate IDs in a clinical note
+      description: Return the ID annotations found in a clinical note
+      operationId: createTextIdAnnotations
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TextIdAnnotationRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TextIdAnnotationResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /textContactAnnotations:
+    post:
+      tags:
+        - TextContactAnnotation
+      summary: Annotate contact information in a clinical note
+      description: Return the contact annotations found in a clinical note
+      operationId: createTextContactAnnotations
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TextContactAnnotationRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TextContactAnnotationResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /textCovidSymptomAnnotations:
+    post:
+      tags:
+        - TextCovidSymptomAnnotation
+      summary: Annotate COVID symptoms in a clinical note
+      description: Return the COVID symptom annotations found in a clinical note
+      operationId: createTextCovidSymptomAnnotations
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TextCovidSymptomAnnotationRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TextCovidSymptomAnnotationResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
         '500':
@@ -418,6 +518,240 @@ components:
             $ref: '#/components/schemas/TextPersonNameAnnotation'
       required:
         - textPersonNameAnnotations
+    TextPhysicalAddressAnnotationRequest:
+      type: object
+      description: A request to annotate physical addresses in a clinical note
+      properties:
+        note:
+          $ref: '#/components/schemas/Note'
+      required:
+        - note
+    TextPhysicalAddressAnnotation:
+      type: object
+      description: A physical address annotation in a text
+      allOf:
+        - $ref: '#/components/schemas/TextAnnotation'
+        - type: object
+          properties:
+            addressType:
+              description: Type of address information
+              type: string
+              enum:
+                - city
+                - country
+                - department
+                - hospital
+                - organization
+                - other
+                - room
+                - state
+                - street
+                - zip
+          required:
+            - addressType
+      example:
+        start: 42
+        length: 7
+        text: Seattle
+        addressType: city
+        confidence: 95.5
+    TextPhysicalAddressAnnotationResponse:
+      type: object
+      description: The response to a physical addresses annotation request
+      properties:
+        textPhysicalAddressAnnotations:
+          description: A list of physical address annotations
+          type: array
+          items:
+            $ref: '#/components/schemas/TextPhysicalAddressAnnotation'
+      required:
+        - textPhysicalAddressAnnotations
+    TextIdAnnotationRequest:
+      type: object
+      description: A request to annotate IDs in a clinical note
+      properties:
+        note:
+          $ref: '#/components/schemas/Note'
+      required:
+        - note
+      example:
+        note:
+          identifier: awesome-note
+          text: >
+            On 12/26/2020, Ms. Chloe Price met with Dr. Prescott in Seattle. Her
+            SSN is 123-45-6789.
+          type: 'loinc:LP29684-5'
+          patientId: awesome-patient
+    TextIdAnnotation:
+      type: object
+      description: An ID annotation in a text
+      allOf:
+        - $ref: '#/components/schemas/TextAnnotation'
+        - type: object
+          properties:
+            idType:
+              description: Type of ID information
+              type: string
+              enum:
+                - account
+                - bio_id
+                - device
+                - health_plan
+                - id_number
+                - license
+                - medical_record
+                - ssn
+                - vehicle
+                - other
+          required:
+            - idType
+      example:
+        start: 42
+        length: 11
+        text: 203-11-4535
+        idType: ssn
+        confidence: 95.5
+    TextIdAnnotationResponse:
+      type: object
+      description: The response to an ID annotation request
+      properties:
+        textIdAnnotations:
+          description: A list of ID annotations
+          type: array
+          items:
+            $ref: '#/components/schemas/TextIdAnnotation'
+      required:
+        - textIdAnnotations
+    TextContactAnnotationRequest:
+      type: object
+      description: A request to annotate contacts in a clinical note
+      properties:
+        note:
+          $ref: '#/components/schemas/Note'
+      required:
+        - note
+      example:
+        note:
+          identifier: awesome-note
+          text: >
+            On 12/26/2020, Ms. Chloe Price met with Dr. Prescott in Seattle. Her
+            phone number is 203-555-4545.
+          type: 'loinc:LP29684-5'
+          patientId: awesome-patient
+    TextContactAnnotation:
+      type: object
+      description: A contact annotation in a text
+      allOf:
+        - $ref: '#/components/schemas/TextAnnotation'
+        - type: object
+          properties:
+            contactType:
+              description: Type of contact information
+              type: string
+              enum:
+                - email
+                - fax
+                - ip_address
+                - phone
+                - url
+                - other
+          required:
+            - contactType
+      example:
+        start: 42
+        length: 11
+        text: dave@uw.edu
+        contactType: email
+        confidence: 95.5
+    TextContactAnnotationResponse:
+      type: object
+      description: The response to a contact annotation request
+      properties:
+        textContactAnnotations:
+          description: A list of contact annotations
+          type: array
+          items:
+            $ref: '#/components/schemas/TextContactAnnotation'
+      required:
+        - textContactAnnotations
+    TextCovidSymptomAnnotationRequest:
+      type: object
+      description: A request to annotate COVID symptoms in a clinical note
+      properties:
+        note:
+          $ref: '#/components/schemas/Note'
+      required:
+        - note
+      example:
+        note:
+          identifier: awesome-note
+          text: >
+            The patient had a dry cough and fever or chills yesterday. He is
+            also experiencing new loss of taste today and three days ago.
+          type: 'loinc:LP29684-5'
+          patientId: awesome-patient
+    TextCovidSymptomAnnotation:
+      type: object
+      description: A COVID symptom annotation in a text
+      allOf:
+        - $ref: '#/components/schemas/TextAnnotation'
+        - type: object
+          properties:
+            condition:
+              description: |
+                The sign/symptom type according to CDC definition
+              type: string
+              enum:
+                - fever
+                - chill
+                - cough
+                - fatigue
+                - nasal_obstruction
+                - loss_of_appetite
+                - diarrhea
+                - abdominal_pain
+                - nausea
+                - vomiting
+                - sore_throat
+                - headache
+                - myalgia
+                - loss_of_taste
+                - loss_of_smell
+                - dyspnea
+                - chest_pain
+                - delirium
+                - hypersomnia
+                - cyanosis
+            certainty:
+              description: >
+                Whether the annotation is positively or negatively correlated
+                with the presence of COVID
+              type: string
+              enum:
+                - positive
+                - negated
+                - possible
+          required:
+            - condition
+            - certainty
+      example:
+        start: 42
+        length: 9
+        text: dry cough
+        condition: cough
+        certainty: positive
+        confidence: 95.5
+    TextCovidSymptomAnnotationResponse:
+      type: object
+      description: The response to a COVID symptoms annotation request
+      properties:
+        textCovidSymptomAnnotations:
+          description: A list of COVID symptom annotations
+          type: array
+          items:
+            $ref: '#/components/schemas/TextCovidSymptomAnnotation'
+      required:
+        - textCovidSymptomAnnotations
   responses:
     NotFound:
       description: The specified resource was not found
