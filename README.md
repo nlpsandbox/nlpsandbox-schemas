@@ -84,7 +84,7 @@ The table below describes the schemas tags available.
 ## Contributing
 
 Thinking about contributing to this project? Get started by reading our
-[Contributor Guide](CONTRIBUTING.md).
+[contribution guidelines].
 
 ## License
 
@@ -117,3 +117,4 @@ Thinking about contributing to this project? Get started by reading our
 [Docker Hub]: https://hub.docker.com/u/nlpsandbox
 
 [Apache License 2.0]: https://github.com/nlpsandbox/date-annotator-example/blob/develop/LICENSE
+[contribution guidelines]: .github/CONTRIBUTING.md
