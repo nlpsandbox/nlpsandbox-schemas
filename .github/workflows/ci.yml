@@ -252,10 +252,10 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: gh-openapi-docs
-        path: .
+        path: gh-openapi-docs
 
     - name: List all files
-      run: du -a .
+      run: ls -R
 
     # - name: Commit doc changes
     #   run: |
