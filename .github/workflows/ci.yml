@@ -149,7 +149,7 @@ jobs:
     - name: Prepare for archiving openapi docs
       run: |
         # Add specific version
-        TARGET_DIR=gh-openapi-docs/${{ matrix.api }}
+        TARGET_DIR=gh-openapi-docs/${{ matrix.api }}/${{ env.version }}
         mkdir -p ${TARGET_DIR}
         cp -R preview/${{ env.branch }}/* ${TARGET_DIR}
 
@@ -243,7 +243,7 @@ jobs:
     - name: Prepare for archiving openapi docs
       run: |
         # Add specific version
-        TARGET_DIR=gh-openapi-docs/_internal/${{ matrix.api }}
+        TARGET_DIR=gh-openapi-docs/_internal/${{ matrix.api }}/${{ env.version }}
         mkdir -p ${TARGET_DIR}
         cp -R preview/${{ env.branch }}/* ${TARGET_DIR}
 
