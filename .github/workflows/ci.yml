@@ -55,13 +55,19 @@ jobs:
           MAJOR=${MINOR%.*}
           PUSH=true
         fi
-        echo "schemas_branch=${BRANCH}" >> $GITHUB_ENV
-        echo "schemas_version=${VERSION}" >> $GITHUB_ENV
-        echo "schemas_version_major=${MAJOR}" >> $GITHUB_ENV
-        echo "schemas_version_minor=${MINOR}" >> $GITHUB_ENV
-        echo "schemas_created=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> $GITHUB_ENV
-        echo "schemas_push=${PUSH}" >> $GITHUB_ENV
-        cat $GITHUB_ENV
+        echo "branch=${BRANCH}" >> $GITHUB_ENV
+        echo "version=${VERSION}" >> $GITHUB_ENV
+        echo "version_major=${MAJOR}" >> $GITHUB_ENV
+        echo "version_minor=${MINOR}" >> $GITHUB_ENV
+        echo "created=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> $GITHUB_ENV
+        echo "push=${PUSH}" >> $GITHUB_ENV
+        cat $GITHUB_ENV > GITHUB_ENV
+
+    - name: Upload $GITHUB_ENV
+      uses: actions/upload-artifact@v1
+      with:
+        name: GITHUB_ENV
+        path: GITHUB_ENV
 
   lint:
     needs: [configure]
@@ -110,6 +116,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: Restore $GITHUB_ENV
+      uses: actions/download-artifact@v1
+      with:
+        name: GITHUB_ENV
+
     - name: Use Node.js ${{ env.node_version }}
       uses: actions/setup-node@v2.1.5
       with:
@@ -133,9 +144,9 @@ jobs:
 
     - name: Prepare for archiving openapi docs
       run: |
-        TARGET_DIR=gh-openapi-docs/${{ matrix.api }}/${{ env.schemas_version }}
+        TARGET_DIR=gh-openapi-docs/${{ matrix.api }}/${{ env.version }}
         mkdir -p ${TARGET_DIR}
-        cp -R preview/${{ env.schemas_branch }}/* ${TARGET_DIR}
+        cp -R preview/${{ env.branch }}/* ${TARGET_DIR}
 
     - name: Archive openapi docs
       uses: actions/upload-artifact@v2
@@ -147,7 +158,7 @@ jobs:
       run: |
         TARGET_DIR=openapi-individuals/openapi/_internal/individuals
         mkdir -p ${TARGET_DIR}
-        cp gh-openapi-docs/${{ matrix.api }}/${{ env.schemas_version }}/openapi.yaml \
+        cp gh-openapi-docs/${{ matrix.api }}/${{ env.version }}/openapi.yaml \
           ${TARGET_DIR}/${{ matrix.api }}.openapi.yaml
 
     - name: Archive openapi.yaml for openapi-merge
@@ -165,6 +176,11 @@ jobs:
         - "tools"
     steps:
     - uses: actions/checkout@v2
+
+    - name: Restore $GITHUB_ENV
+      uses: actions/download-artifact@v1
+      with:
+        name: GITHUB_ENV
 
     - name: Use Node.js ${{ env.node_version }}
       uses: actions/setup-node@v2.1.5
@@ -199,9 +215,9 @@ jobs:
 
     - name: Prepare for archiving openapi docs
       run: |
-        TARGET_DIR=gh-openapi-docs/_internal/${{ matrix.api }}/${{ env.schemas_version }}
+        TARGET_DIR=gh-openapi-docs/_internal/${{ matrix.api }}/${{ env.version }}
         mkdir -p ${TARGET_DIR}
-        cp -R preview/${{ env.schemas_branch }}/* ${TARGET_DIR}
+        cp -R preview/${{ env.branch }}/* ${TARGET_DIR}
 
     - name: Archive openapi docs
       uses: actions/upload-artifact@v2
@@ -214,6 +230,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+
+    - name: Restore $GITHUB_ENV
+      uses: actions/download-artifact@v1
+      with:
+        name: GITHUB_ENV
 
     - name: Download gh-openapi-docs artifacts
       uses: actions/download-artifact@v2
