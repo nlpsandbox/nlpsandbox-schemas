@@ -55,19 +55,19 @@ jobs:
           MAJOR=${MINOR%.*}
           PUSH=true
         fi
-        echo "branch=${BRANCH}" >> $GITHUB_ENV
-        echo "version=${VERSION}" >> $GITHUB_ENV
-        echo "version_major=${MAJOR}" >> $GITHUB_ENV
-        echo "version_minor=${MINOR}" >> $GITHUB_ENV
-        echo "created=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> $GITHUB_ENV
-        echo "push=${PUSH}" >> $GITHUB_ENV
-        cat $GITHUB_ENV > GITHUB_ENV
+        printf "%s\n" \
+          "branch=${BRANCH}" \
+          "version=${VERSION}" \
+          "version_major=${MAJOR}" \
+          "version_minor=${MINOR}" \
+          "created=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" \
+          "push=${PUSH}" | tee -a .GITHUB_ENV
 
-    - name: Upload GITHUB_ENV
+    - name: Upload .GITHUB_ENV
       uses: actions/upload-artifact@v2
       with:
         name: GITHUB_ENV
-        path: GITHUB_ENV
+        path: .GITHUB_ENV
 
   lint:
     needs: [configure]
@@ -116,17 +116,14 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Download GITHUB_ENV
+    - name: Download .GITHUB_ENV
       uses: actions/download-artifact@v2
       with:
         name: GITHUB_ENV
         path: .
 
-    - name: Display structure of downloaded files
-      run: ls -R
-
     - name: Restore $GITHUB_ENV
-      run: export $(grep -v '^#' GITHUB_ENV | xargs -d '\n')
+      run: cat .GITHUB_ENV >> $GITHUB_ENV
 
     - name: Use Node.js ${{ env.node_version }}
       uses: actions/setup-node@v2.1.5
@@ -184,13 +181,14 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Download GITHUB_ENV
+    - name: Download .GITHUB_ENV
       uses: actions/download-artifact@v2
       with:
         name: GITHUB_ENV
+        path: .
 
     - name: Restore $GITHUB_ENV
-      run: export $(grep -v '^#' GITHUB_ENV | xargs -d '\n')
+      run: cat .GITHUB_ENV >> $GITHUB_ENV
 
     - name: Use Node.js ${{ env.node_version }}
       uses: actions/setup-node@v2.1.5
@@ -241,13 +239,14 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Download GITHUB_ENV
+    - name: Download .GITHUB_ENV
       uses: actions/download-artifact@v2
       with:
         name: GITHUB_ENV
+        path: .
 
     - name: Restore $GITHUB_ENV
-      run: export $(grep -v '^#' GITHUB_ENV | xargs -d '\n')
+      run: cat .GITHUB_ENV >> $GITHUB_ENV
 
     - name: Download gh-openapi-docs artifacts
       uses: actions/download-artifact@v2
