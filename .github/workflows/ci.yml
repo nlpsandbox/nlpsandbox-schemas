@@ -148,9 +148,28 @@ jobs:
 
     - name: Prepare for archiving openapi docs
       run: |
-        TARGET_DIR=gh-openapi-docs/${{ matrix.api }}/${{ env.version }}
+        # Add specific version
+        TARGET_DIR=gh-openapi-docs/${{ matrix.api }}
         mkdir -p ${TARGET_DIR}
         cp -R preview/${{ env.branch }}/* ${TARGET_DIR}
+
+        # latest, major, and minor versions
+        if [ ! -z "${{ env.version_major }}" ]; then
+          # Update latest version
+          TARGET_DIR=gh-openapi-docs/${{ matrix.api }}/latest
+          mkdir -p ${TARGET_DIR}
+          cp -R preview/${{ env.branch }}/* ${TARGET_DIR}
+
+          # Update major version (e.g. "1.2.3" => "1")
+          TARGET_DIR=gh-openapi-docs/${{ matrix.api }}/${{ env.version_major }}
+          mkdir -p ${TARGET_DIR}
+          cp -R preview/${{ env.branch }}/* ${TARGET_DIR}
+
+          # Update minor version (e.g. "1.2.3" => "1.2")
+          TARGET_DIR=gh-openapi-docs/${{ matrix.api }}/${{ env.version_minor }}
+          mkdir -p ${TARGET_DIR}
+          cp -R preview/${{ env.branch }}/* ${TARGET_DIR}
+        fi
 
     - name: Archive openapi docs
       uses: actions/upload-artifact@v2
@@ -162,7 +181,7 @@ jobs:
       run: |
         TARGET_DIR=openapi-individuals/openapi/_internal/individuals
         mkdir -p ${TARGET_DIR}
-        cp gh-openapi-docs/${{ matrix.api }}/${{ env.version }}/openapi.yaml \
+        cp gh-openapi-docs/${{ matrix.api }}/openapi.yaml \
           ${TARGET_DIR}/${{ matrix.api }}.openapi.yaml
 
     - name: Archive openapi.yaml for openapi-merge
@@ -223,9 +242,28 @@ jobs:
 
     - name: Prepare for archiving openapi docs
       run: |
-        TARGET_DIR=gh-openapi-docs/_internal/${{ matrix.api }}/${{ env.version }}
+        # Add specific version
+        TARGET_DIR=gh-openapi-docs/_internal/${{ matrix.api }}
         mkdir -p ${TARGET_DIR}
         cp -R preview/${{ env.branch }}/* ${TARGET_DIR}
+
+        # latest, major, and minor versions
+        if [ ! -z "${{ env.version_major }}" ]; then
+          # Update latest version
+          TARGET_DIR=gh-openapi-docs/_internal/${{ matrix.api }}/latest
+          mkdir -p ${TARGET_DIR}
+          cp -R preview/${{ env.branch }}/* ${TARGET_DIR}
+
+          # Update major version (e.g. "1.2.3" => "1")
+          TARGET_DIR=gh-openapi-docs/_internal/${{ matrix.api }}/${{ env.version_major }}
+          mkdir -p ${TARGET_DIR}
+          cp -R preview/${{ env.branch }}/* ${TARGET_DIR}
+
+          # Update minor version (e.g. "1.2.3" => "1.2")
+          TARGET_DIR=gh-openapi-docs/_internal/${{ matrix.api }}/${{ env.version_minor }}
+          mkdir -p ${TARGET_DIR}
+          cp -R preview/${{ env.branch }}/* ${TARGET_DIR}
+        fi
 
     - name: Archive openapi docs
       uses: actions/upload-artifact@v2
@@ -257,47 +295,26 @@ jobs:
     - name: List all files
       run: ls -R
 
-    # - name: Commit doc changes
-    #   run: |
-    #     git clone ${{ env.clone_url }} \
-    #       --branch gh-pages --single-branch gh-pages
+    - name: Commit doc changes
+      run: |
+        git clone ${{ env.clone_url }} \
+          --branch gh-pages --single-branch gh-pages
 
-    #     # Update gh-pages: version specified
-    #     TARGET_DIR=gh-pages/${{ matrix.api }}/${{ steps.prep.outputs.version }}
-    #     mkdir -p ${TARGET_DIR}
-    #     cp -R gh-openapi-docs/${{ steps.prep.outputs.branch }}/* ${TARGET_DIR}
+        cp -R gh-openapi-docs/* gh-pages/.
 
-    #     # Update gh-pages: latest, major, and minor versions
-    #     if [ ! -z "${{ steps.prep.outputs.version_major }}" ]; then
-    #       # Update major version (e.g. "1.2.3" => "1")
-    #       TARGET_DIR=gh-pages/${{ matrix.api }}/latest
-    #       mkdir -p ${TARGET_DIR}
-    #       cp -R gh-openapi-docs/${{ steps.prep.outputs.branch }}/* ${TARGET_DIR}
+        cd gh-pages
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add .
+        git commit -m "Update documentation" -a || true
+        # The above command will fail if no changes were present, so we ignore
+        # that.
 
-    #       # Update major version (e.g. "1.2.3" => "1")
-    #       TARGET_DIR=gh-pages/${{ matrix.api }}/${{ steps.prep.outputs.version_major }}
-    #       mkdir -p ${TARGET_DIR}
-    #       cp -R gh-openapi-docs/${{ steps.prep.outputs.branch }}/* ${TARGET_DIR}
-
-    #       # Update minor version (e.g. "1.2.3" => "1.2")
-    #       TARGET_DIR=gh-pages/${{ matrix.api }}/${{ steps.prep.outputs.version_minor }}
-    #       mkdir -p ${TARGET_DIR}
-    #       cp -R gh-openapi-docs/${{ steps.prep.outputs.branch }}/* ${TARGET_DIR}
-    #     fi
-
-    #     cd gh-pages
-    #     git config --local user.email "action@github.com"
-    #     git config --local user.name "GitHub Action"
-    #     git add .
-    #     git commit -m "Update documentation" -a || true
-    #     # The above command will fail if no changes were present, so we ignore
-    #     # that.
-
-    # - name: Push changes
-    #   if: steps.prep.outputs.push == 'true'
-    #   uses: ad-m/github-push-action@master
-    #   with:
-    #     branch: gh-pages
-    #     directory: gh-pages
-    #     github_token: ${{ secrets.GITHUB_TOKEN }}
-    #     force: true
+    - name: Push changes
+      if: steps.prep.outputs.push == 'true'
+      uses: ad-m/github-push-action@master
+      with:
+        branch: gh-pages
+        directory: gh-pages
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        force: true
