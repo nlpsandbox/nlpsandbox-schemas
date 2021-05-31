@@ -61,8 +61,9 @@ jobs:
         echo "schemas_version_minor=${MINOR}" >> $GITHUB_ENV
         echo "schemas_created=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> $GITHUB_ENV
         echo "schemas_push=${PUSH}" >> $GITHUB_ENV
+        cat $GITHUB_ENV
 
-  lint-individuals:
+  lint:
     needs: [configure]
     runs-on: ubuntu-latest
     strategy:
@@ -92,8 +93,8 @@ jobs:
         npm run lint --api=${{ matrix.api }}
         npm run validate --api=${{ matrix.api }}
 
-  build-individuals:
-    needs: [lint-individuals]
+  build:
+    needs: [lint]
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -156,7 +157,7 @@ jobs:
         path: openapi-individuals
 
   build-aggregates:
-    needs: [build-individuals]
+    needs: [build]
     runs-on: ubuntu-latest
     strategy:
       matrix:
