@@ -66,7 +66,7 @@ jobs:
     - name: Upload GITHUB_ENV
       uses: actions/upload-artifact@v2
       with:
-        name: GITHUB_ENV2
+        name: GITHUB_ENV
         path: GITHUB_ENV
 
   lint:
@@ -119,8 +119,8 @@ jobs:
     - name: Download GITHUB_ENV
       uses: actions/download-artifact@v2
       with:
-        name: GITHUB_ENV2
-        path: GITHUB_ENV
+        name: GITHUB_ENV
+        path: .
 
     - name: Display structure of downloaded files
       run: ls -R
