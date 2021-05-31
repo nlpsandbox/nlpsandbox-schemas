@@ -308,7 +308,7 @@ jobs:
         # that.
 
     - name: Push changes
-      if: steps.prep.outputs.push == 'true'
+      if: env.push == 'true'
       uses: ad-m/github-push-action@master
       with:
         branch: gh-pages
