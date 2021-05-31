@@ -196,7 +196,7 @@ jobs:
     strategy:
       matrix:
         api:
-        - "tools"
+        - "tool"
     steps:
     - uses: actions/checkout@v2
 

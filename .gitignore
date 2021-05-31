@@ -1,9 +1,8 @@
 .idea
 dist
-node_modules
-openapi/_internal/individuals
-openapi/_internal/**/base-combined.openapi.yaml
-openapi/_internal/**/openapi.yaml
-
 dist.yaml
+node_modules
+/openapi/_internal/individuals
+/openapi/_internal/**/base-combined.openapi.yaml
+/openapi/_internal/**/openapi.yaml
 /openapi.yaml
