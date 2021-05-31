@@ -181,7 +181,7 @@ jobs:
       run: |
         TARGET_DIR=openapi-individuals/openapi/_internal/individuals
         mkdir -p ${TARGET_DIR}
-        cp gh-openapi-docs/${{ matrix.api }}/openapi.yaml \
+        cp gh-openapi-docs/${{ matrix.api }}/${{ env.version }}/openapi.yaml \
           ${TARGET_DIR}/${{ matrix.api }}.openapi.yaml
 
     - name: Archive openapi.yaml for openapi-merge
