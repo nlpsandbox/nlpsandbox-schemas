@@ -211,7 +211,7 @@ jobs:
       run: |
         printf "%s\n" \
         '{' \
-        '"apiSpecPath": "openapi/_internal/individuals/${{ matrix.api }}/openapi.yaml",' \
+        '"apiSpecPath": "openapi/_internal/${{ matrix.api }}/openapi.yaml",' \
         '"docsRoot": "docs",' \
         '"defaultBranch": "",' \
         '"branchPathBase": "preview"' \
