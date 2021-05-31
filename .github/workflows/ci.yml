@@ -19,51 +19,10 @@ env:
   default_branch: develop
 
 jobs:
-  lint:
+  configure:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        api:
-        - "data-node"
-        - "date-annotator"
-        - "person-name-annotator"
-        - "phi-deidentifier"
-        - "physical-address-annotator"
-        - "covid-symptom-annotator"
-        - "contact-annotator"
-        - "id-annotator"
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ env.node_version }}
-      uses: actions/setup-node@v2.1.5
-      with:
-        node-version: ${{ env.node_version }}
-    - run: npm ci
-    - name: Lint openapi specifications
-      run: |
-        npm run lint --api=${{ matrix.api }}
-        npm run validate --api=${{ matrix.api }}
-
-  build-and-publish:
-    needs: [lint]
-    runs-on: ubuntu-latest
-    strategy:
-      # Need to process one api at a time to prevent race condition
-      max-parallel: 1
-      matrix:
-        api:
-        - "data-node"
-        - "date-annotator"
-        - "person-name-annotator"
-        - "phi-deidentifier"
-        - "physical-address-annotator"
-        - "covid-symptom-annotator"
-        - "contact-annotator"
-        - "id-annotator"
-    steps:
-    - uses: actions/checkout@v2
-    - name: Prepare
-      id: prep
+    - name: Create configuration
       run: |
         # gh-openapi-docs uses the branch name "undefined" when it does not find
         # the name of the current branch
@@ -89,23 +48,91 @@ jobs:
           fi
         elif [[ $GITHUB_REF == refs/pull/* ]]; then
           VERSION=pr-${{ github.event.number }}
-          PUSH=false
+          PUSH=true
         fi
         if [[ $VERSION =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
           MINOR=${VERSION%.*}
           MAJOR=${MINOR%.*}
           PUSH=true
         fi
-        echo ::set-output name=branch::${BRANCH}
-        echo ::set-output name=version::${VERSION}
-        echo ::set-output name=version_major::${MAJOR}
-        echo ::set-output name=version_minor::${MINOR}
-        echo ::set-output name=created::$(date -u +'%Y-%m-%dT%H:%M:%SZ')
-        echo ::set-output name=push::${PUSH}
+        printf "%s\n" \
+          "branch=${BRANCH}" \
+          "version=${VERSION}" \
+          "version_major=${MAJOR}" \
+          "version_minor=${MINOR}" \
+          "created=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" \
+          "push=${PUSH}" | tee -a .GITHUB_ENV
+
+    - name: Upload .GITHUB_ENV
+      uses: actions/upload-artifact@v2
+      with:
+        name: GITHUB_ENV
+        path: .GITHUB_ENV
+
+  lint:
+    needs: [configure]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        api:
+        - "data-node"
+        - "date-annotator"
+        - "person-name-annotator"
+        - "phi-deidentifier"
+        - "physical-address-annotator"
+        - "covid-symptom-annotator"
+        - "contact-annotator"
+        - "id-annotator"
+    steps:
+    - uses: actions/checkout@v2
+
     - name: Use Node.js ${{ env.node_version }}
       uses: actions/setup-node@v2.1.5
       with:
         node-version: ${{ env.node_version }}
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Lint openapi specifications
+      run: |
+        npm run lint --api=${{ matrix.api }}
+        npm run validate --api=${{ matrix.api }}
+
+  build:
+    needs: [lint]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        api:
+        - "data-node"
+        - "date-annotator"
+        - "person-name-annotator"
+        - "phi-deidentifier"
+        - "physical-address-annotator"
+        - "covid-symptom-annotator"
+        - "contact-annotator"
+        - "id-annotator"
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Download .GITHUB_ENV
+      uses: actions/download-artifact@v2
+      with:
+        name: GITHUB_ENV
+        path: .
+
+    - name: Restore $GITHUB_ENV
+      run: cat .GITHUB_ENV >> $GITHUB_ENV
+
+    - name: Use Node.js ${{ env.node_version }}
+      uses: actions/setup-node@v2.1.5
+      with:
+        node-version: ${{ env.node_version }}
+
+    - name: Install dependencies
+      run: npm ci
+
     - name: Create .spec-docs.json
       run: |
         printf "%s\n" \
@@ -115,37 +142,168 @@ jobs:
         '"defaultBranch": "",' \
         '"branchPathBase": "preview"' \
         '}' | tee -a .spec-docs.json >/dev/null
-        cat .spec-docs.json
-    - run: npm ci
+
     - name: Create openapi docs
       run: npx gh-openapi-docs-ts
+
+    - name: Prepare for archiving openapi docs
+      run: |
+        # Add specific version
+        TARGET_DIR=gh-openapi-docs/${{ matrix.api }}/${{ env.version }}
+        mkdir -p ${TARGET_DIR}
+        cp -R preview/${{ env.branch }}/* ${TARGET_DIR}
+
+        # latest, major, and minor versions
+        if [ ! -z "${{ env.version_major }}" ]; then
+          # Update latest version
+          TARGET_DIR=gh-openapi-docs/${{ matrix.api }}/latest
+          mkdir -p ${TARGET_DIR}
+          cp -R preview/${{ env.branch }}/* ${TARGET_DIR}
+
+          # Update major version (e.g. "1.2.3" => "1")
+          TARGET_DIR=gh-openapi-docs/${{ matrix.api }}/${{ env.version_major }}
+          mkdir -p ${TARGET_DIR}
+          cp -R preview/${{ env.branch }}/* ${TARGET_DIR}
+
+          # Update minor version (e.g. "1.2.3" => "1.2")
+          TARGET_DIR=gh-openapi-docs/${{ matrix.api }}/${{ env.version_minor }}
+          mkdir -p ${TARGET_DIR}
+          cp -R preview/${{ env.branch }}/* ${TARGET_DIR}
+        fi
+
+    - name: Archive openapi docs
+      uses: actions/upload-artifact@v2
+      with:
+        name: gh-openapi-docs
+        path: gh-openapi-docs
+
+    - name: Add openapi.yaml to openapi-merge individuals
+      run: |
+        TARGET_DIR=openapi-individuals/openapi/_internal/individuals
+        mkdir -p ${TARGET_DIR}
+        cp gh-openapi-docs/${{ matrix.api }}/${{ env.version }}/openapi.yaml \
+          ${TARGET_DIR}/${{ matrix.api }}.openapi.yaml
+
+    - name: Archive openapi.yaml for openapi-merge
+      uses: actions/upload-artifact@v2
+      with:
+        name: openapi-individuals
+        path: openapi-individuals
+
+  build-aggregates:
+    needs: [build]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        api:
+        - "tool"
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Download .GITHUB_ENV
+      uses: actions/download-artifact@v2
+      with:
+        name: GITHUB_ENV
+        path: .
+
+    - name: Restore $GITHUB_ENV
+      run: cat .GITHUB_ENV >> $GITHUB_ENV
+
+    - name: Use Node.js ${{ env.node_version }}
+      uses: actions/setup-node@v2.1.5
+      with:
+        node-version: ${{ env.node_version }}
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Download openapi-merge individual openapis
+      uses: actions/download-artifact@v2
+      with:
+        name: openapi-individuals
+        path: .
+
+    - name: Build base openapi
+      run: npm run build:internal:base --api=${{ matrix.api }}
+
+    - name: Merge individual openapis
+      run: npm run merge:internal --api=${{ matrix.api }}
+
+    - name: Validate merged openapi
+      run: npm run validate:internal --api=${{ matrix.api }}
+
+    - name: Create .spec-docs.json
+      run: |
+        printf "%s\n" \
+        '{' \
+        '"apiSpecPath": "openapi/_internal/${{ matrix.api }}/openapi.yaml",' \
+        '"docsRoot": "docs",' \
+        '"defaultBranch": "",' \
+        '"branchPathBase": "preview"' \
+        '}' | tee -a .spec-docs.json >/dev/null
+        cat .spec-docs.json
+
+    - name: Create openapi docs
+      run: npx gh-openapi-docs-ts
+
+    - name: Prepare for archiving openapi docs
+      run: |
+        # Add specific version
+        TARGET_DIR=gh-openapi-docs/_internal/${{ matrix.api }}/${{ env.version }}
+        mkdir -p ${TARGET_DIR}
+        cp -R preview/${{ env.branch }}/* ${TARGET_DIR}
+
+        # latest, major, and minor versions
+        if [ ! -z "${{ env.version_major }}" ]; then
+          # Update latest version
+          TARGET_DIR=gh-openapi-docs/_internal/${{ matrix.api }}/latest
+          mkdir -p ${TARGET_DIR}
+          cp -R preview/${{ env.branch }}/* ${TARGET_DIR}
+
+          # Update major version (e.g. "1.2.3" => "1")
+          TARGET_DIR=gh-openapi-docs/_internal/${{ matrix.api }}/${{ env.version_major }}
+          mkdir -p ${TARGET_DIR}
+          cp -R preview/${{ env.branch }}/* ${TARGET_DIR}
+
+          # Update minor version (e.g. "1.2.3" => "1.2")
+          TARGET_DIR=gh-openapi-docs/_internal/${{ matrix.api }}/${{ env.version_minor }}
+          mkdir -p ${TARGET_DIR}
+          cp -R preview/${{ env.branch }}/* ${TARGET_DIR}
+        fi
+
+    - name: Archive openapi docs
+      uses: actions/upload-artifact@v2
+      with:
+        name: gh-openapi-docs
+        path: gh-openapi-docs
+
+  publish:
+    needs: [build-aggregates]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Download .GITHUB_ENV
+      uses: actions/download-artifact@v2
+      with:
+        name: GITHUB_ENV
+        path: .
+
+    - name: Restore $GITHUB_ENV
+      run: cat .GITHUB_ENV >> $GITHUB_ENV
+
+    - name: Download gh-openapi-docs artifacts
+      uses: actions/download-artifact@v2
+      with:
+        name: gh-openapi-docs
+        path: gh-openapi-docs
+
     - name: Commit doc changes
       run: |
         git clone ${{ env.clone_url }} \
           --branch gh-pages --single-branch gh-pages
 
-        # Update gh-pages: version specified
-        TARGET_DIR=gh-pages/${{ matrix.api }}/${{ steps.prep.outputs.version }}
-        mkdir -p ${TARGET_DIR}
-        cp -R preview/${{ steps.prep.outputs.branch }}/* ${TARGET_DIR}
-
-        # Update gh-pages: latest, major, and minor versions
-        if [ ! -z "${{ steps.prep.outputs.version_major }}" ]; then
-          # Update major version (e.g. "1.2.3" => "1")
-          TARGET_DIR=gh-pages/${{ matrix.api }}/latest
-          mkdir -p ${TARGET_DIR}
-          cp -R preview/${{ steps.prep.outputs.branch }}/* ${TARGET_DIR}
-
-          # Update major version (e.g. "1.2.3" => "1")
-          TARGET_DIR=gh-pages/${{ matrix.api }}/${{ steps.prep.outputs.version_major }}
-          mkdir -p ${TARGET_DIR}
-          cp -R preview/${{ steps.prep.outputs.branch }}/* ${TARGET_DIR}
-
-          # Update minor version (e.g. "1.2.3" => "1.2")
-          TARGET_DIR=gh-pages/${{ matrix.api }}/${{ steps.prep.outputs.version_minor }}
-          mkdir -p ${TARGET_DIR}
-          cp -R preview/${{ steps.prep.outputs.branch }}/* ${TARGET_DIR}
-        fi
+        cp -R gh-openapi-docs/* gh-pages/.
 
         cd gh-pages
         git config --local user.email "action@github.com"
@@ -154,8 +312,9 @@ jobs:
         git commit -m "Update documentation" -a || true
         # The above command will fail if no changes were present, so we ignore
         # that.
+
     - name: Push changes
-      if: steps.prep.outputs.push == 'true'
+      if: env.push == 'true'
       uses: ad-m/github-push-action@master
       with:
         branch: gh-pages
