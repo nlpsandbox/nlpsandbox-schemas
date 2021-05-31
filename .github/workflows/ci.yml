@@ -229,6 +229,9 @@ jobs:
     - name: Merge individual openapis
       run: npm run merge:internal --api=${{ matrix.api }}
 
+    - name: Validate merged openapi
+      run: npm run lint:internal --api=${{ matrix.api }}
+
     - name: Create .spec-docs.json
       run: |
         printf "%s\n" \
