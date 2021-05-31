@@ -10,24 +10,24 @@ inputs:
     excludeTags:
     - Tool
     - HealthCheck
-# - inputFile: ../individuals/physical-address-annotator.openapi.yaml
-#   operationSelection:
-#     excludeTags:
-#     - Tool
-#     - HealthCheck
-# - inputFile: ../individuals/id-annotator.openapi.yaml
-#   operationSelection:
-#     excludeTags:
-#     - Tool
-#     - HealthCheck
-# - inputFile: ../individuals/contact-annotator.openapi.yaml
-#   operationSelection:
-#     excludeTags:
-#     - Tool
-#     - HealthCheck
-# - inputFile: ../individuals/covid-symptom-annotator.openapi.yaml
-#   operationSelection:
-#     excludeTags:
-#     - Tool
-#     - HealthCheck
+- inputFile: ../individuals/physical-address-annotator.openapi.yaml
+  operationSelection:
+    excludeTags:
+    - Tool
+    - HealthCheck
+- inputFile: ../individuals/id-annotator.openapi.yaml
+  operationSelection:
+    excludeTags:
+    - Tool
+    - HealthCheck
+- inputFile: ../individuals/contact-annotator.openapi.yaml
+  operationSelection:
+    excludeTags:
+    - Tool
+    - HealthCheck
+- inputFile: ../individuals/covid-symptom-annotator.openapi.yaml
+  operationSelection:
+    excludeTags:
+    - Tool
+    - HealthCheck
 output: openapi.yaml

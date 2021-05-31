@@ -230,7 +230,7 @@ jobs:
       run: npm run merge:internal --api=${{ matrix.api }}
 
     - name: Validate merged openapi
-      run: npm run lint:internal --api=${{ matrix.api }}
+      run: npm run validate:internal --api=${{ matrix.api }}
 
     - name: Create .spec-docs.json
       run: |
