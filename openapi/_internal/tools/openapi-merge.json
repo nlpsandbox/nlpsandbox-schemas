@@ -22,5 +22,5 @@
         }
       }
     ],
-    "output": "tools.openapi.yaml"
+    "output": "openapi.yaml"
   }
