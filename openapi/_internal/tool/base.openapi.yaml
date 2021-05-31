@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   version: 1.1.1
-  title: NLP Sandbox All Tools API
+  title: NLP Sandbox Tool API
   contact:
     name: NLP Sandbox Team
     email: team@nlpsandbox.io
@@ -20,8 +20,8 @@ tags:
     description: Operations about this tool
 paths:
   /healthCheck:
-    $ref: ../commons/paths/healthCheck.yaml
+    $ref: ../../commons/paths/healthCheck.yaml
   /tool:
-    $ref: ../commons/paths/tool.yaml
+    $ref: ../../commons/paths/tool.yaml
   /tool/dependencies:
-    $ref: ../commons/paths/dependencies.yaml
+    $ref: ../../commons/paths/dependencies.yaml

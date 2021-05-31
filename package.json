@@ -10,10 +10,11 @@
   "scripts": {
     "start": "openapi preview-docs ./openapi/${npm_config_api}/openapi.yaml",
     "build": "openapi bundle -o openapi.yaml ./openapi/${npm_config_api}/openapi.yaml",
+    "build:internal:base": "openapi bundle -o ./openapi/_internal/${npm_config_api}/base-combined.openapi.yaml ./openapi/_internal/${npm_config_api}/base.openapi.yaml",
     "lint": "openapi lint ./openapi/${npm_config_api}/openapi.yaml",
     "lint:all": "openapi lint openapi/*/openapi.yaml",
     "validate": "npm run build --api=${npm_config_api} && ./node_modules/.bin/lint-openapi openapi.yaml",
     "lint:ibm": "openapi bundle -o openapi.yaml $npm_config_entrypoint && ./node_modules/.bin/lint-openapi openapi.yaml",
-    "merge:openapi:tools": "./node_modules/.bin/openapi-merge-cli --config openapi/_internal/tools/openapi-merge.json"
+    "merge:internal": "openapi-merge-cli --config openapi/_internal/${npm_config_api}/openapi-merge.yaml"
   }
 }

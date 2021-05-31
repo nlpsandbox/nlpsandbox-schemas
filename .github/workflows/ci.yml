@@ -223,8 +223,11 @@ jobs:
         name: openapi-individuals
         path: .
 
+    - name: Build base openapi
+      run: npm run build:internal:base --api=${{ matrix.api }}
+
     - name: Merge individual openapis
-      run: npm run merge:openapi:${{ matrix.api }}
+      run: npm run merge:internal --api=${{ matrix.api }}
 
     - name: Create .spec-docs.json
       run: |
