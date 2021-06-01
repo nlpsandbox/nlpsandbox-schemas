@@ -148,7 +148,7 @@ jobs:
         mkdir -p ${TARGET_DIR}
         cp -R preview/${{ env.branch }}/* ${TARGET_DIR}
 
-        # latest, major, and minor versions
+        # Add latest, major, and minor versions
         if [ ! -z "${{ env.version_major }}" ]; then
           # Update latest version
           TARGET_DIR=gh-openapi-docs/${{ matrix.api }}/latest
@@ -162,6 +162,13 @@ jobs:
 
           # Update minor version (e.g. "1.2.3" => "1.2")
           TARGET_DIR=gh-openapi-docs/${{ matrix.api }}/${{ env.version_minor }}
+          mkdir -p ${TARGET_DIR}
+          cp -R preview/${{ env.branch }}/* ${TARGET_DIR}
+        fi
+
+        # Add edge-<sha>
+        if [ "${{ env.version }}" == "edge" ]; then
+          TARGET_DIR=gh-openapi-docs/${{ matrix.api }}/edge-${{ github.sha }}
           mkdir -p ${TARGET_DIR}
           cp -R preview/${{ env.branch }}/* ${TARGET_DIR}
         fi
