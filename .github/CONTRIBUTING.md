@@ -1,4 +1,4 @@
-# Contributing
+# Contributing to NLP Sandbox Schemas
 
 A big welcome and thank you for considering contributing to this project.
 
@@ -106,9 +106,9 @@ of the APIs defined in this repository:
 
     npm run start --api=<name>
 
-where `<name>` is the name of one of the API folders included in
-[openapi/](openapi/) for which you want to see the HTML documentation. The HTML
-page will be available at http://localhost:8080.
+where `<name>` is the name of one of the API folders included in [openapi/] for
+which you want to see the HTML documentation. The HTML page will be available at
+http://localhost:8080.
 
 ### Testing
 
@@ -118,8 +118,8 @@ plan to submit passes with the tests defined for this project:
     npm run lint:all
     npm run validate --api=<name>
 
-where `<name>` is the name of the API folder in [openapi/](openapi/) that you
-want to test.
+where `<name>` is the name of the API folder in [openapi/] that you want to
+test.
 
 ## Release Procedure
 
@@ -135,10 +135,11 @@ channel that best matches the topic of your request.
 
 <!-- Links -->
 
-[Code of Conduct]: https://github.com/auth0/open-source-template/blob/master/CODE-OF-CONDUCT.md
+[Code of Conduct]: ./CODE-OF-CONDUCT.md
 [upstream remote]: https://help.github.com/en/articles/configuring-a-remote-for-a-fork
 [reaction]: https://github.blog/2016-03-10-add-reactions-to-pull-requests-issues-and-comments/
-[docs site]: https://github.com/nlpsandbox/nlpsandbox-website-synapse
+[docs site]: https://nlpsandbox.io
 [Forking Workflow]: https://www.atlassian.com/git/tutorials/comparing-workflows/forking-workflow
-[package.json]: package.json
-[NLP Sandbox Discord server]: https://discord.gg/Zb4ymtF
+[package.json]: ../package.json
+[openapi/]: ../openapi/
+[NLP Sandbox Discord server]: https://nlpsandbox.io/discord

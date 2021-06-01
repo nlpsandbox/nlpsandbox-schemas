@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.1.1
+  version: 1.1.2
   title: NLP Sandbox Data Node API
   contact:
     name: NLP Sandbox Team

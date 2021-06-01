@@ -1,0 +1,38 @@
+inputs:
+- inputFile: base-combined.openapi.yaml
+- inputFile: ../individuals/date-annotator.openapi.yaml
+  operationSelection:
+    excludeTags:
+    - Tool
+    - HealthCheck
+- inputFile: ../individuals/person-name-annotator.openapi.yaml
+  operationSelection:
+    excludeTags:
+    - Tool
+    - HealthCheck
+- inputFile: ../individuals/physical-address-annotator.openapi.yaml
+  operationSelection:
+    excludeTags:
+    - Tool
+    - HealthCheck
+- inputFile: ../individuals/id-annotator.openapi.yaml
+  operationSelection:
+    excludeTags:
+    - Tool
+    - HealthCheck
+- inputFile: ../individuals/contact-annotator.openapi.yaml
+  operationSelection:
+    excludeTags:
+    - Tool
+    - HealthCheck
+- inputFile: ../individuals/phi-deidentifier.openapi.yaml
+  operationSelection:
+    excludeTags:
+    - Tool
+    - HealthCheck
+- inputFile: ../individuals/covid-symptom-annotator.openapi.yaml
+  operationSelection:
+    excludeTags:
+    - Tool
+    - HealthCheck
+output: openapi.yaml

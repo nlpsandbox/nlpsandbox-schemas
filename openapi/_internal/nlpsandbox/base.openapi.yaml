@@ -1,0 +1,20 @@
+openapi: 3.0.3
+info:
+  version: 1.1.1
+  title: NLP Sandbox API
+  contact:
+    name: NLP Sandbox Team
+    email: team@nlpsandbox.io
+    url: https://nlpsandbox.io
+  license:
+    name: Apache 2.0
+    url: https://github.com/nlpsandbox/nlpsandbox-schemas/blob/develop/LICENSE
+  x-logo:
+    url: https://nlpsandbox.github.io/nlpsandbox-schemas/logo.png
+  description: NLP Sandbox REST API
+tags:
+  - name: HealthCheck
+    description: Operations about health checks
+paths:
+  /healthCheck:
+    $ref: ../../commons/paths/healthCheck.yaml
