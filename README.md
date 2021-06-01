@@ -19,7 +19,7 @@ This repository contains the OpenAPI specifications of the NLP Sandbox tools and
 services. Visit [NLPSandbox.io] for more information on how to develop and
 benchmark NLP Sandbox tools.
 
-## NLP Sandbox tools
+## NLP Sandbox Tools
 
 The OpenAPI specifications of the NLP Sandbox tools listed below are available
 in JSON and YAML formats. These specifications can be given as input to the
@@ -43,7 +43,7 @@ API Name                     | Type                                    | Version
 -----------------------------|-----------------------------------------|--------
 [COVID Symptom Annotator]    | `nlpsandbox:covid-symptom-annotator`    | 1.1.2
 
-## NLP Sandbox services
+## NLP Sandbox Services
 
 API Name                | Type                                    | Version
 ------------------------|-----------------------------------------|--------
