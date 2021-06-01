@@ -25,6 +25,11 @@ inputs:
     excludeTags:
     - Tool
     - HealthCheck
+- inputFile: ../individuals/phi-deidentifier.openapi.yaml
+  operationSelection:
+    excludeTags:
+    - Tool
+    - HealthCheck
 - inputFile: ../individuals/covid-symptom-annotator.openapi.yaml
   operationSelection:
     excludeTags:
