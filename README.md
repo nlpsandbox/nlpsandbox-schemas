@@ -87,11 +87,15 @@ This repository uses [semantic versioning] to track the releases of the NLP
 Sandbox schemas. This repository uses "non-moving" GitHub tags, that is, a tag
 will always point to the same git commit once it has been created.
 
-### Schemas tags
+### Schemas / GitHub Pages tags
 
 The artifact published by this repository are OpenAPI schemas and documentation
 published to GitHub Pages. The versions of the schemas are aligned with the
-GitHub tags of this repository.
+GitHub tags of this repository. For example:
+
+- https://nlpsandbox.github.io/nlpsandbox-schemas/date-annotator/latest/docs/
+- https://nlpsandbox.github.io/nlpsandbox-schemas/date-annotator/latest/openapi.yaml
+- https://nlpsandbox.github.io/nlpsandbox-schemas/date-annotator/latest/openapi.json
 
 The table below describes the schemas tags available.
 
