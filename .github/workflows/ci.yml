@@ -197,6 +197,7 @@ jobs:
       matrix:
         api:
         - "tool"
+        - "nlpsandbox"
     steps:
     - uses: actions/checkout@v2
 

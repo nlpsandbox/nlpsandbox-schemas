@@ -35,4 +35,8 @@ inputs:
     excludeTags:
     - Tool
     - HealthCheck
+- inputFile: ../individuals/data-node.openapi.yaml
+  operationSelection:
+    excludeTags:
+    - HealthCheck
 output: openapi.yaml
