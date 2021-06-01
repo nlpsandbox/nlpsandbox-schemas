@@ -19,6 +19,10 @@ This repository contains the OpenAPI specifications of the NLP Sandbox tools and
 services. Visit [NLPSandbox.io] for more information on how to develop and
 benchmark NLP Sandbox tools.
 
+### Requirements
+
+- [Node] >=14
+
 ## NLP Sandbox Tools
 
 The OpenAPI specifications of the NLP Sandbox tools listed below are available
@@ -139,5 +143,6 @@ Thinking about contributing to this project? Get started by reading our
 [nlpsandbox/phi-deidentifier]: https://github.com/nlpsandbox/phi-deidentifier
 [nlpsandbox/covid-symptom-annotation-example]: https://github.com/nlpsandbox/covid-symptom-annotator-example
 [nlpsandbox/data-node]: https://github.com/nlpsandbox/data-node
-[Apache License 2.0]: https://github.com/nlpsandbox/date-annotator-example/blob/develop/LICENSE
 [contribution guidelines]: .github/CONTRIBUTING.md
+[Apache License 2.0]: https://github.com/nlpsandbox/nlpsandbox-schemas/blob/main/LICENSE
+[Node]: https://nodejs.org/en/
