@@ -15,7 +15,7 @@
     "x-logo": {
       "url": "https://nlpsandbox.github.io/nlpsandbox-schemas/logo.png"
     },
-    "description": "OpenAPI specification that groups the specs of all the NLP Sanbox tools.\n"
+    "description": "NLP Sandbox Tool REST API"
   },
   "servers": [
     {
@@ -53,6 +53,10 @@
     {
       "name": "TextContactAnnotation",
       "description": "Operations about text contact annotations"
+    },
+    {
+      "name": "DeidentifiedNote",
+      "description": "Operations about deidentified notes"
     },
     {
       "name": "TextCovidSymptomAnnotation",
@@ -316,6 +320,43 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/TextContactAnnotationResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/deidentifiedNotes": {
+      "post": {
+        "tags": [
+          "DeidentifiedNote"
+        ],
+        "summary": "Deidentify a clinical note",
+        "description": "Returns the deidentified note",
+        "operationId": "createDeidentifiedNotes",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeidentifyRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeidentifyResponse"
                 }
               }
             }
@@ -954,6 +995,202 @@
         "required": [
           "textContactAnnotations"
         ]
+      },
+      "MaskingCharConfig": {
+        "type": "object",
+        "description": "Configuration for the masking char strategy. E.g. \"John Smith lives at 123 Main St\" -> \"********* lives at ***********\".",
+        "properties": {
+          "maskingChar": {
+            "type": "string",
+            "description": "Character used to mask sensitive information",
+            "minLength": 1,
+            "maxLength": 1,
+            "default": "*"
+          }
+        }
+      },
+      "AnnotationTypeMaskConfig": {
+        "type": "object",
+        "description": "Configuration for the \"annotation type\" strategy. E.g. \"John Smith lives at 123 Main St\" -> \"[PERSON_NAME] lives at [PHYSICAL_ADDRESS]\"."
+      },
+      "RedactConfig": {
+        "type": "object",
+        "description": "Configuration for the redaction strategy. E.g. \"John Smith lives at 123 Main St\" -> \"lives at\"."
+      },
+      "DateOffsetConfig": {
+        "type": "object",
+        "description": "Configuration for the \"date offset\" strategy. E.g. \"John Smith visited on 1 January 2020\" -> \"John Smith visited on 29 October 2025\". Note, can only be set with the \"text_date\" annotation type.",
+        "properties": {
+          "offsetDays": {
+            "type": "integer",
+            "description": "Number of days by which to offset annotated dates."
+          }
+        },
+        "required": [
+          "offsetDays"
+        ]
+      },
+      "DeidentificationStep": {
+        "type": "object",
+        "description": "The configuration of a deidentification step",
+        "properties": {
+          "confidenceThreshold": {
+            "type": "number",
+            "format": "float",
+            "description": "The minimum confidence level for a given annotation to be de-identified",
+            "minimum": 0,
+            "maximum": 100,
+            "example": 95.5,
+            "default": 0
+          },
+          "maskingCharConfig": {
+            "$ref": "#/components/schemas/MaskingCharConfig"
+          },
+          "annotationTypeMaskConfig": {
+            "$ref": "#/components/schemas/AnnotationTypeMaskConfig"
+          },
+          "redactConfig": {
+            "$ref": "#/components/schemas/RedactConfig"
+          },
+          "dateOffsetConfig": {
+            "$ref": "#/components/schemas/DateOffsetConfig"
+          },
+          "annotationTypes": {
+            "type": "array",
+            "description": "The types of annotations to which the de-identifer should apply the selected strategy",
+            "items": {
+              "type": "string",
+              "enum": [
+                "text_date",
+                "text_person_name",
+                "text_physical_address",
+                "text_id",
+                "text_contact"
+              ]
+            }
+          }
+        },
+        "required": [
+          "annotationTypes"
+        ]
+      },
+      "DeidentifyRequest": {
+        "type": "object",
+        "description": "A request to de-identify a clinical note",
+        "properties": {
+          "note": {
+            "$ref": "#/components/schemas/Note"
+          },
+          "deidentificationSteps": {
+            "type": "array",
+            "description": "A list of deidentification steps",
+            "items": {
+              "$ref": "#/components/schemas/DeidentificationStep"
+            }
+          }
+        },
+        "required": [
+          "note",
+          "deidentificationSteps"
+        ],
+        "example": {
+          "deidentificationSteps": [
+            {
+              "confidenceThreshold": 20,
+              "maskingCharConfig": {
+                "maskingChar": "-"
+              },
+              "annotationTypes": [
+                "text_date"
+              ]
+            },
+            {
+              "confidenceThreshold": 30,
+              "maskingCharConfig": {
+                "maskingChar": "#"
+              },
+              "annotationTypes": [
+                "text_person_name"
+              ]
+            },
+            {
+              "confidenceThreshold": 20,
+              "annotationTypeMaskConfig": {},
+              "annotationTypes": [
+                "text_physical_address"
+              ]
+            }
+          ],
+          "note": {
+            "identifier": "awesome-note",
+            "text": "On 12/26/2020, Ms. Chloe Price met with Dr. Prescott in Seattle.",
+            "type": "loinc:LP29684-5",
+            "patientId": "awesome-patient"
+          }
+        }
+      },
+      "AnnotationSet": {
+        "type": "object",
+        "description": "Set of annotations of all types for a text",
+        "properties": {
+          "textDateAnnotations": {
+            "description": "Date annotations in a text",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextDateAnnotation"
+            }
+          },
+          "textPersonNameAnnotations": {
+            "description": "Person name annotations in a text",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextPersonNameAnnotation"
+            }
+          },
+          "textPhysicalAddressAnnotations": {
+            "description": "Physical address annotations in a text",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextPhysicalAddressAnnotation"
+            }
+          },
+          "textIdAnnotations": {
+            "description": "ID annotations in a text",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextIdAnnotation"
+            }
+          },
+          "textContactAnnotations": {
+            "description": "Contact annotations in a text",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextContactAnnotation"
+            }
+          }
+        },
+        "required": [
+          "textDateAnnotations",
+          "textPersonNameAnnotations",
+          "textPhysicalAddressAnnotations",
+          "textIdAnnotations",
+          "textContactAnnotations"
+        ]
+      },
+      "DeidentifyResponse": {
+        "type": "object",
+        "description": "The response to a deidentification request",
+        "properties": {
+          "originalAnnotations": {
+            "$ref": "#/components/schemas/AnnotationSet"
+          },
+          "deidentifiedAnnotations": {
+            "$ref": "#/components/schemas/AnnotationSet"
+          },
+          "deidentifiedNote": {
+            "$ref": "#/components/schemas/Note"
+          }
+        }
       },
       "TextCovidSymptomAnnotationRequest": {
         "type": "object",
