@@ -6,13 +6,9 @@ updates:
     schedule:
       interval: "monthly"
     target-branch: "develop"
-    reviewers:
-      - "nlpsandbox/maintainers"
 
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
       interval: "monthly"
     target-branch: "develop"
-    reviewers:
-      - "nlpsandbox/maintainers"
