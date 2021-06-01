@@ -70,7 +70,7 @@ GitHub repository                               | Language
 [nlpsandbox/phi-deidentifier]                   | Python
 [nlpsandbox/covid-symptom-annotation-example]   | Python
 
-## Data Node
+### Data Node
 
 A Data Node instance enables to store FHIR and annotation resources used to
 benchmark NLP Sandbox tools.
