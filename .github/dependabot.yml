@@ -5,10 +5,10 @@ updates:
     directory: "/"
     schedule:
       interval: "monthly"
-    target-branch: "develop"
+    target-branch: "main"
 
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
       interval: "monthly"
-    target-branch: "develop"
+    target-branch: "main"
