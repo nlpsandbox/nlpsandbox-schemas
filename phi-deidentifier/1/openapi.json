@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "version": "1.1.1",
+    "version": "1.1.2",
     "title": "NLP Sandbox PHI Deidentifier API",
     "contact": {
       "name": "NLP Sandbox Team",
@@ -481,11 +481,12 @@
                   "bio_id",
                   "device",
                   "health_plan",
-                  "id_num",
+                  "id_number",
                   "license",
                   "medical_record",
                   "ssn",
-                  "vehicle"
+                  "vehicle",
+                  "other"
                 ]
               }
             },
@@ -518,6 +519,7 @@
                 "enum": [
                   "email",
                   "fax",
+                  "ip_address",
                   "phone",
                   "url",
                   "other"
@@ -769,7 +771,7 @@
           "authorEmail": "author@example.com",
           "url": "https://example.com",
           "type": "nlpsandbox:date-annotator",
-          "apiVersion": "1.1.1"
+          "apiVersion": "1.1.2"
         }
       },
       "ToolDependencies": {
