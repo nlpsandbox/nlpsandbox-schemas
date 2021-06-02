@@ -168,7 +168,7 @@ jobs:
 
         # Add edge-<sha>
         if [ "${{ env.version }}" == "edge" ]; then
-          TARGET_DIR=gh-openapi-docs/${{ matrix.api }}/edge-${{ github.sha::8 }}
+          TARGET_DIR=gh-openapi-docs/${{ matrix.api }}/edge-${GITHUB_SHA::8}
           mkdir -p ${TARGET_DIR}
           cp -R preview/${{ env.branch }}/* ${TARGET_DIR}
         fi
@@ -276,7 +276,7 @@ jobs:
 
         # Add edge-<sha>
         if [ "${{ env.version }}" == "edge" ]; then
-          TARGET_DIR=gh-openapi-docs/${{ matrix.api }}/edge-${{ github.sha::8 }}
+          TARGET_DIR=gh-openapi-docs/${{ matrix.api }}/edge-${GITHUB_SHA::8}
           mkdir -p ${TARGET_DIR}
           cp -R preview/${{ env.branch }}/* ${TARGET_DIR}
         fi
