@@ -18,6 +18,8 @@ servers:
 tags:
   - name: HealthCheck
     description: Operations about health checks
+  - name: Tool
+    description: Operations about this tool
   - name: TextDateAnnotation
     description: Operations about text date annotations
   - name: TextPersonNameAnnotation
@@ -59,6 +61,42 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HealthCheck'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /tool:
+    get:
+      tags:
+        - Tool
+      summary: Get tool information
+      description: Get information about the tool
+      operationId: getTool
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tool'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /tool/dependencies:
+    get:
+      tags:
+        - Tool
+      summary: Get tool dependencies
+      description: Get the dependencies of this tool
+      operationId: getToolDependencies
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ToolDependencies'
         '404':
           $ref: '#/components/responses/NotFound'
         '500':
@@ -985,109 +1023,6 @@ components:
       required:
         - title
         - status
-    NoteId:
-      description: The ID of the clinical note
-      type: string
-      minLength: 3
-      maxLength: 60
-      pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
-      example: awesome-note
-    PatientId:
-      description: The ID of the FHIR patient
-      type: string
-      minLength: 3
-      maxLength: 60
-      pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
-      example: awesome-patient
-    Note:
-      type: object
-      description: A clinical note
-      properties:
-        identifier:
-          $ref: '#/components/schemas/NoteId'
-        text:
-          description: The content of the clinical note
-          type: string
-        type:
-          description: The note type (LOINC concept)
-          type: string
-        patientId:
-          $ref: '#/components/schemas/PatientId'
-      required:
-        - identifier
-        - text
-        - type
-        - patientId
-      example:
-        identifier: awesome-note
-        text: 'On 12/26/2020, Ms. Chloe Price met with Dr. Prescott in Seattle.'
-        type: 'loinc:LP29684-5'
-        patientId: awesome-patient
-    TextDateAnnotationRequest:
-      type: object
-      description: A request to annotate dates in a clinical note
-      properties:
-        note:
-          $ref: '#/components/schemas/Note'
-      required:
-        - note
-    TextAnnotation:
-      type: object
-      description: An annotation in a text
-      properties:
-        start:
-          description: The position of the first character
-          type: integer
-        length:
-          description: The length of the annotation
-          type: integer
-        text:
-          description: The string annotated
-          type: string
-        confidence:
-          description: The confidence in the accuracy of the annotation
-          type: number
-          format: float
-          minimum: 0
-          maximum: 100
-      required:
-        - start
-        - length
-        - text
-        - confidence
-      example:
-        start: 42
-        length: 19
-        text: the annotation text
-        confidence: 95.5
-    TextDateAnnotation:
-      type: object
-      description: A date annotation in a text
-      allOf:
-        - $ref: '#/components/schemas/TextAnnotation'
-        - type: object
-          properties:
-            dateFormat:
-              description: Date format (ISO 8601)
-              type: string
-              example: MM/DD/YYYY
-      example:
-        start: 42
-        length: 10
-        text: 10/26/2020
-        dateFormat: MM/DD/YYYY
-        confidence: 95.5
-    TextDateAnnotationResponse:
-      type: object
-      description: The response to a dates annotation request
-      properties:
-        textDateAnnotations:
-          description: A list of date annotations
-          type: array
-          items:
-            $ref: '#/components/schemas/TextDateAnnotation'
-      required:
-        - textDateAnnotations
     License:
       description: The license (license keyword used by GitHub)
       type: string
@@ -1212,6 +1147,109 @@ components:
             $ref: '#/components/schemas/Tool'
       required:
         - tools
+    NoteId:
+      description: The ID of the clinical note
+      type: string
+      minLength: 3
+      maxLength: 60
+      pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+      example: awesome-note
+    PatientId:
+      description: The ID of the FHIR patient
+      type: string
+      minLength: 3
+      maxLength: 60
+      pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+      example: awesome-patient
+    Note:
+      type: object
+      description: A clinical note
+      properties:
+        identifier:
+          $ref: '#/components/schemas/NoteId'
+        text:
+          description: The content of the clinical note
+          type: string
+        type:
+          description: The note type (LOINC concept)
+          type: string
+        patientId:
+          $ref: '#/components/schemas/PatientId'
+      required:
+        - identifier
+        - text
+        - type
+        - patientId
+      example:
+        identifier: awesome-note
+        text: 'On 12/26/2020, Ms. Chloe Price met with Dr. Prescott in Seattle.'
+        type: 'loinc:LP29684-5'
+        patientId: awesome-patient
+    TextDateAnnotationRequest:
+      type: object
+      description: A request to annotate dates in a clinical note
+      properties:
+        note:
+          $ref: '#/components/schemas/Note'
+      required:
+        - note
+    TextAnnotation:
+      type: object
+      description: An annotation in a text
+      properties:
+        start:
+          description: The position of the first character
+          type: integer
+        length:
+          description: The length of the annotation
+          type: integer
+        text:
+          description: The string annotated
+          type: string
+        confidence:
+          description: The confidence in the accuracy of the annotation
+          type: number
+          format: float
+          minimum: 0
+          maximum: 100
+      required:
+        - start
+        - length
+        - text
+        - confidence
+      example:
+        start: 42
+        length: 19
+        text: the annotation text
+        confidence: 95.5
+    TextDateAnnotation:
+      type: object
+      description: A date annotation in a text
+      allOf:
+        - $ref: '#/components/schemas/TextAnnotation'
+        - type: object
+          properties:
+            dateFormat:
+              description: Date format (ISO 8601)
+              type: string
+              example: MM/DD/YYYY
+      example:
+        start: 42
+        length: 10
+        text: 10/26/2020
+        dateFormat: MM/DD/YYYY
+        confidence: 95.5
+    TextDateAnnotationResponse:
+      type: object
+      description: The response to a dates annotation request
+      properties:
+        textDateAnnotations:
+          description: A list of date annotations
+          type: array
+          items:
+            $ref: '#/components/schemas/TextDateAnnotation'
+      required:
+        - textDateAnnotations
     TextPersonNameAnnotationRequest:
       type: object
       description: A request to annotate person names in a clinical note
