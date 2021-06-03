@@ -31,6 +31,10 @@
       "description": "Operations about health checks"
     },
     {
+      "name": "Tool",
+      "description": "Operations about this tool"
+    },
+    {
       "name": "TextDateAnnotation",
       "description": "Operations about text date annotations"
     },
