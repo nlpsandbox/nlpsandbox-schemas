@@ -18,3 +18,7 @@ tags:
 paths:
   /healthCheck:
     $ref: ../../commons/paths/healthCheck.yaml
+  /tool:
+    $ref: ../../commons/paths/tool.yaml
+  /tool/dependencies:
+    $ref: ../../commons/paths/dependencies.yaml
