@@ -3,7 +3,6 @@ inputs:
 - inputFile: ../individuals/date-annotator.openapi.yaml
   operationSelection:
     excludeTags:
-    - Tool
     - HealthCheck
 - inputFile: ../individuals/person-name-annotator.openapi.yaml
   operationSelection:
