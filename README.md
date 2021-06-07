@@ -110,8 +110,6 @@ The table below describes the schemas tags available.
 | `latest`                        | Latest stable release.                                 | Yes
 | `edge`                          | Lastest commit made to the default branch.             | Yes
 | `edge-<sha>`                    | Same as above with the reference to the git commit.    | No
-| `<major>`                       | Latest stable major release `<major>`.                 | Yes
-| `<major>.<minor>`               | Latest stable minor release `<major>.<minor>`.         | Yes
 | `<major>.<minor>.<patch>`       | Latest stable patch release `<major>.<minor>.<patch>`. | No
 
 ## Contributing
