@@ -21,7 +21,11 @@ This repository contains the OpenAPI specifications of the NLP Sandbox tools and
 services. Visit [NLPSandbox.io] for more information on how to develop and
 benchmark NLP Sandbox tools.
 
-### Requirements
+## Specification
+
+- NLP Sandbox schemas version: 1.1.2
+
+## Requirements
 
 - [Node] >=14
 
@@ -34,26 +38,26 @@ develop and benchmark an NLP Sandbox tool, visit [NLPSandbox.io].
 
 ### PHI Annotation and Deidentification
 
-API Name                     | Type                                    | Version
------------------------------|-----------------------------------------|--------
-[Date Annotator]             | `nlpsandbox:date-annotator`             | 1.1.2
-[Person Name Annotator]      | `nlpsandbox:person-name-annotator`      | 1.1.2
-[Physical Address Annotator] | `nlpsandbox:physical-address-annotator` | 1.1.2
-[ID Annotator]               | `nlpsandbox:id-annotator`               | 1.1.2
-[Contact Annotator]          | `nlpsandbox:contact-annotator`          | 1.1.2
-[PHI Deidentifier]           | `nlpsandbox:phi-deidentifier`           | 1.1.2
+API Name                     | Type
+-----------------------------|-----------------------------------------
+[Date Annotator]             | `nlpsandbox:date-annotator`
+[Person Name Annotator]      | `nlpsandbox:person-name-annotator`
+[Physical Address Annotator] | `nlpsandbox:physical-address-annotator`
+[ID Annotator]               | `nlpsandbox:id-annotator`
+[Contact Annotator]          | `nlpsandbox:contact-annotator`
+[PHI Deidentifier]           | `nlpsandbox:phi-deidentifier`
 
 ### Symptom Annotation
 
-API Name                     | Type                                    | Version
------------------------------|-----------------------------------------|--------
-[COVID Symptom Annotator]    | `nlpsandbox:covid-symptom-annotator`    | 1.1.2
+API Name                     | Type
+-----------------------------|-----------------------------------------
+[COVID Symptom Annotator]    | `nlpsandbox:covid-symptom-annotator`
 
 ## NLP Sandbox Services
 
-API Name                | Type                                    | Version
-------------------------|-----------------------------------------|--------
-[Data Node]             | `nlpsandbox:data`                       | 1.1.2
+API Name                | Type
+------------------------|-----------------------------------------
+[Data Node]             | `nlpsandbox:data`
 
 ## Implementations
 
