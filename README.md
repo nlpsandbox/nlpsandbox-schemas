@@ -91,7 +91,7 @@ GitHub repository                               | Language
 
 ## Versioning
 
-### GitHub tags
+### GitHub release tags
 
 This repository uses [semantic versioning] to track the releases of the NLP
 Sandbox schemas. This repository uses "non-moving" GitHub tags, that is, a tag
