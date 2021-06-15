@@ -1,0 +1,17 @@
+type: object
+description: A page of FHIR patients
+allOf:
+  - $ref: ../../../commons/components/schemas/ResponsePageMetadata.yaml
+  - type: object
+    properties:
+      patients:
+        description: An array of FHIR patients
+        type: array
+        items:
+          $ref: ../../../commons/components/schemas/Patient.yaml
+required:
+  - offset
+  - limit
+  - links
+  - totalResults
+  - patients

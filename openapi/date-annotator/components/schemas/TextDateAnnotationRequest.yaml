@@ -1,0 +1,7 @@
+type: object
+description: A request to annotate dates in a clinical note
+properties:
+  note:
+    $ref: ../../../commons/components/schemas/Note.yaml
+required:
+  - note

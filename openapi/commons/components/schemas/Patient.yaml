@@ -1,0 +1,18 @@
+type: object
+description: A FHIR patient
+properties:
+  identifier:
+    $ref: ../parameters/PatientId.yaml
+  gender:
+    description: Gender of the patient
+    type: string
+    enum:
+      - male
+      - female
+      - other
+      - unknown
+required:
+  - identifier
+example:
+  identifier: awesome-patient
+  gender: male

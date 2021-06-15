@@ -1,0 +1,9 @@
+type: object
+description: The response to a deidentification request
+properties:
+  originalAnnotations:
+    $ref: AnnotationSet.yaml
+  deidentifiedAnnotations:
+    $ref: AnnotationSet.yaml
+  deidentifiedNote:
+    $ref: ../../../commons/components/schemas/Note.yaml

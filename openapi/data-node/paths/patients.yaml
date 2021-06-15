@@ -1,0 +1,74 @@
+parameters:
+  - in: path
+    name: datasetId
+    description: The ID of the dataset
+    required: true
+    schema:
+      $ref: ../components/parameters/DatasetId.yaml
+  - in: path
+    name: fhirStoreId
+    description: The ID of the FHIR store
+    required: true
+    schema:
+      $ref: ../components/parameters/FhirStoreId.yaml
+post:
+  tags:
+    - Patient
+  summary: Create a FHIR patient
+  description: Create a FHIR patient
+  operationId: createPatient
+  parameters:
+    - in: query
+      name: patientId
+      description: The ID of the patient that is being created
+      required: true
+      schema:
+        $ref: ../../commons/components/parameters/PatientId.yaml
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/PatientCreateRequest.yaml
+  responses:
+    '201':
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/PatientCreateResponse.yaml
+      description: Success
+    '400':
+      $ref: ../../commons/components/responses/BadRequest.yaml
+    '409':
+      $ref: ../../commons/components/responses/Conflict.yaml
+    '500':
+      $ref: ../../commons/components/responses/InternalServerError.yaml
+get:
+  tags:
+    - Patient
+  summary: List the Patients in a FHIR store
+  description: Returns the Patients in a FHIR store
+  operationId: listPatients
+  parameters:
+    - in: query
+      name: limit
+      description: Maximum number of results returned
+      required: false
+      schema:
+        $ref: ../../commons/components/parameters/PageLimit.yaml
+    - in: query
+      name: offset
+      description: Index of the first result that must be returned
+      required: false
+      schema:
+        $ref: ../../commons/components/parameters/PageOffset.yaml
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/PageOfPatients.yaml
+      description: Success
+    '400':
+      $ref: ../../commons/components/responses/BadRequest.yaml
+    '500':
+      $ref: ../../commons/components/responses/InternalServerError.yaml

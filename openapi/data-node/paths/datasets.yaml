@@ -1,0 +1,61 @@
+post:
+  tags:
+    - Dataset
+  summary: Create a dataset
+  description: Create a dataset with the name specified
+  operationId: createDataset
+  parameters:
+    - in: query
+      name: datasetId
+      description: The ID of the dataset that is being created
+      required: true
+      schema:
+        $ref: ../components/parameters/DatasetId.yaml
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/DatasetCreateRequest.yaml
+  responses:
+    '201':
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/DatasetCreateResponse.yaml
+      description: Success
+    '400':
+      $ref: ../../commons/components/responses/BadRequest.yaml
+    '409':
+      $ref: ../../commons/components/responses/Conflict.yaml
+    '500':
+      $ref: ../../commons/components/responses/InternalServerError.yaml
+get:
+  tags:
+    - Dataset
+  summary: Get all datasets
+  description: Returns the datasets
+  operationId: listDatasets
+  parameters:
+    - in: query
+      name: limit
+      description: Maximum number of results returned
+      required: false
+      schema:
+        $ref: ../../commons/components/parameters/PageLimit.yaml
+    - in: query
+      name: offset
+      description: Index of the first result that must be returned
+      required: false
+      schema:
+        $ref: ../../commons/components/parameters/PageOffset.yaml
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/PageOfDatasets.yaml
+      description: Success
+    '400':
+      $ref: ../../commons/components/responses/BadRequest.yaml
+    '500':
+      $ref: ../../commons/components/responses/InternalServerError.yaml

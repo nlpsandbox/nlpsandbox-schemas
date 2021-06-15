@@ -1,0 +1,17 @@
+type: object
+description: A page of annotations
+allOf:
+  - $ref: ../../../commons/components/schemas/ResponsePageMetadata.yaml
+  - type: object
+    properties:
+      annotations:
+        description: An array of annotations
+        type: array
+        items:
+          $ref: Annotation.yaml
+required:
+  - offset
+  - limit
+  - links
+  - totalResults
+  - annotations

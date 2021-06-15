@@ -1,0 +1,28 @@
+type: object
+description: A physical address annotation in a text
+allOf:
+  - $ref: TextAnnotation.yaml
+  - type: object
+    properties:
+      addressType:
+        description: Type of address information
+        type: string
+        enum:
+          - city
+          - country
+          - department
+          - hospital
+          - organization
+          - other
+          - room
+          - state
+          - street
+          - zip
+    required:
+      - addressType
+example:
+  start: 42
+  length: 7
+  text: Seattle
+  addressType: city
+  confidence: 95.5

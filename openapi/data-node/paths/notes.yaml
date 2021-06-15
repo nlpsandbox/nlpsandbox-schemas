@@ -1,33 +1,74 @@
+parameters:
+  - in: path
+    name: datasetId
+    description: The ID of the dataset
+    required: true
+    schema:
+      $ref: ../components/parameters/DatasetId.yaml
+  - in: path
+    name: fhirStoreId
+    description: The ID of the FHIR store
+    required: true
+    schema:
+      $ref: ../components/parameters/FhirStoreId.yaml
+post:
+  tags:
+    - Note
+  summary: Create a note
+  description: Create a note
+  operationId: createNote
+  parameters:
+    - in: query
+      name: noteId
+      description: The ID of the note that is being created
+      required: true
+      schema:
+        $ref: ../../commons/components/parameters/NoteId.yaml
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/NoteCreateRequest.yaml
+  responses:
+    '201':
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/NoteCreateResponse.yaml
+      description: Success
+    '400':
+      $ref: ../../commons/components/responses/BadRequest.yaml
+    '409':
+      $ref: ../../commons/components/responses/Conflict.yaml
+    '500':
+      $ref: ../../commons/components/responses/InternalServerError.yaml
 get:
   tags:
     - Note
-  summary: Get all clinical notes
-  description: Returns the clinical notes
-  operationId: "notes.read_all"
+  summary: List notes
+  description: Returns the notes in a FHIR store
+  operationId: listNotes
   parameters:
     - in: query
       name: limit
       description: Maximum number of results returned
       required: false
       schema:
-        format: int32
-        default: 10
-        minimum: 10
+        $ref: ../../commons/components/parameters/PageLimit.yaml
+    - in: query
+      name: offset
+      description: Index of the first result that must be returned
+      required: false
+      schema:
+        $ref: ../../commons/components/parameters/PageOffset.yaml
   responses:
-    "200":
+    '200':
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              items:
-                type: array
-                $ref: '../../commons/components/schemas/Note.yaml'
-            allOf:
-              - $ref: '../../commons/components/schemas/PageResponse.yaml'
+            $ref: ../components/schemas/PageOfNotes.yaml
       description: Success
-    "403":
-      description: Forbidden
-    "404":
-      description: Note not found
-
+    '400':
+      $ref: ../../commons/components/responses/BadRequest.yaml
+    '500':
+      $ref: ../../commons/components/responses/InternalServerError.yaml

@@ -1,0 +1,7 @@
+type: object
+description: The reference to the FHIR store created
+properties:
+  name:
+    $ref: ../parameters/FhirStoreName.yaml
+required:
+  - name

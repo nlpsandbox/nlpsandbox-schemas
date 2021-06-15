@@ -1,0 +1,15 @@
+type: object
+description: A request to annotate COVID symptoms in a clinical note
+properties:
+  note:
+    $ref: ../../../commons/components/schemas/Note.yaml
+required:
+  - note
+example:
+  note:
+    identifier: awesome-note
+    text: >
+      The patient had a dry cough and fever or chills yesterday. He is also
+      experiencing new loss of taste today and three days ago.
+    type: loinc:LP29684-5
+    patientId: awesome-patient

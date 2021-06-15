@@ -1,0 +1,11 @@
+type: object
+description:
+  Configuration for the masking char strategy. E.g. "John Smith lives at 123
+  Main St" -> "********* lives at ***********".
+properties:
+  maskingChar:
+    type: string
+    description: Character used to mask sensitive information
+    minLength: 1
+    maxLength: 1
+    default: "*"

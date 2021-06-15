@@ -1,0 +1,7 @@
+type: object
+description: The reference to the annotation store created
+properties:
+  name:
+    $ref: ../parameters/AnnotationStoreName.yaml
+required:
+  - name

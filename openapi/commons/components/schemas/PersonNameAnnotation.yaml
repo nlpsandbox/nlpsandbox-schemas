@@ -1,4 +1,0 @@
-type: object
-description: A person name annotation in a text
-allOf:
-- $ref: Annotation.yaml

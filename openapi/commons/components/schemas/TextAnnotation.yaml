@@ -1,0 +1,28 @@
+type: object
+description: An annotation in a text
+properties:
+  start:
+    description: The position of the first character
+    type: integer
+  length:
+    description: The length of the annotation
+    type: integer
+  text:
+    description: The string annotated
+    type: string
+  confidence:
+    description: The confidence in the accuracy of the annotation
+    type: number
+    format: float
+    minimum: 0
+    maximum: 100
+required:
+  - start
+  - length
+  - text
+  - confidence
+example:
+  start: 42
+  length: 19
+  text: the annotation text
+  confidence: 95.5

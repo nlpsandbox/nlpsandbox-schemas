@@ -1,0 +1,53 @@
+parameters:
+  - in: path
+    name: datasetId
+    description: The ID of the dataset
+    required: true
+    schema:
+      $ref: ../components/parameters/DatasetId.yaml
+  - in: path
+    name: fhirStoreId
+    description: The ID of the FHIR store
+    required: true
+    schema:
+      $ref: ../components/parameters/FhirStoreId.yaml
+  - in: path
+    name: patientId
+    description: The ID of the FHIR patient
+    required: true
+    schema:
+      $ref: ../../commons/components/parameters/PatientId.yaml
+get:
+  tags:
+    - Patient
+  summary: Get a FHIR patient
+  description: Returns the FHIR patient specified
+  operationId: getPatient
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: ../../commons/components/schemas/Patient.yaml
+    '404':
+      $ref: ../../commons/components/responses/NotFound.yaml
+    '500':
+      $ref: ../../commons/components/responses/InternalServerError.yaml
+delete:
+  tags:
+    - Patient
+  summary: Delete a FHIR patient
+  description: Deletes the FHIR patient specified
+  operationId: deletePatient
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: ../../commons/components/schemas/EmptyObject.yaml
+    '404':
+      $ref: ../../commons/components/responses/NotFound.yaml
+    '500':
+      $ref: ../../commons/components/responses/InternalServerError.yaml

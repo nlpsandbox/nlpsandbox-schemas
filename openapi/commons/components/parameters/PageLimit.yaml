@@ -1,0 +1,5 @@
+description: The maximum number of results returned
+type: integer
+default: 10
+minimum: 10
+maximum: 100

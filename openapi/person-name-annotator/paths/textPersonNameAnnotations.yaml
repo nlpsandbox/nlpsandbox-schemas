@@ -1,0 +1,22 @@
+post:
+  tags:
+    - TextPersonNameAnnotation
+  summary: Annotate person names in a clinical note
+  description: Return the person name annotations found in a clinical note
+  operationId: createTextPersonNameAnnotations
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/TextPersonNameAnnotationRequest.yaml
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/TextPersonNameAnnotationResponse.yaml
+    '400':
+      $ref: ../../commons/components/responses/BadRequest.yaml
+    '500':
+      $ref: ../../commons/components/responses/InternalServerError.yaml

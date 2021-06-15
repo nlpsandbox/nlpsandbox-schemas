@@ -1,0 +1,50 @@
+openapi: 3.0.3
+info:
+  version: 1.1.2
+  title: NLP Sandbox Date Annotator API
+  contact:
+    name: The NLP Sandbox Team
+    email: thomas.schaffter@sagebionetworks.org
+    url: https://nlpsandbox.io
+  license:
+    name: Apache 2.0
+    url: https://github.com/nlpsandbox/nlpsandbox-schemas/blob/develop/LICENSE
+  x-logo:
+    url: https://nlpsandbox.github.io/nlpsandbox-schemas/logo.png
+  description: >
+    # Overview
+
+    The OpenAPI specification implemented by NLP Sandbox Annotators.
+tags:
+  - name: TextDateAnnotation
+    description: Operations about text date annotations
+  - name: TextPersonNameAnnotation
+    description: Operations about text person name annotations
+  - name: TextPhysicalAddressAnnotation
+    description: Operations about text physical address annotations
+  - name: HealthCheck
+    description: Operations about health checks
+  - name: Tool
+    description: Operations about this tool
+servers:
+  - url: 'http://example.com/api/v1'
+  - url: 'https://example.com/api/v1'
+paths:
+  /healthCheck:
+    $ref: '../commons/paths/healthCheck.yaml'
+  /textDateAnnotations:
+    $ref: '../date-annotator/paths/textDateAnnotations.yaml'
+  /textPersonNameAnnotations:
+    $ref: '../person-name-annotator/paths/textPersonNameAnnotations.yaml'
+  /textPhysicalAddressAnnotations:
+    $ref: '../physical-address-annotator/paths/textPhysicalAddressAnnotations.yaml'
+  /textContactAnnotations:
+    $ref: '../contact-annotator/paths/textContactAnnotations.yaml'
+  /textCovidSymptomAnnotations:
+    $ref: '../covid-symptom-annotator/paths/textCovidSymptomAnnotations.yaml'
+  /textIdAnnotations:
+    $ref: '../id-annotator/paths/textIdAnnotations.yaml'
+  /tool:
+    $ref: '../commons/paths/tool.yaml'
+  /tool/dependencies:
+    $ref: '../commons/paths/dependencies.yaml'

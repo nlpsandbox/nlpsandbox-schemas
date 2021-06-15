@@ -1,0 +1,28 @@
+type: object
+description: An ID annotation in a text
+allOf:
+  - $ref: TextAnnotation.yaml
+  - type: object
+    properties:
+      idType:
+        description: Type of ID information
+        type: string
+        enum:
+          - account
+          - bio_id
+          - device
+          - health_plan
+          - id_number
+          - license
+          - medical_record
+          - ssn
+          - vehicle
+          - other
+    required:
+      - idType
+example:
+  start: 42
+  length: 11
+  text: 203-11-4535
+  idType: ssn
+  confidence: 95.5

@@ -1,5 +1,8 @@
-# Dir for bundles
+.idea
 dist
 dist.yaml
 node_modules
-.idea
+/openapi/_internal/individuals
+/openapi/_internal/**/base-combined.openapi.yaml
+/openapi/_internal/**/openapi.yaml
+/openapi.yaml

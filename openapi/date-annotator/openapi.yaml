@@ -1,33 +1,74 @@
-openapi: 3.0.2
+openapi: 3.0.3
 info:
-  version: 0.1.0
+  version: 1.1.2
   title: NLP Sandbox Date Annotator API
   contact:
-    name: The NLP Sandbox Team
-    email: thomas.schaffter@sagebionetworks.org
-    url: 'https://Sage-Bionetworks.github.io/nlp-sandbox-schemas'
+    name: NLP Sandbox Team
+    email: team@nlpsandbox.io
+    url: https://nlpsandbox.io
   license:
     name: Apache 2.0
-    url: 'https://github.com/Sage-Bionetworks/nlp-sandbox/blob/main/LICENSE'
+    url: https://github.com/nlpsandbox/nlpsandbox-schemas/blob/develop/LICENSE
   x-logo:
-    url: 'https://Sage-Bionetworks.github.io/nlp-sandbox-schemas/logo.png'
+    url: https://nlpsandbox.github.io/nlpsandbox-schemas/logo.png
   description: >
-    The OpenAPI specification implemented by NLP Sandbox Date Annotators.
+    # Introduction
 
-    # Overview
+    A Date Annotator takes as input a clinical note and outputs a list of
+    predicted date annotations found in the clinical note. This OpenAPI document
+    describes the specification of a Date Annotator. This specification includes
+    the schemas of the input and output data, and the conditions that this
+    annotator must meet if you want to benchmark its performance on
+    [nlpsandbox.io](https://nlpsandbox.io).
 
-    This NLP tool detects date references in the clinical note specified and
-    returns a list of date annotations.
+    # Getting Started
+
+    The GitHub repository
+    [nlpsandbox/date-annotator-example](https://github.com/nlpsandbox/date-annotator-example)
+    provides a simple example implementation of a Python-Flask Date Annotator.
+    By the end of the tutorial available in the README, you will have built a
+    Docker image for a simple Date Annotator. You will then be able to submit
+    this image to [nlpsandbox.io](https://nlpsandbox.io) to benchmark its
+    performance.
+
+    # Benchmarking Requirements
+
+    Your NLP Sandbox tool must meet the following conditions before evaluating
+    its performance on [nlpsandbox.io](https://nlpsandbox.io).
+
+    - The endpoint `/` must redirect to `/api/v1/tool`.
+
+    - The endpoint `/ui` must redirect to the web interface (UI).
+
+    - The output of this tool must be reproducible: a given input should always
+      generate the same output.
+
+    - To ensure the results are reproducible and robust, and the data are
+      secured, this tool must not connect to any remote server. When benchmarked
+      on [nlpsandbox.io](https://nlpsandbox.io), this tool will not be able to
+      connect to remote servers.
+
+    # Examples
+
+    - [Date Annotator Example (Python)](https://github.com/nlpsandbox/date-annotator-example)
+
+    - [Date Annotator Example (Java)](https://github.com/nlpsandbox/date-annotator-example-java)
 tags:
-  - name: Date
-    description: Operations about dates
-  - name: Health
-    description: Operations about API health
+  - name: HealthCheck
+    description: Operations about health checks
+  - name: TextDateAnnotation
+    description: Operations about text date annotations
+  - name: Tool
+    description: Operations about this tool
 servers:
-  - url: 'http://example.com/api/v1'
-  - url: 'https://example.com/api/v1'
+  - url: http://example.com/api/v1
+  - url: https://example.com/api/v1
 paths:
-  /dates:
-    $ref: 'paths/dates.yaml'
-  /health:
-    $ref: '../commons/paths/health.yaml'
+  /healthCheck:
+    $ref: ../commons/paths/healthCheck.yaml
+  /textDateAnnotations:
+    $ref: paths/textDateAnnotations.yaml
+  /tool:
+    $ref: ../commons/paths/tool.yaml
+  /tool/dependencies:
+    $ref: ../commons/paths/dependencies.yaml

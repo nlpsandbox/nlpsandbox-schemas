@@ -1,0 +1,15 @@
+type: object
+description: A request to annotate IDs in a clinical note
+properties:
+  note:
+    $ref: ../../../commons/components/schemas/Note.yaml
+required:
+  - note
+example:
+  note:
+    identifier: awesome-note
+    text: >
+      On 12/26/2020, Ms. Chloe Price met with Dr. Prescott in Seattle. Her SSN
+      is 123-45-6789.
+    type: loinc:LP29684-5
+    patientId: awesome-patient

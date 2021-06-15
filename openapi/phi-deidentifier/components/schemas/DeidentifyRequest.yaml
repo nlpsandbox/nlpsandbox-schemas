@@ -1,0 +1,34 @@
+type: object
+description: A request to de-identify a clinical note
+properties:
+  note:
+    $ref: ../../../commons/components/schemas/Note.yaml
+  deidentificationSteps:
+    type: array
+    description: A list of deidentification steps
+    items:
+      $ref: DeidentificationStep.yaml
+required:
+  - note
+  - deidentificationSteps
+example:
+  deidentificationSteps:
+    - confidenceThreshold: 20.0
+      maskingCharConfig:
+        maskingChar: "-"
+      annotationTypes:
+        - text_date
+    - confidenceThreshold: 30.0
+      maskingCharConfig:
+        maskingChar: "#"
+      annotationTypes:
+        - text_person_name
+    - confidenceThreshold: 20.0
+      annotationTypeMaskConfig: {}
+      annotationTypes:
+        - text_physical_address
+  note:
+    identifier: awesome-note
+    text: On 12/26/2020, Ms. Chloe Price met with Dr. Prescott in Seattle.
+    type: loinc:LP29684-5
+    patientId: awesome-patient

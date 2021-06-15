@@ -1,0 +1,47 @@
+parameters:
+  - in: path
+    name: datasetId
+    description: The ID of the dataset
+    required: true
+    schema:
+      $ref: ../components/parameters/DatasetId.yaml
+  - in: path
+    name: fhirStoreId
+    description: The ID of the FHIR store
+    required: true
+    schema:
+      $ref: ../components/parameters/FhirStoreId.yaml
+get:
+  tags:
+    - FhirStore
+  summary: Get a FHIR store
+  description: Returns the FHIR store specified
+  operationId: getFhirStore
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/FhirStore.yaml
+    '404':
+      $ref: ../../commons/components/responses/NotFound.yaml
+    '500':
+      $ref: ../../commons/components/responses/InternalServerError.yaml
+delete:
+  tags:
+    - FhirStore
+  summary: Delete a FHIR store
+  description: Deletes the FHIR store specified
+  operationId: deleteFhirStore
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: ../../commons/components/schemas/EmptyObject.yaml
+    '404':
+      $ref: ../../commons/components/responses/NotFound.yaml
+    '500':
+      $ref: ../../commons/components/responses/InternalServerError.yaml

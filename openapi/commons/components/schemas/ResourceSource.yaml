@@ -1,0 +1,8 @@
+type: object
+description: An API resource source
+properties:
+  name:
+    description: Full path of an API resource
+    type: string
+required:
+  - name

@@ -1,0 +1,47 @@
+parameters:
+  - in: path
+    name: datasetId
+    description: The ID of the dataset
+    required: true
+    schema:
+      $ref: ../components/parameters/DatasetId.yaml
+  - in: path
+    name: annotationStoreId
+    description: The ID of the annotation store
+    required: true
+    schema:
+      $ref: ../components/parameters/AnnotationStoreId.yaml
+get:
+  tags:
+    - AnnotationStore
+  summary: Get an annotation store
+  description: Returns the annotation store specified
+  operationId: getAnnotationStore
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/AnnotationStore.yaml
+    '404':
+      $ref: ../../commons/components/responses/NotFound.yaml
+    '500':
+      $ref: ../../commons/components/responses/InternalServerError.yaml
+delete:
+  tags:
+    - AnnotationStore
+  summary: Delete an annotation store
+  description: Deletes the annotation store specified
+  operationId: deleteAnnotationStore
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: ../../commons/components/schemas/EmptyObject.yaml
+    '404':
+      $ref: ../../commons/components/responses/NotFound.yaml
+    '500':
+      $ref: ../../commons/components/responses/InternalServerError.yaml

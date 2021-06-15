@@ -1,0 +1,63 @@
+type: object
+description: Information about an NLP tool
+properties:
+  name:
+    description: The tool name
+    type: string
+    minLength: 3
+    maxLength: 60
+    pattern: "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+  version:
+    description: The version of the tool (SemVer string)
+    type: string
+    minLength: 1
+    pattern: "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$"
+  license:
+    $ref: ../parameters/License.yaml
+  repository:
+    description: The place where the code lives
+    type: string
+  description:
+    description: A short, one-sentence summary of the tool
+    type: string
+    maxLength: 100
+  author:
+    description: The author of the tool
+    type: string
+  authorEmail:
+    description: The email address of the author
+    type: string
+    format: email
+  url:
+    description: The URL to the homepage of the tool
+    type: string
+    format: uri
+  type:
+    $ref: ../parameters/ToolType.yaml
+  apiVersion:
+    description: The version of the tool OpenAPI specification
+    type: string
+    minLength: 1
+    pattern: "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$"
+required:
+  - name
+  - version
+  - license
+  - repository
+  - description
+  - author
+  - authorEmail
+  - url
+  - type
+  - apiVersion
+example:
+  name: awesome-nlp-tool
+  version: 1.0.6
+  license: apache-2.0
+  repository: github:awesome-org/awesome-nlp-tool
+  description: An awesome NLP Tool that takes as input X and outputs Y.
+  author: Awesome Team
+  authorEmail: author@example.com
+  url: https://example.com
+  type: nlpsandbox:date-annotator
+  apiVersion: 1.1.2

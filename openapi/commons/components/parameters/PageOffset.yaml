@@ -1,0 +1,4 @@
+description: The index of the first result that must be returned
+type: integer
+default: 0
+minimum: 0

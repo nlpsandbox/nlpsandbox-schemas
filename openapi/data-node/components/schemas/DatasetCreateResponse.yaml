@@ -1,0 +1,7 @@
+type: object
+description: The reference of the dataset created
+properties:
+  name:
+    $ref: ../parameters/DatasetName.yaml
+required:
+  - name

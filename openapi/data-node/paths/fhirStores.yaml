@@ -1,0 +1,68 @@
+parameters:
+  - in: path
+    name: datasetId
+    description: The ID of the dataset
+    required: true
+    schema:
+      $ref: ../components/parameters/DatasetId.yaml
+post:
+  tags:
+    - FhirStore
+  summary: Create a FHIR store
+  description: Create a FHIR store with the ID specified
+  operationId: createFhirStore
+  parameters:
+    - in: query
+      name: fhirStoreId
+      description: The ID of the FHIR store that is being created.
+      required: true
+      schema:
+        $ref: ../components/parameters/FhirStoreId.yaml
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/FhirStoreCreateRequest.yaml
+  responses:
+    '201':
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/FhirStoreCreateResponse.yaml
+      description: Success
+    '400':
+      $ref: ../../commons/components/responses/BadRequest.yaml
+    '409':
+      $ref: ../../commons/components/responses/Conflict.yaml
+    '500':
+      $ref: ../../commons/components/responses/InternalServerError.yaml
+get:
+  tags:
+    - FhirStore
+  summary: List the FHIR stores in a dataset
+  description: Returns the FHIR stores
+  operationId: listFhirStores
+  parameters:
+    - in: query
+      name: limit
+      description: Maximum number of results returned
+      required: false
+      schema:
+        $ref: ../../commons/components/parameters/PageLimit.yaml
+    - in: query
+      name: offset
+      description: Index of the first result that must be returned
+      required: false
+      schema:
+        $ref: ../../commons/components/parameters/PageOffset.yaml
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/PageOfFhirStores.yaml
+      description: Success
+    '400':
+      $ref: ../../commons/components/responses/BadRequest.yaml
+    '500':
+      $ref: ../../commons/components/responses/InternalServerError.yaml

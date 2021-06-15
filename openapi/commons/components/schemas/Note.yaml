@@ -1,25 +1,23 @@
 type: object
 description: A clinical note
 properties:
+  identifier:
+    $ref: ../parameters/NoteId.yaml
   text:
-    description: The content of the note
+    description: The content of the clinical note
     type: string
-    example: October 3, Ms Chloe Price met with...
-  patientPublicId:
-    readOnly: true
-    allOf:
-      - $ref: PatientPublicId.yaml
-  filename:
-    description: The filename of the source note
-    type: string
-    example: 260-01.xml
   type:
-    description: The note type
+    description: The note type (LOINC concept)
     type: string
-    enum:
-      - pathology
-      - phone_call
-allOf:
-  - $ref: Entity.yaml
+  patientId:
+    $ref: ../parameters/PatientId.yaml
 required:
+  - identifier
   - text
+  - type
+  - patientId
+example:
+  identifier: awesome-note
+  text: On 12/26/2020, Ms. Chloe Price met with Dr. Prescott in Seattle.
+  type: loinc:LP29684-5
+  patientId: awesome-patient

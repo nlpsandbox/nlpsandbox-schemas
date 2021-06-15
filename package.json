@@ -1,16 +1,20 @@
 {
-  "name": "nlp-sandbox-schemas",
-  "version": "0.1.0",
-  "license": "Apache-2.0",
-  "repository": "github:Sage-Bionetworks/nlp-sandbox-schemas",
+  "name": "nlpsandbox-schemas",
   "devDependencies": {
-    "@redocly/openapi-cli": "^1.0.0-beta.16",
-    "gh-openapi-docs-ts": "^0.3.4"
+    "@redocly/openapi-cli": "^1.0.0-beta.48",
+    "gh-openapi-docs-ts": "^0.3.6",
+    "ibm-openapi-validator": "^0.46.0",
+    "openapi-merge-cli": "^1.1.29"
   },
+  "private": true,
   "scripts": {
-    "start": "openapi preview-docs $npm_config_entrypoint",
-    "build": "openapi bundle -o dist $npm_config_entrypoint",
-    "lint": "openapi lint $npm_config_entrypoint",
-    "lint:all": "openapi lint openapi/*/openapi.yaml"
+    "start": "openapi preview-docs ./openapi/${npm_config_api}/openapi.yaml",
+    "build": "openapi bundle -o openapi.yaml ./openapi/${npm_config_api}/openapi.yaml",
+    "build:internal:base": "openapi bundle -o ./openapi/_internal/${npm_config_api}/base-combined.openapi.yaml ./openapi/_internal/${npm_config_api}/base.openapi.yaml",
+    "lint": "openapi lint ./openapi/${npm_config_api}/openapi.yaml",
+    "lint:all": "openapi lint openapi/*/openapi.yaml",
+    "validate": "npm run build --api=${npm_config_api} && lint-openapi --config .validaterc --ruleset .spectral.yaml -v openapi.yaml",
+    "validate:internal": "lint-openapi --config .validaterc --ruleset .spectral.yaml -v openapi/_internal/${npm_config_api}/openapi.yaml",
+    "merge:internal": "openapi-merge-cli --config openapi/_internal/${npm_config_api}/openapi-merge.yaml"
   }
 }

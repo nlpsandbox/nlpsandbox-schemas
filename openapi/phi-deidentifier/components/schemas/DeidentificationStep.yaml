@@ -1,0 +1,32 @@
+type: object
+description: The configuration of a deidentification step
+properties:
+  confidenceThreshold:
+    type: number
+    format: float
+    description: The minimum confidence level for a given annotation to be de-identified
+    minimum: 0
+    maximum: 100
+    example: 95.5
+    default: 0
+  maskingCharConfig:
+    $ref: MaskingCharConfig.yaml
+  annotationTypeMaskConfig:
+    $ref: AnnotationTypeMaskConfig.yaml
+  redactConfig:
+    $ref: RedactConfig.yaml
+  dateOffsetConfig:
+    $ref: DateOffsetConfig.yaml
+  annotationTypes:
+    type: array
+    description: The types of annotations to which the de-identifer should apply the selected strategy
+    items:
+      type: string
+      enum:
+        - "text_date"
+        - "text_person_name"
+        - "text_physical_address"
+        - "text_id"
+        - "text_contact"
+required:
+  - annotationTypes
