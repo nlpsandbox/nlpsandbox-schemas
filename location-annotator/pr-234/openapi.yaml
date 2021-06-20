@@ -14,31 +14,31 @@ info:
   description: >
     # Introduction
 
-    A Location Annotator takes as input a clinical note and outputs a list of
+    A location annotator takes as input a clinical note and outputs a list of
     predicted location annotations found in the clinical note. This OpenAPI
-    document describes the specification of a Location Annotator. This
-    specification includes the schemas of the input and output data, and the
-    conditions that this annotator must meet if you want to benchmark its
-    performance on [nlpsandbox.io](https://nlpsandbox.io).
+    document describes the specification of the NLP Sandbox Location Annotator
+    API. This specification includes the schemas of the input and output data,
+    and the requirements that this annotator must meet if you want to benchmark
+    its performance on [nlpsandbox.io](https://nlpsandbox.io).
 
     # Getting Started
 
     The GitHub repository
     [nlpsandbox/location-annotator-example](https://github.com/nlpsandbox/location-annotator-example)
-    provides a simple example implementation of a Python-Flask Location
-    Annotator. By the end of the tutorial available in the README, you will have
-    built a Docker image for a simple Location Annotator. You will then be able
-    to submit this image to [nlpsandbox.io](https://nlpsandbox.io) to benchmark
-    its performance.
+    provides an example implementation of the NLP Sandbox Location Annotator API
+    in Python-Flask. By the end of the tutorial available in the README, you
+    will have built a Docker image for this NLP Sandbox tool. You will then be
+    able to submit this image to [nlpsandbox.io](https://nlpsandbox.io) to
+    benchmark its performance.
 
     # Benchmarking Requirements
 
-    Your NLP Sandbox tool must meet the following conditions before evaluating
+    Your NLP Sandbox tool must meet the following requirements before evaluating
     its performance on [nlpsandbox.io](https://nlpsandbox.io).
 
     - The endpoint `/` must redirect to `/api/v1/tool`.
 
-    - The endpoint `/ui` must redirect to the web interface (UI).
+    - The endpoint `/ui` must redirect to the Swagger User Interface (UI).
 
     - The output of this tool must be reproducible: a given input should always
       generate the same output.
@@ -50,7 +50,7 @@ info:
 
     # Examples
 
-    - [Location Annotator Example
+    - [NLP Sandbox Location Annotator Example
     (Python)](https://github.com/nlpsandbox/location-annotator-example)
 tags:
   - name: HealthCheck

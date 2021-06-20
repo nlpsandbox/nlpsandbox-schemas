@@ -15,7 +15,7 @@
     "x-logo": {
       "url": "https://github.com/nlpsandbox/nlpsandbox-schemas/raw/main/docs/logo.png"
     },
-    "description": "# Introduction\nThis NLP tool takes as input a clinical note and returned a de-identified version of the note.\nThis design of this API is a work in progress.\n# Examples\n- [NLP Sandbox PHI Deidentifier](https://github.com/nlpsandbox/phi-deidentifier)\n"
+    "description": "# Introduction\nThis NLP tool takes as input a clinical note and returned a de-identified version of the note.\nThis design of this API is a work in progress.\n# Examples\n- [NLP Sandbox PHI Deidentifier Example](https://github.com/nlpsandbox/phi-deidentifier-example)\n"
   },
   "tags": [
     {
