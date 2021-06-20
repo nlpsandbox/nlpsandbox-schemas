@@ -1649,9 +1649,17 @@
       "ToolType": {
         "description": "The type of this tool",
         "type": "string",
-        "minLength": 3,
-        "maxLength": 60,
-        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*(:)[a-z0-9]+(?:-[a-z0-9]+)*$",
+        "enum": [
+          "nlpsandbox:contact-annotator",
+          "nlpsandbox:covid-symptom-annotator",
+          "nlpsandbox:data-node",
+          "nlpsandbox:date-annotator",
+          "nlpsandbox:id-annotator",
+          "nlpsandbox:person-name-annotator",
+          "nlpsandbox:phi-annotator",
+          "nlpsandbox:phi-deidentifier",
+          "nlpsandbox:physical-address-annotator"
+        ],
         "example": "nlpsandbox:date-annotator"
       },
       "Tool": {
