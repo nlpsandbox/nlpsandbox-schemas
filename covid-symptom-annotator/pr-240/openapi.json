@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "version": "1.1.2",
+    "version": "1.2.0",
     "title": "NLP Sandbox COVID Symptom Annotator API",
     "contact": {
       "name": "NLP Sandbox Team",
@@ -10,12 +10,12 @@
     },
     "license": {
       "name": "Apache 2.0",
-      "url": "https://github.com/nlpsandbox/nlpsandbox-schemas/blob/develop/LICENSE"
+      "url": "https://github.com/nlpsandbox/nlpsandbox-schemas/blob/main/LICENSE"
     },
     "x-logo": {
       "url": "https://github.com/nlpsandbox/nlpsandbox-schemas/raw/main/docs/logo.png"
     },
-    "description": "# Introduction\nA COVID Symptom Annotator takes as input a clinical note and outputs a list of predicted COVID-19 sign and symptom annotations found in the clinical note. This OpenAPI document describes the specification of a COVID Symptom Annotator. This specification includes the schemas of the input and output data, and the conditions that this annotator must meet if you want to benchmark its performance on [nlpsandbox.io](https://nlpsandbox.io).\n# Getting Started\nThe GitHub repository [nlpsandbox/covid-symptom-annotator-example](https://github.com/nlpsandbox/covid-symptom-annotator-example) provides a simple example implementation of a Python-Flask COVID Symptom Annotator. By the end of the tutorial available in the README, you will have built a Docker image for a simple COVID Symptom Annotator. You will then be able to submit this image to [nlpsandbox.io](https://nlpsandbox.io) to benchmark its performance.\n# Benchmarking Requirements\nYour NLP Sandbox tool must meet the following conditions before evaluating its performance on [nlpsandbox.io](https://nlpsandbox.io).\n- The endpoint `/` must redirect to `/api/v1/tool`.\n- The endpoint `/ui` must redirect to the web interface (UI).\n- The output of this tool must be reproducible: a given input should always\n  generate the same output.\n\n- To ensure the results are reproducible and robust, and the data are\n  secured, this tool must not connect to any remote server. When benchmarked\n  on [nlpsandbox.io](https://nlpsandbox.io), this tool will not be able to\n  connect to remote servers.\n\n# Examples\n- [COVID Symptom Annotator Example (Python)](https://github.com/nlpsandbox/covid-symptom-annotator-example)\n"
+    "description": "# Introduction\nA COVID symptom annotator takes as input a clinical note and outputs a list of predicted COVID-19 sign and symptom annotations found in the clinical note. This OpenAPI document describes the specification of the NLP Sandbox COVID Symptom Annotator API. This specification includes the schemas of the input and output data, and the requirements that this annotator must meet if you want to benchmark its performance on [nlpsandbox.io](https://nlpsandbox.io).\n# Getting Started\nThe GitHub repository [nlpsandbox/covid-symptom-annotator-example](https://github.com/nlpsandbox/covid-symptom-annotator-example) provides an example implementation of the NLP Sandbox COVID Symptom Annotator API in Python-Flask. By the end of the tutorial available in the README, you will have built a Docker image for this NLP Sandbox tool. You will then be able to submit this image to [nlpsandbox.io](https://nlpsandbox.io) to benchmark its performance.\n# Benchmarking Requirements\nYour NLP Sandbox tool must meet the following requirements before evaluating its performance on [nlpsandbox.io](https://nlpsandbox.io).\n- The endpoint `/` must redirect to `/api/v1/tool`.\n- The endpoint `/ui` must redirect to the Swagger User Interface (UI).\n- The output of this tool must be reproducible: a given input should always\n  generate the same output.\n\n- To ensure the results are reproducible and robust, and the data are\n  secured, this tool must not connect to any remote server. When benchmarked\n  on [nlpsandbox.io](https://nlpsandbox.io), this tool will not be able to\n  connect to remote servers.\n\n# Examples\n- [NLP Sandbox COVID Symptom Annotator Example (Python)](https://github.com/nlpsandbox/covid-symptom-annotator-example)\n"
   },
   "tags": [
     {
@@ -435,9 +435,17 @@
       "ToolType": {
         "description": "The type of this tool",
         "type": "string",
-        "minLength": 3,
-        "maxLength": 60,
-        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*(:)[a-z0-9]+(?:-[a-z0-9]+)*$",
+        "enum": [
+          "nlpsandbox:contact-annotator",
+          "nlpsandbox:covid-symptom-annotator",
+          "nlpsandbox:data-node",
+          "nlpsandbox:date-annotator",
+          "nlpsandbox:id-annotator",
+          "nlpsandbox:person-name-annotator",
+          "nlpsandbox:phi-annotator",
+          "nlpsandbox:phi-deidentifier",
+          "nlpsandbox:physical-address-annotator"
+        ],
         "example": "nlpsandbox:date-annotator"
       },
       "Tool": {
@@ -467,7 +475,7 @@
           "description": {
             "description": "A short, one-sentence summary of the tool",
             "type": "string",
-            "maxLength": 100
+            "maxLength": 280
           },
           "author": {
             "description": "The author of the tool",
@@ -515,7 +523,7 @@
           "authorEmail": "author@example.com",
           "url": "https://example.com",
           "type": "nlpsandbox:date-annotator",
-          "apiVersion": "1.1.2"
+          "apiVersion": "1.2.0"
         }
       },
       "ToolDependencies": {

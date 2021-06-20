@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.1.2
+  version: 1.2.0
   title: NLP Sandbox API
   contact:
     name: NLP Sandbox Team
@@ -8,7 +8,7 @@ info:
     url: 'https://nlpsandbox.io'
   license:
     name: Apache 2.0
-    url: 'https://github.com/nlpsandbox/nlpsandbox-schemas/blob/develop/LICENSE'
+    url: 'https://github.com/nlpsandbox/nlpsandbox-schemas/blob/main/LICENSE'
   x-logo:
     url: 'https://github.com/nlpsandbox/nlpsandbox-schemas/raw/main/docs/logo.png'
   description: NLP Sandbox REST API
@@ -1066,9 +1066,16 @@ components:
     ToolType:
       description: The type of this tool
       type: string
-      minLength: 3
-      maxLength: 60
-      pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*(:)[a-z0-9]+(?:-[a-z0-9]+)*$'
+      enum:
+        - 'nlpsandbox:contact-annotator'
+        - 'nlpsandbox:covid-symptom-annotator'
+        - 'nlpsandbox:data-node'
+        - 'nlpsandbox:date-annotator'
+        - 'nlpsandbox:id-annotator'
+        - 'nlpsandbox:person-name-annotator'
+        - 'nlpsandbox:phi-annotator'
+        - 'nlpsandbox:phi-deidentifier'
+        - 'nlpsandbox:physical-address-annotator'
       example: 'nlpsandbox:date-annotator'
     Tool:
       type: object
@@ -1094,7 +1101,7 @@ components:
         description:
           description: 'A short, one-sentence summary of the tool'
           type: string
-          maxLength: 100
+          maxLength: 280
         author:
           description: The author of the tool
           type: string
@@ -1135,7 +1142,7 @@ components:
         authorEmail: author@example.com
         url: 'https://example.com'
         type: 'nlpsandbox:date-annotator'
-        apiVersion: 1.1.2
+        apiVersion: 1.2.0
     ToolDependencies:
       type: object
       description: A list of tool dependencies
