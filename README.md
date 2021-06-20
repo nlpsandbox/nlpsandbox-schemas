@@ -40,11 +40,12 @@ develop and benchmark an NLP Sandbox tool, visit [NLPSandbox.io].
 
 API Name                     | Type
 -----------------------------|-----------------------------------------
+[Contact Annotator]          | `nlpsandbox:contact-annotator`
 [Date Annotator]             | `nlpsandbox:date-annotator`
+[ID Annotator]               | `nlpsandbox:id-annotator`
 [Person Name Annotator]      | `nlpsandbox:person-name-annotator`
 [Physical Address Annotator] | `nlpsandbox:physical-address-annotator`
-[ID Annotator]               | `nlpsandbox:id-annotator`
-[Contact Annotator]          | `nlpsandbox:contact-annotator`
+[PHI Annotator]              | `nlpsandbox:phi-annotator`
 [PHI Deidentifier]           | `nlpsandbox:phi-deidentifier`
 
 ### Symptom Annotation
@@ -71,13 +72,14 @@ high score!
 
 GitHub repository                               | Language
 ------------------------------------------------|---------
+[nlpsandbox/contact-annotator-example]          | Python
 [nlpsandbox/date-annotator-example]             | Python
 [nlpsandbox/date-annotator-example-java]        | Java
+[nlpsandbox/id-annotator-example]               | Python
 [nlpsandbox/person-name-annotator-example]      | Python
 [nlpsandbox/physical-address-annotator-example] | Python
-[nlpsandbox/id-annotator-example]               | Python
-[nlpsandbox/contact-annotator-example]          | Python
-[nlpsandbox/phi-deidentifier]                   | Python
+[nlpsandbox/phi-annotator-example]              | Python
+[nlpsandbox/phi-deidentifier-example]           | Python
 [nlpsandbox/covid-symptom-annotation-example]   | Python
 
 ### Data Node
@@ -133,6 +135,7 @@ Thinking about contributing to this project? Get started by reading our
 [Physical Address Annotator]: https://nlpsandbox.github.io/nlpsandbox-schemas/physical-address-annotator/latest/docs/
 [ID Annotator]: https://nlpsandbox.github.io/nlpsandbox-schemas/id-annotator/latest/docs/
 [Contact Annotator]: https://nlpsandbox.github.io/nlpsandbox-schemas/contact-annotator/latest/docs/
+[PHI Annotator]: https://nlpsandbox.github.io/nlpsandbox-schemas/phi-annotator/latest/docs/
 [PHI Deidentifier]: https://nlpsandbox.github.io/nlpsandbox-schemas/phi-deidentifier/latest/docs/
 [COVID Symptom Annotator]: https://nlpsandbox.github.io/nlpsandbox-schemas/covid-symptom-annotator/latest/docs/
 [Data Node]: https://nlpsandbox.github.io/nlpsandbox-schemas/data-node/latest/docs/
@@ -143,7 +146,8 @@ Thinking about contributing to this project? Get started by reading our
 [nlpsandbox/physical-address-annotator-example]: https://github.com/nlpsandbox/physical-address-annotator-example
 [nlpsandbox/id-annotator-example]: https://github.com/nlpsandbox/id-annotator-example
 [nlpsandbox/contact-annotator-example]: https://github.com/nlpsandbox/contact-annotator-example
-[nlpsandbox/phi-deidentifier]: https://github.com/nlpsandbox/phi-deidentifier
+[nlpsandbox/phi-annotator-example]: https://github.com/nlpsandbox/phi-annotator-example
+[nlpsandbox/phi-deidentifier-example]: https://github.com/nlpsandbox/phi-deidentifier-example
 [nlpsandbox/covid-symptom-annotation-example]: https://github.com/nlpsandbox/covid-symptom-annotator-example
 [nlpsandbox/data-node]: https://github.com/nlpsandbox/data-node
 [semantic versioning]: https://semver.org/
