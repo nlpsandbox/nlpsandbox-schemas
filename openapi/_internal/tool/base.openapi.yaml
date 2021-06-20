@@ -10,7 +10,7 @@ info:
     name: Apache 2.0
     url: https://github.com/nlpsandbox/nlpsandbox-schemas/blob/develop/LICENSE
   x-logo:
-    url: https://nlpsandbox.github.io/nlpsandbox-schemas/logo.png
+    url: https://github.com/nlpsandbox/nlpsandbox-schemas/raw/main/docs/logo.png
   description: NLP Sandbox Tool REST API
 tags:
   - name: HealthCheck
