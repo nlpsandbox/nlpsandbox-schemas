@@ -1,10 +1,10 @@
 openapi: 3.0.3
 info:
   version: 1.1.2
-  title: NLP Sandbox Contact Annotator API
+  title: NLP Sandbox Location Annotator API
   contact:
     name: NLP Sandbox Team
-    email: thomas.schaffter@sagebionetworks.org
+    email: team@nlpsandbox.io
     url: 'https://nlpsandbox.io'
   license:
     name: Apache 2.0
@@ -14,20 +14,20 @@ info:
   description: >
     # Introduction
 
-    A contact annotator takes as input a clinical note and outputs a list of
-    predicted contact annotations found in the clinical note. This OpenAPI
-    document describes the specification of a contact Annotator. This
+    A Location Annotator takes as input a clinical note and outputs a list of
+    predicted location annotations found in the clinical note. This OpenAPI
+    document describes the specification of a Location Annotator. This
     specification includes the schemas of the input and output data, and the
     conditions that this annotator must meet if you want to benchmark its
     performance on [nlpsandbox.io](https://nlpsandbox.io).
 
     # Getting Started
 
-    The GitHub repository (will be added later)
-    [nlpsandbox/contact-annotator-example](https://github.com/nlpsandbox/contact-annotator-example)
-    provides a rules-based example implementation of a Python-Flask contact
+    The GitHub repository
+    [nlpsandbox/location-annotator-example](https://github.com/nlpsandbox/location-annotator-example)
+    provides a simple example implementation of a Python-Flask Location
     Annotator. By the end of the tutorial available in the README, you will have
-    built a Docker image for a simple contact Annotator. You will then be able
+    built a Docker image for a simple Location Annotator. You will then be able
     to submit this image to [nlpsandbox.io](https://nlpsandbox.io) to benchmark
     its performance.
 
@@ -50,13 +50,13 @@ info:
 
     # Examples
 
-    - [Contact Annotator Example
-    (Python)](https://github.com/nlpsandbox/contact-annotator-example)
+    - [Location Annotator Example
+    (Python)](https://github.com/nlpsandbox/location-annotator-example)
 tags:
   - name: HealthCheck
     description: Operations about health checks
-  - name: TextContactAnnotation
-    description: Operations about text contact annotations
+  - name: TextLocationAnnotation
+    description: Operations about text location annotations
   - name: Tool
     description: Operations about this tool
 servers:
@@ -81,25 +81,25 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
-  /textContactAnnotations:
+  /textLocationAnnotations:
     post:
       tags:
-        - TextContactAnnotation
-      summary: Annotate contact information in a clinical note
-      description: Return the contact annotations found in a clinical note
-      operationId: createTextContactAnnotations
+        - TextLocationAnnotation
+      summary: Annotate locations in a clinical note
+      description: Return the location annotations found in a clinical note
+      operationId: createTextLocationAnnotations
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/TextContactAnnotationRequest'
+              $ref: '#/components/schemas/TextLocationAnnotationRequest'
       responses:
         '200':
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TextContactAnnotationResponse'
+                $ref: '#/components/schemas/TextLocationAnnotationResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
         '500':
@@ -214,22 +214,14 @@ components:
         text: 'On 12/26/2020, Ms. Chloe Price met with Dr. Prescott in Seattle.'
         type: 'loinc:LP29684-5'
         patientId: awesome-patient
-    TextContactAnnotationRequest:
+    TextLocationAnnotationRequest:
       type: object
-      description: A request to annotate contacts in a clinical note
+      description: A request to annotate locations in a clinical note
       properties:
         note:
           $ref: '#/components/schemas/Note'
       required:
         - note
-      example:
-        note:
-          identifier: awesome-note
-          text: >
-            On 12/26/2020, Ms. Chloe Price met with Dr. Prescott in Seattle. Her
-            phone number is 203-555-4545.
-          type: 'loinc:LP29684-5'
-          patientId: awesome-patient
     TextAnnotation:
       type: object
       description: An annotation in a text
@@ -259,42 +251,46 @@ components:
         length: 19
         text: the annotation text
         confidence: 95.5
-    TextContactAnnotation:
+    TextLocationAnnotation:
       type: object
-      description: A contact annotation in a text
+      description: A location annotation in a text
       allOf:
         - $ref: '#/components/schemas/TextAnnotation'
         - type: object
           properties:
-            contactType:
-              description: Type of contact information
+            locationType:
+              description: Type of location
               type: string
               enum:
-                - email
-                - fax
-                - ip_address
-                - phone
-                - url
+                - city
+                - country
+                - department
+                - hospital
+                - organization
                 - other
+                - room
+                - state
+                - street
+                - zip
           required:
-            - contactType
+            - locationType
       example:
         start: 42
-        length: 11
-        text: dave@uw.edu
-        contactType: email
+        length: 7
+        text: Seattle
+        locationType: city
         confidence: 95.5
-    TextContactAnnotationResponse:
+    TextLocationAnnotationResponse:
       type: object
-      description: The response to a contact annotation request
+      description: The response to a locations annotation request
       properties:
-        textContactAnnotations:
-          description: A list of contact annotations
+        textLocationAnnotations:
+          description: A list of location annotations
           type: array
           items:
-            $ref: '#/components/schemas/TextContactAnnotation'
+            $ref: '#/components/schemas/TextLocationAnnotation'
       required:
-        - textContactAnnotations
+        - textLocationAnnotations
     License:
       description: The license (license keyword used by GitHub)
       type: string

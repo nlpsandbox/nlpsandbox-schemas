@@ -10,7 +10,7 @@ info:
     name: Apache 2.0
     url: 'https://github.com/nlpsandbox/nlpsandbox-schemas/blob/develop/LICENSE'
   x-logo:
-    url: 'https://nlpsandbox.github.io/nlpsandbox-schemas/logo.png'
+    url: 'https://github.com/nlpsandbox/nlpsandbox-schemas/raw/main/docs/logo.png'
   description: NLP Sandbox REST API
 servers:
   - url: 'http://example.com/api/v1'
@@ -24,8 +24,8 @@ tags:
     description: Operations about text date annotations
   - name: TextPersonNameAnnotation
     description: Operations about text person name annotations
-  - name: TextPhysicalAddressAnnotation
-    description: Operations about text physical address annotations
+  - name: TextLocationAnnotation
+    description: Operations about text location annotations
   - name: TextIdAnnotation
     description: Operations about text ID annotations
   - name: TextContactAnnotation
@@ -147,25 +147,25 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '500':
           $ref: '#/components/responses/InternalServerError'
-  /textPhysicalAddressAnnotations:
+  /textLocationAnnotations:
     post:
       tags:
-        - TextPhysicalAddressAnnotation
-      summary: Annotate physical addresses in a clinical note
-      description: Return the physical addresse annotations found in a clinical note
-      operationId: createTextPhysicalAddressAnnotations
+        - TextLocationAnnotation
+      summary: Annotate locations in a clinical note
+      description: Return the location annotations found in a clinical note
+      operationId: createTextLocationAnnotations
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/TextPhysicalAddressAnnotationRequest'
+              $ref: '#/components/schemas/TextLocationAnnotationRequest'
       responses:
         '200':
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TextPhysicalAddressAnnotationResponse'
+                $ref: '#/components/schemas/TextLocationAnnotationResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
         '500':
@@ -1279,23 +1279,23 @@ components:
             $ref: '#/components/schemas/TextPersonNameAnnotation'
       required:
         - textPersonNameAnnotations
-    TextPhysicalAddressAnnotationRequest:
+    TextLocationAnnotationRequest:
       type: object
-      description: A request to annotate physical addresses in a clinical note
+      description: A request to annotate locations in a clinical note
       properties:
         note:
           $ref: '#/components/schemas/Note'
       required:
         - note
-    TextPhysicalAddressAnnotation:
+    TextLocationAnnotation:
       type: object
-      description: A physical address annotation in a text
+      description: A location annotation in a text
       allOf:
         - $ref: '#/components/schemas/TextAnnotation'
         - type: object
           properties:
-            addressType:
-              description: Type of address information
+            locationType:
+              description: Type of location
               type: string
               enum:
                 - city
@@ -1309,24 +1309,24 @@ components:
                 - street
                 - zip
           required:
-            - addressType
+            - locationType
       example:
         start: 42
         length: 7
         text: Seattle
-        addressType: city
+        locationType: city
         confidence: 95.5
-    TextPhysicalAddressAnnotationResponse:
+    TextLocationAnnotationResponse:
       type: object
-      description: The response to a physical addresses annotation request
+      description: The response to a locations annotation request
       properties:
-        textPhysicalAddressAnnotations:
-          description: A list of physical address annotations
+        textLocationAnnotations:
+          description: A list of location annotations
           type: array
           items:
-            $ref: '#/components/schemas/TextPhysicalAddressAnnotation'
+            $ref: '#/components/schemas/TextLocationAnnotation'
       required:
-        - textPhysicalAddressAnnotations
+        - textLocationAnnotations
     TextIdAnnotationRequest:
       type: object
       description: A request to annotate IDs in a clinical note
@@ -1451,7 +1451,7 @@ components:
       type: object
       description: >-
         Configuration for the "annotation type" strategy. E.g. "John Smith lives
-        at 123 Main St" -> "[PERSON_NAME] lives at [PHYSICAL_ADDRESS]".
+        at 123 Main St" -> "[PERSON_NAME] lives at [LOCATION]".
     RedactConfig:
       type: object
       description: >-
@@ -1501,7 +1501,7 @@ components:
             enum:
               - text_date
               - text_person_name
-              - text_physical_address
+              - text_location
               - text_id
               - text_contact
       required:
@@ -1535,7 +1535,7 @@ components:
           - confidenceThreshold: 20
             annotationTypeMaskConfig: {}
             annotationTypes:
-              - text_physical_address
+              - text_location
         note:
           identifier: awesome-note
           text: 'On 12/26/2020, Ms. Chloe Price met with Dr. Prescott in Seattle.'
@@ -1555,11 +1555,11 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/TextPersonNameAnnotation'
-        textPhysicalAddressAnnotations:
-          description: Physical address annotations in a text
+        textLocationAnnotations:
+          description: Location annotations in a text
           type: array
           items:
-            $ref: '#/components/schemas/TextPhysicalAddressAnnotation'
+            $ref: '#/components/schemas/TextLocationAnnotation'
         textIdAnnotations:
           description: ID annotations in a text
           type: array
@@ -1573,7 +1573,7 @@ components:
       required:
         - textDateAnnotations
         - textPersonNameAnnotations
-        - textPhysicalAddressAnnotations
+        - textLocationAnnotations
         - textIdAnnotations
         - textContactAnnotations
     DeidentifyResponse:
@@ -1846,11 +1846,11 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/TextPersonNameAnnotation'
-        textPhysicalAddressAnnotations:
-          description: Physical address annotations in a text
+        textLocationAnnotations:
+          description: Location annotations in a text
           type: array
           items:
-            $ref: '#/components/schemas/TextPhysicalAddressAnnotation'
+            $ref: '#/components/schemas/TextLocationAnnotation'
         textIdAnnotations:
           description: ID annotations in a text
           type: array
@@ -1910,11 +1910,11 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/TextPersonNameAnnotation'
-        textPhysicalAddressAnnotations:
-          description: Physical address annotations in a text
+        textLocationAnnotations:
+          description: Location annotations in a text
           type: array
           items:
-            $ref: '#/components/schemas/TextPhysicalAddressAnnotation'
+            $ref: '#/components/schemas/TextLocationAnnotation'
         textIdAnnotations:
           description: ID annotations in a text
           type: array

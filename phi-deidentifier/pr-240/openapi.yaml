@@ -10,7 +10,7 @@ info:
     name: Apache 2.0
     url: 'https://github.com/nlpsandbox/nlpsandbox-schemas/blob/develop/LICENSE'
   x-logo:
-    url: 'https://nlpsandbox.github.io/nlpsandbox-schemas/logo.png'
+    url: 'https://github.com/nlpsandbox/nlpsandbox-schemas/raw/main/docs/logo.png'
   description: >
     # Introduction
 
@@ -167,7 +167,7 @@ components:
       type: object
       description: >-
         Configuration for the "annotation type" strategy. E.g. "John Smith lives
-        at 123 Main St" -> "[PERSON_NAME] lives at [PHYSICAL_ADDRESS]".
+        at 123 Main St" -> "[PERSON_NAME] lives at [LOCATION]".
     RedactConfig:
       type: object
       description: >-
@@ -217,7 +217,7 @@ components:
             enum:
               - text_date
               - text_person_name
-              - text_physical_address
+              - text_location
               - text_id
               - text_contact
       required:
@@ -251,7 +251,7 @@ components:
           - confidenceThreshold: 20
             annotationTypeMaskConfig: {}
             annotationTypes:
-              - text_physical_address
+              - text_location
         note:
           identifier: awesome-note
           text: 'On 12/26/2020, Ms. Chloe Price met with Dr. Prescott in Seattle.'
@@ -313,15 +313,15 @@ components:
         length: 11
         text: Chloe Price
         confidence: 95.5
-    TextPhysicalAddressAnnotation:
+    TextLocationAnnotation:
       type: object
-      description: A physical address annotation in a text
+      description: A location annotation in a text
       allOf:
         - $ref: '#/components/schemas/TextAnnotation'
         - type: object
           properties:
-            addressType:
-              description: Type of address information
+            locationType:
+              description: Type of location
               type: string
               enum:
                 - city
@@ -335,12 +335,12 @@ components:
                 - street
                 - zip
           required:
-            - addressType
+            - locationType
       example:
         start: 42
         length: 7
         text: Seattle
-        addressType: city
+        locationType: city
         confidence: 95.5
     TextIdAnnotation:
       type: object
@@ -410,11 +410,11 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/TextPersonNameAnnotation'
-        textPhysicalAddressAnnotations:
-          description: Physical address annotations in a text
+        textLocationAnnotations:
+          description: Location annotations in a text
           type: array
           items:
-            $ref: '#/components/schemas/TextPhysicalAddressAnnotation'
+            $ref: '#/components/schemas/TextLocationAnnotation'
         textIdAnnotations:
           description: ID annotations in a text
           type: array
@@ -428,7 +428,7 @@ components:
       required:
         - textDateAnnotations
         - textPersonNameAnnotations
-        - textPhysicalAddressAnnotations
+        - textLocationAnnotations
         - textIdAnnotations
         - textContactAnnotations
     DeidentifyResponse:
