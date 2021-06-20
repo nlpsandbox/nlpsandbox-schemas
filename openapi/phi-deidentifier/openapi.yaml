@@ -21,7 +21,7 @@ info:
 
     # Examples
 
-    - [NLP Sandbox PHI Deidentifier](https://github.com/nlpsandbox/phi-deidentifier)
+    - [NLP Sandbox PHI Deidentifier Example](https://github.com/nlpsandbox/phi-deidentifier-example)
 tags:
   - name: DeidentifiedNote
     description: Operations about deidentified notes
