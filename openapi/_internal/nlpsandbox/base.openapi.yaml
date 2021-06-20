@@ -8,7 +8,7 @@ info:
     url: https://nlpsandbox.io
   license:
     name: Apache 2.0
-    url: https://github.com/nlpsandbox/nlpsandbox-schemas/blob/develop/LICENSE
+    url: https://github.com/nlpsandbox/nlpsandbox-schemas/blob/main/LICENSE
   x-logo:
     url: https://github.com/nlpsandbox/nlpsandbox-schemas/raw/main/docs/logo.png
   description: NLP Sandbox REST API

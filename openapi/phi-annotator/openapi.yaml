@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   version: 1.1.2
-  title: NLP Sandbox Date Annotator API
+  title: NLP Sandbox PHI Annotator API
   contact:
     name: NLP Sandbox Team
     email: team@nlpsandbox.io
@@ -10,22 +10,23 @@ info:
     name: Apache 2.0
     url: https://github.com/nlpsandbox/nlpsandbox-schemas/blob/main/LICENSE
   x-logo:
-    url: https://github.com/nlpsandbox/nlpsandbox-schemas/raw/main/docs/logo.png
+    url: https://nlpsandbox.github.io/nlpsandbox-schemas/logo.png
   description: >
     # Introduction
 
-    A date annotator takes as input a clinical note and outputs a list of
-    predicted date annotations found in the clinical note. This OpenAPI document
-    describes the specification of the NLP Sandbox Date Annotator API. This
-    specification includes the schemas of the input and output data, and the
-    requirements that this annotator must meet if you want to benchmark its
-    performance on [nlpsandbox.io](https://nlpsandbox.io).
+    A protected health information (PHI) annotator implements several endpoints
+    that take as input a clinical note and outputs a list of predicted PHI
+    annotations found in the clinical note. This OpenAPI document describes the
+    specification of the NLP Sandbox PHI Annotator API. This specification
+    includes the schemas of the input and output data, and the requirements that
+    this annotator must meet if you want to benchmark its performance on
+    [nlpsandbox.io](https://nlpsandbox.io).
 
     # Getting Started
 
     The GitHub repository
-    [nlpsandbox/date-annotator-example](https://github.com/nlpsandbox/date-annotator-example)
-    provides an example implementation of the NLP Sandbox Date Annotator API in
+    [nlpsandbox/phi-annotator-example](https://github.com/nlpsandbox/phi-annotator-example)
+    provides an example implementation of the NLP Sandbox PHI Annotator API in
     Python-Flask. By the end of the tutorial available in the README, you will
     have built a Docker image for this NLP Sandbox tool. You will then be able
     to submit this image to [nlpsandbox.io](https://nlpsandbox.io) to benchmark
@@ -50,14 +51,20 @@ info:
 
     # Examples
 
-    - [NLP Sandbox Date Annotator Example (Python)](https://github.com/nlpsandbox/date-annotator-example)
-
-    - [NLP Sandbox Date Annotator Example (Java)](https://github.com/nlpsandbox/date-annotator-example-java)
+    - [NLP Sandbox PHI Annotator Example (Python)](https://github.com/nlpsandbox/phi-annotator-example)
 tags:
   - name: HealthCheck
     description: Operations about health checks
+  - name: TextContactAnnotation
+    description: Operations about text contact annotations
   - name: TextDateAnnotation
     description: Operations about text date annotations
+  - name: TextIdAnnotation
+    description: Operations about text ID annotations
+  - name: TextPersonNameAnnotation
+    description: Operations about text person name annotations
+  - name: TextLocationAnnotation
+    description: Operations about text location annotations
   - name: Tool
     description: Operations about this tool
 servers:
@@ -66,8 +73,16 @@ servers:
 paths:
   /healthCheck:
     $ref: ../commons/paths/healthCheck.yaml
+  /textContactAnnotations:
+    $ref: ../contact-annotator/paths/textContactAnnotations.yaml
   /textDateAnnotations:
-    $ref: paths/textDateAnnotations.yaml
+    $ref: ../date-annotator/paths/textDateAnnotations.yaml
+  /textIdAnnotations:
+    $ref: ../id-annotator/paths/textIdAnnotations.yaml
+  /textLocationAnnotations:
+    $ref: ../location-annotator/paths/textLocationAnnotations.yaml
+  /textPersonNameAnnotations:
+    $ref: ../person-name-annotator/paths/textPersonNameAnnotations.yaml
   /tool:
     $ref: ../commons/paths/tool.yaml
   /tool/dependencies:
