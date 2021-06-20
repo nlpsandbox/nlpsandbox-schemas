@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   version: 1.1.2
-  title: NLP Sandbox PHI Deidentifier API
+  title: NLP Sandbox Location Annotator API
   contact:
     name: NLP Sandbox Team
     email: team@nlpsandbox.io
@@ -14,49 +14,55 @@ info:
   description: >
     # Introduction
 
-    This NLP tool takes as input a clinical note and returned a de-identified
-    version of the note.
+    A Location Annotator takes as input a clinical note and outputs a list of
+    predicted location annotations found in the clinical note. This OpenAPI
+    document describes the specification of a Location Annotator. This
+    specification includes the schemas of the input and output data, and the
+    conditions that this annotator must meet if you want to benchmark its
+    performance on [nlpsandbox.io](https://nlpsandbox.io).
 
-    This design of this API is a work in progress.
+    # Getting Started
+
+    The GitHub repository
+    [nlpsandbox/location-annotator-example](https://github.com/nlpsandbox/location-annotator-example)
+    provides a simple example implementation of a Python-Flask Location
+    Annotator. By the end of the tutorial available in the README, you will have
+    built a Docker image for a simple Location Annotator. You will then be able
+    to submit this image to [nlpsandbox.io](https://nlpsandbox.io) to benchmark
+    its performance.
+
+    # Benchmarking Requirements
+
+    Your NLP Sandbox tool must meet the following conditions before evaluating
+    its performance on [nlpsandbox.io](https://nlpsandbox.io).
+
+    - The endpoint `/` must redirect to `/api/v1/tool`.
+
+    - The endpoint `/ui` must redirect to the web interface (UI).
+
+    - The output of this tool must be reproducible: a given input should always
+      generate the same output.
+
+    - To ensure the results are reproducible and robust, and the data are
+      secured, this tool must not connect to any remote server. When benchmarked
+      on [nlpsandbox.io](https://nlpsandbox.io), this tool will not be able to
+      connect to remote servers.
 
     # Examples
 
-    - [NLP Sandbox PHI
-    Deidentifier](https://github.com/nlpsandbox/phi-deidentifier)
+    - [Location Annotator Example
+    (Python)](https://github.com/nlpsandbox/location-annotator-example)
 tags:
-  - name: DeidentifiedNote
-    description: Operations about deidentified notes
   - name: HealthCheck
     description: Operations about health checks
+  - name: TextLocationAnnotation
+    description: Operations about text location annotations
   - name: Tool
     description: Operations about this tool
 servers:
   - url: 'http://example.com/api/v1'
   - url: 'https://example.com/api/v1'
 paths:
-  /deidentifiedNotes:
-    post:
-      tags:
-        - DeidentifiedNote
-      summary: Deidentify a clinical note
-      description: Returns the deidentified note
-      operationId: createDeidentifiedNotes
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/DeidentifyRequest'
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DeidentifyResponse'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '500':
-          $ref: '#/components/responses/InternalServerError'
   /healthCheck:
     get:
       tags:
@@ -73,6 +79,29 @@ paths:
                 $ref: '#/components/schemas/HealthCheck'
         '404':
           $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /textLocationAnnotations:
+    post:
+      tags:
+        - TextLocationAnnotation
+      summary: Annotate locations in a clinical note
+      description: Return the location annotations found in a clinical note
+      operationId: createTextLocationAnnotations
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TextLocationAnnotationRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TextLocationAnnotationResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
         '500':
           $ref: '#/components/responses/InternalServerError'
   /tool:
@@ -113,6 +142,40 @@ paths:
           $ref: '#/components/responses/InternalServerError'
 components:
   schemas:
+    HealthCheck:
+      type: object
+      description: Represents the health of a service
+      properties:
+        status:
+          description: Indicates whether the service status is acceptable or not
+          type: string
+          enum:
+            - pass
+            - fail
+            - warn
+      required:
+        - status
+    Error:
+      type: object
+      description: Problem details (tools.ietf.org/html/rfc7807)
+      properties:
+        title:
+          type: string
+          description: A human readable documentation for the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: >-
+            A human readable explanation specific to this occurrence of the
+            problem
+        type:
+          type: string
+          description: An absolute URI that identifies the problem type
+      required:
+        - title
+        - status
     NoteId:
       description: The ID of the clinical note
       type: string
@@ -151,112 +214,14 @@ components:
         text: 'On 12/26/2020, Ms. Chloe Price met with Dr. Prescott in Seattle.'
         type: 'loinc:LP29684-5'
         patientId: awesome-patient
-    MaskingCharConfig:
+    TextLocationAnnotationRequest:
       type: object
-      description: >-
-        Configuration for the masking char strategy. E.g. "John Smith lives at
-        123 Main St" -> "********* lives at ***********".
-      properties:
-        maskingChar:
-          type: string
-          description: Character used to mask sensitive information
-          minLength: 1
-          maxLength: 1
-          default: '*'
-    AnnotationTypeMaskConfig:
-      type: object
-      description: >-
-        Configuration for the "annotation type" strategy. E.g. "John Smith lives
-        at 123 Main St" -> "[PERSON_NAME] lives at [LOCATION]".
-    RedactConfig:
-      type: object
-      description: >-
-        Configuration for the redaction strategy. E.g. "John Smith lives at 123
-        Main St" -> "lives at".
-    DateOffsetConfig:
-      type: object
-      description: >-
-        Configuration for the "date offset" strategy. E.g. "John Smith visited
-        on 1 January 2020" -> "John Smith visited on 29 October 2025". Note, can
-        only be set with the "text_date" annotation type.
-      properties:
-        offsetDays:
-          type: integer
-          description: Number of days by which to offset annotated dates.
-      required:
-        - offsetDays
-    DeidentificationStep:
-      type: object
-      description: The configuration of a deidentification step
-      properties:
-        confidenceThreshold:
-          type: number
-          format: float
-          description: >-
-            The minimum confidence level for a given annotation to be
-            de-identified
-          minimum: 0
-          maximum: 100
-          example: 95.5
-          default: 0
-        maskingCharConfig:
-          $ref: '#/components/schemas/MaskingCharConfig'
-        annotationTypeMaskConfig:
-          $ref: '#/components/schemas/AnnotationTypeMaskConfig'
-        redactConfig:
-          $ref: '#/components/schemas/RedactConfig'
-        dateOffsetConfig:
-          $ref: '#/components/schemas/DateOffsetConfig'
-        annotationTypes:
-          type: array
-          description: >-
-            The types of annotations to which the de-identifer should apply the
-            selected strategy
-          items:
-            type: string
-            enum:
-              - text_date
-              - text_person_name
-              - text_location
-              - text_id
-              - text_contact
-      required:
-        - annotationTypes
-    DeidentifyRequest:
-      type: object
-      description: A request to de-identify a clinical note
+      description: A request to annotate locations in a clinical note
       properties:
         note:
           $ref: '#/components/schemas/Note'
-        deidentificationSteps:
-          type: array
-          description: A list of deidentification steps
-          items:
-            $ref: '#/components/schemas/DeidentificationStep'
       required:
         - note
-        - deidentificationSteps
-      example:
-        deidentificationSteps:
-          - confidenceThreshold: 20
-            maskingCharConfig:
-              maskingChar: '-'
-            annotationTypes:
-              - text_date
-          - confidenceThreshold: 30
-            maskingCharConfig:
-              maskingChar: '#'
-            annotationTypes:
-              - text_person_name
-          - confidenceThreshold: 20
-            annotationTypeMaskConfig: {}
-            annotationTypes:
-              - text_location
-        note:
-          identifier: awesome-note
-          text: 'On 12/26/2020, Ms. Chloe Price met with Dr. Prescott in Seattle.'
-          type: 'loinc:LP29684-5'
-          patientId: awesome-patient
     TextAnnotation:
       type: object
       description: An annotation in a text
@@ -285,33 +250,6 @@ components:
         start: 42
         length: 19
         text: the annotation text
-        confidence: 95.5
-    TextDateAnnotation:
-      type: object
-      description: A date annotation in a text
-      allOf:
-        - $ref: '#/components/schemas/TextAnnotation'
-        - type: object
-          properties:
-            dateFormat:
-              description: Date format (ISO 8601)
-              type: string
-              example: MM/DD/YYYY
-      example:
-        start: 42
-        length: 10
-        text: 10/26/2020
-        dateFormat: MM/DD/YYYY
-        confidence: 95.5
-    TextPersonNameAnnotation:
-      type: object
-      description: A person name annotation in a text
-      allOf:
-        - $ref: '#/components/schemas/TextAnnotation'
-      example:
-        start: 42
-        length: 11
-        text: Chloe Price
         confidence: 95.5
     TextLocationAnnotation:
       type: object
@@ -342,139 +280,17 @@ components:
         text: Seattle
         locationType: city
         confidence: 95.5
-    TextIdAnnotation:
+    TextLocationAnnotationResponse:
       type: object
-      description: An ID annotation in a text
-      allOf:
-        - $ref: '#/components/schemas/TextAnnotation'
-        - type: object
-          properties:
-            idType:
-              description: Type of ID information
-              type: string
-              enum:
-                - account
-                - bio_id
-                - device
-                - health_plan
-                - id_number
-                - license
-                - medical_record
-                - ssn
-                - vehicle
-                - other
-          required:
-            - idType
-      example:
-        start: 42
-        length: 11
-        text: 203-11-4535
-        idType: ssn
-        confidence: 95.5
-    TextContactAnnotation:
-      type: object
-      description: A contact annotation in a text
-      allOf:
-        - $ref: '#/components/schemas/TextAnnotation'
-        - type: object
-          properties:
-            contactType:
-              description: Type of contact information
-              type: string
-              enum:
-                - email
-                - fax
-                - ip_address
-                - phone
-                - url
-                - other
-          required:
-            - contactType
-      example:
-        start: 42
-        length: 11
-        text: dave@uw.edu
-        contactType: email
-        confidence: 95.5
-    AnnotationSet:
-      type: object
-      description: Set of annotations of all types for a text
+      description: The response to a locations annotation request
       properties:
-        textDateAnnotations:
-          description: Date annotations in a text
-          type: array
-          items:
-            $ref: '#/components/schemas/TextDateAnnotation'
-        textPersonNameAnnotations:
-          description: Person name annotations in a text
-          type: array
-          items:
-            $ref: '#/components/schemas/TextPersonNameAnnotation'
         textLocationAnnotations:
-          description: Location annotations in a text
+          description: A list of location annotations
           type: array
           items:
             $ref: '#/components/schemas/TextLocationAnnotation'
-        textIdAnnotations:
-          description: ID annotations in a text
-          type: array
-          items:
-            $ref: '#/components/schemas/TextIdAnnotation'
-        textContactAnnotations:
-          description: Contact annotations in a text
-          type: array
-          items:
-            $ref: '#/components/schemas/TextContactAnnotation'
       required:
-        - textDateAnnotations
-        - textPersonNameAnnotations
         - textLocationAnnotations
-        - textIdAnnotations
-        - textContactAnnotations
-    DeidentifyResponse:
-      type: object
-      description: The response to a deidentification request
-      properties:
-        originalAnnotations:
-          $ref: '#/components/schemas/AnnotationSet'
-        deidentifiedAnnotations:
-          $ref: '#/components/schemas/AnnotationSet'
-        deidentifiedNote:
-          $ref: '#/components/schemas/Note'
-    Error:
-      type: object
-      description: Problem details (tools.ietf.org/html/rfc7807)
-      properties:
-        title:
-          type: string
-          description: A human readable documentation for the problem type
-        status:
-          type: integer
-          description: The HTTP status code
-        detail:
-          type: string
-          description: >-
-            A human readable explanation specific to this occurrence of the
-            problem
-        type:
-          type: string
-          description: An absolute URI that identifies the problem type
-      required:
-        - title
-        - status
-    HealthCheck:
-      type: object
-      description: Represents the health of a service
-      properties:
-        status:
-          description: Indicates whether the service status is acceptable or not
-          type: string
-          enum:
-            - pass
-            - fail
-            - warn
-      required:
-        - status
     License:
       description: The license (license keyword used by GitHub)
       type: string
@@ -600,8 +416,8 @@ components:
       required:
         - tools
   responses:
-    BadRequest:
-      description: Invalid request
+    NotFound:
+      description: The specified resource was not found
       content:
         application/json:
           schema:
@@ -612,8 +428,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The specified resource was not found
+    BadRequest:
+      description: Invalid request
       content:
         application/json:
           schema:
