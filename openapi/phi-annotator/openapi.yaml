@@ -24,8 +24,8 @@ tags:
     description: Operations about text ID annotations
   - name: TextPersonNameAnnotation
     description: Operations about text person name annotations
-  - name: TextPhysicalAddressAnnotation
-    description: Operations about text physical address annotations
+  - name: TextLocationAnnotation
+    description: Operations about text location annotations
   - name: Tool
     description: Operations about this tool
 servers:
@@ -40,10 +40,10 @@ paths:
     $ref: ../date-annotator/paths/textDateAnnotations.yaml
   /textIdAnnotations:
     $ref: ../id-annotator/paths/textIdAnnotations.yaml
+  /textLocationAnnotations:
+    $ref: ../location-annotator/paths/textLocationAnnotations.yaml
   /textPersonNameAnnotations:
     $ref: ../person-name-annotator/paths/textPersonNameAnnotations.yaml
-  /textPhysicalAddressAnnotations:
-    $ref: ../physical-address-annotator/paths/textPhysicalAddressAnnotations.yaml
   /tool:
     $ref: ../commons/paths/tool.yaml
   /tool/dependencies:
