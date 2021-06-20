@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   version: 1.1.2
-  title: NLP Sandbox Physical Address Annotator API
+  title: NLP Sandbox Location Annotator API
   contact:
     name: NLP Sandbox Team
     email: team@nlpsandbox.io
@@ -10,26 +10,26 @@ info:
     name: Apache 2.0
     url: https://github.com/nlpsandbox/nlpsandbox-schemas/blob/develop/LICENSE
   x-logo:
-    url: https://nlpsandbox.github.io/nlpsandbox-schemas/logo.png
+    url: https://github.com/nlpsandbox/nlpsandbox-schemas/raw/main/docs/logo.png
   description: >
     # Introduction
 
-    A Physical Address Annotator takes as input a clinical note and outputs a
-    list of predicted physical address annotations found in the clinical note.
-    This OpenAPI document describes the specification of a Physical Address
-    Annotator. This specification includes the schemas of the input and output
-    data, and the conditions that this annotator must meet if you want to
-    benchmark its performance on [nlpsandbox.io](https://nlpsandbox.io).
+    A Location Annotator takes as input a clinical note and outputs a list of
+    predicted location annotations found in the clinical note. This OpenAPI
+    document describes the specification of a Location Annotator. This
+    specification includes the schemas of the input and output data, and the
+    conditions that this annotator must meet if you want to benchmark its
+    performance on [nlpsandbox.io](https://nlpsandbox.io).
 
     # Getting Started
 
     The GitHub repository
-    [nlpsandbox/physical-address-annotator-example](https://github.com/nlpsandbox/physical-address-annotator-example)
-    provides a simple example implementation of a Python-Flask Physical Address
-    Annotator. By the end of the tutorial available in the README, you will
-    have built a Docker image for a simple Physical Address Annotator. You will
-    then be able to submit this image to [nlpsandbox.io](https://nlpsandbox.io)
-    to benchmark its performance.
+    [nlpsandbox/location-annotator-example](https://github.com/nlpsandbox/location-annotator-example)
+    provides a simple example implementation of a Python-Flask Location
+    Annotator. By the end of the tutorial available in the README, you will have
+    built a Docker image for a simple Location Annotator. You will then be able
+    to submit this image to [nlpsandbox.io](https://nlpsandbox.io) to benchmark
+    its performance.
 
     # Benchmarking Requirements
 
@@ -50,12 +50,12 @@ info:
 
     # Examples
 
-    - [Physical Address Annotator Example (Python)](https://github.com/nlpsandbox/physical-address-annotator-example)
+    - [Location Annotator Example (Python)](https://github.com/nlpsandbox/location-annotator-example)
 tags:
   - name: HealthCheck
     description: Operations about health checks
-  - name: TextPhysicalAddressAnnotation
-    description: Operations about text physical address annotations
+  - name: TextLocationAnnotation
+    description: Operations about text location annotations
   - name: Tool
     description: Operations about this tool
 servers:
@@ -64,8 +64,8 @@ servers:
 paths:
   /healthCheck:
     $ref: ../commons/paths/healthCheck.yaml
-  /textPhysicalAddressAnnotations:
-    $ref: paths/textPhysicalAddressAnnotations.yaml
+  /textLocationAnnotations:
+    $ref: paths/textLocationAnnotations.yaml
   /tool:
     $ref: ../commons/paths/tool.yaml
   /tool/dependencies:

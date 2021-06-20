@@ -1,4 +1,4 @@
 type: object
 description:
   Configuration for the "annotation type" strategy. E.g. "John Smith lives at
-  123 Main St" -> "[PERSON_NAME] lives at [PHYSICAL_ADDRESS]".
+  123 Main St" -> "[PERSON_NAME] lives at [LOCATION]".

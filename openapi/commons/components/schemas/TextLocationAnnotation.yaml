@@ -1,11 +1,11 @@
 type: object
-description: A physical address annotation in a text
+description: A location annotation in a text
 allOf:
   - $ref: TextAnnotation.yaml
   - type: object
     properties:
-      addressType:
-        description: Type of address information
+      locationType:
+        description: Type of location
         type: string
         enum:
           - city
@@ -19,10 +19,10 @@ allOf:
           - street
           - zip
     required:
-      - addressType
+      - locationType
 example:
   start: 42
   length: 7
   text: Seattle
-  addressType: city
+  locationType: city
   confidence: 95.5

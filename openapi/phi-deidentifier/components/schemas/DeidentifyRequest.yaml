@@ -26,7 +26,7 @@ example:
     - confidenceThreshold: 20.0
       annotationTypeMaskConfig: {}
       annotationTypes:
-        - text_physical_address
+        - text_location
   note:
     identifier: awesome-note
     text: On 12/26/2020, Ms. Chloe Price met with Dr. Prescott in Seattle.
