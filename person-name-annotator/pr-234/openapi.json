@@ -421,7 +421,7 @@
           "description": {
             "description": "A short, one-sentence summary of the tool",
             "type": "string",
-            "maxLength": 100
+            "maxLength": 280
           },
           "author": {
             "description": "The author of the tool",
