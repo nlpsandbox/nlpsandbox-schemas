@@ -10,7 +10,7 @@ info:
     name: Apache 2.0
     url: 'https://github.com/nlpsandbox/nlpsandbox-schemas/blob/main/LICENSE'
   x-logo:
-    url: 'https://nlpsandbox.github.io/nlpsandbox-schemas/logo.png'
+    url: 'https://github.com/nlpsandbox/nlpsandbox-schemas/raw/main/docs/logo.png'
   description: |
     # Overview
 
@@ -1031,15 +1031,15 @@ components:
         length: 11
         text: Chloe Price
         confidence: 95.5
-    TextPhysicalAddressAnnotation:
+    TextLocationAnnotation:
       type: object
-      description: A physical address annotation in a text
+      description: A location annotation in a text
       allOf:
         - $ref: '#/components/schemas/TextAnnotation'
         - type: object
           properties:
-            addressType:
-              description: Type of address information
+            locationType:
+              description: Type of location
               type: string
               enum:
                 - city
@@ -1053,12 +1053,12 @@ components:
                 - street
                 - zip
           required:
-            - addressType
+            - locationType
       example:
         start: 42
         length: 7
         text: Seattle
-        addressType: city
+        locationType: city
         confidence: 95.5
     TextIdAnnotation:
       type: object
@@ -1183,11 +1183,11 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/TextPersonNameAnnotation'
-        textPhysicalAddressAnnotations:
-          description: Physical address annotations in a text
+        textLocationAnnotations:
+          description: Location annotations in a text
           type: array
           items:
-            $ref: '#/components/schemas/TextPhysicalAddressAnnotation'
+            $ref: '#/components/schemas/TextLocationAnnotation'
         textIdAnnotations:
           description: ID annotations in a text
           type: array
@@ -1247,11 +1247,11 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/TextPersonNameAnnotation'
-        textPhysicalAddressAnnotations:
-          description: Physical address annotations in a text
+        textLocationAnnotations:
+          description: Location annotations in a text
           type: array
           items:
-            $ref: '#/components/schemas/TextPhysicalAddressAnnotation'
+            $ref: '#/components/schemas/TextLocationAnnotation'
         textIdAnnotations:
           description: ID annotations in a text
           type: array

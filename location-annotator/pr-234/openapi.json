@@ -2,7 +2,7 @@
   "openapi": "3.0.3",
   "info": {
     "version": "1.1.2",
-    "title": "NLP Sandbox Date Annotator API",
+    "title": "NLP Sandbox Location Annotator API",
     "contact": {
       "name": "NLP Sandbox Team",
       "email": "team@nlpsandbox.io",
@@ -15,7 +15,7 @@
     "x-logo": {
       "url": "https://github.com/nlpsandbox/nlpsandbox-schemas/raw/main/docs/logo.png"
     },
-    "description": "# Introduction\nA Date Annotator takes as input a clinical note and outputs a list of predicted date annotations found in the clinical note. This OpenAPI document describes the specification of a Date Annotator. This specification includes the schemas of the input and output data, and the conditions that this annotator must meet if you want to benchmark its performance on [nlpsandbox.io](https://nlpsandbox.io).\n# Getting Started\nThe GitHub repository [nlpsandbox/date-annotator-example](https://github.com/nlpsandbox/date-annotator-example) provides a simple example implementation of a Python-Flask Date Annotator. By the end of the tutorial available in the README, you will have built a Docker image for a simple Date Annotator. You will then be able to submit this image to [nlpsandbox.io](https://nlpsandbox.io) to benchmark its performance.\n# Benchmarking Requirements\nYour NLP Sandbox tool must meet the following conditions before evaluating its performance on [nlpsandbox.io](https://nlpsandbox.io).\n- The endpoint `/` must redirect to `/api/v1/tool`.\n- The endpoint `/ui` must redirect to the web interface (UI).\n- The output of this tool must be reproducible: a given input should always\n  generate the same output.\n\n- To ensure the results are reproducible and robust, and the data are\n  secured, this tool must not connect to any remote server. When benchmarked\n  on [nlpsandbox.io](https://nlpsandbox.io), this tool will not be able to\n  connect to remote servers.\n\n# Examples\n- [Date Annotator Example (Python)](https://github.com/nlpsandbox/date-annotator-example)\n- [Date Annotator Example (Java)](https://github.com/nlpsandbox/date-annotator-example-java)\n"
+    "description": "# Introduction\nA Location Annotator takes as input a clinical note and outputs a list of predicted location annotations found in the clinical note. This OpenAPI document describes the specification of a Location Annotator. This specification includes the schemas of the input and output data, and the conditions that this annotator must meet if you want to benchmark its performance on [nlpsandbox.io](https://nlpsandbox.io).\n# Getting Started\nThe GitHub repository [nlpsandbox/location-annotator-example](https://github.com/nlpsandbox/location-annotator-example) provides a simple example implementation of a Python-Flask Location Annotator. By the end of the tutorial available in the README, you will have built a Docker image for a simple Location Annotator. You will then be able to submit this image to [nlpsandbox.io](https://nlpsandbox.io) to benchmark its performance.\n# Benchmarking Requirements\nYour NLP Sandbox tool must meet the following conditions before evaluating its performance on [nlpsandbox.io](https://nlpsandbox.io).\n- The endpoint `/` must redirect to `/api/v1/tool`.\n- The endpoint `/ui` must redirect to the web interface (UI).\n- The output of this tool must be reproducible: a given input should always\n  generate the same output.\n\n- To ensure the results are reproducible and robust, and the data are\n  secured, this tool must not connect to any remote server. When benchmarked\n  on [nlpsandbox.io](https://nlpsandbox.io), this tool will not be able to\n  connect to remote servers.\n\n# Examples\n- [Location Annotator Example (Python)](https://github.com/nlpsandbox/location-annotator-example)\n"
   },
   "tags": [
     {
@@ -23,8 +23,8 @@
       "description": "Operations about health checks"
     },
     {
-      "name": "TextDateAnnotation",
-      "description": "Operations about text date annotations"
+      "name": "TextLocationAnnotation",
+      "description": "Operations about text location annotations"
     },
     {
       "name": "Tool",
@@ -68,19 +68,19 @@
         }
       }
     },
-    "/textDateAnnotations": {
+    "/textLocationAnnotations": {
       "post": {
         "tags": [
-          "TextDateAnnotation"
+          "TextLocationAnnotation"
         ],
-        "summary": "Annotate dates in a clinical note",
-        "description": "Return the date annotations found in a clinical note",
-        "operationId": "createTextDateAnnotations",
+        "summary": "Annotate locations in a clinical note",
+        "description": "Return the location annotations found in a clinical note",
+        "operationId": "createTextLocationAnnotations",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/TextDateAnnotationRequest"
+                "$ref": "#/components/schemas/TextLocationAnnotationRequest"
               }
             }
           }
@@ -91,7 +91,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TextDateAnnotationResponse"
+                  "$ref": "#/components/schemas/TextLocationAnnotationResponse"
                 }
               }
             }
@@ -256,9 +256,9 @@
           "patientId": "awesome-patient"
         }
       },
-      "TextDateAnnotationRequest": {
+      "TextLocationAnnotationRequest": {
         "type": "object",
-        "description": "A request to annotate dates in a clinical note",
+        "description": "A request to annotate locations in a clinical note",
         "properties": {
           "note": {
             "$ref": "#/components/schemas/Note"
@@ -305,9 +305,9 @@
           "confidence": 95.5
         }
       },
-      "TextDateAnnotation": {
+      "TextLocationAnnotation": {
         "type": "object",
-        "description": "A date annotation in a text",
+        "description": "A location annotation in a text",
         "allOf": [
           {
             "$ref": "#/components/schemas/TextAnnotation"
@@ -315,36 +315,50 @@
           {
             "type": "object",
             "properties": {
-              "dateFormat": {
-                "description": "Date format (ISO 8601)",
+              "locationType": {
+                "description": "Type of location",
                 "type": "string",
-                "example": "MM/DD/YYYY"
+                "enum": [
+                  "city",
+                  "country",
+                  "department",
+                  "hospital",
+                  "organization",
+                  "other",
+                  "room",
+                  "state",
+                  "street",
+                  "zip"
+                ]
               }
-            }
+            },
+            "required": [
+              "locationType"
+            ]
           }
         ],
         "example": {
           "start": 42,
-          "length": 10,
-          "text": "10/26/2020",
-          "dateFormat": "MM/DD/YYYY",
+          "length": 7,
+          "text": "Seattle",
+          "locationType": "city",
           "confidence": 95.5
         }
       },
-      "TextDateAnnotationResponse": {
+      "TextLocationAnnotationResponse": {
         "type": "object",
-        "description": "The response to a dates annotation request",
+        "description": "The response to a locations annotation request",
         "properties": {
-          "textDateAnnotations": {
-            "description": "A list of date annotations",
+          "textLocationAnnotations": {
+            "description": "A list of location annotations",
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/TextDateAnnotation"
+              "$ref": "#/components/schemas/TextLocationAnnotation"
             }
           }
         },
         "required": [
-          "textDateAnnotations"
+          "textLocationAnnotations"
         ]
       },
       "License": {

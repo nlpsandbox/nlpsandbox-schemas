@@ -39,8 +39,8 @@
       "description": "Operations about text person name annotations"
     },
     {
-      "name": "TextPhysicalAddressAnnotation",
-      "description": "Operations about text physical address annotations"
+      "name": "TextLocationAnnotation",
+      "description": "Operations about text location annotations"
     },
     {
       "name": "Tool",
@@ -195,6 +195,43 @@
         }
       }
     },
+    "/textLocationAnnotations": {
+      "post": {
+        "tags": [
+          "TextLocationAnnotation"
+        ],
+        "summary": "Annotate locations in a clinical note",
+        "description": "Return the location annotations found in a clinical note",
+        "operationId": "createTextLocationAnnotations",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TextLocationAnnotationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TextLocationAnnotationResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
     "/textPersonNameAnnotations": {
       "post": {
         "tags": [
@@ -219,43 +256,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/TextPersonNameAnnotationResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "$ref": "#/components/responses/BadRequest"
-          },
-          "500": {
-            "$ref": "#/components/responses/InternalServerError"
-          }
-        }
-      }
-    },
-    "/textPhysicalAddressAnnotations": {
-      "post": {
-        "tags": [
-          "TextPhysicalAddressAnnotation"
-        ],
-        "summary": "Annotate physical addresses in a clinical note",
-        "description": "Return the physical addresse annotations found in a clinical note",
-        "operationId": "createTextPhysicalAddressAnnotations",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/TextPhysicalAddressAnnotationRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TextPhysicalAddressAnnotationResponse"
                 }
               }
             }
@@ -659,6 +659,74 @@
           "textIdAnnotations"
         ]
       },
+      "TextLocationAnnotationRequest": {
+        "type": "object",
+        "description": "A request to annotate locations in a clinical note",
+        "properties": {
+          "note": {
+            "$ref": "#/components/schemas/Note"
+          }
+        },
+        "required": [
+          "note"
+        ]
+      },
+      "TextLocationAnnotation": {
+        "type": "object",
+        "description": "A location annotation in a text",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TextAnnotation"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "locationType": {
+                "description": "Type of location",
+                "type": "string",
+                "enum": [
+                  "city",
+                  "country",
+                  "department",
+                  "hospital",
+                  "organization",
+                  "other",
+                  "room",
+                  "state",
+                  "street",
+                  "zip"
+                ]
+              }
+            },
+            "required": [
+              "locationType"
+            ]
+          }
+        ],
+        "example": {
+          "start": 42,
+          "length": 7,
+          "text": "Seattle",
+          "locationType": "city",
+          "confidence": 95.5
+        }
+      },
+      "TextLocationAnnotationResponse": {
+        "type": "object",
+        "description": "The response to a locations annotation request",
+        "properties": {
+          "textLocationAnnotations": {
+            "description": "A list of location annotations",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextLocationAnnotation"
+            }
+          }
+        },
+        "required": [
+          "textLocationAnnotations"
+        ]
+      },
       "TextPersonNameAnnotationRequest": {
         "type": "object",
         "description": "A request to annotate person names in a clinical note",
@@ -700,74 +768,6 @@
         },
         "required": [
           "textPersonNameAnnotations"
-        ]
-      },
-      "TextPhysicalAddressAnnotationRequest": {
-        "type": "object",
-        "description": "A request to annotate physical addresses in a clinical note",
-        "properties": {
-          "note": {
-            "$ref": "#/components/schemas/Note"
-          }
-        },
-        "required": [
-          "note"
-        ]
-      },
-      "TextPhysicalAddressAnnotation": {
-        "type": "object",
-        "description": "A physical address annotation in a text",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/TextAnnotation"
-          },
-          {
-            "type": "object",
-            "properties": {
-              "addressType": {
-                "description": "Type of address information",
-                "type": "string",
-                "enum": [
-                  "city",
-                  "country",
-                  "department",
-                  "hospital",
-                  "organization",
-                  "other",
-                  "room",
-                  "state",
-                  "street",
-                  "zip"
-                ]
-              }
-            },
-            "required": [
-              "addressType"
-            ]
-          }
-        ],
-        "example": {
-          "start": 42,
-          "length": 7,
-          "text": "Seattle",
-          "addressType": "city",
-          "confidence": 95.5
-        }
-      },
-      "TextPhysicalAddressAnnotationResponse": {
-        "type": "object",
-        "description": "The response to a physical addresses annotation request",
-        "properties": {
-          "textPhysicalAddressAnnotations": {
-            "description": "A list of physical address annotations",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/TextPhysicalAddressAnnotation"
-            }
-          }
-        },
-        "required": [
-          "textPhysicalAddressAnnotations"
         ]
       },
       "License": {
