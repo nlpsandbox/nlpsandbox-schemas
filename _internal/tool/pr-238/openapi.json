@@ -1,0 +1,1326 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "version": "1.1.1",
+    "title": "NLP Sandbox Tool API",
+    "contact": {
+      "name": "NLP Sandbox Team",
+      "email": "team@nlpsandbox.io",
+      "url": "https://nlpsandbox.io"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "https://github.com/nlpsandbox/nlpsandbox-schemas/blob/develop/LICENSE"
+    },
+    "x-logo": {
+      "url": "https://nlpsandbox.github.io/nlpsandbox-schemas/logo.png"
+    },
+    "description": "NLP Sandbox Tool REST API"
+  },
+  "servers": [
+    {
+      "url": "http://example.com/api/v1"
+    },
+    {
+      "url": "https://example.com/api/v1"
+    }
+  ],
+  "tags": [
+    {
+      "name": "HealthCheck",
+      "description": "Operations about health checks"
+    },
+    {
+      "name": "Tool",
+      "description": "Operations about this tool"
+    },
+    {
+      "name": "TextDateAnnotation",
+      "description": "Operations about text date annotations"
+    },
+    {
+      "name": "TextPersonNameAnnotation",
+      "description": "Operations about text person name annotations"
+    },
+    {
+      "name": "TextLocationAnnotation",
+      "description": "Operations about text location annotations"
+    },
+    {
+      "name": "TextIdAnnotation",
+      "description": "Operations about text ID annotations"
+    },
+    {
+      "name": "TextContactAnnotation",
+      "description": "Operations about text contact annotations"
+    },
+    {
+      "name": "DeidentifiedNote",
+      "description": "Operations about deidentified notes"
+    },
+    {
+      "name": "TextCovidSymptomAnnotation",
+      "description": "Operations about COVID symptom annotations"
+    }
+  ],
+  "paths": {
+    "/healthCheck": {
+      "get": {
+        "tags": [
+          "HealthCheck"
+        ],
+        "summary": "Get health check information",
+        "description": "Get information about the health of the service",
+        "operationId": "getHealthCheck",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthCheck"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/tool": {
+      "get": {
+        "tags": [
+          "Tool"
+        ],
+        "summary": "Get tool information",
+        "description": "Get information about the tool",
+        "operationId": "getTool",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Tool"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/tool/dependencies": {
+      "get": {
+        "tags": [
+          "Tool"
+        ],
+        "summary": "Get tool dependencies",
+        "description": "Get the dependencies of this tool",
+        "operationId": "getToolDependencies",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToolDependencies"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/textDateAnnotations": {
+      "post": {
+        "tags": [
+          "TextDateAnnotation"
+        ],
+        "summary": "Annotate dates in a clinical note",
+        "description": "Return the date annotations found in a clinical note",
+        "operationId": "createTextDateAnnotations",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TextDateAnnotationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TextDateAnnotationResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/textPersonNameAnnotations": {
+      "post": {
+        "tags": [
+          "TextPersonNameAnnotation"
+        ],
+        "summary": "Annotate person names in a clinical note",
+        "description": "Return the person name annotations found in a clinical note",
+        "operationId": "createTextPersonNameAnnotations",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TextPersonNameAnnotationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TextPersonNameAnnotationResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/textLocationAnnotations": {
+      "post": {
+        "tags": [
+          "TextLocationAnnotation"
+        ],
+        "summary": "Annotate locations in a clinical note",
+        "description": "Return the location annotations found in a clinical note",
+        "operationId": "createTextLocationAnnotations",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TextLocationAnnotationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TextLocationAnnotationResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/textIdAnnotations": {
+      "post": {
+        "tags": [
+          "TextIdAnnotation"
+        ],
+        "summary": "Annotate IDs in a clinical note",
+        "description": "Return the ID annotations found in a clinical note",
+        "operationId": "createTextIdAnnotations",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TextIdAnnotationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TextIdAnnotationResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/textContactAnnotations": {
+      "post": {
+        "tags": [
+          "TextContactAnnotation"
+        ],
+        "summary": "Annotate contact information in a clinical note",
+        "description": "Return the contact annotations found in a clinical note",
+        "operationId": "createTextContactAnnotations",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TextContactAnnotationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TextContactAnnotationResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/deidentifiedNotes": {
+      "post": {
+        "tags": [
+          "DeidentifiedNote"
+        ],
+        "summary": "Deidentify a clinical note",
+        "description": "Returns the deidentified note",
+        "operationId": "createDeidentifiedNotes",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeidentifyRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeidentifyResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/textCovidSymptomAnnotations": {
+      "post": {
+        "tags": [
+          "TextCovidSymptomAnnotation"
+        ],
+        "summary": "Annotate COVID symptoms in a clinical note",
+        "description": "Return the COVID symptom annotations found in a clinical note",
+        "operationId": "createTextCovidSymptomAnnotations",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TextCovidSymptomAnnotationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TextCovidSymptomAnnotationResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "HealthCheck": {
+        "type": "object",
+        "description": "Represents the health of a service",
+        "properties": {
+          "status": {
+            "description": "Indicates whether the service status is acceptable or not",
+            "type": "string",
+            "enum": [
+              "pass",
+              "fail",
+              "warn"
+            ]
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "Error": {
+        "type": "object",
+        "description": "Problem details (tools.ietf.org/html/rfc7807)",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "A human readable documentation for the problem type"
+          },
+          "status": {
+            "type": "integer",
+            "description": "The HTTP status code"
+          },
+          "detail": {
+            "type": "string",
+            "description": "A human readable explanation specific to this occurrence of the problem"
+          },
+          "type": {
+            "type": "string",
+            "description": "An absolute URI that identifies the problem type"
+          }
+        },
+        "required": [
+          "title",
+          "status"
+        ]
+      },
+      "License": {
+        "description": "The license (license keyword used by GitHub)",
+        "type": "string",
+        "enum": [
+          "afl-3.0",
+          "apache-2.0",
+          "artistic-2.0",
+          "bsl-1.0",
+          "bsd-2-clause",
+          "bsd-3-clause",
+          "bsd-3-clause-clear",
+          "cc",
+          "cc0-1.0",
+          "cc-by-4.0",
+          "cc-by-sa-4.0",
+          "wtfpl",
+          "ecl-2.0",
+          "epl-1.0",
+          "epl-2.0",
+          "eupl-1.1",
+          "agpl-3.0",
+          "gpl",
+          "gpl-2.0",
+          "gpl-3.0",
+          "lgpl",
+          "lgpl-2.1",
+          "lgpl-3.0",
+          "isc",
+          "lppl-1.3c",
+          "ms-pl",
+          "mit",
+          "mpl-2.0",
+          "osl-3.0",
+          "postgresql",
+          "ofl-1.1",
+          "ncsa",
+          "unlicense",
+          "zlib",
+          "none"
+        ],
+        "example": "apache-2.0"
+      },
+      "ToolType": {
+        "description": "The type of this tool",
+        "type": "string",
+        "minLength": 3,
+        "maxLength": 60,
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*(:)[a-z0-9]+(?:-[a-z0-9]+)*$",
+        "example": "nlpsandbox:date-annotator"
+      },
+      "Tool": {
+        "type": "object",
+        "description": "Information about an NLP tool",
+        "properties": {
+          "name": {
+            "description": "The tool name",
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 60,
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+          },
+          "version": {
+            "description": "The version of the tool (SemVer string)",
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$"
+          },
+          "license": {
+            "$ref": "#/components/schemas/License"
+          },
+          "repository": {
+            "description": "The place where the code lives",
+            "type": "string"
+          },
+          "description": {
+            "description": "A short, one-sentence summary of the tool",
+            "type": "string",
+            "maxLength": 100
+          },
+          "author": {
+            "description": "The author of the tool",
+            "type": "string"
+          },
+          "authorEmail": {
+            "description": "The email address of the author",
+            "type": "string",
+            "format": "email"
+          },
+          "url": {
+            "description": "The URL to the homepage of the tool",
+            "type": "string",
+            "format": "uri"
+          },
+          "type": {
+            "$ref": "#/components/schemas/ToolType"
+          },
+          "apiVersion": {
+            "description": "The version of the tool OpenAPI specification",
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$"
+          }
+        },
+        "required": [
+          "name",
+          "version",
+          "license",
+          "repository",
+          "description",
+          "author",
+          "authorEmail",
+          "url",
+          "type",
+          "apiVersion"
+        ],
+        "example": {
+          "name": "awesome-nlp-tool",
+          "version": "1.0.6",
+          "license": "apache-2.0",
+          "repository": "github:awesome-org/awesome-nlp-tool",
+          "description": "An awesome NLP Tool that takes as input X and outputs Y.",
+          "author": "Awesome Team",
+          "authorEmail": "author@example.com",
+          "url": "https://example.com",
+          "type": "nlpsandbox:date-annotator",
+          "apiVersion": "1.1.2"
+        }
+      },
+      "ToolDependencies": {
+        "type": "object",
+        "description": "A list of tool dependencies",
+        "properties": {
+          "tools": {
+            "description": "A list of tools",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Tool"
+            }
+          }
+        },
+        "required": [
+          "tools"
+        ]
+      },
+      "NoteId": {
+        "description": "The ID of the clinical note",
+        "type": "string",
+        "minLength": 3,
+        "maxLength": 60,
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+        "example": "awesome-note"
+      },
+      "PatientId": {
+        "description": "The ID of the FHIR patient",
+        "type": "string",
+        "minLength": 3,
+        "maxLength": 60,
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+        "example": "awesome-patient"
+      },
+      "Note": {
+        "type": "object",
+        "description": "A clinical note",
+        "properties": {
+          "identifier": {
+            "$ref": "#/components/schemas/NoteId"
+          },
+          "text": {
+            "description": "The content of the clinical note",
+            "type": "string"
+          },
+          "type": {
+            "description": "The note type (LOINC concept)",
+            "type": "string"
+          },
+          "patientId": {
+            "$ref": "#/components/schemas/PatientId"
+          }
+        },
+        "required": [
+          "identifier",
+          "text",
+          "type",
+          "patientId"
+        ],
+        "example": {
+          "identifier": "awesome-note",
+          "text": "On 12/26/2020, Ms. Chloe Price met with Dr. Prescott in Seattle.",
+          "type": "loinc:LP29684-5",
+          "patientId": "awesome-patient"
+        }
+      },
+      "TextDateAnnotationRequest": {
+        "type": "object",
+        "description": "A request to annotate dates in a clinical note",
+        "properties": {
+          "note": {
+            "$ref": "#/components/schemas/Note"
+          }
+        },
+        "required": [
+          "note"
+        ]
+      },
+      "TextAnnotation": {
+        "type": "object",
+        "description": "An annotation in a text",
+        "properties": {
+          "start": {
+            "description": "The position of the first character",
+            "type": "integer"
+          },
+          "length": {
+            "description": "The length of the annotation",
+            "type": "integer"
+          },
+          "text": {
+            "description": "The string annotated",
+            "type": "string"
+          },
+          "confidence": {
+            "description": "The confidence in the accuracy of the annotation",
+            "type": "number",
+            "format": "float",
+            "minimum": 0,
+            "maximum": 100
+          }
+        },
+        "required": [
+          "start",
+          "length",
+          "text",
+          "confidence"
+        ],
+        "example": {
+          "start": 42,
+          "length": 19,
+          "text": "the annotation text",
+          "confidence": 95.5
+        }
+      },
+      "TextDateAnnotation": {
+        "type": "object",
+        "description": "A date annotation in a text",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TextAnnotation"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "dateFormat": {
+                "description": "Date format (ISO 8601)",
+                "type": "string",
+                "example": "MM/DD/YYYY"
+              }
+            }
+          }
+        ],
+        "example": {
+          "start": 42,
+          "length": 10,
+          "text": "10/26/2020",
+          "dateFormat": "MM/DD/YYYY",
+          "confidence": 95.5
+        }
+      },
+      "TextDateAnnotationResponse": {
+        "type": "object",
+        "description": "The response to a dates annotation request",
+        "properties": {
+          "textDateAnnotations": {
+            "description": "A list of date annotations",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextDateAnnotation"
+            }
+          }
+        },
+        "required": [
+          "textDateAnnotations"
+        ]
+      },
+      "TextPersonNameAnnotationRequest": {
+        "type": "object",
+        "description": "A request to annotate person names in a clinical note",
+        "properties": {
+          "note": {
+            "$ref": "#/components/schemas/Note"
+          }
+        },
+        "required": [
+          "note"
+        ]
+      },
+      "TextPersonNameAnnotation": {
+        "type": "object",
+        "description": "A person name annotation in a text",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TextAnnotation"
+          }
+        ],
+        "example": {
+          "start": 42,
+          "length": 11,
+          "text": "Chloe Price",
+          "confidence": 95.5
+        }
+      },
+      "TextPersonNameAnnotationResponse": {
+        "type": "object",
+        "description": "The response to a person names annotation request",
+        "properties": {
+          "textPersonNameAnnotations": {
+            "description": "A list of person name annotations",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextPersonNameAnnotation"
+            }
+          }
+        },
+        "required": [
+          "textPersonNameAnnotations"
+        ]
+      },
+      "TextLocationAnnotationRequest": {
+        "type": "object",
+        "description": "A request to annotate locations in a clinical note",
+        "properties": {
+          "note": {
+            "$ref": "#/components/schemas/Note"
+          }
+        },
+        "required": [
+          "note"
+        ]
+      },
+      "TextLocationAnnotation": {
+        "type": "object",
+        "description": "A location annotation in a text",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TextAnnotation"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "locationType": {
+                "description": "Type of location",
+                "type": "string",
+                "enum": [
+                  "city",
+                  "country",
+                  "department",
+                  "hospital",
+                  "organization",
+                  "other",
+                  "room",
+                  "state",
+                  "street",
+                  "zip"
+                ]
+              }
+            },
+            "required": [
+              "locationType"
+            ]
+          }
+        ],
+        "example": {
+          "start": 42,
+          "length": 7,
+          "text": "Seattle",
+          "locationType": "city",
+          "confidence": 95.5
+        }
+      },
+      "TextLocationAnnotationResponse": {
+        "type": "object",
+        "description": "The response to a locations annotation request",
+        "properties": {
+          "textLocationAnnotations": {
+            "description": "A list of location annotations",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextLocationAnnotation"
+            }
+          }
+        },
+        "required": [
+          "textLocationAnnotations"
+        ]
+      },
+      "TextIdAnnotationRequest": {
+        "type": "object",
+        "description": "A request to annotate IDs in a clinical note",
+        "properties": {
+          "note": {
+            "$ref": "#/components/schemas/Note"
+          }
+        },
+        "required": [
+          "note"
+        ],
+        "example": {
+          "note": {
+            "identifier": "awesome-note",
+            "text": "On 12/26/2020, Ms. Chloe Price met with Dr. Prescott in Seattle. Her SSN is 123-45-6789.\n",
+            "type": "loinc:LP29684-5",
+            "patientId": "awesome-patient"
+          }
+        }
+      },
+      "TextIdAnnotation": {
+        "type": "object",
+        "description": "An ID annotation in a text",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TextAnnotation"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "idType": {
+                "description": "Type of ID information",
+                "type": "string",
+                "enum": [
+                  "account",
+                  "bio_id",
+                  "device",
+                  "health_plan",
+                  "id_number",
+                  "license",
+                  "medical_record",
+                  "ssn",
+                  "vehicle",
+                  "other"
+                ]
+              }
+            },
+            "required": [
+              "idType"
+            ]
+          }
+        ],
+        "example": {
+          "start": 42,
+          "length": 11,
+          "text": "203-11-4535",
+          "idType": "ssn",
+          "confidence": 95.5
+        }
+      },
+      "TextIdAnnotationResponse": {
+        "type": "object",
+        "description": "The response to an ID annotation request",
+        "properties": {
+          "textIdAnnotations": {
+            "description": "A list of ID annotations",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextIdAnnotation"
+            }
+          }
+        },
+        "required": [
+          "textIdAnnotations"
+        ]
+      },
+      "TextContactAnnotationRequest": {
+        "type": "object",
+        "description": "A request to annotate contacts in a clinical note",
+        "properties": {
+          "note": {
+            "$ref": "#/components/schemas/Note"
+          }
+        },
+        "required": [
+          "note"
+        ],
+        "example": {
+          "note": {
+            "identifier": "awesome-note",
+            "text": "On 12/26/2020, Ms. Chloe Price met with Dr. Prescott in Seattle. Her phone number is 203-555-4545.\n",
+            "type": "loinc:LP29684-5",
+            "patientId": "awesome-patient"
+          }
+        }
+      },
+      "TextContactAnnotation": {
+        "type": "object",
+        "description": "A contact annotation in a text",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TextAnnotation"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "contactType": {
+                "description": "Type of contact information",
+                "type": "string",
+                "enum": [
+                  "email",
+                  "fax",
+                  "ip_address",
+                  "phone",
+                  "url",
+                  "other"
+                ]
+              }
+            },
+            "required": [
+              "contactType"
+            ]
+          }
+        ],
+        "example": {
+          "start": 42,
+          "length": 11,
+          "text": "dave@uw.edu",
+          "contactType": "email",
+          "confidence": 95.5
+        }
+      },
+      "TextContactAnnotationResponse": {
+        "type": "object",
+        "description": "The response to a contact annotation request",
+        "properties": {
+          "textContactAnnotations": {
+            "description": "A list of contact annotations",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextContactAnnotation"
+            }
+          }
+        },
+        "required": [
+          "textContactAnnotations"
+        ]
+      },
+      "MaskingCharConfig": {
+        "type": "object",
+        "description": "Configuration for the masking char strategy. E.g. \"John Smith lives at 123 Main St\" -> \"********* lives at ***********\".",
+        "properties": {
+          "maskingChar": {
+            "type": "string",
+            "description": "Character used to mask sensitive information",
+            "minLength": 1,
+            "maxLength": 1,
+            "default": "*"
+          }
+        }
+      },
+      "AnnotationTypeMaskConfig": {
+        "type": "object",
+        "description": "Configuration for the \"annotation type\" strategy. E.g. \"John Smith lives at 123 Main St\" -> \"[PERSON_NAME] lives at [LOCATION]\"."
+      },
+      "RedactConfig": {
+        "type": "object",
+        "description": "Configuration for the redaction strategy. E.g. \"John Smith lives at 123 Main St\" -> \"lives at\"."
+      },
+      "DateOffsetConfig": {
+        "type": "object",
+        "description": "Configuration for the \"date offset\" strategy. E.g. \"John Smith visited on 1 January 2020\" -> \"John Smith visited on 29 October 2025\". Note, can only be set with the \"text_date\" annotation type.",
+        "properties": {
+          "offsetDays": {
+            "type": "integer",
+            "description": "Number of days by which to offset annotated dates."
+          }
+        },
+        "required": [
+          "offsetDays"
+        ]
+      },
+      "DeidentificationStep": {
+        "type": "object",
+        "description": "The configuration of a deidentification step",
+        "properties": {
+          "confidenceThreshold": {
+            "type": "number",
+            "format": "float",
+            "description": "The minimum confidence level for a given annotation to be de-identified",
+            "minimum": 0,
+            "maximum": 100,
+            "example": 95.5,
+            "default": 0
+          },
+          "maskingCharConfig": {
+            "$ref": "#/components/schemas/MaskingCharConfig"
+          },
+          "annotationTypeMaskConfig": {
+            "$ref": "#/components/schemas/AnnotationTypeMaskConfig"
+          },
+          "redactConfig": {
+            "$ref": "#/components/schemas/RedactConfig"
+          },
+          "dateOffsetConfig": {
+            "$ref": "#/components/schemas/DateOffsetConfig"
+          },
+          "annotationTypes": {
+            "type": "array",
+            "description": "The types of annotations to which the de-identifer should apply the selected strategy",
+            "items": {
+              "type": "string",
+              "enum": [
+                "text_date",
+                "text_person_name",
+                "text_location",
+                "text_id",
+                "text_contact"
+              ]
+            }
+          }
+        },
+        "required": [
+          "annotationTypes"
+        ]
+      },
+      "DeidentifyRequest": {
+        "type": "object",
+        "description": "A request to de-identify a clinical note",
+        "properties": {
+          "note": {
+            "$ref": "#/components/schemas/Note"
+          },
+          "deidentificationSteps": {
+            "type": "array",
+            "description": "A list of deidentification steps",
+            "items": {
+              "$ref": "#/components/schemas/DeidentificationStep"
+            }
+          }
+        },
+        "required": [
+          "note",
+          "deidentificationSteps"
+        ],
+        "example": {
+          "deidentificationSteps": [
+            {
+              "confidenceThreshold": 20,
+              "maskingCharConfig": {
+                "maskingChar": "-"
+              },
+              "annotationTypes": [
+                "text_date"
+              ]
+            },
+            {
+              "confidenceThreshold": 30,
+              "maskingCharConfig": {
+                "maskingChar": "#"
+              },
+              "annotationTypes": [
+                "text_person_name"
+              ]
+            },
+            {
+              "confidenceThreshold": 20,
+              "annotationTypeMaskConfig": {},
+              "annotationTypes": [
+                "text_location"
+              ]
+            }
+          ],
+          "note": {
+            "identifier": "awesome-note",
+            "text": "On 12/26/2020, Ms. Chloe Price met with Dr. Prescott in Seattle.",
+            "type": "loinc:LP29684-5",
+            "patientId": "awesome-patient"
+          }
+        }
+      },
+      "AnnotationSet": {
+        "type": "object",
+        "description": "Set of annotations of all types for a text",
+        "properties": {
+          "textDateAnnotations": {
+            "description": "Date annotations in a text",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextDateAnnotation"
+            }
+          },
+          "textPersonNameAnnotations": {
+            "description": "Person name annotations in a text",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextPersonNameAnnotation"
+            }
+          },
+          "textLocationAnnotations": {
+            "description": "Location annotations in a text",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextLocationAnnotation"
+            }
+          },
+          "textIdAnnotations": {
+            "description": "ID annotations in a text",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextIdAnnotation"
+            }
+          },
+          "textContactAnnotations": {
+            "description": "Contact annotations in a text",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextContactAnnotation"
+            }
+          }
+        },
+        "required": [
+          "textDateAnnotations",
+          "textPersonNameAnnotations",
+          "textLocationAnnotations",
+          "textIdAnnotations",
+          "textContactAnnotations"
+        ]
+      },
+      "DeidentifyResponse": {
+        "type": "object",
+        "description": "The response to a deidentification request",
+        "properties": {
+          "originalAnnotations": {
+            "$ref": "#/components/schemas/AnnotationSet"
+          },
+          "deidentifiedAnnotations": {
+            "$ref": "#/components/schemas/AnnotationSet"
+          },
+          "deidentifiedNote": {
+            "$ref": "#/components/schemas/Note"
+          }
+        }
+      },
+      "TextCovidSymptomAnnotationRequest": {
+        "type": "object",
+        "description": "A request to annotate COVID symptoms in a clinical note",
+        "properties": {
+          "note": {
+            "$ref": "#/components/schemas/Note"
+          }
+        },
+        "required": [
+          "note"
+        ],
+        "example": {
+          "note": {
+            "identifier": "awesome-note",
+            "text": "The patient had a dry cough and fever or chills yesterday. He is also experiencing new loss of taste today and three days ago.\n",
+            "type": "loinc:LP29684-5",
+            "patientId": "awesome-patient"
+          }
+        }
+      },
+      "TextCovidSymptomAnnotation": {
+        "type": "object",
+        "description": "A COVID symptom annotation in a text",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TextAnnotation"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "condition": {
+                "description": "The sign/symptom type according to CDC definition\n",
+                "type": "string",
+                "enum": [
+                  "fever",
+                  "chill",
+                  "cough",
+                  "fatigue",
+                  "nasal_obstruction",
+                  "loss_of_appetite",
+                  "diarrhea",
+                  "abdominal_pain",
+                  "nausea",
+                  "vomiting",
+                  "sore_throat",
+                  "headache",
+                  "myalgia",
+                  "loss_of_taste",
+                  "loss_of_smell",
+                  "dyspnea",
+                  "chest_pain",
+                  "delirium",
+                  "hypersomnia",
+                  "cyanosis"
+                ]
+              },
+              "certainty": {
+                "description": "Whether the annotation is positively or negatively correlated with the presence of COVID\n",
+                "type": "string",
+                "enum": [
+                  "positive",
+                  "negated",
+                  "possible"
+                ]
+              }
+            },
+            "required": [
+              "condition",
+              "certainty"
+            ]
+          }
+        ],
+        "example": {
+          "start": 42,
+          "length": 9,
+          "text": "dry cough",
+          "condition": "cough",
+          "certainty": "positive",
+          "confidence": 95.5
+        }
+      },
+      "TextCovidSymptomAnnotationResponse": {
+        "type": "object",
+        "description": "The response to a COVID symptoms annotation request",
+        "properties": {
+          "textCovidSymptomAnnotations": {
+            "description": "A list of COVID symptom annotations",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextCovidSymptomAnnotation"
+            }
+          }
+        },
+        "required": [
+          "textCovidSymptomAnnotations"
+        ]
+      }
+    },
+    "responses": {
+      "NotFound": {
+        "description": "The specified resource was not found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "InternalServerError": {
+        "description": "The request cannot be fulfilled due to an unexpected server error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "BadRequest": {
+        "description": "Invalid request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      }
+    }
+  }
+}
