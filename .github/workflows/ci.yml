@@ -75,10 +75,10 @@ jobs:
         - "data-node"
         - "date-annotator"
         - "id-annotator"
+        - "location-annotator"
         - "person-name-annotator"
         - "phi-annotator"
         - "phi-deidentifier"
-        - "physical-address-annotator"
     steps:
     - uses: actions/checkout@v2
 
@@ -106,10 +106,10 @@ jobs:
         - "data-node"
         - "date-annotator"
         - "id-annotator"
+        - "location-annotator"
         - "person-name-annotator"
         - "phi-annotator"
         - "phi-deidentifier"
-        - "physical-address-annotator"
     steps:
     - uses: actions/checkout@v2
 

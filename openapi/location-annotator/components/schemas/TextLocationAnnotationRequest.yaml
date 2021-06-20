@@ -1,5 +1,5 @@
 type: object
-description: A request to annotate physical addresses in a clinical note
+description: A request to annotate locations in a clinical note
 properties:
   note:
     $ref: ../../../commons/components/schemas/Note.yaml
