@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.1.2
+  version: 1.2.0
   title: NLP Sandbox Data Node API
   contact:
     name: NLP Sandbox Team
@@ -8,7 +8,7 @@ info:
     url: https://nlpsandbox.io
   license:
     name: Apache 2.0
-    url: https://github.com/nlpsandbox/nlpsandbox-schemas/blob/develop/LICENSE
+    url: https://github.com/nlpsandbox/nlpsandbox-schemas/blob/main/LICENSE
   x-logo:
     url: https://github.com/nlpsandbox/nlpsandbox-schemas/raw/main/docs/logo.png
   description: |

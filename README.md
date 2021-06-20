@@ -23,7 +23,7 @@ benchmark NLP Sandbox tools.
 
 ## Specification
 
-- NLP Sandbox schemas version: 1.1.2
+- NLP Sandbox schemas version: 1.2.0
 
 ## Requirements
 
@@ -40,11 +40,12 @@ develop and benchmark an NLP Sandbox tool, visit [NLPSandbox.io].
 
 API Name                     | Type
 -----------------------------|-----------------------------------------
-[Date Annotator]             | `nlpsandbox:date-annotator`
-[Person Name Annotator]      | `nlpsandbox:person-name-annotator`
-[Location Annotator]         | `nlpsandbox:location-annotator`
-[ID Annotator]               | `nlpsandbox:id-annotator`
 [Contact Annotator]          | `nlpsandbox:contact-annotator`
+[Date Annotator]             | `nlpsandbox:date-annotator`
+[ID Annotator]               | `nlpsandbox:id-annotator`
+[Location Annotator]         | `nlpsandbox:location-annotator`
+[Person Name Annotator]      | `nlpsandbox:person-name-annotator`
+[PHI Annotator]              | `nlpsandbox:phi-annotator`
 [PHI Deidentifier]           | `nlpsandbox:phi-deidentifier`
 
 ### Symptom Annotation
@@ -55,9 +56,9 @@ API Name                     | Type
 
 ## NLP Sandbox Services
 
-API Name                | Type
-------------------------|-----------------------------------------
-[Data Node]             | `nlpsandbox:data`
+API Name                     | Type
+-----------------------------|-----------------------------------------
+[Data Node]                  | `nlpsandbox:data-node`
 
 ## Implementations
 
@@ -71,14 +72,15 @@ high score!
 
 GitHub repository                               | Language
 ------------------------------------------------|---------
+[nlpsandbox/contact-annotator-example]          | Python
+[nlpsandbox/covid-symptom-annotation-example]   | Python
 [nlpsandbox/date-annotator-example]             | Python
 [nlpsandbox/date-annotator-example-java]        | Java
-[nlpsandbox/person-name-annotator-example]      | Python
-[nlpsandbox/location-annotator-example]         | Python
 [nlpsandbox/id-annotator-example]               | Python
-[nlpsandbox/contact-annotator-example]          | Python
-[nlpsandbox/phi-deidentifier]                   | Python
-[nlpsandbox/covid-symptom-annotation-example]   | Python
+[nlpsandbox/location-annotator-example]         | Python
+[nlpsandbox/person-name-annotator-example]      | Python
+[nlpsandbox/phi-annotator-example]              | Python
+[nlpsandbox/phi-deidentifier-example]           | Python
 
 ### Data Node
 
@@ -133,6 +135,7 @@ Thinking about contributing to this project? Get started by reading our
 [Location Annotator]: https://nlpsandbox.github.io/nlpsandbox-schemas/location-annotator/latest/docs/
 [ID Annotator]: https://nlpsandbox.github.io/nlpsandbox-schemas/id-annotator/latest/docs/
 [Contact Annotator]: https://nlpsandbox.github.io/nlpsandbox-schemas/contact-annotator/latest/docs/
+[PHI Annotator]: https://nlpsandbox.github.io/nlpsandbox-schemas/phi-annotator/latest/docs/
 [PHI Deidentifier]: https://nlpsandbox.github.io/nlpsandbox-schemas/phi-deidentifier/latest/docs/
 [COVID Symptom Annotator]: https://nlpsandbox.github.io/nlpsandbox-schemas/covid-symptom-annotator/latest/docs/
 [Data Node]: https://nlpsandbox.github.io/nlpsandbox-schemas/data-node/latest/docs/
@@ -143,7 +146,8 @@ Thinking about contributing to this project? Get started by reading our
 [nlpsandbox/location-annotator-example]: https://github.com/nlpsandbox/location-annotator-example
 [nlpsandbox/id-annotator-example]: https://github.com/nlpsandbox/id-annotator-example
 [nlpsandbox/contact-annotator-example]: https://github.com/nlpsandbox/contact-annotator-example
-[nlpsandbox/phi-deidentifier]: https://github.com/nlpsandbox/phi-deidentifier
+[nlpsandbox/phi-annotator-example]: https://github.com/nlpsandbox/phi-annotator-example
+[nlpsandbox/phi-deidentifier-example]: https://github.com/nlpsandbox/phi-deidentifier-example
 [nlpsandbox/covid-symptom-annotation-example]: https://github.com/nlpsandbox/covid-symptom-annotator-example
 [nlpsandbox/data-node]: https://github.com/nlpsandbox/data-node
 [semantic versioning]: https://semver.org/

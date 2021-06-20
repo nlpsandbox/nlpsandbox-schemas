@@ -20,7 +20,7 @@ properties:
   description:
     description: A short, one-sentence summary of the tool
     type: string
-    maxLength: 100
+    maxLength: 280
   author:
     description: The author of the tool
     type: string
@@ -60,4 +60,4 @@ example:
   authorEmail: author@example.com
   url: https://example.com
   type: nlpsandbox:date-annotator
-  apiVersion: 1.1.2
+  apiVersion: 1.2.0

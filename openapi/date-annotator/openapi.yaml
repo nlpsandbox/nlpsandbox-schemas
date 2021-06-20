@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.1.2
+  version: 1.2.0
   title: NLP Sandbox Date Annotator API
   contact:
     name: NLP Sandbox Team
@@ -8,37 +8,37 @@ info:
     url: https://nlpsandbox.io
   license:
     name: Apache 2.0
-    url: https://github.com/nlpsandbox/nlpsandbox-schemas/blob/develop/LICENSE
+    url: https://github.com/nlpsandbox/nlpsandbox-schemas/blob/main/LICENSE
   x-logo:
     url: https://github.com/nlpsandbox/nlpsandbox-schemas/raw/main/docs/logo.png
   description: >
     # Introduction
 
-    A Date Annotator takes as input a clinical note and outputs a list of
+    A date annotator takes as input a clinical note and outputs a list of
     predicted date annotations found in the clinical note. This OpenAPI document
-    describes the specification of a Date Annotator. This specification includes
-    the schemas of the input and output data, and the conditions that this
-    annotator must meet if you want to benchmark its performance on
-    [nlpsandbox.io](https://nlpsandbox.io).
+    describes the specification of the NLP Sandbox Date Annotator API. This
+    specification includes the schemas of the input and output data, and the
+    requirements that this annotator must meet if you want to benchmark its
+    performance on [nlpsandbox.io](https://nlpsandbox.io).
 
     # Getting Started
 
     The GitHub repository
     [nlpsandbox/date-annotator-example](https://github.com/nlpsandbox/date-annotator-example)
-    provides a simple example implementation of a Python-Flask Date Annotator.
-    By the end of the tutorial available in the README, you will have built a
-    Docker image for a simple Date Annotator. You will then be able to submit
-    this image to [nlpsandbox.io](https://nlpsandbox.io) to benchmark its
-    performance.
+    provides an example implementation of the NLP Sandbox Date Annotator API in
+    Python-Flask. By the end of the tutorial available in the README, you will
+    have built a Docker image for this NLP Sandbox tool. You will then be able
+    to submit this image to [nlpsandbox.io](https://nlpsandbox.io) to benchmark
+    its performance.
 
     # Benchmarking Requirements
 
-    Your NLP Sandbox tool must meet the following conditions before evaluating
+    Your NLP Sandbox tool must meet the following requirements before evaluating
     its performance on [nlpsandbox.io](https://nlpsandbox.io).
 
     - The endpoint `/` must redirect to `/api/v1/tool`.
 
-    - The endpoint `/ui` must redirect to the web interface (UI).
+    - The endpoint `/ui` must redirect to the Swagger User Interface (UI).
 
     - The output of this tool must be reproducible: a given input should always
       generate the same output.
@@ -50,9 +50,9 @@ info:
 
     # Examples
 
-    - [Date Annotator Example (Python)](https://github.com/nlpsandbox/date-annotator-example)
+    - [NLP Sandbox Date Annotator Example (Python)](https://github.com/nlpsandbox/date-annotator-example)
 
-    - [Date Annotator Example (Java)](https://github.com/nlpsandbox/date-annotator-example-java)
+    - [NLP Sandbox Date Annotator Example (Java)](https://github.com/nlpsandbox/date-annotator-example-java)
 tags:
   - name: HealthCheck
     description: Operations about health checks
