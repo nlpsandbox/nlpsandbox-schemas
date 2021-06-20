@@ -23,7 +23,7 @@ benchmark NLP Sandbox tools.
 
 ## Specification
 
-- NLP Sandbox schemas version: 1.1.2
+- NLP Sandbox schemas version: 1.2.0
 
 ## Requirements
 
