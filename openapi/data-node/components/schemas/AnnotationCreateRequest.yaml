@@ -13,11 +13,11 @@ properties:
     type: array
     items:
       $ref: ../../../commons/components/schemas/TextPersonNameAnnotation.yaml
-  textPhysicalAddressAnnotations:
-    description: Physical address annotations in a text
+  textLocationAnnotations:
+    description: Location annotations in a text
     type: array
     items:
-      $ref: ../../../commons/components/schemas/TextPhysicalAddressAnnotation.yaml
+      $ref: ../../../commons/components/schemas/TextLocationAnnotation.yaml
   textIdAnnotations:
     description: ID annotations in a text
     type: array
