@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "version": "1.1.2",
+    "version": "1.2.0",
     "title": "NLP Sandbox Data Node API",
     "contact": {
       "name": "NLP Sandbox Team",
@@ -10,10 +10,10 @@
     },
     "license": {
       "name": "Apache 2.0",
-      "url": "https://github.com/nlpsandbox/nlpsandbox-schemas/blob/develop/LICENSE"
+      "url": "https://github.com/nlpsandbox/nlpsandbox-schemas/blob/main/LICENSE"
     },
     "x-logo": {
-      "url": "https://nlpsandbox.github.io/nlpsandbox-schemas/logo.png"
+      "url": "https://github.com/nlpsandbox/nlpsandbox-schemas/raw/main/docs/logo.png"
     },
     "description": "# Overview\n\nThe NLP Sandbox Data Node is a repository of data used to benchmark NLP\nTools like the NLP Sandbox Date Annotator and Person Name Annotator.\n\nThe resources that can be stored in this Data Node and the operations\nsupported are listed below:\n\n- Create and manage datasets - Create and manage FHIR stores\n  - Store and retrieve FHIR patient profiles\n  - Store and retrieve clinical\n  notes\n- Create and manage annotation stores\n  - Store and retrieve text annotations\n"
   },
@@ -1537,9 +1537,9 @@
           "confidence": 95.5
         }
       },
-      "TextPhysicalAddressAnnotation": {
+      "TextLocationAnnotation": {
         "type": "object",
-        "description": "A physical address annotation in a text",
+        "description": "A location annotation in a text",
         "allOf": [
           {
             "$ref": "#/components/schemas/TextAnnotation"
@@ -1547,8 +1547,8 @@
           {
             "type": "object",
             "properties": {
-              "addressType": {
-                "description": "Type of address information",
+              "locationType": {
+                "description": "Type of location",
                 "type": "string",
                 "enum": [
                   "city",
@@ -1565,7 +1565,7 @@
               }
             },
             "required": [
-              "addressType"
+              "locationType"
             ]
           }
         ],
@@ -1573,7 +1573,7 @@
           "start": 42,
           "length": 7,
           "text": "Seattle",
-          "addressType": "city",
+          "locationType": "city",
           "confidence": 95.5
         }
       },
@@ -1738,11 +1738,11 @@
               "$ref": "#/components/schemas/TextPersonNameAnnotation"
             }
           },
-          "textPhysicalAddressAnnotations": {
-            "description": "Physical address annotations in a text",
+          "textLocationAnnotations": {
+            "description": "Location annotations in a text",
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/TextPhysicalAddressAnnotation"
+              "$ref": "#/components/schemas/TextLocationAnnotation"
             }
           },
           "textIdAnnotations": {
@@ -1829,11 +1829,11 @@
               "$ref": "#/components/schemas/TextPersonNameAnnotation"
             }
           },
-          "textPhysicalAddressAnnotations": {
-            "description": "Physical address annotations in a text",
+          "textLocationAnnotations": {
+            "description": "Location annotations in a text",
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/TextPhysicalAddressAnnotation"
+              "$ref": "#/components/schemas/TextLocationAnnotation"
             }
           },
           "textIdAnnotations": {

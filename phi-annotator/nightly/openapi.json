@@ -2,7 +2,7 @@
   "openapi": "3.0.3",
   "info": {
     "version": "1.2.0",
-    "title": "NLP Sandbox ID Annotator API",
+    "title": "NLP Sandbox PHI Annotator API",
     "contact": {
       "name": "NLP Sandbox Team",
       "email": "team@nlpsandbox.io",
@@ -13,9 +13,9 @@
       "url": "https://github.com/nlpsandbox/nlpsandbox-schemas/blob/main/LICENSE"
     },
     "x-logo": {
-      "url": "https://github.com/nlpsandbox/nlpsandbox-schemas/raw/main/docs/logo.png"
+      "url": "https://nlpsandbox.github.io/nlpsandbox-schemas/logo.png"
     },
-    "description": "# Introduction\nAn ID annotator takes as input a clinical note and outputs a list of predicted ID annotations found in the clinical note. This OpenAPI document describes the specification of the NLP Sandbox ID Annotator API. This specification includes the schemas of the input and output data, and the requirements that this annotator must meet if you want to benchmark its performance on [nlpsandbox.io](https://nlpsandbox.io).\n# Getting Started\nThe GitHub repository [nlpsandbox/id-annotator-example](https://github.com/nlpsandbox/id-annotator-example) provides an example implementation of the NLP Sandbox ID Annotator API in Python-Flask. By the end of the tutorial available in the README, you will have built a Docker image for this NLP Sandbox tool. You will then be able to submit this image to [nlpsandbox.io](https://nlpsandbox.io) to benchmark its performance.\n# Benchmarking Requirements\nYour NLP Sandbox tool must meet the following requirements before evaluating its performance on [nlpsandbox.io](https://nlpsandbox.io).\n- The endpoint `/` must redirect to `/api/v1/tool`.\n- The endpoint `/ui` must redirect to the Swagger User Interface (UI).\n- The output of this tool must be reproducible: a given input should always\n  generate the same output.\n\n- To ensure the results are reproducible and robust, and the data are\n  secured, this tool must not connect to any remote server. When benchmarked\n  on [nlpsandbox.io](https://nlpsandbox.io), this tool will not be able to\n  connect to remote servers.\n\n# Examples\n- [NLP Sandbox ID Annotator Example (Python)](https://github.com/nlpsandbox/id-annotator-example)\n"
+    "description": "# Introduction\nA protected health information (PHI) annotator implements several endpoints that take as input a clinical note and outputs a list of predicted PHI annotations found in the clinical note. This OpenAPI document describes the specification of the NLP Sandbox PHI Annotator API. This specification includes the schemas of the input and output data, and the requirements that this annotator must meet if you want to benchmark its performance on [nlpsandbox.io](https://nlpsandbox.io).\n# Getting Started\nThe GitHub repository [nlpsandbox/phi-annotator-example](https://github.com/nlpsandbox/phi-annotator-example) provides an example implementation of the NLP Sandbox PHI Annotator API in Python-Flask. By the end of the tutorial available in the README, you will have built a Docker image for this NLP Sandbox tool. You will then be able to submit this image to [nlpsandbox.io](https://nlpsandbox.io) to benchmark its performance.\n# Benchmarking Requirements\nYour NLP Sandbox tool must meet the following requirements before evaluating its performance on [nlpsandbox.io](https://nlpsandbox.io).\n- The endpoint `/` must redirect to `/api/v1/tool`.\n- The endpoint `/ui` must redirect to the Swagger User Interface (UI).\n- The output of this tool must be reproducible: a given input should always\n  generate the same output.\n\n- To ensure the results are reproducible and robust, and the data are\n  secured, this tool must not connect to any remote server. When benchmarked\n  on [nlpsandbox.io](https://nlpsandbox.io), this tool will not be able to\n  connect to remote servers.\n\n# Examples\n- [NLP Sandbox PHI Annotator Example (Python)](https://github.com/nlpsandbox/phi-annotator-example)\n"
   },
   "tags": [
     {
@@ -23,8 +23,24 @@
       "description": "Operations about health checks"
     },
     {
+      "name": "TextContactAnnotation",
+      "description": "Operations about text contact annotations"
+    },
+    {
+      "name": "TextDateAnnotation",
+      "description": "Operations about text date annotations"
+    },
+    {
       "name": "TextIdAnnotation",
       "description": "Operations about text ID annotations"
+    },
+    {
+      "name": "TextPersonNameAnnotation",
+      "description": "Operations about text person name annotations"
+    },
+    {
+      "name": "TextLocationAnnotation",
+      "description": "Operations about text location annotations"
     },
     {
       "name": "Tool",
@@ -68,6 +84,80 @@
         }
       }
     },
+    "/textContactAnnotations": {
+      "post": {
+        "tags": [
+          "TextContactAnnotation"
+        ],
+        "summary": "Annotate contact information in a clinical note",
+        "description": "Return the contact annotations found in a clinical note",
+        "operationId": "createTextContactAnnotations",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TextContactAnnotationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TextContactAnnotationResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/textDateAnnotations": {
+      "post": {
+        "tags": [
+          "TextDateAnnotation"
+        ],
+        "summary": "Annotate dates in a clinical note",
+        "description": "Return the date annotations found in a clinical note",
+        "operationId": "createTextDateAnnotations",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TextDateAnnotationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TextDateAnnotationResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
     "/textIdAnnotations": {
       "post": {
         "tags": [
@@ -92,6 +182,80 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/TextIdAnnotationResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/textLocationAnnotations": {
+      "post": {
+        "tags": [
+          "TextLocationAnnotation"
+        ],
+        "summary": "Annotate locations in a clinical note",
+        "description": "Return the location annotations found in a clinical note",
+        "operationId": "createTextLocationAnnotations",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TextLocationAnnotationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TextLocationAnnotationResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/textPersonNameAnnotations": {
+      "post": {
+        "tags": [
+          "TextPersonNameAnnotation"
+        ],
+        "summary": "Annotate person names in a clinical note",
+        "description": "Return the person name annotations found in a clinical note",
+        "operationId": "createTextPersonNameAnnotations",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TextPersonNameAnnotationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TextPersonNameAnnotationResponse"
                 }
               }
             }
@@ -256,9 +420,9 @@
           "patientId": "awesome-patient"
         }
       },
-      "TextIdAnnotationRequest": {
+      "TextContactAnnotationRequest": {
         "type": "object",
-        "description": "A request to annotate IDs in a clinical note",
+        "description": "A request to annotate contacts in a clinical note",
         "properties": {
           "note": {
             "$ref": "#/components/schemas/Note"
@@ -270,7 +434,7 @@
         "example": {
           "note": {
             "identifier": "awesome-note",
-            "text": "On 12/26/2020, Ms. Chloe Price met with Dr. Prescott in Seattle. Her SSN is 123-45-6789.\n",
+            "text": "On 12/26/2020, Ms. Chloe Price met with Dr. Prescott in Seattle. Her phone number is 203-555-4545.\n",
             "type": "loinc:LP29684-5",
             "patientId": "awesome-patient"
           }
@@ -311,6 +475,132 @@
           "length": 19,
           "text": "the annotation text",
           "confidence": 95.5
+        }
+      },
+      "TextContactAnnotation": {
+        "type": "object",
+        "description": "A contact annotation in a text",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TextAnnotation"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "contactType": {
+                "description": "Type of contact information",
+                "type": "string",
+                "enum": [
+                  "email",
+                  "fax",
+                  "ip_address",
+                  "phone",
+                  "url",
+                  "other"
+                ]
+              }
+            },
+            "required": [
+              "contactType"
+            ]
+          }
+        ],
+        "example": {
+          "start": 42,
+          "length": 11,
+          "text": "dave@uw.edu",
+          "contactType": "email",
+          "confidence": 95.5
+        }
+      },
+      "TextContactAnnotationResponse": {
+        "type": "object",
+        "description": "The response to a contact annotation request",
+        "properties": {
+          "textContactAnnotations": {
+            "description": "A list of contact annotations",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextContactAnnotation"
+            }
+          }
+        },
+        "required": [
+          "textContactAnnotations"
+        ]
+      },
+      "TextDateAnnotationRequest": {
+        "type": "object",
+        "description": "A request to annotate dates in a clinical note",
+        "properties": {
+          "note": {
+            "$ref": "#/components/schemas/Note"
+          }
+        },
+        "required": [
+          "note"
+        ]
+      },
+      "TextDateAnnotation": {
+        "type": "object",
+        "description": "A date annotation in a text",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TextAnnotation"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "dateFormat": {
+                "description": "Date format (ISO 8601)",
+                "type": "string",
+                "example": "MM/DD/YYYY"
+              }
+            }
+          }
+        ],
+        "example": {
+          "start": 42,
+          "length": 10,
+          "text": "10/26/2020",
+          "dateFormat": "MM/DD/YYYY",
+          "confidence": 95.5
+        }
+      },
+      "TextDateAnnotationResponse": {
+        "type": "object",
+        "description": "The response to a dates annotation request",
+        "properties": {
+          "textDateAnnotations": {
+            "description": "A list of date annotations",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextDateAnnotation"
+            }
+          }
+        },
+        "required": [
+          "textDateAnnotations"
+        ]
+      },
+      "TextIdAnnotationRequest": {
+        "type": "object",
+        "description": "A request to annotate IDs in a clinical note",
+        "properties": {
+          "note": {
+            "$ref": "#/components/schemas/Note"
+          }
+        },
+        "required": [
+          "note"
+        ],
+        "example": {
+          "note": {
+            "identifier": "awesome-note",
+            "text": "On 12/26/2020, Ms. Chloe Price met with Dr. Prescott in Seattle. Her SSN is 123-45-6789.\n",
+            "type": "loinc:LP29684-5",
+            "patientId": "awesome-patient"
+          }
         }
       },
       "TextIdAnnotation": {
@@ -367,6 +657,117 @@
         },
         "required": [
           "textIdAnnotations"
+        ]
+      },
+      "TextLocationAnnotationRequest": {
+        "type": "object",
+        "description": "A request to annotate locations in a clinical note",
+        "properties": {
+          "note": {
+            "$ref": "#/components/schemas/Note"
+          }
+        },
+        "required": [
+          "note"
+        ]
+      },
+      "TextLocationAnnotation": {
+        "type": "object",
+        "description": "A location annotation in a text",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TextAnnotation"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "locationType": {
+                "description": "Type of location",
+                "type": "string",
+                "enum": [
+                  "city",
+                  "country",
+                  "department",
+                  "hospital",
+                  "organization",
+                  "other",
+                  "room",
+                  "state",
+                  "street",
+                  "zip"
+                ]
+              }
+            },
+            "required": [
+              "locationType"
+            ]
+          }
+        ],
+        "example": {
+          "start": 42,
+          "length": 7,
+          "text": "Seattle",
+          "locationType": "city",
+          "confidence": 95.5
+        }
+      },
+      "TextLocationAnnotationResponse": {
+        "type": "object",
+        "description": "The response to a locations annotation request",
+        "properties": {
+          "textLocationAnnotations": {
+            "description": "A list of location annotations",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextLocationAnnotation"
+            }
+          }
+        },
+        "required": [
+          "textLocationAnnotations"
+        ]
+      },
+      "TextPersonNameAnnotationRequest": {
+        "type": "object",
+        "description": "A request to annotate person names in a clinical note",
+        "properties": {
+          "note": {
+            "$ref": "#/components/schemas/Note"
+          }
+        },
+        "required": [
+          "note"
+        ]
+      },
+      "TextPersonNameAnnotation": {
+        "type": "object",
+        "description": "A person name annotation in a text",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TextAnnotation"
+          }
+        ],
+        "example": {
+          "start": 42,
+          "length": 11,
+          "text": "Chloe Price",
+          "confidence": 95.5
+        }
+      },
+      "TextPersonNameAnnotationResponse": {
+        "type": "object",
+        "description": "The response to a person names annotation request",
+        "properties": {
+          "textPersonNameAnnotations": {
+            "description": "A list of person name annotations",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextPersonNameAnnotation"
+            }
+          }
+        },
+        "required": [
+          "textPersonNameAnnotations"
         ]
       },
       "License": {

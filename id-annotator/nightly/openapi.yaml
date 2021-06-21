@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.1.2
+  version: 1.2.0
   title: NLP Sandbox ID Annotator API
   contact:
     name: NLP Sandbox Team
@@ -8,37 +8,37 @@ info:
     url: 'https://nlpsandbox.io'
   license:
     name: Apache 2.0
-    url: 'https://github.com/nlpsandbox/nlpsandbox-schemas/blob/develop/LICENSE'
+    url: 'https://github.com/nlpsandbox/nlpsandbox-schemas/blob/main/LICENSE'
   x-logo:
-    url: 'https://nlpsandbox.github.io/nlpsandbox-schemas/logo.png'
+    url: 'https://github.com/nlpsandbox/nlpsandbox-schemas/raw/main/docs/logo.png'
   description: >
     # Introduction
 
-    An ID Annotator takes as input a clinical note and outputs a list of
+    An ID annotator takes as input a clinical note and outputs a list of
     predicted ID annotations found in the clinical note. This OpenAPI document
-    describes the specification of a ID Annotator. This specification includes
-    the schemas of the input and output data, and the conditions that this
-    annotator must meet if you want to benchmark its performance on
-    [nlpsandbox.io](https://nlpsandbox.io).
+    describes the specification of the NLP Sandbox ID Annotator API. This
+    specification includes the schemas of the input and output data, and the
+    requirements that this annotator must meet if you want to benchmark its
+    performance on [nlpsandbox.io](https://nlpsandbox.io).
 
     # Getting Started
 
-    The GitHub repository (will be added later)
+    The GitHub repository
     [nlpsandbox/id-annotator-example](https://github.com/nlpsandbox/id-annotator-example)
-    provides a simple example implementation of a Python-Flask ID Annotator. By
-    the end of the tutorial available in the README, you will have built a
-    Docker image for a simple ID Annotator. You will then be able to submit this
-    image to [nlpsandbox.io](https://nlpsandbox.io) to benchmark its
-    performance.
+    provides an example implementation of the NLP Sandbox ID Annotator API in
+    Python-Flask. By the end of the tutorial available in the README, you will
+    have built a Docker image for this NLP Sandbox tool. You will then be able
+    to submit this image to [nlpsandbox.io](https://nlpsandbox.io) to benchmark
+    its performance.
 
     # Benchmarking Requirements
 
-    Your NLP Sandbox tool must meet the following conditions before evaluating
+    Your NLP Sandbox tool must meet the following requirements before evaluating
     its performance on [nlpsandbox.io](https://nlpsandbox.io).
 
     - The endpoint `/` must redirect to `/api/v1/tool`.
 
-    - The endpoint `/ui` must redirect to the web interface (UI).
+    - The endpoint `/ui` must redirect to the Swagger User Interface (UI).
 
     - The output of this tool must be reproducible: a given input should always
       generate the same output.
@@ -50,7 +50,7 @@ info:
 
     # Examples
 
-    - [ID Annotator Example
+    - [NLP Sandbox ID Annotator Example
     (Python)](https://github.com/nlpsandbox/id-annotator-example)
 tags:
   - name: HealthCheck
@@ -342,9 +342,16 @@ components:
     ToolType:
       description: The type of this tool
       type: string
-      minLength: 3
-      maxLength: 60
-      pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*(:)[a-z0-9]+(?:-[a-z0-9]+)*$'
+      enum:
+        - 'nlpsandbox:contact-annotator'
+        - 'nlpsandbox:covid-symptom-annotator'
+        - 'nlpsandbox:data-node'
+        - 'nlpsandbox:date-annotator'
+        - 'nlpsandbox:id-annotator'
+        - 'nlpsandbox:location-annotator'
+        - 'nlpsandbox:person-name-annotator'
+        - 'nlpsandbox:phi-annotator'
+        - 'nlpsandbox:phi-deidentifier'
       example: 'nlpsandbox:date-annotator'
     Tool:
       type: object
@@ -370,7 +377,7 @@ components:
         description:
           description: 'A short, one-sentence summary of the tool'
           type: string
-          maxLength: 100
+          maxLength: 280
         author:
           description: The author of the tool
           type: string
@@ -411,7 +418,7 @@ components:
         authorEmail: author@example.com
         url: 'https://example.com'
         type: 'nlpsandbox:date-annotator'
-        apiVersion: 1.1.2
+        apiVersion: 1.2.0
     ToolDependencies:
       type: object
       description: A list of tool dependencies

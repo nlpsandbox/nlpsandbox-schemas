@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   version: 1.2.0
-  title: NLP Sandbox COVID Symptom Annotator API
+  title: NLP Sandbox PHI Annotator API
   contact:
     name: NLP Sandbox Team
     email: team@nlpsandbox.io
@@ -10,27 +10,27 @@ info:
     name: Apache 2.0
     url: 'https://github.com/nlpsandbox/nlpsandbox-schemas/blob/main/LICENSE'
   x-logo:
-    url: 'https://github.com/nlpsandbox/nlpsandbox-schemas/raw/main/docs/logo.png'
+    url: 'https://nlpsandbox.github.io/nlpsandbox-schemas/logo.png'
   description: >
     # Introduction
 
-    A COVID symptom annotator takes as input a clinical note and outputs a list
-    of predicted COVID-19 sign and symptom annotations found in the clinical
-    note. This OpenAPI document describes the specification of the NLP Sandbox
-    COVID Symptom Annotator API. This specification includes the schemas of the
-    input and output data, and the requirements that this annotator must meet if
-    you want to benchmark its performance on
+    A protected health information (PHI) annotator implements several endpoints
+    that take as input a clinical note and outputs a list of predicted PHI
+    annotations found in the clinical note. This OpenAPI document describes the
+    specification of the NLP Sandbox PHI Annotator API. This specification
+    includes the schemas of the input and output data, and the requirements that
+    this annotator must meet if you want to benchmark its performance on
     [nlpsandbox.io](https://nlpsandbox.io).
 
     # Getting Started
 
     The GitHub repository
-    [nlpsandbox/covid-symptom-annotator-example](https://github.com/nlpsandbox/covid-symptom-annotator-example)
-    provides an example implementation of the NLP Sandbox COVID Symptom
-    Annotator API in Python-Flask. By the end of the tutorial available in the
-    README, you will have built a Docker image for this NLP Sandbox tool. You
-    will then be able to submit this image to
-    [nlpsandbox.io](https://nlpsandbox.io) to benchmark its performance.
+    [nlpsandbox/phi-annotator-example](https://github.com/nlpsandbox/phi-annotator-example)
+    provides an example implementation of the NLP Sandbox PHI Annotator API in
+    Python-Flask. By the end of the tutorial available in the README, you will
+    have built a Docker image for this NLP Sandbox tool. You will then be able
+    to submit this image to [nlpsandbox.io](https://nlpsandbox.io) to benchmark
+    its performance.
 
     # Benchmarking Requirements
 
@@ -51,13 +51,21 @@ info:
 
     # Examples
 
-    - [NLP Sandbox COVID Symptom Annotator Example
-    (Python)](https://github.com/nlpsandbox/covid-symptom-annotator-example)
+    - [NLP Sandbox PHI Annotator Example
+    (Python)](https://github.com/nlpsandbox/phi-annotator-example)
 tags:
   - name: HealthCheck
     description: Operations about health checks
-  - name: TextCovidSymptomAnnotation
-    description: Operations about COVID symptom annotations
+  - name: TextContactAnnotation
+    description: Operations about text contact annotations
+  - name: TextDateAnnotation
+    description: Operations about text date annotations
+  - name: TextIdAnnotation
+    description: Operations about text ID annotations
+  - name: TextPersonNameAnnotation
+    description: Operations about text person name annotations
+  - name: TextLocationAnnotation
+    description: Operations about text location annotations
   - name: Tool
     description: Operations about this tool
 servers:
@@ -82,25 +90,117 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
-  /textCovidSymptomAnnotations:
+  /textContactAnnotations:
     post:
       tags:
-        - TextCovidSymptomAnnotation
-      summary: Annotate COVID symptoms in a clinical note
-      description: Return the COVID symptom annotations found in a clinical note
-      operationId: createTextCovidSymptomAnnotations
+        - TextContactAnnotation
+      summary: Annotate contact information in a clinical note
+      description: Return the contact annotations found in a clinical note
+      operationId: createTextContactAnnotations
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/TextCovidSymptomAnnotationRequest'
+              $ref: '#/components/schemas/TextContactAnnotationRequest'
       responses:
         '200':
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TextCovidSymptomAnnotationResponse'
+                $ref: '#/components/schemas/TextContactAnnotationResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /textDateAnnotations:
+    post:
+      tags:
+        - TextDateAnnotation
+      summary: Annotate dates in a clinical note
+      description: Return the date annotations found in a clinical note
+      operationId: createTextDateAnnotations
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TextDateAnnotationRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TextDateAnnotationResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /textIdAnnotations:
+    post:
+      tags:
+        - TextIdAnnotation
+      summary: Annotate IDs in a clinical note
+      description: Return the ID annotations found in a clinical note
+      operationId: createTextIdAnnotations
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TextIdAnnotationRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TextIdAnnotationResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /textLocationAnnotations:
+    post:
+      tags:
+        - TextLocationAnnotation
+      summary: Annotate locations in a clinical note
+      description: Return the location annotations found in a clinical note
+      operationId: createTextLocationAnnotations
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TextLocationAnnotationRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TextLocationAnnotationResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /textPersonNameAnnotations:
+    post:
+      tags:
+        - TextPersonNameAnnotation
+      summary: Annotate person names in a clinical note
+      description: Return the person name annotations found in a clinical note
+      operationId: createTextPersonNameAnnotations
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TextPersonNameAnnotationRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TextPersonNameAnnotationResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
         '500':
@@ -215,9 +315,9 @@ components:
         text: 'On 12/26/2020, Ms. Chloe Price met with Dr. Prescott in Seattle.'
         type: 'loinc:LP29684-5'
         patientId: awesome-patient
-    TextCovidSymptomAnnotationRequest:
+    TextContactAnnotationRequest:
       type: object
-      description: A request to annotate COVID symptoms in a clinical note
+      description: A request to annotate contacts in a clinical note
       properties:
         note:
           $ref: '#/components/schemas/Note'
@@ -227,8 +327,8 @@ components:
         note:
           identifier: awesome-note
           text: >
-            The patient had a dry cough and fever or chills yesterday. He is
-            also experiencing new loss of taste today and three days ago.
+            On 12/26/2020, Ms. Chloe Price met with Dr. Prescott in Seattle. Her
+            phone number is 203-555-4545.
           type: 'loinc:LP29684-5'
           patientId: awesome-patient
     TextAnnotation:
@@ -260,68 +360,211 @@ components:
         length: 19
         text: the annotation text
         confidence: 95.5
-    TextCovidSymptomAnnotation:
+    TextContactAnnotation:
       type: object
-      description: A COVID symptom annotation in a text
+      description: A contact annotation in a text
       allOf:
         - $ref: '#/components/schemas/TextAnnotation'
         - type: object
           properties:
-            condition:
-              description: |
-                The sign/symptom type according to CDC definition
+            contactType:
+              description: Type of contact information
               type: string
               enum:
-                - fever
-                - chill
-                - cough
-                - fatigue
-                - nasal_obstruction
-                - loss_of_appetite
-                - diarrhea
-                - abdominal_pain
-                - nausea
-                - vomiting
-                - sore_throat
-                - headache
-                - myalgia
-                - loss_of_taste
-                - loss_of_smell
-                - dyspnea
-                - chest_pain
-                - delirium
-                - hypersomnia
-                - cyanosis
-            certainty:
-              description: >
-                Whether the annotation is positively or negatively correlated
-                with the presence of COVID
-              type: string
-              enum:
-                - positive
-                - negated
-                - possible
+                - email
+                - fax
+                - ip_address
+                - phone
+                - url
+                - other
           required:
-            - condition
-            - certainty
+            - contactType
       example:
         start: 42
-        length: 9
-        text: dry cough
-        condition: cough
-        certainty: positive
+        length: 11
+        text: dave@uw.edu
+        contactType: email
         confidence: 95.5
-    TextCovidSymptomAnnotationResponse:
+    TextContactAnnotationResponse:
       type: object
-      description: The response to a COVID symptoms annotation request
+      description: The response to a contact annotation request
       properties:
-        textCovidSymptomAnnotations:
-          description: A list of COVID symptom annotations
+        textContactAnnotations:
+          description: A list of contact annotations
           type: array
           items:
-            $ref: '#/components/schemas/TextCovidSymptomAnnotation'
+            $ref: '#/components/schemas/TextContactAnnotation'
       required:
-        - textCovidSymptomAnnotations
+        - textContactAnnotations
+    TextDateAnnotationRequest:
+      type: object
+      description: A request to annotate dates in a clinical note
+      properties:
+        note:
+          $ref: '#/components/schemas/Note'
+      required:
+        - note
+    TextDateAnnotation:
+      type: object
+      description: A date annotation in a text
+      allOf:
+        - $ref: '#/components/schemas/TextAnnotation'
+        - type: object
+          properties:
+            dateFormat:
+              description: Date format (ISO 8601)
+              type: string
+              example: MM/DD/YYYY
+      example:
+        start: 42
+        length: 10
+        text: 10/26/2020
+        dateFormat: MM/DD/YYYY
+        confidence: 95.5
+    TextDateAnnotationResponse:
+      type: object
+      description: The response to a dates annotation request
+      properties:
+        textDateAnnotations:
+          description: A list of date annotations
+          type: array
+          items:
+            $ref: '#/components/schemas/TextDateAnnotation'
+      required:
+        - textDateAnnotations
+    TextIdAnnotationRequest:
+      type: object
+      description: A request to annotate IDs in a clinical note
+      properties:
+        note:
+          $ref: '#/components/schemas/Note'
+      required:
+        - note
+      example:
+        note:
+          identifier: awesome-note
+          text: >
+            On 12/26/2020, Ms. Chloe Price met with Dr. Prescott in Seattle. Her
+            SSN is 123-45-6789.
+          type: 'loinc:LP29684-5'
+          patientId: awesome-patient
+    TextIdAnnotation:
+      type: object
+      description: An ID annotation in a text
+      allOf:
+        - $ref: '#/components/schemas/TextAnnotation'
+        - type: object
+          properties:
+            idType:
+              description: Type of ID information
+              type: string
+              enum:
+                - account
+                - bio_id
+                - device
+                - health_plan
+                - id_number
+                - license
+                - medical_record
+                - ssn
+                - vehicle
+                - other
+          required:
+            - idType
+      example:
+        start: 42
+        length: 11
+        text: 203-11-4535
+        idType: ssn
+        confidence: 95.5
+    TextIdAnnotationResponse:
+      type: object
+      description: The response to an ID annotation request
+      properties:
+        textIdAnnotations:
+          description: A list of ID annotations
+          type: array
+          items:
+            $ref: '#/components/schemas/TextIdAnnotation'
+      required:
+        - textIdAnnotations
+    TextLocationAnnotationRequest:
+      type: object
+      description: A request to annotate locations in a clinical note
+      properties:
+        note:
+          $ref: '#/components/schemas/Note'
+      required:
+        - note
+    TextLocationAnnotation:
+      type: object
+      description: A location annotation in a text
+      allOf:
+        - $ref: '#/components/schemas/TextAnnotation'
+        - type: object
+          properties:
+            locationType:
+              description: Type of location
+              type: string
+              enum:
+                - city
+                - country
+                - department
+                - hospital
+                - organization
+                - other
+                - room
+                - state
+                - street
+                - zip
+          required:
+            - locationType
+      example:
+        start: 42
+        length: 7
+        text: Seattle
+        locationType: city
+        confidence: 95.5
+    TextLocationAnnotationResponse:
+      type: object
+      description: The response to a locations annotation request
+      properties:
+        textLocationAnnotations:
+          description: A list of location annotations
+          type: array
+          items:
+            $ref: '#/components/schemas/TextLocationAnnotation'
+      required:
+        - textLocationAnnotations
+    TextPersonNameAnnotationRequest:
+      type: object
+      description: A request to annotate person names in a clinical note
+      properties:
+        note:
+          $ref: '#/components/schemas/Note'
+      required:
+        - note
+    TextPersonNameAnnotation:
+      type: object
+      description: A person name annotation in a text
+      allOf:
+        - $ref: '#/components/schemas/TextAnnotation'
+      example:
+        start: 42
+        length: 11
+        text: Chloe Price
+        confidence: 95.5
+    TextPersonNameAnnotationResponse:
+      type: object
+      description: The response to a person names annotation request
+      properties:
+        textPersonNameAnnotations:
+          description: A list of person name annotations
+          type: array
+          items:
+            $ref: '#/components/schemas/TextPersonNameAnnotation'
+      required:
+        - textPersonNameAnnotations
     License:
       description: The license (license keyword used by GitHub)
       type: string

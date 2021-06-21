@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   version: 1.2.0
-  title: NLP Sandbox COVID Symptom Annotator API
+  title: NLP Sandbox Location Annotator API
   contact:
     name: NLP Sandbox Team
     email: team@nlpsandbox.io
@@ -14,23 +14,22 @@ info:
   description: >
     # Introduction
 
-    A COVID symptom annotator takes as input a clinical note and outputs a list
-    of predicted COVID-19 sign and symptom annotations found in the clinical
-    note. This OpenAPI document describes the specification of the NLP Sandbox
-    COVID Symptom Annotator API. This specification includes the schemas of the
-    input and output data, and the requirements that this annotator must meet if
-    you want to benchmark its performance on
-    [nlpsandbox.io](https://nlpsandbox.io).
+    A location annotator takes as input a clinical note and outputs a list of
+    predicted location annotations found in the clinical note. This OpenAPI
+    document describes the specification of the NLP Sandbox Location Annotator
+    API. This specification includes the schemas of the input and output data,
+    and the requirements that this annotator must meet if you want to benchmark
+    its performance on [nlpsandbox.io](https://nlpsandbox.io).
 
     # Getting Started
 
     The GitHub repository
-    [nlpsandbox/covid-symptom-annotator-example](https://github.com/nlpsandbox/covid-symptom-annotator-example)
-    provides an example implementation of the NLP Sandbox COVID Symptom
-    Annotator API in Python-Flask. By the end of the tutorial available in the
-    README, you will have built a Docker image for this NLP Sandbox tool. You
-    will then be able to submit this image to
-    [nlpsandbox.io](https://nlpsandbox.io) to benchmark its performance.
+    [nlpsandbox/location-annotator-example](https://github.com/nlpsandbox/location-annotator-example)
+    provides an example implementation of the NLP Sandbox Location Annotator API
+    in Python-Flask. By the end of the tutorial available in the README, you
+    will have built a Docker image for this NLP Sandbox tool. You will then be
+    able to submit this image to [nlpsandbox.io](https://nlpsandbox.io) to
+    benchmark its performance.
 
     # Benchmarking Requirements
 
@@ -51,13 +50,13 @@ info:
 
     # Examples
 
-    - [NLP Sandbox COVID Symptom Annotator Example
-    (Python)](https://github.com/nlpsandbox/covid-symptom-annotator-example)
+    - [NLP Sandbox Location Annotator Example
+    (Python)](https://github.com/nlpsandbox/location-annotator-example)
 tags:
   - name: HealthCheck
     description: Operations about health checks
-  - name: TextCovidSymptomAnnotation
-    description: Operations about COVID symptom annotations
+  - name: TextLocationAnnotation
+    description: Operations about text location annotations
   - name: Tool
     description: Operations about this tool
 servers:
@@ -82,25 +81,25 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
-  /textCovidSymptomAnnotations:
+  /textLocationAnnotations:
     post:
       tags:
-        - TextCovidSymptomAnnotation
-      summary: Annotate COVID symptoms in a clinical note
-      description: Return the COVID symptom annotations found in a clinical note
-      operationId: createTextCovidSymptomAnnotations
+        - TextLocationAnnotation
+      summary: Annotate locations in a clinical note
+      description: Return the location annotations found in a clinical note
+      operationId: createTextLocationAnnotations
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/TextCovidSymptomAnnotationRequest'
+              $ref: '#/components/schemas/TextLocationAnnotationRequest'
       responses:
         '200':
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TextCovidSymptomAnnotationResponse'
+                $ref: '#/components/schemas/TextLocationAnnotationResponse'
         '400':
           $ref: '#/components/responses/BadRequest'
         '500':
@@ -215,22 +214,14 @@ components:
         text: 'On 12/26/2020, Ms. Chloe Price met with Dr. Prescott in Seattle.'
         type: 'loinc:LP29684-5'
         patientId: awesome-patient
-    TextCovidSymptomAnnotationRequest:
+    TextLocationAnnotationRequest:
       type: object
-      description: A request to annotate COVID symptoms in a clinical note
+      description: A request to annotate locations in a clinical note
       properties:
         note:
           $ref: '#/components/schemas/Note'
       required:
         - note
-      example:
-        note:
-          identifier: awesome-note
-          text: >
-            The patient had a dry cough and fever or chills yesterday. He is
-            also experiencing new loss of taste today and three days ago.
-          type: 'loinc:LP29684-5'
-          patientId: awesome-patient
     TextAnnotation:
       type: object
       description: An annotation in a text
@@ -260,68 +251,46 @@ components:
         length: 19
         text: the annotation text
         confidence: 95.5
-    TextCovidSymptomAnnotation:
+    TextLocationAnnotation:
       type: object
-      description: A COVID symptom annotation in a text
+      description: A location annotation in a text
       allOf:
         - $ref: '#/components/schemas/TextAnnotation'
         - type: object
           properties:
-            condition:
-              description: |
-                The sign/symptom type according to CDC definition
+            locationType:
+              description: Type of location
               type: string
               enum:
-                - fever
-                - chill
-                - cough
-                - fatigue
-                - nasal_obstruction
-                - loss_of_appetite
-                - diarrhea
-                - abdominal_pain
-                - nausea
-                - vomiting
-                - sore_throat
-                - headache
-                - myalgia
-                - loss_of_taste
-                - loss_of_smell
-                - dyspnea
-                - chest_pain
-                - delirium
-                - hypersomnia
-                - cyanosis
-            certainty:
-              description: >
-                Whether the annotation is positively or negatively correlated
-                with the presence of COVID
-              type: string
-              enum:
-                - positive
-                - negated
-                - possible
+                - city
+                - country
+                - department
+                - hospital
+                - organization
+                - other
+                - room
+                - state
+                - street
+                - zip
           required:
-            - condition
-            - certainty
+            - locationType
       example:
         start: 42
-        length: 9
-        text: dry cough
-        condition: cough
-        certainty: positive
+        length: 7
+        text: Seattle
+        locationType: city
         confidence: 95.5
-    TextCovidSymptomAnnotationResponse:
+    TextLocationAnnotationResponse:
       type: object
-      description: The response to a COVID symptoms annotation request
+      description: The response to a locations annotation request
       properties:
-        textCovidSymptomAnnotations:
-          description: A list of COVID symptom annotations
+        textLocationAnnotations:
+          description: A list of location annotations
           type: array
           items:
-            $ref: '#/components/schemas/TextCovidSymptomAnnotation'
+            $ref: '#/components/schemas/TextLocationAnnotation'
       required:
-        - textCovidSymptomAnnotations
+        - textLocationAnnotations
     License:
       description: The license (license keyword used by GitHub)
       type: string
