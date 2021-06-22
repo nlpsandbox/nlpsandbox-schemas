@@ -66,10 +66,6 @@ paths:
     $ref: ../commons/paths/healthCheck.yaml
   /textLocationAnnotations:
     $ref: paths/textLocationAnnotations.yaml
-  /textLocationAnnotatorTrain:
-    $ref: paths/textLocationAnnotatorTrain.yaml
-  /textLocationAnnotatorTrainingStatus:
-    $ref: paths/textLocationAnnotatorTrainingStatus.yaml
   /tool:
     $ref: ../commons/paths/tool.yaml
   /tool/dependencies:

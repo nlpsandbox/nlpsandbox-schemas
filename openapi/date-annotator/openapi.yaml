@@ -68,10 +68,6 @@ paths:
     $ref: ../commons/paths/healthCheck.yaml
   /textDateAnnotations:
     $ref: paths/textDateAnnotations.yaml
-  /textDateAnnotatorTrain:
-    $ref: paths/textDateAnnotatorTrain.yaml
-  /textDateAnnotatorTrainingStatus:
-    $ref: paths/textDateAnnotatorTrainingStatus.yaml
   /tool:
     $ref: ../commons/paths/tool.yaml
   /tool/dependencies:
