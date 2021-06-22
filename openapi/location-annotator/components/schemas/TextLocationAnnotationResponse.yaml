@@ -1,0 +1,10 @@
+type: object
+description: The response to a locations annotation request
+properties:
+  textLocationAnnotations:
+    description: A list of location annotations
+    type: array
+    items:
+      $ref: ../../../commons/components/schemas/TextLocationAnnotation.yaml
+required:
+  - textLocationAnnotations
