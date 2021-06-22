@@ -70,14 +70,15 @@ jobs:
     strategy:
       matrix:
         api:
+        - "contact-annotator"
+        - "covid-symptom-annotator"
         - "data-node"
         - "date-annotator"
-        - "person-name-annotator"
-        - "phi-deidentifier"
-        - "physical-address-annotator"
-        - "covid-symptom-annotator"
-        - "contact-annotator"
         - "id-annotator"
+        - "location-annotator"
+        - "person-name-annotator"
+        - "phi-annotator"
+        - "phi-deidentifier"
     steps:
     - uses: actions/checkout@v2
 
@@ -100,14 +101,15 @@ jobs:
     strategy:
       matrix:
         api:
+        - "contact-annotator"
+        - "covid-symptom-annotator"
         - "data-node"
         - "date-annotator"
-        - "person-name-annotator"
-        - "phi-deidentifier"
-        - "physical-address-annotator"
-        - "covid-symptom-annotator"
-        - "contact-annotator"
         - "id-annotator"
+        - "location-annotator"
+        - "person-name-annotator"
+        - "phi-annotator"
+        - "phi-deidentifier"
     steps:
     - uses: actions/checkout@v2
 

@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   version: 1.2.0
-  title: NLP Sandbox ID Annotator API
+  title: NLP Sandbox Location Annotator API
   contact:
     name: NLP Sandbox Team
     email: team@nlpsandbox.io
@@ -14,22 +14,22 @@ info:
   description: >
     # Introduction
 
-    An ID annotator takes as input a clinical note and outputs a list of
-    predicted ID annotations found in the clinical note. This OpenAPI document
-    describes the specification of the NLP Sandbox ID Annotator API. This
-    specification includes the schemas of the input and output data, and the
-    requirements that this annotator must meet if you want to benchmark its
-    performance on [nlpsandbox.io](https://nlpsandbox.io).
+    A location annotator takes as input a clinical note and outputs a list of
+    predicted location annotations found in the clinical note. This OpenAPI
+    document describes the specification of the NLP Sandbox Location Annotator
+    API. This specification includes the schemas of the input and output data,
+    and the requirements that this annotator must meet if you want to benchmark
+    its performance on [nlpsandbox.io](https://nlpsandbox.io).
 
     # Getting Started
 
     The GitHub repository
-    [nlpsandbox/id-annotator-example](https://github.com/nlpsandbox/id-annotator-example)
-    provides an example implementation of the NLP Sandbox ID Annotator API in
-    Python-Flask. By the end of the tutorial available in the README, you will
-    have built a Docker image for this NLP Sandbox tool. You will then be able
-    to submit this image to [nlpsandbox.io](https://nlpsandbox.io) to benchmark
-    its performance.
+    [nlpsandbox/location-annotator-example](https://github.com/nlpsandbox/location-annotator-example)
+    provides an example implementation of the NLP Sandbox Location Annotator API
+    in Python-Flask. By the end of the tutorial available in the README, you
+    will have built a Docker image for this NLP Sandbox tool. You will then be
+    able to submit this image to [nlpsandbox.io](https://nlpsandbox.io) to
+    benchmark its performance.
 
     # Benchmarking Requirements
 
@@ -50,12 +50,12 @@ info:
 
     # Examples
 
-    - [NLP Sandbox ID Annotator Example (Python)](https://github.com/nlpsandbox/id-annotator-example)
+    - [NLP Sandbox Location Annotator Example (Python)](https://github.com/nlpsandbox/location-annotator-example)
 tags:
   - name: HealthCheck
     description: Operations about health checks
-  - name: TextIdAnnotation
-    description: Operations about text ID annotations
+  - name: TextLocationAnnotation
+    description: Operations about text location annotations
   - name: Tool
     description: Operations about this tool
 servers:
@@ -64,8 +64,8 @@ servers:
 paths:
   /healthCheck:
     $ref: ../commons/paths/healthCheck.yaml
-  /textIdAnnotations:
-    $ref: paths/textIdAnnotations.yaml
+  /textLocationAnnotations:
+    $ref: paths/textLocationAnnotations.yaml
   /tool:
     $ref: ../commons/paths/tool.yaml
   /tool/dependencies:

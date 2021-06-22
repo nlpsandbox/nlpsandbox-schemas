@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 1.1.2
+  version: 1.2.0
   title: NLP Sandbox Contact Annotator API
   contact:
     name: NLP Sandbox Team
@@ -8,37 +8,37 @@ info:
     url: https://nlpsandbox.io
   license:
     name: Apache 2.0
-    url: https://github.com/nlpsandbox/nlpsandbox-schemas/blob/develop/LICENSE
+    url: https://github.com/nlpsandbox/nlpsandbox-schemas/blob/main/LICENSE
   x-logo:
-    url: https://nlpsandbox.github.io/nlpsandbox-schemas/logo.png
+    url: https://github.com/nlpsandbox/nlpsandbox-schemas/raw/main/docs/logo.png
   description: >
     # Introduction
 
     A contact annotator takes as input a clinical note and outputs a list of
     predicted contact annotations found in the clinical note. This OpenAPI
-    document describes the specification of a contact Annotator. This
-    specification includes the schemas of the input and output data, and the
-    conditions that this annotator must meet if you want to benchmark its
-    performance on [nlpsandbox.io](https://nlpsandbox.io).
+    document describes the specification of the NLP Sandbox Contact Annotator
+    API. This specification includes the schemas of the input and output data,
+    and the requirements that this annotator must meet if you want to benchmark
+    its performance on [nlpsandbox.io](https://nlpsandbox.io).
 
     # Getting Started
 
-    The GitHub repository (will be added later)
+    The GitHub repository
     [nlpsandbox/contact-annotator-example](https://github.com/nlpsandbox/contact-annotator-example)
-    provides a rules-based example implementation of a Python-Flask contact
-    Annotator. By the end of the tutorial available in the README, you will have
-    built a Docker image for a simple contact Annotator. You will then be able
-    to submit this image to [nlpsandbox.io](https://nlpsandbox.io) to benchmark
-    its performance.
+    provides a rules-based example implementation of the NLP Sandbox Contact
+    Annotator API in Python-Flask. By the end of the tutorial available in the
+    README, you will have built a Docker image for this NLP Sandbox tool. You
+    will then be able to submit this image to
+    [nlpsandbox.io](https://nlpsandbox.io) to benchmark its performance.
 
     # Benchmarking Requirements
 
-    Your NLP Sandbox tool must meet the following conditions before evaluating
+    Your NLP Sandbox tool must meet the following requirements before evaluating
     its performance on [nlpsandbox.io](https://nlpsandbox.io).
 
     - The endpoint `/` must redirect to `/api/v1/tool`.
 
-    - The endpoint `/ui` must redirect to the web interface (UI).
+    - The endpoint `/ui` must redirect to the Swagger User Interface (UI).
 
     - The output of this tool must be reproducible: a given input should always
       generate the same output.
@@ -50,7 +50,7 @@ info:
 
     # Examples
 
-    - [Contact Annotator Example (Python)](https://github.com/nlpsandbox/contact-annotator-example)
+    - [NLP Sandbox Contact Annotator Example (Python)](https://github.com/nlpsandbox/contact-annotator-example)
 tags:
   - name: HealthCheck
     description: Operations about health checks

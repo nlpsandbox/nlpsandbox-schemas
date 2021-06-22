@@ -25,7 +25,7 @@ properties:
       enum:
         - "text_date"
         - "text_person_name"
-        - "text_physical_address"
+        - "text_location"
         - "text_id"
         - "text_contact"
 required:

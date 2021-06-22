@@ -10,7 +10,7 @@ inputs:
     excludeTags:
     - Tool
     - HealthCheck
-- inputFile: ../individuals/physical-address-annotator.openapi.yaml
+- inputFile: ../individuals/location-annotator.openapi.yaml
   operationSelection:
     excludeTags:
     - Tool
