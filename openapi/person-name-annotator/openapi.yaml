@@ -66,6 +66,10 @@ paths:
     $ref: ../commons/paths/healthCheck.yaml
   /textPersonNameAnnotations:
     $ref: paths/textPersonNameAnnotations.yaml
+  /textPersonNameAnnotatorTrain:
+    $ref: paths/textPersonNameAnnotatorTrain.yaml
+  /textPersonNameAnnotatorTrainingStatus:
+    $ref: paths/textPersonNameAnnotatorTrainingStatus.yaml
   /tool:
     $ref: ../commons/paths/tool.yaml
   /tool/dependencies:

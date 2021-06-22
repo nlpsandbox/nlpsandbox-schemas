@@ -1,0 +1,19 @@
+post:
+  tags:
+    - Training
+  summary: Initiate annotator training (async)
+  description: Start training the tool's annotation model
+  operationId: textPersonNameAnnotatorTrain
+  responses:
+    '201':
+      description: Training initialized
+      content:
+        application/json:
+          schema:
+      links:
+        GetTrainingStatus:
+          operationId: textPersonNameAnnotatorTrainingStatus
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '500':
+      $ref: ../components/responses/InternalServerError.yaml
