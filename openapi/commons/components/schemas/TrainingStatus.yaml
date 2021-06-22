@@ -1,0 +1,5 @@
+type: string
+enum:
+  - not yet started
+  - ongoing
+  - finished
