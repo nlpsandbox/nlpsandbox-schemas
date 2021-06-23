@@ -38,8 +38,7 @@ properties:
     default: false
   trainedAnnotatorStatus:
     description: Information about the trained component of the annotator
-    schema:
-      $ref: TrainedAnnotatorStatus.yaml
+    $ref: TrainedAnnotatorStatus.yaml
   type:
     $ref: ../parameters/ToolType.yaml
   apiVersion:
