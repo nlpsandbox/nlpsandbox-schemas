@@ -7,14 +7,11 @@ post:
   responses:
     '201':
       description: Trained annotator loaded
-      content:
-        application/json:
-          schema:
       links:
         GetTrainingStatus:
           operationId: getAnnotatorTrainingStatus
     '403':
-      $ref: ../components/response/Unauthorized.yaml
+      $ref: ../components/responses/Unauthorized.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
     '500':

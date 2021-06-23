@@ -4,16 +4,9 @@ post:
   summary: Initiate annotator training (async)
   description: Start training the tool's annotation model
   operationId: trainAnnotator
-  requestBody:
-    content:
-      application/json:
-        schema:
   responses:
     '201':
       description: Training initialized
-      content:
-        application/json:
-          schema:
       links:
         GetTrainingStatus:
           operationId: annotatorTrainingStatus
