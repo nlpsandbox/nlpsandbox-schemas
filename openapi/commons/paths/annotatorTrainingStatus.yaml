@@ -1,0 +1,17 @@
+get:
+  tags:
+    - Training
+  summary: Get status of annotator training
+  description: Get status of the tool's training process (404 if annotator is not trainable)
+  operationId: getAnnotatorTrainingStatus
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/TrainingStatus.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '500':
+      $ref: ../components/responses/InternalServerError.yaml
