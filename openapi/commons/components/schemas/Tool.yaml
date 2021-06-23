@@ -67,5 +67,6 @@ example:
   author: Awesome Team
   authorEmail: author@example.com
   url: https://example.com
+  trainable: false
   type: nlpsandbox:date-annotator
   apiVersion: 1.2.0
