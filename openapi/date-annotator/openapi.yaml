@@ -72,3 +72,9 @@ paths:
     $ref: ../commons/paths/tool.yaml
   /tool/dependencies:
     $ref: ../commons/paths/dependencies.yaml
+  /train:
+    $ref: ../commons/paths/trainAnnotator.yaml
+  /train/status:
+    $ref: ../commons/paths/annotatorTrainingStatus.yaml
+  /train/load:
+    $ref: ../commons/paths/loadTrainedAnnotator.yaml
