@@ -1,0 +1,9 @@
+type: object
+description: Information about whether the annotator is using a trained model, and which one it is
+properties:
+  loaded:
+    description: Whether the annotator is using a trained model
+    type: boolean
+  dataset:
+    description: Which dataset the annotator's trained model was trained on
+    type: string

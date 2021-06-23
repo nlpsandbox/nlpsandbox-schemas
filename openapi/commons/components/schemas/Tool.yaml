@@ -32,6 +32,14 @@ properties:
     description: The URL to the homepage of the tool
     type: string
     format: uri
+  trainable:
+    description: Whether the tool implements trainability
+    type: boolean
+    default: false
+  trainedAnnotatorStatus:
+    description: Information about the trained component of the annotator
+    schema:
+      $ref: TrainedAnnotatorStatus.yaml
   type:
     $ref: ../parameters/ToolType.yaml
   apiVersion:
@@ -50,6 +58,7 @@ required:
   - url
   - type
   - apiVersion
+  - trainable
 example:
   name: awesome-nlp-tool
   version: 1.0.6
