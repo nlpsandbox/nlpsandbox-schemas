@@ -1,9 +1,14 @@
 type: object
-description: Information about whether the annotator is using a trained model, and which one it is
+description: Information about whether the annotator is using a trained model, and the dataset on which the annotator was trained
 properties:
   loaded:
     description: Whether the annotator is using a trained model
     type: boolean
-  dataset:
-    description: Which dataset the annotator's trained model was trained on
+  notesURI:
+    description: URI to first page of the notes in the dataset
     type: string
+    format: uri
+  goldStandardAnnotationsURI:
+    description: URI to first page of gold standard annotations
+    type: string
+    format: uri
