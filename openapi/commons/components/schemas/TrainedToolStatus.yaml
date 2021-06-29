@@ -1,5 +1,5 @@
 type: object
-description: Information about whether the annotator is using a trained model, and the dataset on which the annotator was trained
+description: Information about whether the tool is using a trained model, and the dataset on which the tool was trained
 properties:
   loaded:
     description: Whether the annotator is using a trained model
