@@ -1,9 +1,9 @@
 get:
   tags:
     - Training
-  summary: Get status of annotator training
-  description: Get status of the tool's training process (404 if annotator is not trainable)
-  operationId: getAnnotatorTrainingStatus
+  summary: Get status of tool training
+  description: Get status of the tool's training process (404 if tool is not trainable)
+  operationId: getToolTrainingStatus
   responses:
     '200':
       description: Success
