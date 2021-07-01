@@ -36,9 +36,6 @@ properties:
     description: Whether the tool implements trainability
     type: boolean
     default: false
-  trainedToolStatus:
-    description: Information about the trained component of the annotator
-    $ref: TrainedToolStatus.yaml
   type:
     $ref: ../parameters/ToolType.yaml
   apiVersion:
