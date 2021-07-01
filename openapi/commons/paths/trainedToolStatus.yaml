@@ -1,0 +1,17 @@
+get:
+  tags:
+    - Training
+  summary: Get information about whether trained model has been loaded
+  description: Get information about the tool's trained model (404 if tool is not trainable)
+  operationId: getTrainedToolStatus
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/TrainedToolStatus.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '500':
+      $ref: ../components/responses/InternalServerError.yaml
