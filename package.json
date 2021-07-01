@@ -1,7 +1,7 @@
 {
   "name": "nlpsandbox-schemas",
   "devDependencies": {
-    "@redocly/openapi-cli": "^1.0.0-beta.48",
+    "@redocly/openapi-cli": "^1.0.0-beta.52",
     "gh-openapi-docs-ts": "^0.3.6",
     "ibm-openapi-validator": "^0.46.0",
     "openapi-merge-cli": "^1.1.29"
