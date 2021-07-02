@@ -1,0 +1,1524 @@
+openapi: 3.0.3
+info:
+  version: 1.2.0
+  title: NLP Sandbox Data Node API
+  contact:
+    name: NLP Sandbox Team
+    email: team@nlpsandbox.io
+    url: 'https://nlpsandbox.io'
+  license:
+    name: Apache 2.0
+    url: 'https://github.com/nlpsandbox/nlpsandbox-schemas/blob/main/LICENSE'
+  x-logo:
+    url: 'https://github.com/nlpsandbox/nlpsandbox-schemas/raw/main/docs/logo.png'
+  description: |
+    # Overview
+
+    The NLP Sandbox Data Node is a repository of data used to benchmark NLP
+    Tools like the NLP Sandbox Date Annotator and Person Name Annotator.
+
+    The resources that can be stored in this Data Node and the operations
+    supported are listed below:
+
+    - Create and manage datasets - Create and manage FHIR stores
+      - Store and retrieve FHIR patient profiles
+      - Store and retrieve clinical
+      notes
+    - Create and manage annotation stores
+      - Store and retrieve text annotations
+tags:
+  - name: Annotation
+    description: Operations about annotations
+  - name: AnnotationStore
+    description: Operations about annotation stores
+  - name: Dataset
+    description: Operations about datasets
+  - name: FhirStore
+    description: Operations about FHIR stores
+  - name: HealthCheck
+    description: Operations about health checks
+  - name: Note
+    description: Operations about notes
+  - name: Patient
+    description: Operations about patients
+servers:
+  - url: 'http://example.com/api/v1'
+  - url: 'https://example.com/api/v1'
+paths:
+  /datasets:
+    post:
+      tags:
+        - Dataset
+      summary: Create a dataset
+      description: Create a dataset with the name specified
+      operationId: createDataset
+      parameters:
+        - in: query
+          name: datasetId
+          description: The ID of the dataset that is being created
+          required: true
+          schema:
+            $ref: '#/components/schemas/DatasetId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DatasetCreateRequest'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DatasetCreateResponse'
+          description: Success
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    get:
+      tags:
+        - Dataset
+      summary: Get all datasets
+      description: Returns the datasets
+      operationId: listDatasets
+      parameters:
+        - in: query
+          name: limit
+          description: Maximum number of results returned
+          required: false
+          schema:
+            $ref: '#/components/schemas/PageLimit'
+        - in: query
+          name: offset
+          description: Index of the first result that must be returned
+          required: false
+          schema:
+            $ref: '#/components/schemas/PageOffset'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageOfDatasets'
+          description: Success
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  '/datasets/{datasetId}':
+    parameters:
+      - in: path
+        name: datasetId
+        description: The ID of the dataset
+        required: true
+        schema:
+          $ref: '#/components/schemas/DatasetId'
+    get:
+      tags:
+        - Dataset
+      summary: Get a dataset by ID
+      description: Returns the dataset for a given ID
+      operationId: getDataset
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dataset'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      tags:
+        - Dataset
+      summary: Delete a dataset by ID
+      description: Deletes the dataset for a given ID
+      operationId: deleteDataset
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmptyObject'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  '/datasets/{datasetId}/annotationStores':
+    parameters:
+      - in: path
+        name: datasetId
+        description: The ID of the dataset
+        required: true
+        schema:
+          $ref: '#/components/schemas/DatasetId'
+    post:
+      tags:
+        - AnnotationStore
+      summary: Create an annotation store
+      description: Create an annotation store with the ID specified
+      operationId: createAnnotationStore
+      parameters:
+        - in: query
+          name: annotationStoreId
+          description: The ID of the annotation store that is being created.
+          required: true
+          schema:
+            $ref: '#/components/schemas/AnnotationStoreId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnnotationStoreCreateRequest'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnnotationStoreCreateResponse'
+          description: Success
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    get:
+      tags:
+        - AnnotationStore
+      summary: List the annotation stores in a dataset
+      description: Returns the annotation stores
+      operationId: listAnnotationStores
+      parameters:
+        - in: query
+          name: limit
+          description: Maximum number of results returned
+          required: false
+          schema:
+            $ref: '#/components/schemas/PageLimit'
+        - in: query
+          name: offset
+          description: Index of the first result that must be returned
+          required: false
+          schema:
+            $ref: '#/components/schemas/PageOffset'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageOfAnnotationStores'
+          description: Success
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  '/datasets/{datasetId}/annotationStores/{annotationStoreId}':
+    parameters:
+      - in: path
+        name: datasetId
+        description: The ID of the dataset
+        required: true
+        schema:
+          $ref: '#/components/schemas/DatasetId'
+      - in: path
+        name: annotationStoreId
+        description: The ID of the annotation store
+        required: true
+        schema:
+          $ref: '#/components/schemas/AnnotationStoreId'
+    get:
+      tags:
+        - AnnotationStore
+      summary: Get an annotation store
+      description: Returns the annotation store specified
+      operationId: getAnnotationStore
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnnotationStore'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      tags:
+        - AnnotationStore
+      summary: Delete an annotation store
+      description: Deletes the annotation store specified
+      operationId: deleteAnnotationStore
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmptyObject'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  '/datasets/{datasetId}/annotationStores/{annotationStoreId}/annotations':
+    parameters:
+      - in: path
+        name: datasetId
+        description: The ID of the dataset
+        required: true
+        schema:
+          $ref: '#/components/schemas/DatasetId'
+      - in: path
+        name: annotationStoreId
+        description: The ID of the annotation store
+        required: true
+        schema:
+          $ref: '#/components/schemas/AnnotationStoreId'
+    post:
+      tags:
+        - Annotation
+      summary: Create an annotation
+      description: Create an annotation
+      operationId: createAnnotation
+      parameters:
+        - in: query
+          name: annotationId
+          description: The ID of the annotation that is being created
+          required: true
+          schema:
+            $ref: '#/components/schemas/AnnotationId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnnotationCreateRequest'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnnotationCreateResponse'
+          description: Success
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    get:
+      tags:
+        - Annotation
+      summary: List the annotations in an annotation store
+      description: Returns the annotations in an annotation store
+      operationId: listAnnotations
+      parameters:
+        - in: query
+          name: limit
+          description: Maximum number of results returned
+          required: false
+          schema:
+            $ref: '#/components/schemas/PageLimit'
+        - in: query
+          name: offset
+          description: Index of the first result that must be returned
+          required: false
+          schema:
+            $ref: '#/components/schemas/PageOffset'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageOfAnnotations'
+          description: Success
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  '/datasets/{datasetId}/annotationStores/{annotationStoreId}/annotations/{annotationId}':
+    parameters:
+      - in: path
+        name: datasetId
+        description: The ID of the dataset
+        required: true
+        schema:
+          $ref: '#/components/schemas/DatasetId'
+      - in: path
+        name: annotationStoreId
+        description: The ID of the annotation store
+        required: true
+        schema:
+          $ref: '#/components/schemas/FhirStoreId'
+      - in: path
+        name: annotationId
+        description: The ID of the annotation
+        required: true
+        schema:
+          $ref: '#/components/schemas/AnnotationId'
+    get:
+      tags:
+        - Annotation
+      summary: Get an annotation
+      description: Returns the annotation specified
+      operationId: getAnnotation
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Annotation'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      tags:
+        - Annotation
+      summary: Delete an annotation
+      description: Deletes the annotation specified
+      operationId: deleteAnnotation
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmptyObject'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  '/datasets/{datasetId}/fhirStores':
+    parameters:
+      - in: path
+        name: datasetId
+        description: The ID of the dataset
+        required: true
+        schema:
+          $ref: '#/components/schemas/DatasetId'
+    post:
+      tags:
+        - FhirStore
+      summary: Create a FHIR store
+      description: Create a FHIR store with the ID specified
+      operationId: createFhirStore
+      parameters:
+        - in: query
+          name: fhirStoreId
+          description: The ID of the FHIR store that is being created.
+          required: true
+          schema:
+            $ref: '#/components/schemas/FhirStoreId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FhirStoreCreateRequest'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FhirStoreCreateResponse'
+          description: Success
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    get:
+      tags:
+        - FhirStore
+      summary: List the FHIR stores in a dataset
+      description: Returns the FHIR stores
+      operationId: listFhirStores
+      parameters:
+        - in: query
+          name: limit
+          description: Maximum number of results returned
+          required: false
+          schema:
+            $ref: '#/components/schemas/PageLimit'
+        - in: query
+          name: offset
+          description: Index of the first result that must be returned
+          required: false
+          schema:
+            $ref: '#/components/schemas/PageOffset'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageOfFhirStores'
+          description: Success
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  '/datasets/{datasetId}/fhirStores/{fhirStoreId}':
+    parameters:
+      - in: path
+        name: datasetId
+        description: The ID of the dataset
+        required: true
+        schema:
+          $ref: '#/components/schemas/DatasetId'
+      - in: path
+        name: fhirStoreId
+        description: The ID of the FHIR store
+        required: true
+        schema:
+          $ref: '#/components/schemas/FhirStoreId'
+    get:
+      tags:
+        - FhirStore
+      summary: Get a FHIR store
+      description: Returns the FHIR store specified
+      operationId: getFhirStore
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FhirStore'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      tags:
+        - FhirStore
+      summary: Delete a FHIR store
+      description: Deletes the FHIR store specified
+      operationId: deleteFhirStore
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmptyObject'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  '/datasets/{datasetId}/fhirStores/{fhirStoreId}/fhir/Patient':
+    parameters:
+      - in: path
+        name: datasetId
+        description: The ID of the dataset
+        required: true
+        schema:
+          $ref: '#/components/schemas/DatasetId'
+      - in: path
+        name: fhirStoreId
+        description: The ID of the FHIR store
+        required: true
+        schema:
+          $ref: '#/components/schemas/FhirStoreId'
+    post:
+      tags:
+        - Patient
+      summary: Create a FHIR patient
+      description: Create a FHIR patient
+      operationId: createPatient
+      parameters:
+        - in: query
+          name: patientId
+          description: The ID of the patient that is being created
+          required: true
+          schema:
+            $ref: '#/components/schemas/PatientId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatientCreateRequest'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PatientCreateResponse'
+          description: Success
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    get:
+      tags:
+        - Patient
+      summary: List the Patients in a FHIR store
+      description: Returns the Patients in a FHIR store
+      operationId: listPatients
+      parameters:
+        - in: query
+          name: limit
+          description: Maximum number of results returned
+          required: false
+          schema:
+            $ref: '#/components/schemas/PageLimit'
+        - in: query
+          name: offset
+          description: Index of the first result that must be returned
+          required: false
+          schema:
+            $ref: '#/components/schemas/PageOffset'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageOfPatients'
+          description: Success
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  '/datasets/{datasetId}/fhirStores/{fhirStoreId}/fhir/Patient/{patientId}':
+    parameters:
+      - in: path
+        name: datasetId
+        description: The ID of the dataset
+        required: true
+        schema:
+          $ref: '#/components/schemas/DatasetId'
+      - in: path
+        name: fhirStoreId
+        description: The ID of the FHIR store
+        required: true
+        schema:
+          $ref: '#/components/schemas/FhirStoreId'
+      - in: path
+        name: patientId
+        description: The ID of the FHIR patient
+        required: true
+        schema:
+          $ref: '#/components/schemas/PatientId'
+    get:
+      tags:
+        - Patient
+      summary: Get a FHIR patient
+      description: Returns the FHIR patient specified
+      operationId: getPatient
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patient'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      tags:
+        - Patient
+      summary: Delete a FHIR patient
+      description: Deletes the FHIR patient specified
+      operationId: deletePatient
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmptyObject'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  '/datasets/{datasetId}/fhirStores/{fhirStoreId}/fhir/Note':
+    parameters:
+      - in: path
+        name: datasetId
+        description: The ID of the dataset
+        required: true
+        schema:
+          $ref: '#/components/schemas/DatasetId'
+      - in: path
+        name: fhirStoreId
+        description: The ID of the FHIR store
+        required: true
+        schema:
+          $ref: '#/components/schemas/FhirStoreId'
+    post:
+      tags:
+        - Note
+      summary: Create a note
+      description: Create a note
+      operationId: createNote
+      parameters:
+        - in: query
+          name: noteId
+          description: The ID of the note that is being created
+          required: true
+          schema:
+            $ref: '#/components/schemas/NoteId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NoteCreateRequest'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NoteCreateResponse'
+          description: Success
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    get:
+      tags:
+        - Note
+      summary: List notes
+      description: Returns the notes in a FHIR store
+      operationId: listNotes
+      parameters:
+        - in: query
+          name: limit
+          description: Maximum number of results returned
+          required: false
+          schema:
+            $ref: '#/components/schemas/PageLimit'
+        - in: query
+          name: offset
+          description: Index of the first result that must be returned
+          required: false
+          schema:
+            $ref: '#/components/schemas/PageOffset'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageOfNotes'
+          description: Success
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  '/datasets/{datasetId}/fhirStores/{fhirStoreId}/fhir/Note/{noteId}':
+    parameters:
+      - in: path
+        name: datasetId
+        description: The ID of the dataset
+        required: true
+        schema:
+          $ref: '#/components/schemas/DatasetId'
+      - in: path
+        name: fhirStoreId
+        description: The ID of the FHIR store
+        required: true
+        schema:
+          $ref: '#/components/schemas/FhirStoreId'
+      - in: path
+        name: noteId
+        description: The ID of the note
+        required: true
+        schema:
+          $ref: '#/components/schemas/NoteId'
+    get:
+      tags:
+        - Note
+      summary: Get a note
+      description: Returns the note specified
+      operationId: getNote
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Note'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      tags:
+        - Note
+      summary: Delete a note
+      description: Deletes the note specified
+      operationId: deleteNote
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmptyObject'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /healthCheck:
+    get:
+      tags:
+        - HealthCheck
+      summary: Get health check information
+      description: Get information about the health of the service
+      operationId: getHealthCheck
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthCheck'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  schemas:
+    PageLimit:
+      description: The maximum number of results returned
+      type: integer
+      default: 10
+      minimum: 10
+      maximum: 100
+    PageOffset:
+      description: The index of the first result that must be returned
+      type: integer
+      default: 0
+      minimum: 0
+    ResponsePageMetadata:
+      type: object
+      description: A page of results
+      properties:
+        offset:
+          $ref: '#/components/schemas/PageOffset'
+        limit:
+          $ref: '#/components/schemas/PageLimit'
+        links:
+          description: Links to navigate to different pages of results
+          type: object
+          properties:
+            next:
+              description: Link to the next page of results
+              type: string
+              format: uri
+        totalResults:
+          description: The total number of results in the result set
+          type: integer
+      required:
+        - links
+        - totalResults
+    DatasetName:
+      description: The name of the dataset
+      type: string
+      pattern: '^datasets/[a-z0-9]+(?:-[a-z0-9]+)*$'
+      example: datasets/awesome-dataset
+    Dataset:
+      type: object
+      description: A dataset
+      properties:
+        name:
+          $ref: '#/components/schemas/DatasetName'
+      required:
+        - name
+    PageOfDatasets:
+      type: object
+      description: A page of datasets
+      allOf:
+        - $ref: '#/components/schemas/ResponsePageMetadata'
+        - type: object
+          properties:
+            datasets:
+              description: An array of datasets
+              type: array
+              items:
+                $ref: '#/components/schemas/Dataset'
+      required:
+        - offset
+        - limit
+        - links
+        - totalResults
+        - datasets
+    Error:
+      type: object
+      description: Problem details (tools.ietf.org/html/rfc7807)
+      properties:
+        title:
+          type: string
+          description: A human readable documentation for the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: >-
+            A human readable explanation specific to this occurrence of the
+            problem
+        type:
+          type: string
+          description: An absolute URI that identifies the problem type
+      required:
+        - title
+        - status
+    DatasetId:
+      description: The ID of the dataset
+      type: string
+      minLength: 3
+      maxLength: 60
+      pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+      example: awesome-dataset
+    DatasetCreateRequest:
+      type: object
+      description: An empty object
+    DatasetCreateResponse:
+      type: object
+      description: The reference of the dataset created
+      properties:
+        name:
+          $ref: '#/components/schemas/DatasetName'
+      required:
+        - name
+    EmptyObject:
+      type: object
+      description: An empty object
+    AnnotationStoreName:
+      description: >-
+        The resource name of the annotation store, of the form
+        datasets/{datasetId}/annotationStores/{annotationStoreId}
+      type: string
+      pattern: >-
+        ^datasets/[a-z0-9]+(?:-[a-z0-9]+)*/annotationStores/[a-z0-9]+(?:-[a-z0-9]+)*$
+      example: datasets/awesome-dataset/annotationStores/awesome-annotation-store
+    AnnotationStore:
+      type: object
+      description: An annotation store
+      properties:
+        name:
+          $ref: '#/components/schemas/AnnotationStoreName'
+      required:
+        - name
+    PageOfAnnotationStores:
+      type: object
+      description: A page of annotation stores
+      allOf:
+        - $ref: '#/components/schemas/ResponsePageMetadata'
+        - type: object
+          properties:
+            annotationStores:
+              description: An array of annotation stores
+              type: array
+              items:
+                $ref: '#/components/schemas/AnnotationStore'
+      required:
+        - offset
+        - limit
+        - links
+        - totalResults
+        - annotationStores
+    AnnotationStoreId:
+      description: The ID of the annotation store
+      type: string
+      minLength: 3
+      maxLength: 60
+      pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+      example: awesome-annotation-store
+    AnnotationStoreCreateRequest:
+      type: object
+      description: An empty object
+    AnnotationStoreCreateResponse:
+      type: object
+      description: The reference to the annotation store created
+      properties:
+        name:
+          $ref: '#/components/schemas/AnnotationStoreName'
+      required:
+        - name
+    AnnotationName:
+      description: >-
+        The resource name of the annotation record, of the form
+        datasets/{datasetId}/annotationStores/{annotationStoreId}/annotations/{annotationId}
+      type: string
+      pattern: >-
+        ^datasets/[a-z0-9]+(?:-[a-z0-9]+)*/annotationStores/[a-z0-9]+(?:-[a-z0-9]+)*/annotations/[a-z0-9]+(?:-[a-z0-9]+)*$
+      example: >-
+        datasets/awesome-dataset/annotationStores/awesome-annotation-store/annotations/awesome-annotation
+    ResourceSource:
+      type: object
+      description: An API resource source
+      properties:
+        name:
+          description: Full path of an API resource
+          type: string
+      required:
+        - name
+    AnnotationSource:
+      type: object
+      description: The source of an annotation record
+      properties:
+        resourceSource:
+          $ref: '#/components/schemas/ResourceSource'
+      maxProperties: 1
+      required:
+        - resourceSource
+    TextAnnotation:
+      type: object
+      description: An annotation in a text
+      properties:
+        start:
+          description: The position of the first character
+          type: integer
+        length:
+          description: The length of the annotation
+          type: integer
+        text:
+          description: The string annotated
+          type: string
+        confidence:
+          description: The confidence in the accuracy of the annotation
+          type: number
+          format: float
+          minimum: 0
+          maximum: 100
+      required:
+        - start
+        - length
+        - text
+        - confidence
+      example:
+        start: 42
+        length: 19
+        text: the annotation text
+        confidence: 95.5
+    TextDateAnnotation:
+      type: object
+      description: A date annotation in a text
+      allOf:
+        - $ref: '#/components/schemas/TextAnnotation'
+        - type: object
+          properties:
+            dateFormat:
+              description: Date format (ISO 8601)
+              type: string
+              example: MM/DD/YYYY
+      example:
+        start: 42
+        length: 10
+        text: 10/26/2020
+        dateFormat: MM/DD/YYYY
+        confidence: 95.5
+    TextPersonNameAnnotation:
+      type: object
+      description: A person name annotation in a text
+      allOf:
+        - $ref: '#/components/schemas/TextAnnotation'
+      example:
+        start: 42
+        length: 11
+        text: Chloe Price
+        confidence: 95.5
+    TextLocationAnnotation:
+      type: object
+      description: A location annotation in a text
+      allOf:
+        - $ref: '#/components/schemas/TextAnnotation'
+        - type: object
+          properties:
+            locationType:
+              description: Type of location
+              type: string
+              enum:
+                - city
+                - country
+                - department
+                - hospital
+                - organization
+                - other
+                - room
+                - state
+                - street
+                - zip
+          required:
+            - locationType
+      example:
+        start: 42
+        length: 7
+        text: Seattle
+        locationType: city
+        confidence: 95.5
+    TextIdAnnotation:
+      type: object
+      description: An ID annotation in a text
+      allOf:
+        - $ref: '#/components/schemas/TextAnnotation'
+        - type: object
+          properties:
+            idType:
+              description: Type of ID information
+              type: string
+              enum:
+                - account
+                - bio_id
+                - device
+                - health_plan
+                - id_number
+                - license
+                - medical_record
+                - ssn
+                - vehicle
+                - other
+          required:
+            - idType
+      example:
+        start: 42
+        length: 11
+        text: 203-11-4535
+        idType: ssn
+        confidence: 95.5
+    TextContactAnnotation:
+      type: object
+      description: A contact annotation in a text
+      allOf:
+        - $ref: '#/components/schemas/TextAnnotation'
+        - type: object
+          properties:
+            contactType:
+              description: Type of contact information
+              type: string
+              enum:
+                - email
+                - fax
+                - ip_address
+                - phone
+                - url
+                - other
+          required:
+            - contactType
+      example:
+        start: 42
+        length: 11
+        text: dave@uw.edu
+        contactType: email
+        confidence: 95.5
+    TextCovidSymptomAnnotation:
+      type: object
+      description: A COVID symptom annotation in a text
+      allOf:
+        - $ref: '#/components/schemas/TextAnnotation'
+        - type: object
+          properties:
+            condition:
+              description: |
+                The sign/symptom type according to CDC definition
+              type: string
+              enum:
+                - fever
+                - chill
+                - cough
+                - fatigue
+                - nasal_obstruction
+                - loss_of_appetite
+                - diarrhea
+                - abdominal_pain
+                - nausea
+                - vomiting
+                - sore_throat
+                - headache
+                - myalgia
+                - loss_of_taste
+                - loss_of_smell
+                - dyspnea
+                - chest_pain
+                - delirium
+                - hypersomnia
+                - cyanosis
+            certainty:
+              description: >
+                Whether the annotation is positively or negatively correlated
+                with the presence of COVID
+              type: string
+              enum:
+                - positive
+                - negated
+                - possible
+          required:
+            - condition
+            - certainty
+      example:
+        start: 42
+        length: 9
+        text: dry cough
+        condition: cough
+        certainty: positive
+        confidence: 95.5
+    Annotation:
+      type: object
+      description: An annotation record
+      properties:
+        name:
+          $ref: '#/components/schemas/AnnotationName'
+        annotationSource:
+          $ref: '#/components/schemas/AnnotationSource'
+        textDateAnnotations:
+          description: Date annotations in a text
+          type: array
+          items:
+            $ref: '#/components/schemas/TextDateAnnotation'
+        textPersonNameAnnotations:
+          description: Person name annotations in a text
+          type: array
+          items:
+            $ref: '#/components/schemas/TextPersonNameAnnotation'
+        textLocationAnnotations:
+          description: Location annotations in a text
+          type: array
+          items:
+            $ref: '#/components/schemas/TextLocationAnnotation'
+        textIdAnnotations:
+          description: ID annotations in a text
+          type: array
+          items:
+            $ref: '#/components/schemas/TextIdAnnotation'
+        textContactAnnotations:
+          description: Contact annotations in a text
+          type: array
+          items:
+            $ref: '#/components/schemas/TextContactAnnotation'
+        textCovidSymptomAnnotations:
+          description: COVID symptom annotations in a text
+          type: array
+          items:
+            $ref: '#/components/schemas/TextCovidSymptomAnnotation'
+      required:
+        - name
+        - annotationSource
+    PageOfAnnotations:
+      type: object
+      description: A page of annotations
+      allOf:
+        - $ref: '#/components/schemas/ResponsePageMetadata'
+        - type: object
+          properties:
+            annotations:
+              description: An array of annotations
+              type: array
+              items:
+                $ref: '#/components/schemas/Annotation'
+      required:
+        - offset
+        - limit
+        - links
+        - totalResults
+        - annotations
+    AnnotationId:
+      description: The ID of the annotation
+      type: string
+      minLength: 3
+      maxLength: 60
+      pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+      example: awesome-annotation
+    AnnotationCreateRequest:
+      type: object
+      description: An annotation record
+      properties:
+        annotationSource:
+          $ref: '#/components/schemas/AnnotationSource'
+        textDateAnnotations:
+          description: Date annotations in a text
+          type: array
+          items:
+            $ref: '#/components/schemas/TextDateAnnotation'
+        textPersonNameAnnotations:
+          description: Person name annotations in a text
+          type: array
+          items:
+            $ref: '#/components/schemas/TextPersonNameAnnotation'
+        textLocationAnnotations:
+          description: Location annotations in a text
+          type: array
+          items:
+            $ref: '#/components/schemas/TextLocationAnnotation'
+        textIdAnnotations:
+          description: ID annotations in a text
+          type: array
+          items:
+            $ref: '#/components/schemas/TextIdAnnotation'
+        textContactAnnotations:
+          description: Contact annotations in a text
+          type: array
+          items:
+            $ref: '#/components/schemas/TextContactAnnotation'
+        textCovidSymptomAnnotations:
+          description: COVID symptom annotations in a text
+          type: array
+          items:
+            $ref: '#/components/schemas/TextCovidSymptomAnnotation'
+      required:
+        - annotationSource
+    AnnotationCreateResponse:
+      type: object
+      description: The reference to the annotation created
+      properties:
+        name:
+          $ref: '#/components/schemas/AnnotationName'
+      required:
+        - name
+    FhirStoreId:
+      description: The ID of the FHIR store
+      type: string
+      minLength: 3
+      maxLength: 60
+      pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+      example: awesome-fhir-store
+    FhirStoreName:
+      description: >-
+        The resource name of the FHIR store, of the form
+        datasets/{datasetId}/fhirStores/{fhirStoreId}
+      type: string
+      pattern: '^datasets/[a-z0-9]+(?:-[a-z0-9]+)*/fhirStores/[a-z0-9]+(?:-[a-z0-9]+)*$'
+      example: datasets/awesome-dataset/fhirStores/awesome-fhir-store
+    FhirStore:
+      type: object
+      description: A FHIR store
+      properties:
+        name:
+          $ref: '#/components/schemas/FhirStoreName'
+      required:
+        - name
+    PageOfFhirStores:
+      type: object
+      description: A page of FHIR stores
+      allOf:
+        - $ref: '#/components/schemas/ResponsePageMetadata'
+        - type: object
+          properties:
+            fhirStores:
+              description: An array of FHIR stores
+              type: array
+              items:
+                $ref: '#/components/schemas/FhirStore'
+      required:
+        - offset
+        - limit
+        - links
+        - totalResults
+        - fhirStores
+    FhirStoreCreateRequest:
+      type: object
+      description: An empty object
+    FhirStoreCreateResponse:
+      type: object
+      description: The reference to the FHIR store created
+      properties:
+        name:
+          $ref: '#/components/schemas/FhirStoreName'
+      required:
+        - name
+    PatientId:
+      description: The ID of the FHIR patient
+      type: string
+      minLength: 3
+      maxLength: 60
+      pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+      example: awesome-patient
+    Patient:
+      type: object
+      description: A FHIR patient
+      properties:
+        identifier:
+          $ref: '#/components/schemas/PatientId'
+        gender:
+          description: Gender of the patient
+          type: string
+          enum:
+            - male
+            - female
+            - other
+            - unknown
+      required:
+        - identifier
+      example:
+        identifier: awesome-patient
+        gender: male
+    PageOfPatients:
+      type: object
+      description: A page of FHIR patients
+      allOf:
+        - $ref: '#/components/schemas/ResponsePageMetadata'
+        - type: object
+          properties:
+            patients:
+              description: An array of FHIR patients
+              type: array
+              items:
+                $ref: '#/components/schemas/Patient'
+      required:
+        - offset
+        - limit
+        - links
+        - totalResults
+        - patients
+    PatientCreateRequest:
+      type: object
+      description: A FHIR patient
+      properties:
+        gender:
+          description: Gender of the patient
+          type: string
+          enum:
+            - male
+            - female
+            - other
+            - unknown
+    PatientResourceName:
+      description: >-
+        The resource name of the FHIR patient, of the form
+        datasets/{datasetId}/fhirStores/{fhirStoreId}/Patient/{PatientId}
+      type: string
+      pattern: >-
+        ^datasets/[a-z0-9]+(?:-[a-z0-9]+)*/fhirStores/[a-z0-9]+(?:-[a-z0-9]+)*/Patient/[a-z0-9]+(?:-[a-z0-9]+)*$
+      example: >-
+        datasets/awesome-dataset/fhirStores/awesome-fhir-store/Patient/507f1f77bcf86cd799439011
+    PatientCreateResponse:
+      type: object
+      description: The reference to the patient created
+      properties:
+        name:
+          $ref: '#/components/schemas/PatientResourceName'
+      required:
+        - name
+    NoteId:
+      description: The ID of the clinical note
+      type: string
+      minLength: 3
+      maxLength: 60
+      pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+      example: awesome-note
+    Note:
+      type: object
+      description: A clinical note
+      properties:
+        identifier:
+          $ref: '#/components/schemas/NoteId'
+        text:
+          description: The content of the clinical note
+          type: string
+        type:
+          description: The note type (LOINC concept)
+          type: string
+        patientId:
+          $ref: '#/components/schemas/PatientId'
+      required:
+        - identifier
+        - text
+        - type
+        - patientId
+      example:
+        identifier: awesome-note
+        text: 'On 12/26/2020, Ms. Chloe Price met with Dr. Prescott in Seattle.'
+        type: 'loinc:LP29684-5'
+        patientId: awesome-patient
+    PageOfNotes:
+      type: object
+      description: A page of notes
+      allOf:
+        - $ref: '#/components/schemas/ResponsePageMetadata'
+        - type: object
+          properties:
+            notes:
+              description: An array of notes
+              type: array
+              items:
+                $ref: '#/components/schemas/Note'
+      required:
+        - offset
+        - limit
+        - links
+        - totalResults
+        - notes
+    NoteCreateRequest:
+      type: object
+      description: A clinical note
+      properties:
+        text:
+          description: The content of the clinical note
+          type: string
+          example: 'On 12/26/2020, Ms. Chloe Price met with Dr. Prescott in Seattle.'
+        type:
+          description: The note type (LOINC concept)
+          type: string
+          example: 'loinc:LP29684-5'
+        patientId:
+          $ref: '#/components/schemas/PatientId'
+      required:
+        - text
+        - type
+        - patientId
+    NoteResourceName:
+      description: >-
+        The resource name of the clinical note, of the form
+        datasets/{datasetId}/fhirStores/{fhirStoreId}/Note/{NoteId}
+      type: string
+      pattern: >-
+        ^datasets/[a-z0-9]+(?:-[a-z0-9]+)*/fhirStores/[a-z0-9]+(?:-[a-z0-9]+)*/Note/[a-z0-9]+(?:-[a-z0-9]+)*$
+      example: datasets/awesome-dataset/fhirStores/awesome-fhir-store/Note/awesome-note
+    NoteCreateResponse:
+      type: object
+      description: The reference to the note created
+      properties:
+        name:
+          $ref: '#/components/schemas/NoteResourceName'
+      required:
+        - name
+    HealthCheck:
+      type: object
+      description: Represents the health of a service
+      properties:
+        status:
+          description: Indicates whether the service status is acceptable or not
+          type: string
+          enum:
+            - pass
+            - fail
+            - warn
+      required:
+        - status
+  responses:
+    BadRequest:
+      description: Invalid request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    InternalServerError:
+      description: The request cannot be fulfilled due to an unexpected server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Conflict:
+      description: The request conflicts with current state of the target resource
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The specified resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
