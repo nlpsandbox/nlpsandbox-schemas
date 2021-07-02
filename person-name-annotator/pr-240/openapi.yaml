@@ -321,10 +321,10 @@ components:
         - 'nlpsandbox:data-node'
         - 'nlpsandbox:date-annotator'
         - 'nlpsandbox:id-annotator'
+        - 'nlpsandbox:location-annotator'
         - 'nlpsandbox:person-name-annotator'
         - 'nlpsandbox:phi-annotator'
         - 'nlpsandbox:phi-deidentifier'
-        - 'nlpsandbox:physical-address-annotator'
       example: 'nlpsandbox:date-annotator'
     Tool:
       type: object
