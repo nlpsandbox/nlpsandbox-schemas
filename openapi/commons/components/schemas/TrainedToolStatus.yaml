@@ -1,0 +1,14 @@
+type: object
+description: Information about whether the tool is using a trained model, and the dataset on which the tool was trained
+properties:
+  loaded:
+    description: Whether the tool is using a trained model
+    type: boolean
+  notesURI:
+    description: URI to first page of the notes in the dataset
+    type: string
+    format: uri
+  goldStandardAnnotationsURI:
+    description: URI to first page of gold standard annotations
+    type: string
+    format: uri

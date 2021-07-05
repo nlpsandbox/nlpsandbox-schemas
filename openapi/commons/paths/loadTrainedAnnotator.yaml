@@ -1,0 +1,18 @@
+post:
+  tags:
+    - Training
+  summary: Load the results of training
+  description: Load the results of training (e.g. a machine learning model) into memory from mounted volume
+  operationId: loadTrainedAnnotator
+  responses:
+    '201':
+      description: Trained annotator loaded
+      links:
+        GetTrainingStatus:
+          operationId: getAnnotatorTrainingStatus
+    '403':
+      $ref: ../components/responses/Unauthorized.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '500':
+      $ref: ../components/responses/InternalServerError.yaml

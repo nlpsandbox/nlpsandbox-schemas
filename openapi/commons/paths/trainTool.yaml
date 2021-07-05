@@ -1,0 +1,16 @@
+post:
+  tags:
+    - Training
+  summary: Initiate tool training (async)
+  description: Start training the tool's model
+  operationId: trainAnnotator
+  responses:
+    '201':
+      description: Training initialized
+      links:
+        GetTrainingStatus:
+          operationId: toolTrainingStatus
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '500':
+      $ref: ../components/responses/InternalServerError.yaml

@@ -1,0 +1,6 @@
+type: string
+description: Whether this annotator instance has been used to generate a trained model
+enum:
+  - not-yet-started
+  - ongoing
+  - finished

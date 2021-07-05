@@ -32,6 +32,10 @@ properties:
     description: The URL to the homepage of the tool
     type: string
     format: uri
+  trainable:
+    description: Whether the tool implements trainability
+    type: boolean
+    default: false
   type:
     $ref: ../parameters/ToolType.yaml
   apiVersion:
@@ -50,6 +54,7 @@ required:
   - url
   - type
   - apiVersion
+  - trainable
 example:
   name: awesome-nlp-tool
   version: 1.0.6
@@ -59,5 +64,6 @@ example:
   author: Awesome Team
   authorEmail: author@example.com
   url: https://example.com
+  trainable: false
   type: nlpsandbox:date-annotator
   apiVersion: 1.2.0

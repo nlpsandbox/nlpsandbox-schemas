@@ -5,26 +5,31 @@ inputs:
     excludeTags:
     - Tool
     - HealthCheck
+    - Training
 - inputFile: ../individuals/person-name-annotator.openapi.yaml
   operationSelection:
     excludeTags:
     - Tool
     - HealthCheck
+    - Training
 - inputFile: ../individuals/location-annotator.openapi.yaml
   operationSelection:
     excludeTags:
     - Tool
     - HealthCheck
+    - Training
 - inputFile: ../individuals/id-annotator.openapi.yaml
   operationSelection:
     excludeTags:
     - Tool
     - HealthCheck
+    - Training
 - inputFile: ../individuals/contact-annotator.openapi.yaml
   operationSelection:
     excludeTags:
     - Tool
     - HealthCheck
+    - Training
 - inputFile: ../individuals/phi-deidentifier.openapi.yaml
   operationSelection:
     excludeTags:
@@ -35,4 +40,5 @@ inputs:
     excludeTags:
     - Tool
     - HealthCheck
+    - Training
 output: openapi.yaml
