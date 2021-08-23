@@ -1,0 +1,601 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "version": "1.2.0",
+    "title": "NLP Sandbox Person Name Annotator API",
+    "contact": {
+      "name": "NLP Sandbox Team",
+      "email": "team@nlpsandbox.io",
+      "url": "https://nlpsandbox.io"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "https://github.com/nlpsandbox/nlpsandbox-schemas/blob/main/LICENSE"
+    },
+    "x-logo": {
+      "url": "https://github.com/nlpsandbox/nlpsandbox-schemas/raw/main/docs/logo.png"
+    },
+    "description": "# Introduction\nA person name annotator takes as input a clinical note and outputs a list of predicted person name annotations found in the clinical note. This OpenAPI document describes the specification of the NLP Sandbox Person Name Annotator API. This specification includes the schemas of the input and output data, and the requirements that this annotator must meet if you want to benchmark its performance on [nlpsandbox.io](https://nlpsandbox.io).\n# Getting Started\nThe GitHub repository [nlpsandbox/person-name-annotator-example](https://github.com/nlpsandbox/person-name-annotator-example) provides an example implementation of the NLP Sandbox Person Name Annotator API in Python-Flask. By the end of the tutorial available in the README, you will have built a Docker image for this NLP Sandbox tool. You will then be able to submit this image to [nlpsandbox.io](https://nlpsandbox.io) to benchmark its performance.\n# Benchmarking Requirements\nYour NLP Sandbox tool must meet the following requirements before evaluating its performance on [nlpsandbox.io](https://nlpsandbox.io).\n- The endpoint `/` must redirect to `/api/v1/tool`.\n- The endpoint `/ui` must redirect to the Swagger User Interface (UI).\n- The output of this tool must be reproducible: a given input should always\n  generate the same output.\n\n- To ensure the results are reproducible and robust, and the data are\n  secured, this tool must not connect to any remote server. When benchmarked\n  on [nlpsandbox.io](https://nlpsandbox.io), this tool will not be able to\n  connect to remote servers.\n\n# Examples\n- [NLP Sandbox Person Name Annotator Example (Python)](https://github.com/nlpsandbox/person-name-annotator-example)\n"
+  },
+  "tags": [
+    {
+      "name": "HealthCheck",
+      "description": "Operations about health checks"
+    },
+    {
+      "name": "TextPersonNameAnnotation",
+      "description": "Operations about text person name annotations"
+    },
+    {
+      "name": "Tool",
+      "description": "Operations about this tool"
+    }
+  ],
+  "servers": [
+    {
+      "url": "http://example.com/api/v1"
+    },
+    {
+      "url": "https://example.com/api/v1"
+    }
+  ],
+  "paths": {
+    "/healthCheck": {
+      "get": {
+        "tags": [
+          "HealthCheck"
+        ],
+        "summary": "Get health check information",
+        "description": "Get information about the health of the service",
+        "operationId": "getHealthCheck",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthCheck"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/textPersonNameAnnotations": {
+      "post": {
+        "tags": [
+          "TextPersonNameAnnotation"
+        ],
+        "summary": "Annotate person names in a clinical note",
+        "description": "Return the person name annotations found in a clinical note",
+        "operationId": "createTextPersonNameAnnotations",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TextPersonNameAnnotationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TextPersonNameAnnotationResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/tool": {
+      "get": {
+        "tags": [
+          "Tool"
+        ],
+        "summary": "Get tool information",
+        "description": "Get information about the tool",
+        "operationId": "getTool",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Tool"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/tool/dependencies": {
+      "get": {
+        "tags": [
+          "Tool"
+        ],
+        "summary": "Get tool dependencies",
+        "description": "Get the dependencies of this tool",
+        "operationId": "getToolDependencies",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ToolDependencies"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "HealthCheck": {
+        "type": "object",
+        "description": "Represents the health of a service",
+        "properties": {
+          "status": {
+            "description": "Indicates whether the service status is acceptable or not",
+            "type": "string",
+            "enum": [
+              "pass",
+              "fail",
+              "warn"
+            ]
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "Error": {
+        "type": "object",
+        "description": "Problem details (tools.ietf.org/html/rfc7807)",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "A human readable documentation for the problem type"
+          },
+          "status": {
+            "type": "integer",
+            "description": "The HTTP status code"
+          },
+          "detail": {
+            "type": "string",
+            "description": "A human readable explanation specific to this occurrence of the problem"
+          },
+          "type": {
+            "type": "string",
+            "description": "An absolute URI that identifies the problem type"
+          }
+        },
+        "required": [
+          "title",
+          "status"
+        ]
+      },
+      "NoteId": {
+        "description": "The ID of the clinical note",
+        "type": "string",
+        "minLength": 3,
+        "maxLength": 60,
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+        "example": "awesome-note"
+      },
+      "PatientId": {
+        "description": "The ID of the FHIR patient",
+        "type": "string",
+        "minLength": 3,
+        "maxLength": 60,
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+        "example": "awesome-patient"
+      },
+      "Note": {
+        "type": "object",
+        "description": "A clinical note",
+        "properties": {
+          "identifier": {
+            "$ref": "#/components/schemas/NoteId"
+          },
+          "text": {
+            "description": "The content of the clinical note",
+            "type": "string"
+          },
+          "type": {
+            "description": "The note type (LOINC concept)",
+            "type": "string"
+          },
+          "patientId": {
+            "$ref": "#/components/schemas/PatientId"
+          }
+        },
+        "required": [
+          "identifier",
+          "text",
+          "type",
+          "patientId"
+        ],
+        "example": {
+          "identifier": "awesome-note",
+          "text": "On 12/26/2020, Ms. Chloe Price met with Dr. Prescott in Seattle.",
+          "type": "loinc:LP29684-5",
+          "patientId": "awesome-patient"
+        }
+      },
+      "TextPersonNameAnnotationRequest": {
+        "type": "object",
+        "description": "A request to annotate person names in a clinical note",
+        "properties": {
+          "note": {
+            "$ref": "#/components/schemas/Note"
+          }
+        },
+        "required": [
+          "note"
+        ]
+      },
+      "TextAnnotation": {
+        "type": "object",
+        "description": "An annotation in a text",
+        "properties": {
+          "start": {
+            "description": "The position of the first character",
+            "type": "integer"
+          },
+          "length": {
+            "description": "The length of the annotation",
+            "type": "integer"
+          },
+          "text": {
+            "description": "The string annotated",
+            "type": "string"
+          },
+          "confidence": {
+            "description": "The confidence in the accuracy of the annotation",
+            "type": "number",
+            "format": "float",
+            "minimum": 0,
+            "maximum": 100
+          }
+        },
+        "required": [
+          "start",
+          "length",
+          "text",
+          "confidence"
+        ],
+        "example": {
+          "start": 42,
+          "length": 19,
+          "text": "the annotation text",
+          "confidence": 95.5
+        }
+      },
+      "TextPersonNameAnnotation": {
+        "type": "object",
+        "description": "A person name annotation in a text",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TextAnnotation"
+          }
+        ],
+        "example": {
+          "start": 42,
+          "length": 11,
+          "text": "Chloe Price",
+          "confidence": 95.5
+        }
+      },
+      "TextPersonNameAnnotationResponse": {
+        "type": "object",
+        "description": "The response to a person names annotation request",
+        "properties": {
+          "textPersonNameAnnotations": {
+            "description": "A list of person name annotations",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextPersonNameAnnotation"
+            }
+          }
+        },
+        "required": [
+          "textPersonNameAnnotations"
+        ]
+      },
+      "License": {
+        "description": "The license (license keyword used by GitHub)",
+        "type": "string",
+        "enum": [
+          "afl-3.0",
+          "apache-2.0",
+          "artistic-2.0",
+          "bsl-1.0",
+          "bsd-2-clause",
+          "bsd-3-clause",
+          "bsd-3-clause-clear",
+          "cc",
+          "cc0-1.0",
+          "cc-by-4.0",
+          "cc-by-sa-4.0",
+          "wtfpl",
+          "ecl-2.0",
+          "epl-1.0",
+          "epl-2.0",
+          "eupl-1.1",
+          "agpl-3.0",
+          "gpl",
+          "gpl-2.0",
+          "gpl-3.0",
+          "lgpl",
+          "lgpl-2.1",
+          "lgpl-3.0",
+          "isc",
+          "lppl-1.3c",
+          "ms-pl",
+          "mit",
+          "mpl-2.0",
+          "osl-3.0",
+          "postgresql",
+          "ofl-1.1",
+          "ncsa",
+          "unlicense",
+          "zlib",
+          "none"
+        ],
+        "example": "apache-2.0"
+      },
+      "ToolType": {
+        "description": "The type of this tool",
+        "type": "string",
+        "enum": [
+          "nlpsandbox:contact-annotator",
+          "nlpsandbox:covid-symptom-annotator",
+          "nlpsandbox:data-node",
+          "nlpsandbox:date-annotator",
+          "nlpsandbox:id-annotator",
+          "nlpsandbox:location-annotator",
+          "nlpsandbox:person-name-annotator",
+          "nlpsandbox:phi-annotator",
+          "nlpsandbox:phi-deidentifier"
+        ],
+        "example": "nlpsandbox:date-annotator"
+      },
+      "ProgrammingLanguage": {
+        "description": "A programming language",
+        "type": "string",
+        "enum": [
+          "APL",
+          "ASP",
+          "Ada",
+          "Assembly",
+          "Awk",
+          "Basic",
+          "C",
+          "C#",
+          "C++",
+          "Clojure",
+          "Cython",
+          "Dart",
+          "Delphi/Kylix",
+          "Emacs-Lisp",
+          "Erlang",
+          "Euler",
+          "Forth",
+          "Fortran",
+          "Go",
+          "Groovy",
+          "Haskell",
+          "Java",
+          "JavaScript",
+          "Julia",
+          "Kotlin",
+          "Lisp",
+          "Logo",
+          "MATLAB",
+          "ML",
+          "OCaml",
+          "Object Pascal",
+          "Objective C",
+          "Other",
+          "Other Scripting Engines",
+          "PHP",
+          "PL/SQL",
+          "Pascal",
+          "Perl",
+          "Pike",
+          "Prolog",
+          "Python",
+          "R",
+          "REBOL",
+          "Rexx",
+          "Ruby",
+          "Rust",
+          "Scala",
+          "Scheme",
+          "SQL",
+          "Tcl",
+          "TypeScript",
+          "Unix Shell",
+          "Visual Basic",
+          "YACC",
+          "Zope"
+        ],
+        "example": "Python"
+      },
+      "Tool": {
+        "type": "object",
+        "description": "Information about an NLP tool",
+        "properties": {
+          "name": {
+            "description": "The tool name",
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 60,
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+          },
+          "version": {
+            "description": "The version of the tool (SemVer string)",
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$"
+          },
+          "license": {
+            "$ref": "#/components/schemas/License"
+          },
+          "repository": {
+            "description": "The place where the code lives",
+            "type": "string"
+          },
+          "description": {
+            "description": "A short, one-sentence summary of the tool",
+            "type": "string",
+            "maxLength": 280
+          },
+          "author": {
+            "description": "The author of the tool",
+            "type": "string"
+          },
+          "authorEmail": {
+            "description": "The email address of the author",
+            "type": "string",
+            "format": "email"
+          },
+          "url": {
+            "description": "The URL to the homepage of the tool",
+            "type": "string",
+            "format": "uri"
+          },
+          "type": {
+            "$ref": "#/components/schemas/ToolType"
+          },
+          "apiVersion": {
+            "description": "The version of the tool OpenAPI specification",
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$"
+          },
+          "programmingLanguages": {
+            "description": "The programming languages used to develop this tool",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProgrammingLanguage"
+            },
+            "minItems": 1,
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "name",
+          "version",
+          "license",
+          "repository",
+          "description",
+          "author",
+          "authorEmail",
+          "url",
+          "type",
+          "apiVersion",
+          "programmingLanguages"
+        ],
+        "example": {
+          "name": "awesome-nlp-tool",
+          "version": "1.0.6",
+          "license": "apache-2.0",
+          "repository": "github:awesome-org/awesome-nlp-tool",
+          "description": "An awesome NLP Tool that takes as input X and outputs Y.",
+          "author": "Awesome Team",
+          "authorEmail": "author@example.com",
+          "url": "https://example.com",
+          "type": "nlpsandbox:date-annotator",
+          "apiVersion": "1.2.0",
+          "programmingLanguages": [
+            "Python",
+            "Scala"
+          ]
+        }
+      },
+      "ToolDependencies": {
+        "type": "object",
+        "description": "A list of tool dependencies",
+        "properties": {
+          "tools": {
+            "description": "A list of tools",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Tool"
+            }
+          }
+        },
+        "required": [
+          "tools"
+        ]
+      }
+    },
+    "responses": {
+      "NotFound": {
+        "description": "The specified resource was not found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "InternalServerError": {
+        "description": "The request cannot be fulfilled due to an unexpected server error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "BadRequest": {
+        "description": "Invalid request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      }
+    }
+  }
+}
