@@ -48,6 +48,7 @@ enum:
   - Rexx
   - Ruby
   - Rust
+  - Scala
   - Scheme
   - SQL
   - Tcl
