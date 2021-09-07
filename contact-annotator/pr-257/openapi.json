@@ -543,7 +543,7 @@
             "items": {
               "$ref": "#/components/schemas/ProgrammingLanguage"
             },
-            "minItems": 1,
+            "minItems": 0,
             "uniqueItems": true
           }
         },
@@ -557,8 +557,7 @@
           "authorEmail",
           "url",
           "type",
-          "apiVersion",
-          "programmingLanguages"
+          "apiVersion"
         ],
         "example": {
           "name": "awesome-nlp-tool",

@@ -1186,7 +1186,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ProgrammingLanguage'
-          minItems: 1
+          minItems: 0
           uniqueItems: true
       required:
         - name
@@ -1199,7 +1199,6 @@ components:
         - url
         - type
         - apiVersion
-        - programmingLanguages
       example:
         name: awesome-nlp-tool
         version: 1.0.6
