@@ -448,6 +448,68 @@
         ],
         "example": "nlpsandbox:date-annotator"
       },
+      "ProgrammingLanguage": {
+        "description": "A programming language",
+        "type": "string",
+        "enum": [
+          "APL",
+          "ASP",
+          "Ada",
+          "Assembly",
+          "Awk",
+          "Basic",
+          "C",
+          "C#",
+          "C++",
+          "Clojure",
+          "Cython",
+          "Dart",
+          "Delphi/Kylix",
+          "Emacs-Lisp",
+          "Erlang",
+          "Euler",
+          "Forth",
+          "Fortran",
+          "Go",
+          "Groovy",
+          "Haskell",
+          "Java",
+          "JavaScript",
+          "Julia",
+          "Kotlin",
+          "Lisp",
+          "Logo",
+          "MATLAB",
+          "ML",
+          "OCaml",
+          "Object Pascal",
+          "Objective C",
+          "Other",
+          "Other Scripting Engines",
+          "PHP",
+          "PL/SQL",
+          "Pascal",
+          "Perl",
+          "Pike",
+          "Prolog",
+          "Python",
+          "R",
+          "REBOL",
+          "Rexx",
+          "Ruby",
+          "Rust",
+          "Scala",
+          "Scheme",
+          "SQL",
+          "Tcl",
+          "TypeScript",
+          "Unix Shell",
+          "Visual Basic",
+          "YACC",
+          "Zope"
+        ],
+        "example": "Python"
+      },
       "Tool": {
         "type": "object",
         "description": "Information about an NLP tool",
@@ -499,6 +561,15 @@
             "type": "string",
             "minLength": 1,
             "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$"
+          },
+          "programmingLanguages": {
+            "description": "The programming languages used to develop this tool",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProgrammingLanguage"
+            },
+            "minItems": 0,
+            "uniqueItems": true
           }
         },
         "required": [
@@ -523,7 +594,11 @@
           "authorEmail": "author@example.com",
           "url": "https://example.com",
           "type": "nlpsandbox:date-annotator",
-          "apiVersion": "1.2.0"
+          "apiVersion": "1.2.0",
+          "programmingLanguages": [
+            "Python",
+            "Scala"
+          ]
         }
       },
       "ToolDependencies": {
