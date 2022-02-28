@@ -5,6 +5,6 @@ properties:
     description: A list of tools
     type: array
     items:
-      $ref: Tool.yaml
+      $ref: ToolDependency.yaml
 required:
   - tools

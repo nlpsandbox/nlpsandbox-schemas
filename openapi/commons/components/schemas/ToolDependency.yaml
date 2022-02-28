@@ -1,0 +1,23 @@
+type: object
+description: Information about an NLP tool within the context of its use
+properties:
+  tool:
+    $ref: Tool.yaml
+  functionalType:
+    $ref: ../parameters/ToolType.yaml
+required:
+  - tool
+  - functionalType
+example:
+  tool:
+    name: awesome-nlp-tool
+    version: 1.0.6
+    license: apache-2.0
+    repository: github:awesome-org/awesome-nlp-tool
+    description: An awesome NLP Tool that takes as input X and outputs Y.
+    author: Awesome Team
+    authorEmail: author@example.com
+    url: https://example.com
+    type: nlpsandbox:phi-annotator
+    apiVersion: 1.2.0
+  functionalType: nlpsandbox:date-annotator
