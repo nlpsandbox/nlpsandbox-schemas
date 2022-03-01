@@ -462,17 +462,41 @@ components:
         programmingLanguages:
           - Python
           - Scala
+    ToolDependency:
+      type: object
+      description: Information about an NLP tool within the context of its use
+      properties:
+        tool:
+          $ref: '#/components/schemas/Tool'
+        functionalType:
+          $ref: '#/components/schemas/ToolType'
+      required:
+        - tool
+        - functionalType
+      example:
+        tool:
+          name: awesome-nlp-tool
+          version: 1.0.6
+          license: apache-2.0
+          repository: 'github:awesome-org/awesome-nlp-tool'
+          description: An awesome NLP Tool that takes as input X and outputs Y.
+          author: Awesome Team
+          authorEmail: author@example.com
+          url: 'https://example.com'
+          type: 'nlpsandbox:phi-annotator'
+          apiVersion: 1.2.0
+        functionalType: 'nlpsandbox:date-annotator'
     ToolDependencies:
       type: object
       description: A list of tool dependencies
       properties:
-        tools:
-          description: A list of tools
+        toolDependencies:
+          description: A list of tool dependencies
           type: array
           items:
-            $ref: '#/components/schemas/Tool'
+            $ref: '#/components/schemas/ToolDependency'
       required:
-        - tools
+        - toolDependencies
   responses:
     NotFound:
       description: The specified resource was not found
